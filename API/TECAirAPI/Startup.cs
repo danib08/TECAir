@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
-//using TECAirAPI.Data;
+using TECAirAPI.Data;
 
 namespace TECAirAPI
 {
@@ -29,8 +29,8 @@ namespace TECAirAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
-            //services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddScoped<IDataContext>(provider => provider.GetService<DataContext>());
+            services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IDataContext>(provider => provider.GetService<DataContext>());
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
