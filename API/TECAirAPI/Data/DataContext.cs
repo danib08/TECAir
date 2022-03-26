@@ -10,6 +10,6 @@ namespace TECAirAPI.Data
              
         }
  
-        public DbSet<Worker> workers { get; init; }
+        public DbSet<Worker> Workers { get; init; }
     }
 }

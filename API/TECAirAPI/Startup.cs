@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using TECAirAPI.Data;
+using TECAirAPI.Repositories;
 
 namespace TECAirAPI
 {
@@ -31,6 +32,7 @@ namespace TECAirAPI
 
             services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IDataContext>(provider => provider.GetService<DataContext>());
+            services.AddScoped<IWorkerRepository, WorkerRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -45,7 +47,8 @@ namespace TECAirAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TECAirAPI v1"));
+                app.UseSwaggerUI(c => {c.SwaggerEndpoint("/swagger/v1/swagger.json", "TECAirAPI v1"); 
+                c.RoutePrefix = string.Empty;});
             }
 
             app.UseHttpsRedirection();
