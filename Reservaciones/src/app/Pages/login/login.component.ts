@@ -12,20 +12,14 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   loginUser(event: { preventDefault: () => void; target: any; }){
-
     event.preventDefault()
     const target= event.target
-    const username= target.querySelector("#username").value
-    const password= target.querySelector("#password").value
-
-    if (username=="daval" && password=="123"){
-      //window.alert("Hola mundo")
-      this.router.navigate(["home"])
-    }
-    else{
-      //window.alert("XD")
-    }
-    console.log(username,password)
+    console.log("Hola mundo")
+  }
+  SignUpUser(event: { preventDefault: () => void; target: any; }){
+    event.preventDefault()
+    const target= event.target
+    console.log("Hola mundo 2")
   }
 
 }
