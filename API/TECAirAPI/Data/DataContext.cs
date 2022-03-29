@@ -11,5 +11,6 @@ namespace TECAirAPI.Data
         }
  
         public DbSet<Worker> Workers { get; init; }
+        public DbSet<Bag> Bags { get; init; }
     }
 }
