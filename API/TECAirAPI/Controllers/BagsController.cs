@@ -5,7 +5,7 @@ using TECAirAPI.Dtos;
 using TECAirAPI.Models;
 using TECAirAPI.Repositories;
  
-namespace ProductsApi.Controllers
+namespace TECAirAPI.Controllers
 {
   [ApiController]
   [Route("[controller]")]
@@ -57,7 +57,7 @@ namespace ProductsApi.Controllers
     }
  
     [HttpPut("{id}")]
-    public async Task<ActionResult> UpdatBag(int id, UpdateBagDto updateBagDto)
+    public async Task<ActionResult> UpdateBag(int id, UpdateBagDto updateBagDto)
     {
         Bag bag = new()
         {
