@@ -12,5 +12,10 @@ namespace TECAirAPI.Data
  
         public DbSet<Worker> Workers { get; init; }
         public DbSet<Bag> Bags { get; init; }
+        public DbSet<Plane> Planes { get; init; }
+        public DbSet<Seat> Seats { get; init; }
+        public DbSet<User> Users { get; init; }
+
+
     }
 }
