@@ -6,7 +6,7 @@ using TECAirAPI.Dtos;
 using TECAirAPI.Models;
 using TECAirAPI.Repositories;
  
-namespace ProductsApi.Controllers
+namespace TECAirAPI.Controllers
 {
   [ApiController]
   [Route("[controller]")]

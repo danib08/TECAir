@@ -33,6 +33,7 @@ namespace TECAirAPI
             services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IDataContext>(provider => provider.GetService<DataContext>());
             services.AddScoped<IWorkerRepository, WorkerRepository>();
+            services.AddScoped<IBagRepository , BagRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

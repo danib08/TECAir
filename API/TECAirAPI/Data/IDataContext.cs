@@ -8,6 +8,7 @@ namespace TECAirAPI.Data
     public interface IDataContext
     {
          DbSet<Worker> Workers { get; init; }
+        DbSet<Bag> Bags { get; init; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
