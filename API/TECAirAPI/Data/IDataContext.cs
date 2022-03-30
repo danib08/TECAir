@@ -17,7 +17,7 @@ namespace TECAirAPI.Data
         DbSet<Seat> Seats { get; init; } //Setting of Seats in the database
         DbSet<Plane> Planes { get; init; } //Setting of Planes in the database
          DbSet<User> Users { get; init; } //Setting of Users in the database
-
+        DbSet<Flight> Flights { get; init; } //Setting of Flights in the database
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default); //Task for saving changes
     }
 }

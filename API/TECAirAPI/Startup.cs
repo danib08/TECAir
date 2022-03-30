@@ -37,6 +37,7 @@ namespace TECAirAPI
             services.AddScoped<ISeatRepository, SeatRepository>();
             services.AddScoped<IPlaneRepository, PlaneRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IFlightRepository, FlightRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
