@@ -5,7 +5,8 @@ namespace TECAirAPI.Dtos
         public int BagID { get; set; }
         public int Weight { get; set; }
         public string Color { get; set; }
-        public int WorkerID { get; set; }
+        public int UserID { get; set; }
+        public int FlightID { get; set; }
 
     }
 }
