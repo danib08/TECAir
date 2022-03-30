@@ -11,9 +11,11 @@ namespace TECAirAPI.Models
         public int Weight { get; set; }
         public string Color { get; set; }
         
-        public int UserID { get; set; }  //Foreign Key from User
+        //public int UserID { get; set; }  //Foreign Key from User
 
-        public int FlightID{get; set;}   //Foreign Key from Flight
+        //public int FlightID{get; set;}   //Foreign Key from Flight
+
+         
         
         //public User user{get; set;} //Reference navigation property from User
         //public Flight flight { get; set; } //Reference navigation property

@@ -17,7 +17,8 @@ namespace TECAirAPI.Models
         public string NameWorker { get; set; }
         public string LastNameWorker { get; set; }
         public string PassWorker { get; set; }
-        public List<Bag> Bags { get; set; }  //Collection navigation property
+        
+    ///public List<Bag> Bags { get; set; }  //Collection navigation property
 
     }
 }

@@ -79,8 +79,8 @@ namespace TECAirAPI.Repositories
         itemToUpdate.BagID = bag.BagID; //Updates the Bag ID
         itemToUpdate.Weight = bag.Weight; //Updates the weight
         itemToUpdate.Color = bag.Color; //Updates the color
-        itemToUpdate.UserID = bag.UserID; //Updates the UserID
-        itemToUpdate.FlightID = bag.FlightID; //Updates the Flight
+        //itemToUpdate.UserID = bag.UserID; //Updates the UserID
+       // itemToUpdate.FlightID = bag.FlightID; //Updates the Flight
 
         await _context.SaveChangesAsync(); //Save changes
  

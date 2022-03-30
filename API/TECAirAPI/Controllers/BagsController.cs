@@ -59,8 +59,8 @@ namespace TECAirAPI.Controllers
             BagID = createBagDto.BagID,
             Weight = createBagDto.Weight,
             Color = createBagDto.Color,
-            UserID = createBagDto.UserID,
-            FlightID = createBagDto.FlightID,
+            //UserID = createBagDto.UserID,
+            //FlightID = createBagDto.FlightID,
         };
  
         await _bagRepository.Add(bag);
@@ -90,8 +90,8 @@ namespace TECAirAPI.Controllers
             BagID = updateBagDto.BagID,
             Weight = updateBagDto.Weight,
             Color = updateBagDto.Color,
-            UserID = updateBagDto.UserID,
-            FlightID = updateBagDto.FlightID,
+            //UserID = updateBagDto.UserID,
+            //FlightID = updateBagDto.FlightID,
        
         };
  
