@@ -16,8 +16,8 @@ namespace TECAirAPI.Data
  
         public DbSet<Worker> Workers { get; init; } //Setting of workers in the database
         public DbSet<Bag> Bags { get; init; } //Setting of bags in the database
-
-
-
+        public DbSet<Seat> Seats { get; init; } //Setting of Seats in the database
+        public DbSet<Plane> Planes { get; init; } //Setting of Planes in the database
+        public DbSet<User> Users { get; init; } //Setting of Users in the database
     }
 }

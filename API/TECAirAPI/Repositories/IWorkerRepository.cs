@@ -14,6 +14,6 @@ namespace TECAirAPI.Repositories
         Task<IEnumerable<Worker>> GetAll(); //Initialization of multi valuated Get
         Task Add(Worker worker); //Initialization of Post
         Task Delete(int id); //Initialization of Delete
-        Task Update(Worker worker); //Initialization of Put
+        Task Update(Worker worker); //Initialization of Put 
     }
 }
