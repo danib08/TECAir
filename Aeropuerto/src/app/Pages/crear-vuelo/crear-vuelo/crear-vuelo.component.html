@@ -1,0 +1,89 @@
+<h2> Creación de Vuelos de TecAir </h2>
+<form (submit)="submit()" [formGroup]="registerForm">
+    <div class="form-group">
+        <label for="Origin">Origin</label>
+        <input type="text" class="form-control" formControlName="Origin">
+        <div
+        *ngIf="origin?.invalid && (origin?.dirty || origin?.touched)" class="alert alert-danger">
+            HOLA
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Destination">Destination</label>
+        <input type="text" class="form-control" formControlName="Destination">
+        <div
+        *ngIf="destination?.invalid && (destination?.dirty || destination?.touched)" class="alert alert-danger">
+            HOLA2
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="FlightID">Flight ID</label>
+        <input type="text" class="form-control" formControlName="FlightID">
+        <div
+        *ngIf="flightID?.invalid && (flightID?.dirty || flightID?.touched)" class="alert alert-danger">
+            HOLA5
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="DepartureTime">Departure Time</label>
+        <input type="text" class="form-control" formControlName="DepartureTime">
+        <div
+        *ngIf="departureTime?.invalid && (departureTime?.dirty || departureTime?.touched)" class="alert alert-danger">
+            HOLA6
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="ArrivalTime">Arrival Time</label>
+        <input type="text" class="form-control" formControlName="ArrivalTime">
+        <div
+        *ngIf="arrivalTime?.invalid && (arrivalTime?.dirty || arrivalTime?.touched)" class="alert alert-danger">
+            HOLA7
+        </div>
+    </div>
+
+    <div class="form-group">
+        <a class=" btn btn-primary" (click)="addStops()">Add Stop</a>
+    </div>
+
+    <form (submit)="submit()" [formGroup]="registerForm2">
+        <div formArrayName="Stops" *ngFor="let stop of stops.controls; let i = index">
+            <div [formGroupName]="i">
+                <div>
+    
+                    <label [attr.for] ="'Origin' + i" >Origin</label>
+                    <div>
+                        <input type="text" [attr.id]="'Origin' + i" class="form-control" formControlName="Origin">
+                    </div>
+    
+                    <label [attr.for] ="'Destination' + i" >Destination</label>
+                    <div>
+                        <input type="text" [attr.id]="'Destination' + i" class="form-control" formControlName="Destination">
+                    </div>
+    
+                    <label [attr.for] ="'FlightID' + i" >Flight ID</label>
+                    <div>
+                        <input type="text" [attr.id]="'FlightID' + i" class="form-control" formControlName="FlightID">
+                    </div>
+    
+                    <label [attr.for] ="'DepartureTime' + i" >Departure Time</label>
+                    <div>
+                        <input type="text" [attr.id]="'DepartureTime' + i" class="form-control" formControlName="DepartureTime">
+                    </div>
+    
+                    <label [attr.for] ="'ArrivalTime' + i" >Arrival Time</label>
+                    <div>
+                        <input type="text" [attr.id]="'ArrivalTime' + i" class="form-control" formControlName="ArrivalTime">
+                    </div>
+    
+                    <div>
+                        <button class="btn btn-danger" (click)="removeStops(i)">Remove stop</button>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </form>
+
+    <button type="submit" class="btn btn-success" [disabled]="registerForm.invalid"> Submit </button>
+    <button type="submit" class="btn btn-default" (click)="refresh()"> Refresh </button>
+</form>

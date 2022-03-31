@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { BusquedaVueloComponent } from './busqueda-vuelo/busqueda-vuelo.component';
 import { GestionUsuarioComponent } from './gestion-usuario/gestion-usuario.component';
 import { ReservacionVuelosComponent } from './reservacion-vuelos/reservacion-vuelos.component';
+import { CrearVueloComponent } from './crear-vuelo/crear-vuelo/crear-vuelo.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { ReservacionVuelosComponent } from './reservacion-vuelos/reservacion-vue
     LoginComponent,
     BusquedaVueloComponent,
     GestionUsuarioComponent,
-    ReservacionVuelosComponent
+    ReservacionVuelosComponent,
+    CrearVueloComponent,
 
   ],
   imports: [
@@ -25,7 +28,8 @@ import { ReservacionVuelosComponent } from './reservacion-vuelos/reservacion-vue
     HttpClientModule,
     FormsModule,
     RouterModule,
-    ComponentsModule
+    ComponentsModule,
+    ReactiveFormsModule
   ]
 })
 export class PagesModule {

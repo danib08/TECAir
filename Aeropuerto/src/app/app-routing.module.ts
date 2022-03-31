@@ -5,6 +5,8 @@ import { GestionUsuarioComponent } from './Pages/gestion-usuario/gestion-usuario
 import { HomeComponent } from './Pages/home/home.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { ReservacionVuelosComponent } from './Pages/reservacion-vuelos/reservacion-vuelos.component';
+import { CrearVueloComponent } from './Pages/crear-vuelo/crear-vuelo/crear-vuelo.component';
+
 
 const routes: Routes = [
   {path: "home",component: HomeComponent},
@@ -12,6 +14,7 @@ const routes: Routes = [
   {path: "gestionUsuario",component: GestionUsuarioComponent},
   {path: "login",component: LoginComponent},
   {path: "reservacionVuelo",component: ReservacionVuelosComponent},
+  {path: "crearVuelo", component: CrearVueloComponent},
   {path: "**", redirectTo: "login", pathMatch:"full"},
 
 ];
