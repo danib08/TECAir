@@ -11,5 +11,12 @@ export class GestionUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  /**
+   * @description: Method for adding new users to the DB
+   */
+  SignUpUser(event: { preventDefault: () => void; target: any; }){
+    event.preventDefault()
+    const target= event.target
+    console.log("Hola mundo 2")
+  }
 }
