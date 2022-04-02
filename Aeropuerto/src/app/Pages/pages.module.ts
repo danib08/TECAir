@@ -11,6 +11,7 @@ import { GestionUsuarioComponent } from './gestion-usuario/gestion-usuario.compo
 import { ReservacionVuelosComponent } from './reservacion-vuelos/reservacion-vuelos.component';
 import { CrearVueloComponent } from './crear-vuelo/crear-vuelo/crear-vuelo.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ManagePromosComponent } from './crear-promocion/manage-promos/manage-promos.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     GestionUsuarioComponent,
     ReservacionVuelosComponent,
     CrearVueloComponent,
+    ManagePromosComponent,
 
   ],
   imports: [

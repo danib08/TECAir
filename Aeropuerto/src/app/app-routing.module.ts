@@ -6,6 +6,7 @@ import { HomeComponent } from './Pages/home/home.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { ReservacionVuelosComponent } from './Pages/reservacion-vuelos/reservacion-vuelos.component';
 import { CrearVueloComponent } from './Pages/crear-vuelo/crear-vuelo/crear-vuelo.component';
+import { ManagePromosComponent } from './Pages/crear-promocion/manage-promos/manage-promos.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: "login",component: LoginComponent},
   {path: "reservacionVuelo",component: ReservacionVuelosComponent},
   {path: "crearVuelo", component: CrearVueloComponent},
+  {path: "gestionPromociones", component: ManagePromosComponent},
   {path: "**", redirectTo: "login", pathMatch:"full"},
 
 ];

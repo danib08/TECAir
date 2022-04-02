@@ -94,24 +94,7 @@ export class CrearVueloComponent implements OnInit {
       console.log(this.list);
     }
   }
-
-
-  refresh(){
-    this.registerForm.patchValue({
-      Origin: '',
-      Destination: '',
-      BagQuantity: 0,
-      UserQuantity: 0,
-      FlightID: '',
-      DepartureTime: '',
-      ArrivalTime:''
-    });
-    this.stops.controls.splice(0, this.stops.length);
-  }
   
   
-}
-function foreach(each: any, arg1: boolean) {
-  throw new Error('Function not implemented.');
 }
 
