@@ -136,15 +136,15 @@ namespace TECAirDbAPI
                     .HasColumnName("seatnum")
                     .IsFixedLength(true);
 
-                entity.HasOne(d => d.Customer)
+                /*entity.HasOne(d => d.Customer)
                     .WithMany()
                     .HasForeignKey(d => d.Customerid)
-                    .HasConstraintName("customer_in_flight_customerid_fkey");
+                    .HasConstraintName("customer_in_flight_customerid_fkey");*/
 
-                entity.HasOne(d => d.Flight)
+                /*entity.HasOne(d => d.Flight)
                     .WithMany()
                     .HasForeignKey(d => d.Flightid)
-                    .HasConstraintName("customer_in_flight_flightid_fkey");
+                    .HasConstraintName("customer_in_flight_flightid_fkey");*/
             });
 
             modelBuilder.Entity<Flight>(entity =>

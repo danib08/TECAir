@@ -10,7 +10,7 @@ namespace TECAirDbAPI.Models
         /*public Worker()
         {
             Flights = new HashSet<Flight>();
-        */
+        }*/
 
         public int Workerid { get; set; }
         public string Nameworker { get; set; }
