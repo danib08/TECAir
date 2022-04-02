@@ -13,7 +13,5 @@ namespace TECAirDbAPI.Models
         public int? Customerid { get; set; }
         public string Flightid { get; set; }
 
-        //public virtual Customer Customer { get; set; }
-        //public virtual Flight Flight { get; set; }
     }
 }

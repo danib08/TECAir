@@ -7,10 +7,6 @@ namespace TECAirDbAPI.Models
 {
     public partial class Flight
     {
-        /*public Flight()
-        {
-            Bags = new HashSet<Bag>();
-        }*/
 
         public string Flightid { get; set; }
         public int? Bagquantity { get; set; }
@@ -26,9 +22,5 @@ namespace TECAirDbAPI.Models
         public int? Discount { get; set; }
         public string Planeid { get; set; }
         public int? Workerid { get; set; }
-
-        //public virtual Plane Plane { get; set; }
-        //public virtual Worker Worker { get; set; }
-        //public virtual ICollection<Bag> Bags { get; set; }
     }
 }
