@@ -1,21 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore;
-using TECAirAPI.Data;
-using TECAirAPI.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace TECAirAPI
+namespace TECAirDbAPI
 {
     public class Startup
     {
@@ -30,14 +28,11 @@ namespace TECAirAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IDataContext>(provider => provider.GetService<DataContext>());
-            services.AddScoped<IWorkerRepository, WorkerRepository>();
-            services.AddScoped<IBagRepository , BagRepository>();
+            services.AddDbContext<TECAirDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TECAirAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TECAirDbAPI", Version = "v1" });
             });
         }
 
@@ -48,8 +43,7 @@ namespace TECAirAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => {c.SwaggerEndpoint("/swagger/v1/swagger.json", "TECAirAPI v1"); 
-                c.RoutePrefix = string.Empty;});
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TECAirDbAPI v1"));
             }
 
             app.UseHttpsRedirection();
