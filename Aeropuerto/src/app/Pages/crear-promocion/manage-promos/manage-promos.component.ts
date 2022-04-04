@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-manage-promos',
@@ -12,6 +12,7 @@ export class ManagePromosComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 
   get discounts(){
     return this.registerForm2.get('Discounts') as FormArray;
@@ -26,29 +27,25 @@ export class ManagePromosComponent implements OnInit {
   }
 
   registerForm = this.formBuilder.group({
-    FlightID: [''],
-    Discount: [0]
+    FlightID: ['',Validators.required],
+    Discount: [0, Validators.required]
   });
 
   registerForm2 = this.formBuilder.group({
-    Discounts: this.formBuilder.array([])
+    Discounts: this.formBuilder.array([], Validators.required)
   });
-
   addDiscounts(){
     const discountsFormGroup = this.formBuilder.group({
       FlightID: '',
       Discount: 0
     });
     this.discounts.push(discountsFormGroup);
-
   }
   removeDiscounts(index : number){
     this.discounts.removeAt(index);
   }
-
   submit(){
-    this.discounts.push(this.registerForm);
-    //console.log(this.registerForm.value);
+    console.log(this.discounts.at(1).get('Discount')?.value);
     console.log(this.registerForm2.value);
   }
 }

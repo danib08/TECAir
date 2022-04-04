@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 
+
+div.container-fluid {
+  background-color: rgba(42,43,56,255);
+  box-shadow: black;
+  padding: 16px;
+  border: 1 px solid,black;
+  min-height: 635px;
+}
 body{
 	font-family: 'Poppins', sans-serif;
 	font-weight: 300;

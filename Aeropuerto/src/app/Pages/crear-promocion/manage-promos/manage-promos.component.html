@@ -1,4 +1,5 @@
-<body>
+<div class="container-fluid">
+    <body>
     <h2> Creación de promociones de TecAir </h2>
     <form (submit)="submit()" [formGroup]="registerForm">
         <div class="form-group">
@@ -7,12 +8,18 @@
               <option value="wenas">HOLA</option>
             </select>
         </div>
+        <div class="form-group"> 
+            <label> Precio sin descuento: {{895}} dólares</label>
+        </div>
         <div class="form-group">
             <label for="Discount">Descuento</label>
             <input type="number" class="form-control" formControlName="Discount">
-            <div *ngIf="discount?.invalid && (discount?.dirty || discount?.touched)" class="alert alert-danger">
+            <div *ngIf="(discount?.invalid && (discount?.dirty || discount?.touched)) || (discount?.value < 0 || discount?.value > 100) " class="alert alert-danger">
                 hola buenas
             </div>
+        </div>
+        <div class="form-group"> 
+            <label> Precio con descuento: {{895*((100-discount?.value)/100)}} dólares</label>
         </div>
         <div class="form-group">
             <a class=" btn btn-primary" (click)="addDiscounts()">Agregar promoción</a>
@@ -20,24 +27,35 @@
         <form (submit)="submit()" [formGroup]="registerForm2">
             <div formArrayName="Discounts" *ngFor="let discount of discounts.controls; let i = index">
                 <div [formGroupName]="i">
-                    <div class="form-group row">
+                    <div class="row">
                         <label class="col-md-1" [attr.for]="'FlightID' + i">Vuelo</label>
+                        <div class="col-md-3">
+                            <select class="form-control" [attr.id]="'FlightID' + i" formControlName="FlightID"> 
+                                <option value="tardes"> Hola3</option>
+                            </select>
+                        </div>
+                        <label class="col-md-1" [attr.for]="'Discount' + i">Descuento</label>
+                        <div class="col-md-5">
+                            <input type="number" [attr.id]="'Discount' + i" class="form-control" formControlName="Discount">
+                        </div>
+                        
+                        <div class="col-md-1">
+                            <button class="btn btn-danger" (click)="removeDiscounts(i)">Eliminar promoción</button>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <select class="form-control" [attr.id]="'FlightID' + i" formControlName="FlightID"> 
-                            <option value="tardes"> Hola3</option>
-                        </select>
-                    </div>
-                    <label class="col-md-1" [attr.for]="'Discount' + i">Descuento</label>
-                    <div class="col-md-5">
-                        <input type="number" [attr.id]="'Discount' + i" class="form-control" formControlName="Discount">
-                    </div>
-                    <div>
-                        <button class="btn btn-danger" (click)="removeDiscounts(i)">Eliminar promoción</button>
+                    <div class="row">
+                        <div class="col-md-1 col-md-3"> 
+                            <label>Precio sin descuento: {{895}} dólares</label>
+                        </div>
+                        
+                        <div class="col-md-5 col-md-9"> 
+                            <label> Precio con descuento: {{895*((100-discounts.at(i).get('Discount')?.value)/100)}} dólares</label>
+                        </div> 
                     </div>
                 </div>
             </div>
+            <button type="submit" class="btn btn-success" [disabled]="registerForm2.invalid || registerForm.invalid"> Enviar </button>
         </form>
-        <button type="submit" class="btn btn-success" [disabled]="registerForm.invalid"> Enviar </button>
     </form>
-</body>
+    </body>
+</div>
