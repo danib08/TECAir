@@ -1,8 +1,21 @@
 <resources>
     <string name="app_name">AppTECAir</string>
-    <string name="login_title">TECAir</string>
+    <string name="app_title">TECAir</string>
     <string name="slogan">Su aerolínea de confianza</string>
     <string name="login">Iniciar sesión</string>
+    <string name="login_title">Inicio de sesión</string>
+    <string name="log">Ingresar</string>
     <string name="register">Registrarse</string>
+    <string name="register_title">Registro</string>
+    <string name="id">Cédula</string>
+    <string name="name">Nombre</string>
+    <string name="last_name">Apellido</string>
+    <string name="email">Correo electrónico</string>
+    <string name="phone">Número telefónico</string>
+    <string name="if_student">Si es estudiante:</string>
+    <string name="id_student">Carnet estudiantil</string>
+    <string name="university">Universidad</string>
+    <string name="password">Contraseña</string>
+
 
 </resources>

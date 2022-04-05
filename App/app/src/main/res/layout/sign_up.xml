@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/accentPalette"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/register_title"
+        android:textColor="@color/orangePalette" />
+
+    <EditText
+        style="@style/edit_text"
+        android:id="@+id/editTextId"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="@string/id"
+        android:autofillHints="@string/id"
+        android:inputType="number" />
+
+    <EditText
+        style="@style/edit_text"
+        android:id="@+id/editTextPass"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="@string/password"
+        android:autofillHints="@string/password"
+        android:inputType="textPassword" />
+
+    <EditText
+        style="@style/edit_text"
+        android:id="@+id/editTextName"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="@string/name"
+        android:autofillHints="@string/name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        style="@style/edit_text"
+        android:id="@+id/editTextLastName"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="@string/last_name"
+        android:autofillHints="@string/last_name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        style="@style/edit_text"
+        android:id="@+id/editTextEmail"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="@string/email"
+        android:autofillHints="@string/email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        style="@style/edit_text"
+        android:id="@+id/editTextPhone"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="@string/phone"
+        android:autofillHints="@string/phone"
+        android:inputType="phone" />
+
+    <TextView
+        style="@style/subHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="@string/if_student"
+        android:textColor="@color/orangePalette" />
+
+    <EditText
+        style="@style/edit_text"
+        android:id="@+id/editTextStudentId"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="@string/id_student"
+        android:autofillHints="@string/id_student"
+        android:inputType="number" />
+
+    <EditText
+        style="@style/edit_text"
+        android:id="@+id/editTextUni"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="@string/university"
+        android:autofillHints="@string/university"
+        android:inputType="text" />
+
+    <android.widget.Button
+        android:id="@+id/sendSignIn"
+        style="@style/button_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:text="@string/register"
+        android:textAllCaps="false" />
+
+</LinearLayout>
