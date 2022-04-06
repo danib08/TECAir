@@ -1,8 +1,9 @@
 <div class="container-fluid">
-    <body>
     <h2> Creación de promociones de TecAir </h2>
+    <body>
     <form (submit)="submit()" [formGroup]="registerForm">
         <div class="form-group">
+            <i class="fa fa-plane"></i>
             <label for="FlightID">Escoja el vuelo al que desea aplicarle el descuento</label>
             <select class="form-control" id="FlightID" name="FlightID" formControlName="FlightID">
               <option value="wenas">HOLA</option>
@@ -12,6 +13,7 @@
             <label> Precio sin descuento: {{895}} dólares</label>
         </div>
         <div class="form-group">
+            <i class="fa fa-usd"></i>
             <label for="Discount">Descuento</label>
             <input type="number" class="form-control" formControlName="Discount">
             <div *ngIf="(discount?.invalid && (discount?.dirty || discount?.touched)) || (discount?.value < 0 || discount?.value > 100) " class="alert alert-danger">
@@ -21,6 +23,7 @@
         <div class="form-group"> 
             <label> Precio con descuento: {{895*((100-discount?.value)/100)}} dólares</label>
         </div>
+        
         <div class="form-group">
             <a class=" btn btn-primary" (click)="addDiscounts()">Agregar promoción</a>
         </div>
@@ -28,30 +31,39 @@
             <div formArrayName="Discounts" *ngFor="let discount of discounts.controls; let i = index">
                 <div [formGroupName]="i">
                     <div class="row">
-                        <label class="col-md-1" [attr.for]="'FlightID' + i">Vuelo</label>
+                        <i class="fa fa-plane col-md-1">
+                            <label [attr.for]="'FlightID' + i">Vuelo</label>
+                        </i>
                         <div class="col-md-3">
                             <select class="form-control" [attr.id]="'FlightID' + i" formControlName="FlightID"> 
                                 <option value="tardes"> Hola3</option>
                             </select>
                         </div>
-                        <label class="col-md-1" [attr.for]="'Discount' + i">Descuento</label>
-                        <div class="col-md-5">
+                        <i class="fa fa-usd col-md-1">
+                            <label class="col-md-3" [attr.for]="'Discount' + i">Descuento  </label>
+                        </i>
+                        <div class="col-md-3">
                             <input type="number" [attr.id]="'Discount' + i" class="form-control" formControlName="Discount">
                         </div>
-                        
+                        <div *ngIf=" (discounts.at(i).get('Discount')?.value < 0 || discounts.at(i).get('Discount')?.value > 100) " class="alert alert-danger">
+                            hola buenas
+                        </div>
                         <div class="col-md-1">
                             <button class="btn btn-danger" (click)="removeDiscounts(i)">Eliminar promoción</button>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-1 col-md-3"> 
+                        <div class="col-md-5"> 
                             <label>Precio sin descuento: {{895}} dólares</label>
                         </div>
                         
-                        <div class="col-md-5 col-md-9"> 
+                        <div class="col-md-9"> 
                             <label> Precio con descuento: {{895*((100-discounts.at(i).get('Discount')?.value)/100)}} dólares</label>
                         </div> 
                     </div>
+                    <p>
+
+                    </p>
                 </div>
             </div>
             <button type="submit" class="btn btn-success" [disabled]="registerForm2.invalid || registerForm.invalid"> Enviar </button>

@@ -58,22 +58,18 @@ p {
   font-size: 14px;
   line-height: 1.7;
 }
-i.bi-pin-map-fill{
-  color: #ffeba7;
-  margin-left: 10px;
-}
 i.bi-journal-minus{
   color: #ffeba7;
   margin-left: 10px;
 }
-i.bi-arrow-up-square-fill{
+i.bi-file-person-fill{
   color: #ffeba7;
   margin-left: 10px;
 }
-i.bi-arrow-down-square-fill{
-  color: #ffeba7;
-  margin-left: 10px;
-}
+i.bi-file-lock2-fill{
+    color: #ffeba7;
+    margin-left: 10px;
+  }
 h2{
     font-size: 40px;
     color:rgba(42,43,56,255);

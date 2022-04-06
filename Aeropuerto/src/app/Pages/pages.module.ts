@@ -12,6 +12,7 @@ import { ReservacionVuelosComponent } from './reservacion-vuelos/reservacion-vue
 import { CrearVueloComponent } from './crear-vuelo/crear-vuelo/crear-vuelo.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ManagePromosComponent } from './crear-promocion/manage-promos/manage-promos.component';
+import { SignUpWorkersComponent } from './registro-trabajadores/sign-up-workers/sign-up-workers.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { ManagePromosComponent } from './crear-promocion/manage-promos/manage-pr
     ReservacionVuelosComponent,
     CrearVueloComponent,
     ManagePromosComponent,
+    SignUpWorkersComponent,
 
   ],
   imports: [
