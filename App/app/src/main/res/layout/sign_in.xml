@@ -18,7 +18,7 @@
 
     <EditText
         style="@style/edit_text"
-        android:id="@+id/editTextId"
+        android:id="@+id/editTextIdIn"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -29,7 +29,7 @@
 
     <EditText
         style="@style/edit_text"
-        android:id="@+id/editTextPass"
+        android:id="@+id/editTextPassIn"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
