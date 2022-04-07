@@ -12,5 +12,6 @@ namespace TECAirDbAPI.Models
         public string Model { get; set; }
         public int Passengercap { get; set; }
         public int Bagcap { get; set; }
+
     }
 }

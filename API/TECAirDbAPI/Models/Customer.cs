@@ -7,7 +7,6 @@ namespace TECAirDbAPI.Models
 {
     public partial class Customer
     {
-
         public int Customerid { get; set; }
         public string Namecustomer { get; set; }
         public string Lastnamecustomer { get; set; }

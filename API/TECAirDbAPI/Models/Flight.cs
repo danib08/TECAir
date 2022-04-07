@@ -7,7 +7,7 @@ namespace TECAirDbAPI.Models
 {
     public partial class Flight
     {
-
+        
         public string Flightid { get; set; }
         public int? Bagquantity { get; set; }
         public int? Userquantity { get; set; }

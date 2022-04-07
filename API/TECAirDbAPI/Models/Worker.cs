@@ -12,5 +12,6 @@ namespace TECAirDbAPI.Models
         public string Nameworker { get; set; }
         public string Lastnameworker { get; set; }
         public string Passworker { get; set; }
+
     }
 }
