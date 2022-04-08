@@ -43,9 +43,31 @@
         style="@style/button_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_gravity="center"
+        android:layout_marginTop="30dp"
         android:text="@string/log"
         android:textAllCaps="false" />
+
+    <EditText
+        style="@style/edit_text"
+        android:id="@+id/editTextName"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:hint="@string/name"
+        android:autofillHints="@string/name"
+        android:inputType="text" />
+
+    <EditText
+        style="@style/edit_text"
+        android:id="@+id/editTextLastName"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:hint="@string/last_name"
+        android:autofillHints="@string/last_name"
+        android:inputType="text" />
 
 </LinearLayout>

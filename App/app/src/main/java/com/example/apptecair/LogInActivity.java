@@ -13,7 +13,7 @@ import android.widget.Toast;
  */
 public class LogInActivity extends AppCompatActivity {
 
-    EditText idText, passText;
+    EditText idText, passText, nameText, lastNameText;
     Button signInBtn;
 
     /**
@@ -31,14 +31,19 @@ public class LogInActivity extends AppCompatActivity {
         passText = findViewById(R.id.editTextPassIn);
         signInBtn = findViewById(R.id.sendSignIn);
 
+        nameText = findViewById(R.id.editTextName);
+        lastNameText = findViewById(R.id.editTextLastName);
+
         String id = idText.getText().toString();
         String password = passText.getText().toString();
+        String name = nameText.getText().toString();
+        String lastName = lastNameText.getText().toString();
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Database myDB =new Database(LogInActivity.this);
-                myDB.addWorker(id.trim(),password.trim());
+                myDB.addWorker(id.trim(),name.trim(),lastName.trim(),password.trim());
             }
         });
 

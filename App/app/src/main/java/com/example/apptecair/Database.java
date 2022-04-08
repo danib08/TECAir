@@ -120,12 +120,14 @@ public class Database extends SQLiteOpenHelper {
 
     }
 
-    void addWorker(String IdWorker, String PassWorker){
+    void addWorker(String IdWorker, String NameWorker, String LastNameWorker, String PassWorker){
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(WORKERID, IdWorker);
         cv.put(PASSWORKER, PassWorker);
+        cv.put(NAMEWORKER, NameWorker);
+        cv.put(LASTNAMEWORKER, LastNameWorker);
         long result = db.insert(TABLE_WORKERS, null, cv);
         if (result == -1){
 
