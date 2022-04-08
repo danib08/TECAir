@@ -1,13 +1,16 @@
 package com.example.apptecair;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 public class Database extends SQLiteOpenHelper {
 
+    private Context context;
     public static final String DATABASE = "TECAirDB";
 
     // Customer table
@@ -69,8 +72,11 @@ public class Database extends SQLiteOpenHelper {
     public static final String FLIGHTID_CIF = "flightid";
 
 
+
     public Database(@Nullable Context context) {
+
         super(context, DATABASE, null, 1);
+
     }
 
     @Override
@@ -107,8 +113,26 @@ public class Database extends SQLiteOpenHelper {
                 "REFERENCES "+TABLE_FLIGHTS+"("+FLIGHTID+"), " + "PRIMARY KEY (" + CUSTOMERID_CIF + ", " + FLIGHTID_CIF + "))");
     }
 
+
+
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
+
+    void addWorker(String IdWorker, String PassWorker){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(WORKERID, IdWorker);
+        cv.put(PASSWORKER, PassWorker);
+        long result = db.insert(TABLE_WORKERS, null, cv);
+        if (result == -1){
+
+            Toast.makeText(context, "", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context, "Added Successfully!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

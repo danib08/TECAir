@@ -26,6 +26,7 @@ public class HomeActivity extends AppCompatActivity {
 
         final Database db = new Database (HomeActivity.this);
 
+
         // All layout widgets are referenced
         signInBtn = findViewById(R.id.btnSignIn);
         signUpBtn = findViewById(R.id.btnSignUp);

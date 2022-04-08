@@ -3,6 +3,7 @@ package com.example.apptecair;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -32,6 +33,14 @@ public class LogInActivity extends AppCompatActivity {
 
         String id = idText.getText().toString();
         String password = passText.getText().toString();
+
+        signInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Database myDB =new Database(LogInActivity.this);
+                myDB.addWorker(id.trim(),password.trim());
+            }
+        });
 
         // TODO: id sea numerico
         if (id.equals("") || password.equals("")) {
