@@ -37,8 +37,5 @@ public class LogInActivity extends AppCompatActivity {
         if (id.equals("") || password.equals("")) {
             Toast.makeText(LogInActivity.this, "Por favor llene toda la información solicitada", Toast.LENGTH_SHORT).show();
         }
-        else {
-            
-        }
     }
 }

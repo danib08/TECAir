@@ -65,7 +65,8 @@ CREATE TABLE Customer_in_Flight(
 	CustomerID INT,
 	FlightID CHAR(7),
 	FOREIGN KEY (CustomerID) REFERENCES CUSTOMER(CustomerID),
-	FOREIGN KEY (FlightID) REFERENCES FLIGHT(FlightID)
+	FOREIGN KEY (FlightID) REFERENCES FLIGHT(FlightID),
+	PRIMARY KEY (CustomerID, FlightID)
 );
 
 
