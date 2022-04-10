@@ -2,31 +2,47 @@
     <h2> Creación de promociones de TecAir </h2>
     <body>
     <form (submit)="submit()" [formGroup]="registerForm">
-        <div class="form-group">
-            <i class="fa fa-plane"></i>
-            <label for="FlightID">Escoja el vuelo al que desea aplicarle el descuento</label>
-            <select class="form-control" id="FlightID" name="FlightID" formControlName="FlightID">
-              <option value="wenas">HOLA</option>
-            </select>
-        </div>
-        <div class="form-group"> 
-            <label> Precio sin descuento: {{895}} dólares</label>
-        </div>
-        <div class="form-group">
-            <i class="fa fa-usd"></i>
-            <label for="Discount">Descuento</label>
-            <input type="number" class="form-control" formControlName="Discount">
-            <div *ngIf="(discount?.invalid && (discount?.dirty || discount?.touched)) || (discount?.value < 0 || discount?.value > 100) " class="alert alert-danger">
-                hola buenas
+    <div class="row">
+        <div class="col-1 col-5">    
+            <div class="form-group">
+                <i class="fa fa-plane"></i>
+                <label for="FlightID">Escoja el vuelo al que desea aplicarle el descuento</label>
+                <select class="form-control" id="FlightID" name="FlightID" formControlName="FlightID">
+                <option value="wenas">HOLA</option>
+                </select>
+            </div>
+            <div class="form-group"> 
+                <label> Precio sin descuento: {{895}} dólares</label>
+            </div>
+            <div class="form-group">
+                <i class="fa fa-usd"></i>
+                <label for="Discount">Descuento</label>
+                <input type="number" class="form-control" formControlName="Discount">
+                <div *ngIf="(discount?.invalid && (discount?.dirty || discount?.touched)) || (discount?.value < 0 || discount?.value > 100) " class="alert alert-danger">
+                    hola buenas
+                </div>
+            </div>
+            <div class="form-group"> 
+                <label> Precio con descuento: {{895*((100-discount?.value)/100)}} dólares</label>
+            </div>
+            <div class="form-group">
+                <a class=" btn btn-primary" (click)="addDiscounts()">Agregar promoción</a>
             </div>
         </div>
-        <div class="form-group"> 
-            <label> Precio con descuento: {{895*((100-discount?.value)/100)}} dólares</label>
+        <div class="col-1 col-3">
+            <p class="hidden">
+              a
+              a
+              a  
+            </p>
+            <div class="imageRef">
+                <p>    
+                </p>
+                <img src="https://cdn-icons-png.flaticon.com/512/21/21238.png" width="300px" height="250px">
+            </div>
         </div>
+    </div>
         
-        <div class="form-group">
-            <a class=" btn btn-primary" (click)="addDiscounts()">Agregar promoción</a>
-        </div>
         <form (submit)="submit()" [formGroup]="registerForm2">
             <div formArrayName="Discounts" *ngFor="let discount of discounts.controls; let i = index">
                 <div [formGroupName]="i">

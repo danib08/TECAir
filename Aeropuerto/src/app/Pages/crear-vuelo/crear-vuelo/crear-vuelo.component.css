@@ -8,6 +8,14 @@ div.container-fluid {
   border: 1 px solid,black;
   min-height: 635px;
 }
+div.imageRef{
+  background-color: #ffeba7;
+  border-radius: 25px;
+  box-shadow: 5px 10px #000000;
+}
+p.hidden{
+  color:rgba(42,43,56,255);
+}
 body{
 	font-family: 'Poppins', sans-serif;
 	font-weight: 300;

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 @import url('http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css');
-
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
 
 div.container-fluid {
   background-color: #ffeba7;
@@ -8,6 +8,10 @@ div.container-fluid {
   padding: 16px;
   border: 1 px solid,black;
   min-height: 635px;
+}
+img.image{
+    height: cover;
+    width: cover;
 }
 div.imageRef{
   background-color: #ffeba7;
@@ -27,6 +31,10 @@ i.fa-plane{
   margin-left: 10px;
   font-size: large;
 }
+i.bi-info-square-fill{
+    color: #ffeba7;
+    margin-left: 10px;
+  }
 body{
 	font-family: 'Poppins', sans-serif;
 	font-weight: 300;

@@ -2,57 +2,72 @@
     <h2> Creación de Vuelos de TecAir </h2>
     <body>
     <form (submit)="submit()" [formGroup]="registerForm">
-    <div class="form-group">
-        <i class="bi bi-pin-map-fill">
-            <label for="Origin">Origen</label>
-        </i>
-        <input type="text" class="form-control" formControlName="Origin">
-        <div
-        *ngIf="origin?.invalid && (origin?.dirty || origin?.touched)" class="alert alert-danger">
-            HOLA
+    <div class="row">
+        <div class="col-1 col-5">
+            <div class="form-group">
+                <i class="bi bi-pin-map-fill">
+                    <label for="Origin">Origen</label>
+                </i>
+                <input type="text" class="form-control" formControlName="Origin">
+                <div
+                *ngIf="origin?.invalid && (origin?.dirty || origin?.touched)" class="alert alert-danger">
+                    HOLA
+                </div>
+            </div>
+            <div class="form-group">
+                <i class="bi bi-pin-map-fill">
+                    <label for="Destination">Destino</label>
+                </i>
+                <input type="text" class="form-control" formControlName="Destination">
+                <div
+                *ngIf="destination?.invalid && (destination?.dirty || destination?.touched)" class="alert alert-danger">
+                    HOLA2
+                </div>
+            </div>
+            <div class="form-group">
+                <i class="bi bi-journal-minus">
+                    <label for="FlightID">ID del vuelo</label>
+                </i>
+                <input type="text" class="form-control" formControlName="FlightID">
+                <div
+                *ngIf="flightID?.invalid && (flightID?.dirty || flightID?.touched)" class="alert alert-danger">
+                    HOLA5
+                </div>
+            </div>
+            <div class="form-group">
+                <i class="bi bi-arrow-up-square-fill">
+                    <label for="DepartureTime">Fecha de salida</label>
+                </i>
+                <input type="datetime-local" class="form-control" formControlName="DepartureTime">
+                <div
+                *ngIf="departureTime?.invalid && (departureTime?.dirty || departureTime?.touched)" class="alert alert-danger">
+                    HOLA6
+                </div>
+            </div>
+            <div class="form-group">
+                <i class="bi bi-arrow-down-square-fill">
+                    <label for="ArrivalTime">Fecha de llegada</label>
+                </i>
+                <input type="datetime-local" class="form-control" formControlName="ArrivalTime">
+                <div
+                *ngIf="arrivalTime?.invalid && (arrivalTime?.dirty || arrivalTime?.touched)" class="alert alert-danger">
+                    HOLA7
+                </div>
+            </div>
+        </div>
+        <div class="col-1 col-3">
+            <p class="hidden">
+              a
+              a
+              a  
+            </p>
+            <div class="imageRef">
+                <p>    
+                </p>
+                <img src="https://images.vexels.com/media/users/3/199466/isolated/preview/41cb851619a9461e199b26d76f49a257-avion-ligero-moderno.png" width="300px" height="350px">
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        <i class="bi bi-pin-map-fill">
-            <label for="Destination">Destino</label>
-        </i>
-        <input type="text" class="form-control" formControlName="Destination">
-        <div
-        *ngIf="destination?.invalid && (destination?.dirty || destination?.touched)" class="alert alert-danger">
-            HOLA2
-        </div>
-    </div>
-    <div class="form-group">
-        <i class="bi bi-journal-minus">
-            <label for="FlightID">ID del vuelo</label>
-        </i>
-        <input type="text" class="form-control" formControlName="FlightID">
-        <div
-        *ngIf="flightID?.invalid && (flightID?.dirty || flightID?.touched)" class="alert alert-danger">
-            HOLA5
-        </div>
-    </div>
-    <div class="form-group">
-        <i class="bi bi-arrow-up-square-fill">
-            <label for="DepartureTime">Fecha de salida</label>
-        </i>
-        <input type="datetime-local" class="form-control" formControlName="DepartureTime">
-        <div
-        *ngIf="departureTime?.invalid && (departureTime?.dirty || departureTime?.touched)" class="alert alert-danger">
-            HOLA6
-        </div>
-    </div>
-    <div class="form-group">
-        <i class="bi bi-arrow-down-square-fill">
-            <label for="ArrivalTime">Fecha de llegada</label>
-        </i>
-        <input type="datetime-local" class="form-control" formControlName="ArrivalTime">
-        <div
-        *ngIf="arrivalTime?.invalid && (arrivalTime?.dirty || arrivalTime?.touched)" class="alert alert-danger">
-            HOLA7
-        </div>
-    </div>
-
     <div class="form-group">
         <a class=" btn btn-primary" (click)="addStops()">Agregar escala</a>
     </div>

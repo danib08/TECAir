@@ -13,6 +13,7 @@ import { CrearVueloComponent } from './crear-vuelo/crear-vuelo/crear-vuelo.compo
 import { ReactiveFormsModule } from '@angular/forms';
 import { ManagePromosComponent } from './crear-promocion/manage-promos/manage-promos.component';
 import { SignUpWorkersComponent } from './registro-trabajadores/sign-up-workers/sign-up-workers.component';
+import { ManageFlightsComponent } from './gestion-vuelos/manage-flights/manage-flights.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { SignUpWorkersComponent } from './registro-trabajadores/sign-up-workers/
     CrearVueloComponent,
     ManagePromosComponent,
     SignUpWorkersComponent,
+    ManageFlightsComponent,
 
   ],
   imports: [
