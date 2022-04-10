@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-reservacion-vuelos',
   templateUrl: './reservacion-vuelos.component.html',
@@ -16,9 +16,12 @@ export class ReservacionVuelosComponent implements OnInit {
   Stops:string="---";
   Price:number=0;
   Discount:number=0;
-  Flightid:string="XSQ124";
-  constructor() { }
+  Flightid:string="";
 
+  constructor(private cookieSvc:CookieService) {
+    this.Flightid=this.cookieSvc.get("IDVuelo");
+    //Method for asking the API for the information of the flight
+  }
   ngOnInit(): void {
   }
 

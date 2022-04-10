@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Vuelos } from '../models/vuelos.model';
-
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 // Test for displaying all the flights
 const COUNTRIES: Vuelos[] = [
   {
@@ -8,7 +9,7 @@ const COUNTRIES: Vuelos[] = [
     Destination: "United States",
     BagQuantity: 4546,
     UserQuantity: 8994,
-    FlightID: "XML5214",
+    FlightID: "XML1",
     DepartureTime: "21:00",
     ArrivalTime:"12:47",
     Price:450
@@ -18,7 +19,7 @@ const COUNTRIES: Vuelos[] = [
     Destination: "United States",
     BagQuantity: 4546,
     UserQuantity: 8994,
-    FlightID: "XML5214",
+    FlightID: "XML2",
     DepartureTime: "21:00",
     ArrivalTime:"12:47",
     Price:150
@@ -28,7 +29,7 @@ const COUNTRIES: Vuelos[] = [
     Destination: "Canada",
     BagQuantity: 4546,
     UserQuantity: 8994,
-    FlightID: "XML5214",
+    FlightID: "XML3",
     DepartureTime: "21:00",
     ArrivalTime:"12:47",
     Price:400
@@ -38,7 +39,7 @@ const COUNTRIES: Vuelos[] = [
     Destination: "España",
     BagQuantity: 4546,
     UserQuantity: 8994,
-    FlightID: "XML5214",
+    FlightID: "XML4",
     DepartureTime: "21:00",
     ArrivalTime:"12:47",
     Price:350
@@ -48,7 +49,7 @@ const COUNTRIES: Vuelos[] = [
     Destination: "España",
     BagQuantity: 4546,
     UserQuantity: 8994,
-    FlightID: "XML5214",
+    FlightID: "XML5",
     DepartureTime: "21:00",
     ArrivalTime:"12:47",
     Price:550
@@ -58,7 +59,7 @@ const COUNTRIES: Vuelos[] = [
     Destination: "Costa Rica",
     BagQuantity: 4546,
     UserQuantity: 8994,
-    FlightID: "XML5214",
+    FlightID: "XML6",
     DepartureTime: "21:00",
     ArrivalTime:"12:47",
     Price:430
@@ -68,7 +69,7 @@ const COUNTRIES: Vuelos[] = [
     Destination: "Russia",
     BagQuantity: 4546,
     UserQuantity: 8994,
-    FlightID: "XML5214",
+    FlightID: "XML7",
     DepartureTime:"21:00",
     ArrivalTime: "12:47",
     Price:40
@@ -82,7 +83,7 @@ const COUNTRIES: Vuelos[] = [
 })
 export class BusquedaVueloComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router, private cookieSvc:CookieService) { }
 
   Estado=false;
 
@@ -92,13 +93,15 @@ export class BusquedaVueloComponent implements OnInit {
   }
   //Testing the button
   mostrarInfo(event: { preventDefault: () => void; target: any; }){
-    event.preventDefault()
-    const target= event.target
-    console.log("Hola mundo")
     this.Estado=true;
   }
   getListaVuelos(event: { preventDefault: () => void; target: any; }){
     //Ask API for all the flight that comes form Origin to Destination
+  }
 
+  connectReservacion(VueloID:string){
+    console.log(VueloID)
+    this.cookieSvc.set("IDVuelo", VueloID);
+    this.router.navigate(["reservacionVuelo"])
   }
 }

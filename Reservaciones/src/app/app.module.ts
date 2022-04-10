@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { PagesModule } from './Pages/pages.module';
 import { ComponentsModule } from './Components/components.module';
 import { RouterModule } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
+  //Modules
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -18,7 +20,8 @@ import { RouterModule } from '@angular/router';
     ComponentsModule,
     PagesModule
   ],
-  providers: [],
+  //Services
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

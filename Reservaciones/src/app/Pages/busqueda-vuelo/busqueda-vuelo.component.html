@@ -29,7 +29,7 @@
             <span class="right"> {{hero.Origin}} -:- {{hero.DepartureTime}}</span><span class="left">{{hero.Destination}} -:- {{hero.ArrivalTime}}</span>
           </div>
           <div class="col-sm-4 p-3 bg-dark text-white">
-            <button class="btn" style="float: right;">Precio: ${{hero.Price}}</button>
+            <button class="btn" (click)="connectReservacion(hero.FlightID)" style="float: right;">Precio: ${{hero.Price}}</button>
           </div>
         </div>
       </li>
