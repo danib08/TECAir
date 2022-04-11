@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { PostService } from 'src/app/Services/post-service';
 import { PutService } from 'src/app/Services/put-service';
 
 @Component({
@@ -11,7 +10,7 @@ import { PutService } from 'src/app/Services/put-service';
 })
 export class ManageFlightsComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private http:HttpClient, private apiService: PutService) { }
+  constructor(private formBuilder: FormBuilder, private apiService: PutService) { }
 
   ngOnInit(): void {
   }

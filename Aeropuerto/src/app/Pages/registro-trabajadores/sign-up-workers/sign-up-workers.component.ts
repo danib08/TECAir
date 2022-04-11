@@ -10,7 +10,7 @@ import { PostService } from 'src/app/Services/post-service';
 })
 export class SignUpWorkersComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private http:HttpClient, private apiService: PostService) { }
+  constructor(private formBuilder: FormBuilder, private apiService: PostService) { }
 
   ngOnInit(): void {
   }
