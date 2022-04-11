@@ -8,7 +8,7 @@
                 <i class="bi bi-journal-minus">
                     <label for="WorkerID">ID del Trabajador</label>
                 </i>
-                <input type="text" class="form-control" formControlName="WorkerID">
+                <input type="number" class="form-control" formControlName="WorkerID">
                 <div
                 *ngIf="workerID?.invalid && (workerID?.dirty || workerID?.touched)" class="alert alert-danger">
                     HOLA
@@ -70,7 +70,7 @@
                         <label class="col-2" align="center" [attr.for] ="'WorkerID' + i">ID del trabajador</label>
 
                         <div class="col-3">
-                            <input type="text" [attr.id]="'WorkerID' + i" class="form-control" formControlName="WorkerID">
+                            <input type="number" [attr.id]="'WorkerID' + i" class="form-control" formControlName="WorkerID">
                         </div>
         
                         <label class="col-2" align="center" [attr.for] ="'NameWorker' + i" >Nombre</label>

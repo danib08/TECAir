@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PostService } from 'src/app/Services/post-service';
+import { PutService } from 'src/app/Services/put-service';
 
 @Component({
   selector: 'app-manage-promos',
@@ -8,7 +11,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ManagePromosComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private http:HttpClient, private apiService: PutService) { }
 
   ngOnInit(): void {
   }
@@ -45,7 +48,26 @@ export class ManagePromosComponent implements OnInit {
     this.discounts.removeAt(index);
   }
   submit(){
-    console.log(this.discounts.at(1).get('Discount')?.value);
-    console.log(this.registerForm2.value);
+    if(!this.registerForm.valid){
+      alert("ERROR");
+      return;
+    }
+    else{
+      this.apiService.changeStatus(this.registerForm.value).subscribe(
+        res => {
+          console.log(res);
+        }
+      );
+      if(this.discounts.length != 0){
+        this.apiService.addDiscount(this.discounts.value).subscribe(
+          res => {
+            console.log(res);
+          }
+        );
+      }
+
+      
+      
+    }
   }
 }

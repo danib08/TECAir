@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { PostService } from 'src/app/Services/post-service';
 
 @Component({
   selector: 'app-sign-up-workers',
@@ -8,7 +10,7 @@ import { FormArray, FormBuilder, Validators } from '@angular/forms';
 })
 export class SignUpWorkersComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private http:HttpClient, private apiService: PostService) { }
 
   ngOnInit(): void {
   }
@@ -29,7 +31,7 @@ export class SignUpWorkersComponent implements OnInit {
     return this.registerForm2.get('Workers') as FormArray;
   }
   registerForm = this.formBuilder.group({
-    WorkerID: ['', Validators.required],
+    WorkerID: [0, Validators.required],
     NameWorker: ['', Validators.required],
     LastNameWorker: ['', Validators.required],
     PassWorker: ['',Validators.required],
@@ -41,7 +43,7 @@ export class SignUpWorkersComponent implements OnInit {
 
   addWorkers(){
     const workersFormGroup = this.formBuilder.group({
-      WorkerID: '',
+      WorkerID: 0,
       NameWorker: '',
       LastNameWorker: '',
       PassWorker: ''
@@ -58,9 +60,22 @@ export class SignUpWorkersComponent implements OnInit {
       alert("ERROR");
       return;
     }
-    else{;
-      console.log(this.registerForm.value);
-      console.log(this.registerForm2.value);
+    else{
+      this.apiService.addWorker(this.registerForm.value).subscribe(
+        res => {
+          console.log(res);
+        }
+      );
+      if(this.workers.length != 0){
+        this.apiService.addWorker(this.workers.value).subscribe(
+          res => {
+            console.log(res);
+          }
+        );
+      }
+
+      
+      
     }
   }
 }

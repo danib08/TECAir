@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { PostService } from 'src/app/Services/post-service';
 
 @Component({
   selector: 'app-crear-vuelo',
@@ -8,7 +10,7 @@ import { FormArray, FormBuilder, Validators } from '@angular/forms';
 })
 export class CrearVueloComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private http:HttpClient, private apiService: PostService) { }
  
 
   list: Array<string> = [];
@@ -89,9 +91,18 @@ export class CrearVueloComponent implements OnInit {
         this.list.push(this.stops.at(i).get('FlightID')?.value);
       }
       this.registerForm.get('Stops')?.setValue(this.list);
-      console.log(this.registerForm.value);
-      console.log(this.registerForm2.value);
-      console.log(this.list);
+      this.apiService.addFlight(this.registerForm.value).subscribe(
+        res => {
+          console.log(res);
+        }
+      );
+      if(this.stops.length != 0){
+        this.apiService.addFlight(this.stops.value).subscribe(
+          res => {
+            console.log(res);
+          }
+        );
+      }
     }
   }
   

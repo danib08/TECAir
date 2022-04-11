@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { PostService } from 'src/app/Services/post-service';
+import { PutService } from 'src/app/Services/put-service';
 
 @Component({
   selector: 'app-manage-flights',
@@ -8,7 +11,7 @@ import { FormArray, FormBuilder, Validators } from '@angular/forms';
 })
 export class ManageFlightsComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private http:HttpClient, private apiService: PutService) { }
 
   ngOnInit(): void {
   }
@@ -35,7 +38,26 @@ export class ManageFlightsComponent implements OnInit {
     this.flights.removeAt(index);
   }
   submit(){
-    console.log(this.registerForm.value);
-    console.log(this.flights.value);
+    if(!this.registerForm.valid){
+      alert("ERROR");
+      return;
+    }
+    else{
+      this.apiService.changeStatus(this.registerForm.value).subscribe(
+        res => {
+          console.log(res);
+        }
+      );
+      if(this.flights.length != 0){
+        this.apiService.changeStatus(this.flights.value).subscribe(
+          res => {
+            console.log(res);
+          }
+        );
+      }
+
+      
+      
+    }
   }
 }
