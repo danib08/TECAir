@@ -34,22 +34,16 @@ public class LogInActivity extends AppCompatActivity {
         nameText = findViewById(R.id.editTextName);
         lastNameText = findViewById(R.id.editTextLastName);
 
-        String id = idText.getText().toString();
-        String password = passText.getText().toString();
-        String name = nameText.getText().toString();
-        String lastName = lastNameText.getText().toString();
+        // TODO: id sea numerico
+        signInBtn.setOnClickListener(view -> {
+            String id = idText.getText().toString();
+            String password = passText.getText().toString();
+            String name = nameText.getText().toString();
+            String lastName = lastNameText.getText().toString();
 
-        signInBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Database myDB =new Database(LogInActivity.this);
-                myDB.addWorker(id.trim(),name.trim(),lastName.trim(),password.trim());
-            }
+            Database myDB = new Database(LogInActivity.this);
+            myDB.addWorker(id.trim(),name.trim(),lastName.trim(),password.trim());
         });
 
-        // TODO: id sea numerico
-        if (id.equals("") || password.equals("")) {
-            Toast.makeText(LogInActivity.this, "Por favor llene toda la información solicitada", Toast.LENGTH_SHORT).show();
-        }
     }
 }

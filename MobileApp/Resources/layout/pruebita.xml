@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/accentPalette"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Pruebitaaaaa"
+        android:textColor="@color/orangePalette" />
+
+    
+
+    <EditText
+        style="@style/edit_text"
+        android:id="@+id/nombre"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:hint="Nombre"
+        android:autofillHints="@string/password"
+        android:inputType="textPassword" />
+
+    <EditText
+        style="@style/edit_text"
+        android:id="@+id/apellido"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:hint="Apellido"
+        android:autofillHints="@string/password"
+        android:inputType="textPassword" />
+
+    <EditText
+        style="@style/edit_text"
+        android:id="@+id/cedula"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:hint="@string/id"
+        android:autofillHints="@string/id"
+        android:inputType="number" />
+
+    <EditText
+        style="@style/edit_text"
+        android:id="@+id/contra"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:hint="@string/password"
+        android:autofillHints="@string/password"
+        android:inputType="textPassword" />
+
+    <android.widget.Button
+        android:id="@+id/post"
+        style="@style/button_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Post"
+        android:textAllCaps="false" />
+
+   <android.widget.Button
+        android:id="@+id/delete"
+        style="@style/button_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="Delete"
+        android:textAllCaps="false" />
+
+    <android.widget.Button
+        android:id="@+id/update"
+        style="@style/button_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="Update"
+        android:textAllCaps="false" />
+
+
+
+</LinearLayout>
+
