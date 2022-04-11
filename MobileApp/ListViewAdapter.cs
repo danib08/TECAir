@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using MobileApp.Models;
 
-namespace MobileApp.Resources
+namespace MobileApp
 {
     public class ViewHolder : Java.Lang.Object
     {
