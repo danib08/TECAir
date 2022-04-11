@@ -26,7 +26,22 @@
       <li *ngFor="let hero of listVuelos">
         <div class="row">
           <div class="col-sm-8 p-3 bg-dark text-white">
-            <span class="right"> {{hero.Origin}} -:- {{hero.DepartureTime}}</span><span class="left">{{hero.Destination}} -:- {{hero.ArrivalTime}}</span>
+            <div class="row">
+              <div class="col-sm">
+                <h6 ><i class="material-icons"> flight_takeoff</i> &nbsp; Origen &nbsp; <i class="material-icons">trending_flat</i> &nbsp; Destino &nbsp; <i class="material-icons"> flight_land</i>
+                  &nbsp;&nbsp;&nbsp; Paradas: {{hero.Stops}} &nbsp; <i class="material-icons"> airplanemode_active</i></h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <span class="left"> {{hero.Origin}}</span><span class="right">{{hero.Destination}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <span class="left">{{hero.DepartureTime}}</span><span class="right">{{hero.ArrivalTime}}</span>
+              </div>
+            </div>
           </div>
           <div class="col-sm-4 p-3 bg-dark text-white">
             <button class="btn" (click)="connectReservacion(hero.FlightID)" style="float: right;">Precio: ${{hero.Price}}</button>

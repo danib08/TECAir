@@ -20,6 +20,13 @@ body,html{
 h3{
   color: tomato;
 }
+h6{
+  color: tomato;
+  text-align-last: center;
+}
+.material-icons{
+  color: #ffeba7;
+}
 .btn{
   border-radius: 4px;
   height: 44px;

@@ -6,5 +6,6 @@ export interface Vuelos {
   FlightID: string,
   DepartureTime: string,
   ArrivalTime:string
-  Price:number
+  Price:number,
+  Stops:string
 }

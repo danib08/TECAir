@@ -12,7 +12,8 @@ const COUNTRIES: Vuelos[] = [
     FlightID: "XML1",
     DepartureTime: "21:00",
     ArrivalTime:"12:47",
-    Price:450
+    Price:450,
+    Stops:"4"
   },
   {
     Origin: "Canada",
@@ -22,7 +23,8 @@ const COUNTRIES: Vuelos[] = [
     FlightID: "XML2",
     DepartureTime: "21:00",
     ArrivalTime:"12:47",
-    Price:150
+    Price:150,
+    Stops:"3"
   },
   {
     Origin: "Costa Rica",
@@ -32,7 +34,8 @@ const COUNTRIES: Vuelos[] = [
     FlightID: "XML3",
     DepartureTime: "21:00",
     ArrivalTime:"12:47",
-    Price:400
+    Price:400,
+    Stops:"0"
   },
   {
     Origin: "Panama",
@@ -42,7 +45,8 @@ const COUNTRIES: Vuelos[] = [
     FlightID: "XML4",
     DepartureTime: "21:00",
     ArrivalTime:"12:47",
-    Price:350
+    Price:350,
+    Stops:"9"
   },
   {
     Origin: "Japon",
@@ -52,7 +56,8 @@ const COUNTRIES: Vuelos[] = [
     FlightID: "XML5",
     DepartureTime: "21:00",
     ArrivalTime:"12:47",
-    Price:550
+    Price:550,
+    Stops:"1"
   },
   {
     Origin: "Peru",
@@ -62,7 +67,8 @@ const COUNTRIES: Vuelos[] = [
     FlightID: "XML6",
     DepartureTime: "21:00",
     ArrivalTime:"12:47",
-    Price:430
+    Price:430,
+    Stops:"4"
   },
   {
     Origin: "Uruguay",
@@ -72,7 +78,8 @@ const COUNTRIES: Vuelos[] = [
     FlightID: "XML7",
     DepartureTime:"21:00",
     ArrivalTime: "12:47",
-    Price:40
+    Price:40,
+    Stops:"6"
   }
 ];
 
