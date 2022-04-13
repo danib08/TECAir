@@ -11,6 +11,8 @@ namespace TECAirDbAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
+    //Customer Controller generated from DbContext
     public class CustomersController : ControllerBase
     {
         private readonly TECAirDbContext _context;
@@ -20,14 +22,22 @@ namespace TECAirDbAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Customers
+        /// <summary>
+        /// Multi value get of customers
+        /// </summary>
+        /// <returns>All customers in database</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
         {
             return await _context.Customers.ToListAsync();
         }
 
-        // GET: api/Customers/5
+        /// <summary>
+        /// Single value get customer 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Required customer</returns>
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<Customer>> GetCustomer(int id)
         {
@@ -41,8 +51,13 @@ namespace TECAirDbAPI.Controllers
             return customer;
         }
 
-        // PUT: api/Customers/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Put method to edit customer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="customer"></param>
+        /// <returns>State of query</returns>
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCustomer(int id, Customer customer)
         {
@@ -72,7 +87,11 @@ namespace TECAirDbAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Customers
+        /// <summary>
+        /// Method to create customers
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
@@ -97,7 +116,12 @@ namespace TECAirDbAPI.Controllers
             return CreatedAtAction("GetCustomer", new { id = customer.Customerid }, customer);
         }
 
-        // DELETE: api/Customers/5
+        /// <summary>
+        /// Method for deleting customer by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>State of task</returns>
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCustomer(int id)
         {

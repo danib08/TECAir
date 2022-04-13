@@ -11,6 +11,8 @@ namespace TECAirDbAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
+    //Workers Controller generated from DbContext
     public class WorkersController : ControllerBase
     {
         private readonly TECAirDbContext _context;
@@ -18,16 +20,25 @@ namespace TECAirDbAPI.Controllers
         public WorkersController(TECAirDbContext context)
         {
             _context = context;
-        }   
+        }
 
-        // GET: api/Workers
+        /// <summary>
+        /// Multi value get of workers
+        /// </summary>
+        /// <returns>All workers in database</returns>
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Worker>>> GetWorkers()
         {
             return await _context.Workers.ToListAsync();
         }
 
-        // GET: api/Workers/5
+        /// <summary>
+        /// Single value get
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Required worker</returns>
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Worker>> GetWorker(int id)
         {
@@ -41,8 +52,13 @@ namespace TECAirDbAPI.Controllers
             return worker;
         }
 
-        // PUT: api/Workers/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Put method to edit workers
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="worker"></param>
+        /// <returns>State of query</returns>
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutWorker(int id, Worker worker)
         {
@@ -72,7 +88,12 @@ namespace TECAirDbAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Workers
+        /// <summary>
+        /// Method to create worker
+        /// </summary>
+        /// <param name="worker"></param>
+        /// <returns></returns>
+
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Worker>> PostWorker(Worker worker)
@@ -97,7 +118,13 @@ namespace TECAirDbAPI.Controllers
             return CreatedAtAction("GetWorker", new { id = worker.Workerid }, worker);
         }
 
-        // DELETE: api/Workers/5
+        /// <summary>
+        /// Method for deleting workers by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>State of task</returns>
+         
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWorker(int id)
         {

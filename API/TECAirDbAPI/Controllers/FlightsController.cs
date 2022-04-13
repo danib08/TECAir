@@ -11,6 +11,8 @@ namespace TECAirDbAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
+    //Bag Controller generated from DbContext
     public class FlightsController : ControllerBase
     {
         private readonly TECAirDbContext _context;
@@ -20,14 +22,22 @@ namespace TECAirDbAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Flights
+        /// <summary>
+        /// Multi value get of flights
+        /// </summary>
+        /// <returns>All flights in database</returns>
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Flight>>> GetFlights()
         {
             return await _context.Flights.ToListAsync();
         }
 
-        // GET: api/Flights/5
+        /// <summary>
+        /// Single value get
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Required flight</returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Flight>> GetFlight(string id)
         {
@@ -41,8 +51,13 @@ namespace TECAirDbAPI.Controllers
             return flight;
         }
 
-        // PUT: api/Flights/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Put method to edit flights
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="flight"></param>
+        /// <returns>State of query</returns>
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFlight(string id, Flight flight)
         {
@@ -72,8 +87,12 @@ namespace TECAirDbAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Flights
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Method to create Flights
+        /// </summary>
+        /// <param name="flight"></param>
+        /// <returns></returns> 
+        
         [HttpPost]
         public async Task<ActionResult<Flight>> PostFlight(Flight flight)
         {
@@ -97,7 +116,12 @@ namespace TECAirDbAPI.Controllers
             return CreatedAtAction("GetFlight", new { id = flight.Flightid }, flight);
         }
 
-        // DELETE: api/Flights/5
+        /// <summary>
+        /// Method for deleting flight by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>State of task</returns>
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFlight(string id)
         {

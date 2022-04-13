@@ -7,6 +7,7 @@ using TECAirDbAPI.Models;
 
 namespace TECAirDbAPI
 {
+    //DbContext file generated from scaffolding
     public partial class TECAirDbContext : DbContext
     {
         public TECAirDbContext()

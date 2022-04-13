@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace TECAirDbAPI.Models
 {
+    //Plane Model generated from DbContext
     public partial class Plane
     {
 

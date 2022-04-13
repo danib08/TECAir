@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 namespace TECAirDbAPI.Models
 {
+    //Bag Model generated from DbContext
+
     public partial class Bag
     {
         public string Bagid { get; set; }
