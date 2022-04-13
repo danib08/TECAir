@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿    using SQLite;
 
-#nullable disable
-
-namespace TECAirDbAPI.Models
+namespace MobileApp.Models
 {
-    public partial class Worker
+    public class Worker
     {
-
+        [PrimaryKey]
         public int Workerid { get; set; }
         public string Nameworker { get; set; }
         public string Lastnameworker { get; set; }
