@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -7,15 +9,23 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router,private cookieSvc:CookieService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
+
+  //Here we make the conection with the REST/API
+  /**
+   * @description: Method for login users to the web app
+   */
   loginUser(event: { preventDefault: () => void; target: any; }){
     event.preventDefault()
     const target= event.target
     console.log("Hola mundo")
   }
+  //Here we make the conection with the REST/API
+  /**
+   * @description: Method for adding new users to the DB
+   */
   SignUpUser(event: { preventDefault: () => void; target: any; }){
     event.preventDefault()
     const target= event.target
