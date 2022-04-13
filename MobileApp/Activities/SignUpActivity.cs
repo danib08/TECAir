@@ -13,6 +13,7 @@ using AndroidX.AppCompat.App;
 
 namespace MobileApp
 {
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false)]
     class SignUpActivity : AppCompatActivity
     {
 

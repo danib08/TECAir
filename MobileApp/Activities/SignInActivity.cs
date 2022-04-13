@@ -13,6 +13,8 @@ using System.Text;
 
 namespace MobileApp.Activities
 {
+
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false)]
     class SignInActivity : AppCompatActivity
     {
         private Database db;
@@ -62,7 +64,7 @@ namespace MobileApp.Activities
                         if (editTextPassIn.Text.Equals(customer.Passcustomer))
                         {
                             toastText = "Sesión iniciada";
-                            Intent intent = new Intent(this, typeof(SignInActivity));
+                            Intent intent = new Intent(this, typeof(BusquedaVuelos));
                             StartActivity(intent);
                             Finish();
                         }

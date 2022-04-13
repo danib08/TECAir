@@ -10,8 +10,8 @@ namespace MobileApp.Models
         public int Bagquantity { get; set; }
         public int Userquantity { get; set; }
         public int Gate { get; set; }
-        public DateTime Departure { get; set; }
-        public DateTime Arrival { get; set; }
+        public string Departure { get; set; }
+        public string Arrival { get; set; }
         public string Origin { get; set; }
         public string Destination { get; set; }
         public string Stops { get; set; }

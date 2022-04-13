@@ -61,10 +61,14 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\BusquedaVuelos.cs" />
     <Compile Include="Activities\SignInActivity.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Activities\MainActivity.cs" />
+    <Compile Include="Models\Bag.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Flight.cs" />
+    <Compile Include="Models\Plane.cs" />
     <Compile Include="Models\Worker.cs" />
     <Compile Include="ListViewAdapter.cs" />
     <Compile Include="Resources\Resource.designer.cs" />

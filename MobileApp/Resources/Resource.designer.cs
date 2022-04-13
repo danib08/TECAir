@@ -3726,7 +3726,7 @@ namespace MobileApp
 			public const int disableHome = 2131230827;
 			
 			// aapt resource value: 0x7F08006C
-			public const int editTextDestino = 2131230828;
+			public const int editTextDestination = 2131230828;
 			
 			// aapt resource value: 0x7F08006D
 			public const int editTextEmail = 2131230829;
@@ -3744,7 +3744,7 @@ namespace MobileApp
 			public const int editTextName = 2131230833;
 			
 			// aapt resource value: 0x7F080072
-			public const int editTextOrigen = 2131230834;
+			public const int editTextOrigin = 2131230834;
 			
 			// aapt resource value: 0x7F080073
 			public const int editTextPass = 2131230835;
