@@ -55,19 +55,19 @@ namespace MobileApp.Activities
 
                     if(customer == null)
                     {
-                        toastText = "mega cagaste";
+                        toastText = "Este usuario no se encuentra registrado";
                     }
                     else
                     {
-                        if (editTextPassIn.Equals(customer.Passcustomer))
+                        if (editTextPassIn.Text.Equals(customer.Passcustomer))
                         {
-                            toastText = "toy bien";
+                            toastText = "Sesión iniciada";
                             Intent intent = new Intent(this, typeof(SignInActivity));
                             StartActivity(intent);
                             Finish();
                         }
                         else {
-                            toastText = "cagaste";
+                            toastText = "Contraseña incorrecta";
                         }
                         
                     }

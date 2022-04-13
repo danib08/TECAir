@@ -88,12 +88,12 @@ namespace MobileApp
 
                     if (db.InsertCustomer(customer))
                     {
-                        toastText = "SI SE PUDO";
+                        toastText = "Registro exitoso";
                         Finish();
                     }
                     else
                     {
-                        toastText = "cagaste";
+                        toastText = "Esta cédula ya se encuentra registrada";
                     }
                 }
 
