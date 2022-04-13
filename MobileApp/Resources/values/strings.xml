@@ -18,6 +18,6 @@
 	<string name="id_student">Carnet estudiantil</string>
 	<string name="university">Universidad</string>
 	<string name="password">Contraseña</string>
-
+	<string name="origen">Origen</string>
 
 </resources>
