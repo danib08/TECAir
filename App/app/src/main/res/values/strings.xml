@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">AppTECAir</string>
-    <string name="login_title">TECAir</string>
-    <string name="slogan">Su aerolínea de confianza</string>
-    <string name="login">Iniciar sesión</string>
-    <string name="register">Registrarse</string>
-
-</resources>
