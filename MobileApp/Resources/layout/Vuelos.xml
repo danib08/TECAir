@@ -11,113 +11,62 @@
     android:minHeight="25px"
     tools:gridSpec="1|8|#0093eeff|K:#ee8700ff:16,l:72,l:16,r|S:#83ee00ff:16,0,l:16,56,l:16,0,r">
 
-
-
-
     <TextView
         style="@style/header"
         android:layout_width="match_parent"
         android:layout_height="52.5dp"
         android:gravity="center"
         android:textSize="30sp"
-        android:text="Reservación de Vuelos"
+        android:text="@string/busqueda_vuelos"
         android:textColor="@color/orangePalette"
         android:id="@+id/textView1"
-        android:layout_marginTop="30dp" />
-
-    <TextView
-        style="@style/header"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:translationY="70dp"
-        android:translationX="20dp"
-        android:textSize="20sp"
-        android:text="Origen"
-        android:textColor="@color/creamPalette"
-        android:id="@+id/Origin" />
+        android:layout_marginTop="20dp" />
 
     <EditText
         style="@style/edit_text"
-        android:id="@+id/textOrigen"
-        android:translationY="40dp"
-        android:translationX="20dp"
-        android:layout_width="200dp"
+        android:id="@+id/editTextOrigen"
+        android:translationY="0dp"
+        android:translationX="-30dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="85dp"
         android:textSize="20sp"
+        android:hint="@string/origen"
         android:textColor="@color/orangePalette"
         android:autofillHints="@string/password"
         android:inputType="text" />
 
-    <TextView
-        style="@style/header"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:translationY="70dp"
-        android:translationX="20dp"
-        android:textSize="20sp"
-        android:text="Destino"
-        android:textColor="@color/creamPalette"
-        android:id="@+id/Destiny" />
-
     <EditText
         style="@style/edit_text"
-        android:id="@+id/textDestino"
-        android:translationY="40dp"
-        android:translationX="20dp"
-        android:layout_width="200dp"
+        android:id="@+id/editTextDestino"
+        android:translationY="-52dp"
+        android:translationX="150dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="85dp"
         android:textSize="20sp"
+        android:hint="@string/destino"
         android:autofillHints="@string/password"
         android:inputType="text" />
 
-    <TextView
-        style="@style/header"
+    <android.widget.Button
+        android:id="@+id/sendBusqueda"
+        style="@style/button_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationY="-30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="0dp"
+        android:text="@string/log"
+        android:textAllCaps="false" />
+
+    <ListView
+        android:id="@+id/listView1"
+        android:minWidth="25px"
+        android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:translationY="70dp"
-        android:translationX="20dp"
-        android:textSize="20sp"
-        android:text="Fecha"
-        android:textColor="@color/creamPalette"
-        android:id="@+id/Date" />
+        android:layout_height="match_parent"/>
 
-    <EditText
-        style="@style/edit_text"
-        android:id="@+id/textFecha"
-        android:translationY="50dp"
-        android:translationX="20dp"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
-        android:textSize="20sp"
-        android:autofillHints="@string/password"
-        android:inputType="text" />
-
-
-
-    <android.widget.Button
-        android:id="@+id/buttonAgendar"
-        style="@style/button_light"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:translationY="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:text="Reservar"
-        android:textAllCaps="false" />
-
-    <android.widget.Button
-        android:id="@+id/back1"
-        style="@style/button_light"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:translationY="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:text="Volver"
-        android:textAllCaps="false" />
 
 </LinearLayout>
 

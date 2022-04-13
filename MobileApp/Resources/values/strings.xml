@@ -18,6 +18,8 @@
 	<string name="id_student">Carnet estudiantil</string>
 	<string name="university">Universidad</string>
 	<string name="password">Contraseña</string>
+	<string name="busqueda_vuelos">Búsqueda de Vuelos</string>
 	<string name="origen">Origen</string>
+	<string name="destino">Destino</string>
 
 </resources>
