@@ -3,7 +3,7 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
 
 div.container-fluid {
-  background-color: #ffeba7;
+  background:url(src/assets/bg.jpg);
   box-shadow: black;
   padding: 16px;
   border: 1 px solid,black;
@@ -45,7 +45,7 @@ body{
   box-shadow: 5px 10px #1f2029;
 	overflow-x: hidden;
     object-fit: cover;
-    background-color: rgba(42,43,56,255);
+    background-color: #212529;
     background-size: cover;
     overflow: hidden;
 

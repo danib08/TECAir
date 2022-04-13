@@ -1,5 +1,62 @@
 <app-header></app-header>
-<div class="container-fluid">
-  reservacion-vuelos works!
-</div>
+<body>
+  <div class="row px-5 py-3">
+    <!-- Section about payments details -->
+    <div class="col-sm-8 p-3  bg-dark text-white">
+      <p class="h1">Resumen de la reservación</p>
+      <div class="col mb-lg-0 mb-3">
+        <p class="mb-0">Estimado: {{nombreUsuario}}</p>
+        <p></p>
+        <p>Esta es la información del vuelo {{Flightid}} que partirá de {{Origin}} al destino {{Destination}}, la fecha de salida es {{DateTimeDeparture}} y de llegada {{DateTimeArrival}}</p>
+        <p class="mb">Este vuelo esta en la compuerta numero {{gate}} y posee las siguientes paradas: {{Stops}}</p>
+      </div>
+      <div class="bg-dark rounded d-flex flex-column">
+        <div class="p-2 d-flex">
+            <div class="col-8">Precio original:</div>
+            <div class="ml-auto">{{Price}}</div>
+        </div>
+        <div class="p-2 d-flex">
+            <div class="col-8">Descuento:</div>
+            <div class="ml-auto">{{Discount}}%</div>
+        </div>
+        <div class="border-top px-3 mx-2"></div>
+        <div class="p-2 d-flex pt-3">
+            <div class="col-8"><b>Total</b></div>
+            <div class="ml-auto"><b>$85.00</b></div>
+        </div>
+      </div>
+    </div>
+    <!-- Section about payments methods -->
+    <div class="col-sm-4 p-3 bg-dark text-white">
+      <div class="card bg-dark px-4">
+        <p class="h8 py-3">Detalles del pago -|- <i class="fa fa-credit-card w3-large"></i><i class="fa fa-cc-mastercard w3-large"></i> <i class="fa fa-cc-amex w3-large"></i> <i class="fa fa-cc-cc-visa w3-large"></i></p>
+        <div class="row gx-3">
+            <div class="col-12">
+                <div class="d-flex flex-column">
+                    <p class="text mb-1">Nombre de la tarjeta</p> <input class="form-control mb-3" type="text" placeholder="Nombre">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="d-flex flex-column">
+                    <p class="text mb-1">Número de tarjeta</p> <input class="form-control mb-3" type="text" placeholder="#### - #### - #### - ####">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="d-flex flex-column">
+                    <p class="text mb-1">Expiración</p> <input class="form-control mb-3" type="text" placeholder="MM/YYYY">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="d-flex flex-column">
+                    <p class="text mb-1">CVV/CVC</p> <input class="form-control mb-3 pt-2 " type="number" placeholder="***" >
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="btn btn-primary mb-3"> <span class="ps-3">Realizar pago</span> <i class="material-icons">trending_flat</i> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</body>
 <app-footer></app-footer>
