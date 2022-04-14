@@ -87,12 +87,69 @@ namespace TECAirDbAPI.Controllers
             return NoContent();
         }
 
+        
+
+         /// <summary>
+        /// Method to change one filght status
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="status"></param>
+        /// <returns>Request status </returns>
+
+        [HttpPatch("FlightStatus")]
+        public async Task<IActionResult> PatchFlightStatus(string id, string status)
+        {
+            if (string.IsNullOrWhiteSpace(status))
+            {
+                return BadRequest();
+            }
+
+            var Flight = await _context.Flights.FindAsync(id);
+            if(Flight == null)
+            {
+                return NotFound();
+            }
+
+            Flight.Status = status;
+            await _context.SaveChangesAsync();
+            return NoContent();
+            
+        }
+        
+        
+        /// <summary>
+        /// Method to change one filght status
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="status"></param>
+        /// <returns>Request status </returns>
+
+        [HttpPatch("FlightDiscount")]
+        public async Task<IActionResult> PatchFlightDiscount(string id1, int discount)
+        {
+            if (discount < 0)
+            {
+                return BadRequest();
+            }
+
+            var Flight = await _context.Flights.FindAsync(id1);
+            if (Flight == null)
+            {
+                return NotFound();
+            }
+
+            Flight.Discount = discount;
+            await _context.SaveChangesAsync();
+            return NoContent();
+
+        }
+        
         /// <summary>
         /// Method to create Flights
         /// </summary>
         /// <param name="flight"></param>
         /// <returns></returns> 
-        
+
         [HttpPost]
         public async Task<ActionResult<Flight>> PostFlight(Flight flight)
         {
