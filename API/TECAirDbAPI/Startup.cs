@@ -17,6 +17,8 @@ namespace TECAirDbAPI
 {
     public class Startup
     {
+        private readonly string _MyCors = "MyCors";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -34,6 +36,14 @@ namespace TECAirDbAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TECAirDbAPI", Version = "v1" });
             });
+
+            services.AddCors(options => {
+                options.AddPolicy(name: _MyCors, builder =>
+                {
+                    builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
+                    .AllowAnyHeader().AllowAnyMethod();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +59,8 @@ namespace TECAirDbAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(_MyCors);
 
             app.UseAuthorization();
 
