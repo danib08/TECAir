@@ -7,6 +7,7 @@ using TECAirDbAPI.Models;
 
 namespace TECAirDbAPI
 {
+    //DbContext file generated from scaffolding
     public partial class TECAirDbContext : DbContext
     {
         public TECAirDbContext()
@@ -29,8 +30,7 @@ namespace TECAirDbAPI
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseNpgsql("Host=localhost;Database=TECAirDb;Username=admin;Password=admin1234");
+                optionsBuilder.UseNpgsql("Host=localhost;Database=tecairDb;Username=admin;Password=admin1234");
             }
         }
 
@@ -57,16 +57,6 @@ namespace TECAirDbAPI
                     .IsFixedLength(true);
 
                 entity.Property(e => e.Weight).HasColumnName("weight");
-
-                /*entity.HasOne(d => d.Customer)
-                    .WithMany(p => p.Bags)
-                    .HasForeignKey(d => d.Customerid)
-                    .HasConstraintName("bag_customerid_fkey");
-
-                entity.HasOne(d => d.Flight)
-                    .WithMany(p => p.Bags)
-                    .HasForeignKey(d => d.Flightid)
-                    .HasConstraintName("bag_flightid_fkey");*/
             });
 
             modelBuilder.Entity<Customer>(entity =>
@@ -134,18 +124,6 @@ namespace TECAirDbAPI
                     .HasMaxLength(3)
                     .HasColumnName("seatnum")
                     .IsFixedLength(true);
-
-                /*entity.HasOne(d => d.Customer)
-                    .WithMany(p => p.CustomerInFlights)
-                    .HasForeignKey(d => d.Customerid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("customer_in_flight_customerid_fkey");
-
-                entity.HasOne(d => d.Flight)
-                    .WithMany(p => p.CustomerInFlights)
-                    .HasForeignKey(d => d.Flightid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("customer_in_flight_flightid_fkey");*/
             });
 
             modelBuilder.Entity<Flight>(entity =>
@@ -202,16 +180,6 @@ namespace TECAirDbAPI
                 entity.Property(e => e.Workerid)
                     .HasColumnName("workerid")
                     .HasDefaultValueSql("0");
-
-                /*entity.HasOne(d => d.Plane)
-                    .WithMany(p => p.Flights)
-                    .HasForeignKey(d => d.Planeid)
-                    .HasConstraintName("flight_planeid_fkey");
-
-                entity.HasOne(d => d.Worker)
-                    .WithMany(p => p.Flights)
-                    .HasForeignKey(d => d.Workerid)
-                    .HasConstraintName("flight_workerid_fkey");*/
             });
 
             modelBuilder.Entity<Plane>(entity =>
