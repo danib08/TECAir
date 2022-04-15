@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using TECAirDbAPI.Models;
 
 namespace TECAirDbAPI.Controllers
@@ -52,13 +53,14 @@ namespace TECAirDbAPI.Controllers
         }
 
         /// <summary>
-        /// Single value get
+        /// Single value get price from flight
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Required flight</returns>
         [HttpGet("Price/{id}")]
-        public async Task<ActionResult<int>> GetFlightPrice(string id)
+        public async Task<ActionResult<string>> GetFlightPrice(string id)
         {
+            
             var flight = await _context.Flights.FindAsync(id);
 
             if (flight == null)
@@ -66,7 +68,10 @@ namespace TECAirDbAPI.Controllers
                 return NotFound();
             }
 
-            return flight.Price;
+            var data = new JObject(new JProperty("flightid",flight.Flightid), new JProperty("price", flight.Price));
+
+            return data.ToString();
+            
         }
 
         /// <summary>
