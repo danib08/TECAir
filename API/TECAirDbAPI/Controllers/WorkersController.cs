@@ -95,36 +95,7 @@ namespace TECAirDbAPI.Controllers
         /// <returns></returns>
 
         [HttpPost]
-        public async Task<ActionResult<Worker>> PostWorker(Worker worker)
-        {
-            _context.Workers.Add(worker);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (WorkerExists(worker.Workerid))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction("GetWorker", new { id = worker.Workerid }, worker);
-        }
-
-        /// <summary>
-        /// Method to create worker
-        /// </summary>
-        /// <param name="worker"></param>
-        /// <returns></returns>
-
-        [HttpPost("Workers")]
-        public async Task<ActionResult> PostWorkers(List<Worker> workerList)
+        public async Task<ActionResult> PostWorker(List<Worker> workerList)
         {
             while (workerList.Count() > 0)
             {
@@ -145,14 +116,14 @@ namespace TECAirDbAPI.Controllers
                         throw;
                     }
                 }
+                workerList.RemoveAt(0);
 
-                return CreatedAtAction("GetWorker", new { id = workerList.First().Workerid }, workerList);
             }
 
             return Ok();
-            
-        }
 
+        }
+        
 
         /// <summary>
         /// Method for deleting workers by id
