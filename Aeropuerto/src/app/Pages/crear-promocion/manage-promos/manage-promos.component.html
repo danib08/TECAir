@@ -8,7 +8,7 @@
             <div class="form-group">
                 <i class="fa fa-plane"></i>
                 <label for="FlightID">Escoja el vuelo al que desea aplicarle el descuento</label>
-                <select class="form-control" id="FlightID" name="FlightID" formControlName="FlightID" (click)="changes()">
+                <select class="form-control" id="FlightID" name="FlightID" formControlName="FlightID" (click)="getPrice(flightID?.value)">
                 <option *ngFor="let list of flightsArray; index as i" value="{{list.FlightID}}">
                     {{list.FlightID}} - {{list.Origin}} - {{list.Destination}}
                 </option>

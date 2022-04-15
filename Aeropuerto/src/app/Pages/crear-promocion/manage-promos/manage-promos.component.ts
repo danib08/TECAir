@@ -103,13 +103,10 @@ export class ManagePromosComponent implements OnInit {
         
       }
     );
-    console.log(this.flightPrice.Price);
-    return this.flightPrice.Price;
   }
 
   changes(){
     if(this.IDF != this.flightID?.value){
-      this.price = this.getPrice(this.flightID?.value);
       this.IDF = this.flightID?.value;
     }
 
