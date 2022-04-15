@@ -3,16 +3,22 @@
   <div class="card px-5 py-3">
     <!-- Forms of destination and origin-->
     <div id="Flight" class="w3-container ">
-      <form (submit)="mostrarInfo($event)">
+      <form name="form" (ngSubmit)="f.form.valid && mostrarInfo()" #f="ngForm">
         <h3>Viaja con nosotros</h3>
         <div class="w3-row-padding" style="margin:0 -16px;">
           <div class="w3-half">
             <label>Salida</label>
-            <input class="w3-input w3-border" type="text" placeholder="Aeropuerto de origen">
+            <input class="w3-input w3-border" type="text" placeholder="Aeropuerto de origen"
+            [(ngModel)]="busqueda.Origin" name="Salida" #name = "ngModel"
+            [ngClass]="{'is-invalid':f.submitted && name.invalid}"
+            required>
           </div>
           <div class="w3-half">
             <label>Llegada</label>
-            <input class="w3-input w3-border" type="text" placeholder="Aeropuerto de llegada">
+            <input class="w3-input w3-border" type="text" placeholder="Aeropuerto de llegada"
+            [(ngModel)]="busqueda.Destination" name="Llegada" #name = "ngModel"
+            [ngClass]="{'is-invalid':f.submitted && name.invalid}"
+            required>
           </div>
         </div>
         <h3></h3>

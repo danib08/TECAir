@@ -16,15 +16,21 @@
                 <div class="card-front">
                   <div class="center-wrap">
                     <div class="section text-center">
-                      <!-- Section about login -->
-                      <form (submit)="loginUser($event)">
+                      <!-- Section about login -->usuarioRegistrado
+                      <form name="form" (ngSubmit)="f.form.valid && loginUser()" #f="ngForm">
                         <h4  class="mb-4 pb-3">Iniciar sesión</h4>
                         <div class="form-group">
-                          <input type="email" name="logemail" class="form-style" placeholder="Email" id="logemail" autocomplete="off">
+                          <input type="email" name="logemail" class="form-style" placeholder="Email"
+                          [(ngModel)]="usuarioRegistrado.Email" name="Email" #Email = "ngModel"
+                          [ngClass]="{'is-invalid':f.submitted && name.invalid}"
+                          required>
                           <i class="material-icons">email</i>
                         </div>
                         <div class="form-group mt-2">
-                          <input type="password" name="logpass" class="form-style" placeholder="Contraseña" id="logpass" autocomplete="off">
+                          <input type="password" name="logpass" class="form-style" placeholder="Contraseña"
+                          [(ngModel)]="usuarioRegistrado.Passcustomer" name="Contraseña" #Contraseña = "ngModel"
+                          [ngClass]="{'is-invalid':f.submitted && name.invalid}"
+                          required>
                           <i class="material-icons">locks</i>
                         </div>
                         <button class="btn mt-4" type="submit">Iniciar sesión</button>
@@ -36,23 +42,44 @@
                   <div class="center-wrap" >
                     <div class="section text-center">
                       <!-- Section about SignUp -->
-                      <form (submit)="SignUpUser($event)">
+                      <form name="form" (ngSubmit)="f.form.valid && SignUpUser()" #f="ngForm">
                         <h4 class="mb-4 pb-3">Registrar Usuario</h4>
                         <div class="form-group">
-                          <input type="text" name="logname" class="form-style" placeholder="Nombre completo" id="logname" autocomplete="off">
+                          <input type="text" name="logname" class="form-style" placeholder="Nombre"
+                          [(ngModel)]="nuevoUsuario.Namecustomer" name="Nombre" #name = "ngModel"
+                          [ngClass]="{'is-invalid':f.submitted && name.invalid}"
+                          required>
                           <i class="material-icons">account_circle</i>
                         </div>
+
                         <div class="form-group mt-2">
-                          <input type="email" name="logemail" class="form-style" placeholder="Email" id="logemail" autocomplete="off">
+                          <input type="text" name="logname" class="form-style" placeholder="Apellido"
+                          [(ngModel)]="nuevoUsuario.Lastnamecustomer" name="Apellido" #name = "ngModel"
+                          [ngClass]="{'is-invalid':f.submitted && name.invalid}"
+                          required>
+                          <i class="material-icons">person</i>
+                        </div>
+
+                        <div class="form-group mt-2">
+                          <input type="email" name="logemail" class="form-style" placeholder="Email"
+                          [(ngModel)]="nuevoUsuario.Email" name="Email" #Email = "ngModel"
+                          [ngClass]="{'is-invalid':f.submitted && name.invalid}"
+                          required>
                           <i class="material-icons">email</i>
                         </div>
                         <div class="form-group mt-2">
-                          <input type="password" name="logpass" class="form-style" placeholder="Contraseña" id="logpass" autocomplete="off">
+                          <input type="password" name="logpass" class="form-style" placeholder="Contraseña"
+                          [(ngModel)]="nuevoUsuario.Passcustomer" name="Contraseña" #Contraseña = "ngModel"
+                          [ngClass]="{'is-invalid':f.submitted && name.invalid}"
+                          required>
                           <i class="material-icons">lock</i>
                         </div>
 
                         <div class="form-group mt-2">
-                          <input type="text" name="logtelef" class="form-style" placeholder="Telefono personal" id="logtelef" autocomplete="off">
+                          <input type="text" name="logtelef" class="form-style" placeholder="Telefono personal"
+                          [(ngModel)]="nuevoUsuario.Phone" name="Telefono" #Telefono = "ngModel"
+                          [ngClass]="{'is-invalid':f.submitted && name.invalid}"
+                          required>
                           <i class="material-icons">call</i>
                         </div>
 

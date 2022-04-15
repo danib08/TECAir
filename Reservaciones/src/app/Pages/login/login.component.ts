@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { PostService } from 'src/app/Services/post-service';
+import { Customer } from '../models/customer';
+import { EstadoModel } from '../models/estado-model';
 
 @Component({
   selector: 'app-login',
@@ -9,27 +12,58 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router:Router,private cookieSvc:CookieService) { }
+  constructor(private router:Router,private cookieSvc:CookieService,private apiService: PostService) { }
+  nuevoUsuario: Customer={
+    Customerid: 0,
+    Namecustomer: "",
+    Lastnamecustomer: "",
+    Passcustomer: "",
+    Email: "",
+    Phone: 0,
+    Studentid: 0,
+    University: "",
+  }
 
+  usuarioRegistrado: Customer={
+    Customerid: 0,
+    Namecustomer: "",
+    Lastnamecustomer: "",
+    Passcustomer: "",
+    Email: "",
+    Phone: 0,
+    Studentid: 0,
+    University: "",
+  }
+
+  estadoRes: EstadoModel = {
+    estado:""
+  }
   ngOnInit(): void {}
 
-  //Here we make the conection with the REST/API
   /**
    * @description: Method for login users to the web app
    */
-  loginUser(event: { preventDefault: () => void; target: any; }){
-    event.preventDefault()
-    const target= event.target
-    console.log("Hola mundo")
+  loginUser(){
+    this.apiService.login(this.usuarioRegistrado).subscribe(
+      res =>{
+        this.estadoRes = res;
+        if(this.estadoRes.estado == "OK"){
+          window.alert("BIENVENIDO");
+          this.router.navigate(["home"]);
+        }else{
+          window.alert("CONTRASEÑA O EMAILL INCORRECTOS")
+        }
+      }
+    );
   }
-  //Here we make the conection with the REST/API
   /**
    * @description: Method for adding new users to the DB
    */
-  SignUpUser(event: { preventDefault: () => void; target: any; }){
-    event.preventDefault()
-    const target= event.target
-    console.log("Hola mundo 2")
+  SignUpUser(){
+    this.apiService.addCustomer(this.nuevoUsuario).subscribe(
+      res =>{
+        location.reload();
+      }
+    );
   }
-
 }
