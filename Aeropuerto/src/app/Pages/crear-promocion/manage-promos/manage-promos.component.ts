@@ -12,8 +12,6 @@ import { FlightModel } from '../../models/flight.model';
 })
 export class ManagePromosComponent implements OnInit {
 
-  IDF = '';
-  price = 0;
   flightsArray: FlightModel[] = [];
 
   flightPrice: FlightPriceModel = {
@@ -105,10 +103,16 @@ export class ManagePromosComponent implements OnInit {
     );
   }
 
-  changes(){
-    if(this.IDF != this.flightID?.value){
-      this.IDF = this.flightID?.value;
+  getFlightPrice(ID:string): number{
+    let value = 0;
+    for(let i = 0; i < this.flightsArray.length; i++){
+      if (this.flightsArray[i].FlightID == ID){
+        value = this.flightsArray[i].Price;
+        break;
+      }
     }
-
+    return value;
   }
+
 }
+

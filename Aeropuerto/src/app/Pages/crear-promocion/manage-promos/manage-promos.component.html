@@ -54,7 +54,7 @@
                             <label [attr.for]="'FlightID' + i">Vuelo</label>
                         </i>
                         <div class="col-md-3">
-                            <select class="form-control" [attr.id]="'FlightID' + i" formControlName="FlightID"> 
+                            <select class="form-control" [attr.id]="'FlightID' + i" formControlName="FlightID" > 
                                 <option *ngFor="let list of flightsArray; index as i" value="{{list.FlightID}}">
                                     {{list.FlightID}} - {{list.Origin}} - {{list.Destination}}
                                 </option>
@@ -75,11 +75,11 @@
                     </div>
                     <div class="row">
                         <div class="col-md-5"> 
-                            <label>Precio sin descuento: {{895}} dólares</label>
+                            <label>Precio sin descuento: {{getFlightPrice(discounts.at(i).get('FlightID')?.value)}} dólares</label>
                         </div>
                         
                         <div class="col-md-9"> 
-                            <label> Precio con descuento: {{895*((100-discounts.at(i).get('Discount')?.value)/100)}} dólares</label>
+                            <label> Precio con descuento: {{getFlightPrice(discounts.at(i).get('FlightID')?.value)*((100-discounts.at(i).get('Discount')?.value)/100)}} dólares</label>
                         </div> 
                     </div>
                     <p>
