@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
 @Injectable({
     providedIn: 'root'
 })
-export class PutService {
+export class PatchService {
 
     private baseURL = "http://localhost..."
     private changeFlighttStatus = "https://tecair.free.beeceptor.com"
@@ -19,9 +19,9 @@ export class PutService {
     }
 
     changeStatus(status: FormControl):Observable<any>{
-        return this.http.put<any>(this.changeFlighttStatus, status);
+        return this.http.patch<any>(this.changeFlighttStatus, status);
     }
     addDiscount(discount: FormControl):Observable<any>{
-        return this.http.put<any>(this.changeFlighttStatus, discount);
+        return this.http.patch<any>(this.changeFlighttStatus, discount);
     }
 }

@@ -1,4 +1,4 @@
-import { PutService } from './put-service';
+import { PutService } from './patch-service';
 
 describe('PutService', () => {
   it('should create an instance', () => {

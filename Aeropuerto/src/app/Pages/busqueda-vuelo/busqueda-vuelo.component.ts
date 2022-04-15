@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Vuelos } from '../models/vuelos.model';
+import { FlightModel } from '../models/flight.model';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 // Test for displaying all the flights
-const COUNTRIES: Vuelos[] = [
+const COUNTRIES: FlightModel[] = [
   {
     Origin: "Mexico",
     Destination: "United States",

@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PutService } from 'src/app/Services/put-service';
+import { GetService } from 'src/app/Services/get-service';
+import { PatchService } from 'src/app/Services/patch-service';
+import { FlightPriceModel } from '../../models/flight-price';
+import { FlightModel } from '../../models/flight.model';
 
 @Component({
   selector: 'app-manage-promos',
@@ -10,9 +12,18 @@ import { PutService } from 'src/app/Services/put-service';
 })
 export class ManagePromosComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private apiService: PutService) { }
+  IDF = '';
+  price = 0;
+  flightsArray: FlightModel[] = [];
+
+  flightPrice: FlightPriceModel = {
+    FlightID: '',
+    Price: 0
+  }
+  constructor(private formBuilder: FormBuilder, private apiService: PatchService, private apiServiceGET:GetService) { }
 
   ngOnInit(): void {
+    this.getFlights();
   }
 
 
@@ -58,15 +69,49 @@ export class ManagePromosComponent implements OnInit {
         }
       );
       if(this.discounts.length != 0){
-        this.apiService.addDiscount(this.discounts.value).subscribe(
-          res => {
-            console.log(res);
-          }
-        );
+        for (let i = 0; i< this.discounts.length; i++){
+          this.apiService.changeStatus(this.discounts.at(i).value).subscribe(
+            res => {
+              console.log(res);
+            }
+          );
+        }
+        
       }
 
       
       
     }
+  }
+
+  getFlights(){
+    this.apiServiceGET.getFlights().subscribe(
+      res => {
+        this.flightsArray = res;
+      },
+      err => {
+        alert("Ha habido un error")
+      }
+      
+    );
+  }
+
+  getPrice(ID:string){
+    this.apiServiceGET.getPrice(ID).subscribe(
+      res =>{
+        this.flightPrice = res;
+        
+      }
+    );
+    console.log(this.flightPrice.Price);
+    return this.flightPrice.Price;
+  }
+
+  changes(){
+    if(this.IDF != this.flightID?.value){
+      this.price = this.getPrice(this.flightID?.value);
+      this.IDF = this.flightID?.value;
+    }
+
   }
 }
