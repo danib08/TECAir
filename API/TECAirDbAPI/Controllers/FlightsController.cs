@@ -52,12 +52,30 @@ namespace TECAirDbAPI.Controllers
         }
 
         /// <summary>
+        /// Single value get
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Required flight</returns>
+        [HttpGet("Price/{id}")]
+        public async Task<ActionResult<int>> GetFlightPrice(string id)
+        {
+            var flight = await _context.Flights.FindAsync(id);
+
+            if (flight == null)
+            {
+                return NotFound();
+            }
+
+            return flight.Price;
+        }
+
+        /// <summary>
         /// Put method to edit flights
         /// </summary>
         /// <param name="id"></param>
         /// <param name="flight"></param>
         /// <returns>State of query</returns>
-        
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFlight(string id, Flight flight)
         {
@@ -87,9 +105,9 @@ namespace TECAirDbAPI.Controllers
             return NoContent();
         }
 
-        
 
-         /// <summary>
+
+        /// <summary>
         /// Method to change one filght status
         /// </summary>
         /// <param name="id"></param>
@@ -105,7 +123,7 @@ namespace TECAirDbAPI.Controllers
             }
 
             var Flight = await _context.Flights.FindAsync(id);
-            if(Flight == null)
+            if (Flight == null)
             {
                 return NotFound();
             }
@@ -113,15 +131,14 @@ namespace TECAirDbAPI.Controllers
             Flight.Status = status;
             await _context.SaveChangesAsync();
             return NoContent();
-            
+
         }
-        
-        
+
         /// <summary>
-        /// Method to change one filght status
+        /// Method to change one filght discount
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="status"></param>
+        /// <param name="discount"></param>
         /// <returns>Request status </returns>
 
         [HttpPatch("FlightDiscount")]
@@ -143,7 +160,34 @@ namespace TECAirDbAPI.Controllers
             return NoContent();
 
         }
-        
+
+        /// <summary>
+        /// Method to change stops in flights
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="discount"></param>
+        /// <returns>Request status </returns>
+
+        [HttpPatch("FlightStops")]
+        public async Task<IActionResult> PatchFlightStops(string id1, string stops)
+        {
+            if (stops == null)
+            {
+                return BadRequest();
+            }
+
+            var Flight = await _context.Flights.FindAsync(id1);
+            if (Flight == null)
+            {
+                return NotFound();
+            }
+
+            Flight.Stops = stops;
+            await _context.SaveChangesAsync();
+            return NoContent();
+
+        }
+
         /// <summary>
         /// Method to create Flights
         /// </summary>
