@@ -14,6 +14,7 @@ import { ManageFlightsComponent } from './gestion-vuelos/manage-flights/manage-f
 import { LoginComponent } from './login/login.component';
 import { GestionUsuarioComponent } from './gestion-usuario/gestion-usuario.component';
 import { ReservacionVuelosComponent } from './reservacion-vuelos/reservacion-vuelos.component';
+import { BagAssignComponent } from './asignar-maletas/bag-assign/bag-assign.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { ReservacionVuelosComponent } from './reservacion-vuelos/reservacion-vue
     ManagePromosComponent,
     SignUpWorkersComponent,
     ManageFlightsComponent,
+    BagAssignComponent,
 
   ],
   imports: [

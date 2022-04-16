@@ -1,4 +1,4 @@
-export interface Vuelos {
+export interface FlightModel {
   Origin: string,
   Destination: string,
   BagQuantity: number,

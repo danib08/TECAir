@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { PutService } from 'src/app/Services/put-service';
+import { GetService } from 'src/app/Services/get-service';
+import { PatchService } from 'src/app/Services/patch-service';
+import { FlightModel } from '../../models/flight.model';
 
 @Component({
   selector: 'app-manage-flights',
@@ -10,9 +11,12 @@ import { PutService } from 'src/app/Services/put-service';
 })
 export class ManageFlightsComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private apiService: PutService) { }
+  constructor(private formBuilder: FormBuilder, private apiService: PatchService, private apiServiceGET:GetService) { }
 
+  flightsArray: FlightModel[] = [];
+  
   ngOnInit(): void {
+    this.getFlights();
   }
 
   get flights(){
@@ -48,15 +52,29 @@ export class ManageFlightsComponent implements OnInit {
         }
       );
       if(this.flights.length != 0){
-        this.apiService.changeStatus(this.flights.value).subscribe(
-          res => {
-            console.log(res);
-          }
-        );
+        for (let i = 0; i< this.flights.length; i++){
+          this.apiService.addDiscount(this.flights.at(i).value).subscribe(
+            res => {
+              console.log(res);
+            }
+          );
+        }
       }
 
       
       
     }
   }
+  getFlights(){
+    this.apiServiceGET.getFlights().subscribe(
+      res => {
+        this.flightsArray = res;
+      },
+      err => {
+        alert("Ha habido un error")
+      }
+      
+    );
+  }
+
 }
