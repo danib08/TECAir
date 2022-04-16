@@ -16,7 +16,7 @@
                 <div class="card-front">
                   <div class="center-wrap">
                     <div class="section text-center">
-                      <!-- Section about login -->usuarioRegistrado
+                      <!-- Section about login -->
                       <form name="form" (ngSubmit)="f.form.valid && loginUser()" #f="ngForm">
                         <h4  class="mb-4 pb-3">Iniciar sesión</h4>
                         <div class="form-group">
@@ -88,12 +88,14 @@
                         </div>
 
                         <div class="form-group mt-2">
-                          <input type="text" name="logUniver" class="form-style" placeholder="Universidad" id="logUniver" autocomplete="off">
+                          <input type="text" name="logUniver" class="form-style" placeholder="Universidad"
+                          [(ngModel)]="nuevoUsuario.University" name="Universidad" #Universidad = "ngModel">
                           <i class="material-icons">school</i>
                         </div>
 
                         <div class="form-group mt-2">
-                          <input type="text" name="logCarnet" class="form-style" placeholder="Carnet" id="logCarnet" autocomplete="off">
+                          <input type="text" name="logCarnet" class="form-style" placeholder="Carnet"
+                          [(ngModel)]="nuevoUsuario.Studentid" name="Carnet" #Telefono = "ngModel">
                           <i class="material-icons">assignment_ind</i>
                         </div>
                         <button class="btn mt-4" type="submit">Registrar Usuario</button>

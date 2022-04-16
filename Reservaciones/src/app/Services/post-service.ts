@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
 import { Customer } from "../Pages/models/customer";
+import { IniciarSesion } from "../Pages/models/iniciar-sesion";
 
 @Injectable({
     providedIn: 'root'
@@ -31,7 +32,7 @@ export class PostService {
      * @param Customer
      * @returns EstadoModel Object
      */
-    login(Usuarios: Customer):Observable<any>{
+    login(Usuarios: IniciarSesion):Observable<any>{
       return this.http.post<any>(this.addWorkerURL, Usuarios);
     }
 

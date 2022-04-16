@@ -112,7 +112,7 @@ export class BusquedaVueloComponent implements OnInit {
 
   //Testing the button
   mostrarInfo(){
-    this.apiService.getVuelos().subscribe(
+    this.apiService.getVuelos(this.busqueda).subscribe(
       res => {
         this.listaVuelos = res;
       },

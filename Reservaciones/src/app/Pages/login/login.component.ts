@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { PostService } from 'src/app/Services/post-service';
 import { Customer } from '../models/customer';
 import { EstadoModel } from '../models/estado-model';
+import { IniciarSesion } from '../models/iniciar-sesion';
 
 @Component({
   selector: 'app-login',
@@ -24,15 +25,9 @@ export class LoginComponent implements OnInit {
     University: "",
   }
 
-  usuarioRegistrado: Customer={
-    Customerid: 0,
-    Namecustomer: "",
-    Lastnamecustomer: "",
+  usuarioRegistrado: IniciarSesion={
     Passcustomer: "",
-    Email: "",
-    Phone: 0,
-    Studentid: 0,
-    University: "",
+    Email: ""
   }
 
   estadoRes: EstadoModel = {

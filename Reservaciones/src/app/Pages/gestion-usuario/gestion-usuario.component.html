@@ -35,7 +35,7 @@
 
             <div class="form-input">
               <i class="material-icons">lock</i>
-              <input type="text" class="form-control" placeholder="Contraseña"
+              <input type="password" class="form-control" placeholder="Contraseña"
               [(ngModel)]="nuevoUsuario.Passcustomer" name="Contraseña" #Contraseña = "ngModel"
               [ngClass]="{'is-invalid':f.submitted && name.invalid}"
               required>
@@ -55,12 +55,14 @@
 
             <div class="form-input">
               <i class="material-icons">school</i>
-              <input type="text" class="form-control" placeholder="Universidad">
+              <input type="text" class="form-control" placeholder="Universidad"
+              [(ngModel)]="nuevoUsuario.University" name="Universidad" #Universidad = "ngModel">
             </div>
 
             <div class="form-input">
               <i class="material-icons">assignment_ind</i>
-              <input type="text" class="form-control" placeholder="Carnet">
+              <input type="text" class="form-control" placeholder="Carnet"
+              [(ngModel)]="nuevoUsuario.Studentid" name="Carnet" #Telefono = "ngModel">
             </div>
 
             <div class="form-input text-center">
