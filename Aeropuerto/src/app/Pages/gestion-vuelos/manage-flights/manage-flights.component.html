@@ -9,7 +9,9 @@
                 <i class="fa fa-plane"></i>
                 <label for="FlightID">Seleccione el vuelo</label>
                 <select class="form-control" id="FlightID" name="FlightID" formControlName="FlightID">
-                <option value="wenas">HOLA</option>
+                    <option *ngFor="let list of flightsArray; index as i" value="{{list.FlightID}}">
+                        {{list.FlightID}} - {{list.Origin}} - {{list.Destination}}
+                    </option>
                 </select>
             </div>
             <div class="form-group">
@@ -50,7 +52,9 @@
                         </i>
                         <div class="col-md-3">
                             <select class="form-control" [attr.id]="'FlightID' + i" formControlName="FlightID"> 
-                                <option value="tardes"> Hola3</option>
+                                <option *ngFor="let list of flightsArray; index as i" value="{{list.FlightID}}">
+                                    {{list.FlightID}} - {{list.Origin}} - {{list.Destination}}
+                                </option>
                             </select>
                         </div>
                         <i class="bi bi-info-square-fill col-md-1">

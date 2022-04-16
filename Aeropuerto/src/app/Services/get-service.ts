@@ -10,7 +10,7 @@ import { FlightModel } from "../Pages/models/flight.model";
 })
 export class GetService {
 
-    private baseURL = "https://jajaja.free.beeceptor.com";
+    private baseURL = "https://tecair.free.beeceptor.com";
     private getFlightsURL = `${this.baseURL}\\Flights`;
     constructor(private http: HttpClient) {
 

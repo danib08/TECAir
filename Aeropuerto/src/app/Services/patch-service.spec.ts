@@ -1,7 +1,7 @@
-import { PutService } from './patch-service';
+import { PatchService } from './patch-service';
 
-describe('PutService', () => {
+describe('PatchService', () => {
   it('should create an instance', () => {
-    expect(new PutService()).toBeTruthy();
+    expect(new PatchService()).toBeTruthy();
   });
 });

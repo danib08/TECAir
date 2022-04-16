@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { GetService } from 'src/app/Services/get-service';
 import { PatchService } from 'src/app/Services/patch-service';
+import { FlightModel } from '../../models/flight.model';
 
 @Component({
   selector: 'app-manage-flights',
@@ -10,9 +11,12 @@ import { PatchService } from 'src/app/Services/patch-service';
 })
 export class ManageFlightsComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private apiService: PatchService) { }
+  constructor(private formBuilder: FormBuilder, private apiService: PatchService, private apiServiceGET:GetService) { }
 
+  flightsArray: FlightModel[] = [];
+  
   ngOnInit(): void {
+    this.getFlights();
   }
 
   get flights(){
@@ -61,4 +65,16 @@ export class ManageFlightsComponent implements OnInit {
       
     }
   }
+  getFlights(){
+    this.apiServiceGET.getFlights().subscribe(
+      res => {
+        this.flightsArray = res;
+      },
+      err => {
+        alert("Ha habido un error")
+      }
+      
+    );
+  }
+
 }
