@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
+import { BuscarVuelo } from "../Pages/models/buscar-vuelo";
 import { Customer } from "../Pages/models/customer";
 import { IniciarSesion } from "../Pages/models/iniciar-sesion";
 
@@ -34,6 +35,14 @@ export class PostService {
      */
     login(Usuarios: IniciarSesion):Observable<any>{
       return this.http.post<any>(this.addWorkerURL, Usuarios);
+    }
+    /**
+     * @description Method for search flights
+     * @param Customer
+     * @returns EstadoModel Object
+     */
+     addBusquedaVuelo(vuelo:BuscarVuelo):Observable<any>{
+      return this.http.post<any>(this.addWorkerURL, vuelo);
     }
 
     addWorker(worker: FormControl):Observable<any>{

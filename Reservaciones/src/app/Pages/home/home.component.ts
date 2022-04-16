@@ -14,14 +14,14 @@ export class HomeComponent implements OnInit {
   listaVuelos:Flight[]=[];
 
   ngOnInit(): void {
-    this.apiService.getPromociones().subscribe(
-      res => {
-        this.listaVuelos = res;
-      },
-      err => {
-        alert("Ha habido un error")
-      }
-    );
+    //this.apiService.getPromociones().subscribe(
+    //  res => {
+    //    this.listaVuelos = res;
+    //  },
+    //  err => {
+    //    alert("Ha habido un error")
+    //  }
+    //);
   }
 
 }

@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { BuscarVuelo } from '../models/buscar-vuelo';
 import { GetService } from 'src/app/Services/get-service';
 import { Flight } from '../models/flight';
+import { PostService } from 'src/app/Services/post-service';
 // Test for displaying all the flights
 const COUNTRIES: Vuelos[] = [
   {
@@ -93,7 +94,7 @@ const COUNTRIES: Vuelos[] = [
 })
 export class BusquedaVueloComponent implements OnInit {
 
-  constructor(private router:Router, private cookieSvc:CookieService,private apiService:GetService) { }
+  constructor(private router:Router, private cookieSvc:CookieService,private apiService:GetService,private apiServ: PostService) { }
 
   busqueda:BuscarVuelo={
     Origin: "",
