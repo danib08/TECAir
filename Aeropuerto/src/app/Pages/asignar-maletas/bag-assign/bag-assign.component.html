@@ -1,0 +1,83 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <h2> Creación de Vuelos de TecAir </h2>
+    <body>
+    <form (submit)="submit()" [formGroup]="registerForm">
+    <div class="row">
+        <div class="col-1 col-5">
+            <div class="form-group">
+                <i class="fa fa-plane"></i>
+                <label for="FlightID">Escoja el vuelo al que desea asignar la maleta</label>
+                <select class="form-control" id="FlightID" name="FlightID" formControlName="FlightID">
+                    <option *ngFor="let list of flightsArray; index as i" value="{{list.FlightID}}">
+                        {{list.FlightID}} - {{list.Origin}} - {{list.Destination}}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <i class="bi bi-person-fill"></i>
+                <label for="FlightID">Escoja el usuario al que desea asignar la maleta</label>
+                <select class="form-control" id="CustomerID" name="CustomerID" formControlName="CustomerID">
+                    <option *ngFor="let list of customerArray; index as i" value="{{list.CustomerID}}">
+                        {{list.CustomerID}} - {{list.NameCustomer}} - {{list.LastNameCustomer}}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <i class="bi bi-bag">
+                    <label for="FlightID">Escoja el peso de la maleta</label>
+                </i>
+                <input type="number" class="form-control" formControlName="Weight">
+                <div
+                *ngIf="weight?.invalid && (weight?.dirty || weight?.touched)" class="alert alert-danger">
+                    HOLA5
+                </div>
+            </div>
+            <div class="form-group">
+                <i class="bi bi-bag">
+                    <label for="Color">Escoja el color de la maleta</label>
+                </i>
+                <input type="text" class="form-control" formControlName="Color">
+                <div
+                *ngIf="color?.invalid && (color?.dirty || color?.touched)" class="alert alert-danger">
+                    HOLA6
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <a class=" btn btn-primary" (click)="addBags()">Agregar maleta</a>
+    </div>
+
+    <form (submit)="submit()" [formGroup]="registerForm2">
+        <div formArrayName="Bags" *ngFor="let stop of bags.controls; let i = index">
+            <div [formGroupName]="i" >
+                <div class="form-group">
+                    <div class="row">
+                        <label class="col-2" align="center" [attr.for] ="'Weight' + i">Peso</label>
+
+                        <div class="col-3">
+                            <input type="text" [attr.id]="'Weight' + i" class="form-control" formControlName="Weight">
+                        </div>
+        
+                        <label class="col-2" align="center" [attr.for] ="'Color' + i" >Color</label>
+                        <div class="col-3">
+                            <input type="text" [attr.id]="'Color' + i" class="form-control" formControlName="Color">
+                        </div>
+                    </div>
+                    
+        
+                    <div class="col-5">
+                        <button class="btn btn-danger" align="right" (click)="removeBags(i)">Eliminar maleta</button>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </form>
+    <button type="submit" class="btn btn-success" [disabled]="registerForm.invalid"> Enviar </button>
+    </form>
+    </body>
+</div>
+<app-footer></app-footer>

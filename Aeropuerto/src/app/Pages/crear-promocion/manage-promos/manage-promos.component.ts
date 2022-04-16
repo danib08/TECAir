@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { GetService } from 'src/app/Services/get-service';
 import { PatchService } from 'src/app/Services/patch-service';
+import { CustomerModel } from '../../models/customer';
 import { FlightPriceModel } from '../../models/flight-price';
 import { FlightModel } from '../../models/flight.model';
 
@@ -13,6 +14,7 @@ import { FlightModel } from '../../models/flight.model';
 export class ManagePromosComponent implements OnInit {
 
   flightsArray: FlightModel[] = [];
+
 
   flightPrice: FlightPriceModel = {
     FlightID: '',
