@@ -21,15 +21,8 @@ export class LoginComponent implements OnInit {
     event.preventDefault()
     const target= event.target
     console.log("Hola mundo")
+    this.cookieSvc.set('WorkerID', '1234');
   }
-  //Here we make the conection with the REST/API
-  /**
-   * @description: Method for adding new users to the DB
-   */
-  SignUpUser(event: { preventDefault: () => void; target: any; }){
-    event.preventDefault()
-    const target= event.target
-    console.log("Hola mundo 2")
-  }
+  
 
 }

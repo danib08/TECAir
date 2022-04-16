@@ -3,85 +3,7 @@ import { FlightModel } from '../models/flight.model';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 // Test for displaying all the flights
-const COUNTRIES: FlightModel[] = [
-  {
-    Origin: "Mexico",
-    Destination: "United States",
-    BagQuantity: 4546,
-    UserQuantity: 8994,
-    FlightID: "XML1",
-    DepartureTime: "21:00",
-    ArrivalTime:"12:47",
-    Price:450,
-    Stops:"4"
-  },
-  {
-    Origin: "Canada",
-    Destination: "United States",
-    BagQuantity: 4546,
-    UserQuantity: 8994,
-    FlightID: "XML2",
-    DepartureTime: "21:00",
-    ArrivalTime:"12:47",
-    Price:150,
-    Stops:"3"
-  },
-  {
-    Origin: "Costa Rica",
-    Destination: "Canada",
-    BagQuantity: 4546,
-    UserQuantity: 8994,
-    FlightID: "XML3",
-    DepartureTime: "21:00",
-    ArrivalTime:"12:47",
-    Price:400,
-    Stops:"0"
-  },
-  {
-    Origin: "Panama",
-    Destination: "España",
-    BagQuantity: 4546,
-    UserQuantity: 8994,
-    FlightID: "XML4",
-    DepartureTime: "21:00",
-    ArrivalTime:"12:47",
-    Price:350,
-    Stops:"9"
-  },
-  {
-    Origin: "Japon",
-    Destination: "España",
-    BagQuantity: 4546,
-    UserQuantity: 8994,
-    FlightID: "XML5",
-    DepartureTime: "21:00",
-    ArrivalTime:"12:47",
-    Price:550,
-    Stops:"1"
-  },
-  {
-    Origin: "Peru",
-    Destination: "Costa Rica",
-    BagQuantity: 4546,
-    UserQuantity: 8994,
-    FlightID: "XML6",
-    DepartureTime: "21:00",
-    ArrivalTime:"12:47",
-    Price:430,
-    Stops:"4"
-  },
-  {
-    Origin: "Uruguay",
-    Destination: "Russia",
-    BagQuantity: 4546,
-    UserQuantity: 8994,
-    FlightID: "XML7",
-    DepartureTime:"21:00",
-    ArrivalTime: "12:47",
-    Price:40,
-    Stops:"6"
-  }
-];
+
 
 @Component({
   selector: 'app-busqueda-vuelo',
@@ -95,7 +17,7 @@ export class BusquedaVueloComponent implements OnInit {
   Estado=false;
 
   //List with all the flights
-  listVuelos= COUNTRIES;
+  listVuelos: FlightModel[] = [];
   ngOnInit(): void {
   }
   //Testing the button

@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
 })
 export class PostService {
     private baseURL = "http://localhost..."
-    private addWorkerURL = "https://tecair.free.beeceptor.com"
+    private addWorkerURL = "https://prueba.free.beeceptor.com"
 
     /**
      * Método constructor

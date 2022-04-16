@@ -39,7 +39,7 @@
                 <i class="bi bi-arrow-up-square-fill">
                     <label for="DepartureTime">Fecha de salida</label>
                 </i>
-                <input type="datetime-local" class="form-control" formControlName="DepartureTime">
+                <input type="datetime-local" class="form-control" formControlName="Departure">
                 <div
                 *ngIf="departureTime?.invalid && (departureTime?.dirty || departureTime?.touched)" class="alert alert-danger">
                     HOLA6
@@ -49,11 +49,20 @@
                 <i class="bi bi-arrow-down-square-fill">
                     <label for="ArrivalTime">Fecha de llegada</label>
                 </i>
-                <input type="datetime-local" class="form-control" formControlName="ArrivalTime">
+                <input type="datetime-local" class="form-control" formControlName="Arrival">
                 <div
                 *ngIf="arrivalTime?.invalid && (arrivalTime?.dirty || arrivalTime?.touched)" class="alert alert-danger">
                     HOLA7
                 </div>
+            </div>
+            <div class="form-group">
+                <i class="fa fa-plane"></i>
+                <label for="PlaneID">Seleccione el avión</label>
+                <select class="form-control" id="PlaneID" name="PlaneID" formControlName="PlaneID">
+                    <option *ngFor="let list of planesArray; index as i" value="{{list.PlaneID}}">
+                        {{list.PlaneID}} - {{list.Model}}
+                    </option>
+                </select>
             </div>
         </div>
         <div class="col-1 col-3">
@@ -95,18 +104,26 @@
                             <input type="text" [attr.id]="'FlightID' + i" class="form-control" formControlName="FlightID">
                         </div>
         
-                        <label class="col-2" align="center" [attr.for] ="'DepartureTime' + i" >Fecha de salida</label>
+                        <label class="col-2" align="center" [attr.for] ="'Departure' + i" >Fecha de salida</label>
                         <div class="col-3">
-                            <input type="datetime-local" [attr.id]="'DepartureTime' + i" class="form-control" formControlName="DepartureTime">
+                            <input type="datetime-local" [attr.id]="'Departure' + i" class="form-control" formControlName="Departure">
                         </div>
                     </div>
                     <div class="row">
-                        <label class="col-2" align="center" [attr.for] ="'ArrivalTime' + i" >Fecha de llegada</label>
+                        <label class="col-2" align="center" [attr.for] ="'Arrival' + i" >Fecha de llegada</label>
                         <div class="col-3">
-                            <input type="datetime-local" [attr.id]="'ArrivalTime' + i" class="form-control" formControlName="ArrivalTime">
+                            <input type="datetime-local" [attr.id]="'ArrivalTime' + i" class="form-control" formControlName="Arrival">
                         </div>
-        
-                        <div class="col-5">
+                        <label class="col-2" align="center" [attr.for] ="'PlaneID' + i" >Avión</label>
+                        <div class="col-3">
+                            <select class="form-control" [attr.id]="'PlaneID' + i" formControlName="PlaneID"> 
+                                <option *ngFor="let list of planesArray; index as i" value="{{list.PlaneID}}">
+                                    {{list.PlaneID}} - {{list.Model}}
+                                </option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-7">
                             <button class="btn btn-danger" align="right" (click)="removeStops(i)">Eliminar escala</button>
                         </div>
                     </div>

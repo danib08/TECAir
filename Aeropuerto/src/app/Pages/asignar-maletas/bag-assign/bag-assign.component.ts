@@ -46,7 +46,8 @@ export class BagAssignComponent implements OnInit {
     CustomerID: ['', Validators.required],
     Weight: [0, Validators.required],
     FlightID: ['',Validators.required],
-    Color:['', Validators.required]
+    Color:['', Validators.required],
+    Price: 0
   });
 
   registerForm2 = this.formBuilder.group({
@@ -58,7 +59,9 @@ export class BagAssignComponent implements OnInit {
       CustomerID: this.customerID?.value,
       Weight: 0,
       FlightID: this.flightID?.value,
-      Color:''
+      Color:'',
+      Price: 0
+
     });
     this.bags.push(bagsFormGroup);
   }
@@ -102,6 +105,14 @@ export class BagAssignComponent implements OnInit {
         }
       );
       if(this.bags.length != 0){
+        for(let i = 0; i < this.bags.length; i++){
+          if(i == 0){
+            this.bags.at(i).get('Price')?.setValue(25);
+          }
+          else{
+            this.bags.at(i).get('Price')?.setValue(75);
+          }
+        }
         this.apiService.addBag(this.bags.value).subscribe(
           res => {
             console.log(res);
