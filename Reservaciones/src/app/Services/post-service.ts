@@ -41,7 +41,7 @@ export class PostService {
      * @param Customer
      * @returns EstadoModel Object
      */
-     addBusquedaVuelo(vuelo:BuscarVuelo):Observable<any>{
+    addBusquedaVuelo(vuelo:BuscarVuelo):Observable<any>{
       return this.http.post<any>(this.addWorkerURL, vuelo);
     }
 

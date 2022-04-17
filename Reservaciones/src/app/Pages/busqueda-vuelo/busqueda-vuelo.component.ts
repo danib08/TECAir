@@ -113,6 +113,7 @@ export class BusquedaVueloComponent implements OnInit {
 
   //Testing the button
   mostrarInfo(){
+    this.Estado=true;
     this.apiService.getVuelos(this.busqueda).subscribe(
       res => {
         this.listaVuelos = res;
@@ -121,7 +122,6 @@ export class BusquedaVueloComponent implements OnInit {
         alert("Ha habido un error")
       }
     );
-    //this.Estado=true;
   }
 
   getListaVuelos(event: { preventDefault: () => void; target: any; }){
@@ -131,6 +131,6 @@ export class BusquedaVueloComponent implements OnInit {
   connectReservacion(VueloID:string){
     console.log(VueloID)
     this.cookieSvc.set("IDVuelo", VueloID);
-    this.router.navigate(["reservacionVuelo"])
+    this.router.navigate(["asientos"]);
   }
 }

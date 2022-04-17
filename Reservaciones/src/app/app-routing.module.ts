@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AsientosComponent } from './Pages/asientos/asientos.component';
 import { BusquedaVueloComponent } from './Pages/busqueda-vuelo/busqueda-vuelo.component';
 import { GestionUsuarioComponent } from './Pages/gestion-usuario/gestion-usuario.component';
 import { HomeComponent } from './Pages/home/home.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: "gestionUsuario",component: GestionUsuarioComponent},
   {path: "login",component: LoginComponent},
   {path: "reservacionVuelo",component: ReservacionVuelosComponent},
+  {path: "asientos",component: AsientosComponent},
   {path: "**", redirectTo: "login", pathMatch:"full"},
 
 ];
