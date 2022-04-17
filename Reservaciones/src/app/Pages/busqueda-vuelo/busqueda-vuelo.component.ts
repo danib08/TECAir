@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Vuelos } from '../models/vuelos.model';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { BuscarVuelo } from '../models/buscar-vuelo';
+import { GetService } from 'src/app/Services/get-service';
+import { Flight } from '../models/flight';
+import { PostService } from 'src/app/Services/post-service';
 // Test for displaying all the flights
 const COUNTRIES: Vuelos[] = [
   {
@@ -90,18 +94,36 @@ const COUNTRIES: Vuelos[] = [
 })
 export class BusquedaVueloComponent implements OnInit {
 
-  constructor(private router:Router, private cookieSvc:CookieService) { }
+  constructor(private router:Router, private cookieSvc:CookieService,private apiService:GetService,private apiServ: PostService) { }
 
-  Estado=false;
+  busqueda:BuscarVuelo={
+    Origin: "",
+    Destination: "",
+  }
 
   //List with all the flights
+  listaVuelos:Flight[]=[];
+
+  //Show the list of flights
+  Estado=false;
+
   listVuelos= COUNTRIES;
-  ngOnInit(): void {
-  }
+
+  ngOnInit(): void {}
+
   //Testing the button
-  mostrarInfo(event: { preventDefault: () => void; target: any; }){
+  mostrarInfo(){
     this.Estado=true;
+    this.apiService.getVuelos(this.busqueda).subscribe(
+      res => {
+        this.listaVuelos = res;
+      },
+      err => {
+        alert("Ha habido un error")
+      }
+    );
   }
+
   getListaVuelos(event: { preventDefault: () => void; target: any; }){
     //Ask API for all the flight that comes form Origin to Destination
   }
@@ -109,6 +131,6 @@ export class BusquedaVueloComponent implements OnInit {
   connectReservacion(VueloID:string){
     console.log(VueloID)
     this.cookieSvc.set("IDVuelo", VueloID);
-    this.router.navigate(["reservacionVuelo"])
+    this.router.navigate(["asientos"]);
   }
 }
