@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { GestionUsuarioComponent } from './gestion-usuario/gestion-usuario.component';
 import { ReservacionVuelosComponent } from './reservacion-vuelos/reservacion-vuelos.component';
 import { BagAssignComponent } from './asignar-maletas/bag-assign/bag-assign.component';
+import { AsientosComponent } from './asientos/asientos.component';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { BagAssignComponent } from './asignar-maletas/bag-assign/bag-assign.comp
     SignUpWorkersComponent,
     ManageFlightsComponent,
     BagAssignComponent,
-
+    AsientosComponent
   ],
   imports: [
     CommonModule,

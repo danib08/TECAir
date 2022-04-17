@@ -17,9 +17,11 @@ export class ReservacionVuelosComponent implements OnInit {
   Price:number=0;
   Discount:number=0;
   Flightid:string="";
+  numAsientos:string="";
 
   constructor(private cookieSvc:CookieService) {
     this.Flightid=this.cookieSvc.get("IDVuelo");
+    this.numAsientos=this.cookieSvc.get("numAsiento");
     //Method for asking the API for the information of the flight
   }
   ngOnInit(): void {
