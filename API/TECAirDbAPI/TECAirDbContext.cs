@@ -7,6 +7,7 @@ using TECAirDbAPI.Models;
 
 namespace TECAirDbAPI
 {
+    //DbContext file generated from scaffolding
     public partial class TECAirDbContext : DbContext
     {
         public TECAirDbContext()
@@ -29,7 +30,7 @@ namespace TECAirDbAPI
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql("Host=localhost;Database=TECAirDb;Username=admin;Password=admin1234");
+                optionsBuilder.UseNpgsql("Host=localhost;Database=tecairDb;Username=admin;Password=admin1234");
             }
         }
 
@@ -56,7 +57,7 @@ namespace TECAirDbAPI
                     .IsFixedLength(true);
 
                 entity.Property(e => e.Weight).HasColumnName("weight");
-                });
+            });
 
             modelBuilder.Entity<Customer>(entity =>
             {
@@ -74,7 +75,7 @@ namespace TECAirDbAPI
 
                 entity.Property(e => e.Email)
                     .IsRequired()
-                    .HasMaxLength(20)
+                    .HasMaxLength(35)
                     .HasColumnName("email");
 
                 entity.Property(e => e.Lastnamecustomer)
@@ -98,9 +99,7 @@ namespace TECAirDbAPI
 
                 entity.Property(e => e.Phone).HasColumnName("phone");
 
-                entity.Property(e => e.Studentid)
-                    .HasColumnName("studentid")
-                    .HasDefaultValueSql("0");
+                entity.Property(e => e.Studentid).HasColumnName("studentid");
 
                 entity.Property(e => e.University)
                     .HasMaxLength(20)
@@ -109,7 +108,8 @@ namespace TECAirDbAPI
 
             modelBuilder.Entity<CustomerInFlight>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => new { e.Customerid, e.Flightid })
+                    .HasName("customer_in_flight_pkey");
 
                 entity.ToTable("customer_in_flight");
 
@@ -124,7 +124,6 @@ namespace TECAirDbAPI
                     .HasMaxLength(3)
                     .HasColumnName("seatnum")
                     .IsFixedLength(true);
-
             });
 
             modelBuilder.Entity<Flight>(entity =>
@@ -168,9 +167,7 @@ namespace TECAirDbAPI
                     .HasDefaultValueSql("0")
                     .IsFixedLength(true);
 
-                entity.Property(e => e.Price)
-                    .HasPrecision(4, 2)
-                    .HasColumnName("price");
+                entity.Property(e => e.Price).HasColumnName("price");
 
                 entity.Property(e => e.Status).HasColumnName("status");
 

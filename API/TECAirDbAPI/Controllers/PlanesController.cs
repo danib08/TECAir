@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TECAirDbAPI;
 using TECAirDbAPI.Models;
 
 namespace TECAirDbAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
+    //Bag Controller generated from DbContext
     public class PlanesController : ControllerBase
     {
         private readonly TECAirDbContext _context;
@@ -21,14 +22,23 @@ namespace TECAirDbAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Planes
+        /// <summary>
+        /// Multi value get of planes
+        /// </summary>
+        /// <returns>All planes in database</returns>
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Plane>>> GetPlanes()
         {
             return await _context.Planes.ToListAsync();
         }
 
-        // GET: api/Planes/5
+        /// <summary>
+        /// Single value get
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Required plane</returns>
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<Plane>> GetPlane(string id)
         {
@@ -42,8 +52,13 @@ namespace TECAirDbAPI.Controllers
             return plane;
         }
 
-        // PUT: api/Planes/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Put method to edit planes
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="plane"></param>
+        /// <returns>State of query</returns>
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPlane(string id, Plane plane)
         {
@@ -73,8 +88,12 @@ namespace TECAirDbAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Planes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Method to create plane
+        /// </summary>
+        /// <param name="plane"></param>
+        /// <returns></returns>
+
         [HttpPost]
         public async Task<ActionResult<Plane>> PostPlane(Plane plane)
         {
@@ -98,7 +117,12 @@ namespace TECAirDbAPI.Controllers
             return CreatedAtAction("GetPlane", new { id = plane.Planeid }, plane);
         }
 
-        // DELETE: api/Planes/5
+        /// <summary>
+        /// Method for deleting planes by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>State of task</returns>
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePlane(string id)
         {

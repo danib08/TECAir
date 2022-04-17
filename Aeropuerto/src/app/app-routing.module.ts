@@ -9,6 +9,7 @@ import { CrearVueloComponent } from './Pages/crear-vuelo/crear-vuelo/crear-vuelo
 import { ManagePromosComponent } from './Pages/crear-promocion/manage-promos/manage-promos.component';
 import { SignUpWorkersComponent } from './Pages/registro-trabajadores/sign-up-workers/sign-up-workers.component';
 import { ManageFlightsComponent } from './Pages/gestion-vuelos/manage-flights/manage-flights.component';
+import { BagAssignComponent } from './Pages/asignar-maletas/bag-assign/bag-assign.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: "gestionPromociones", component: ManagePromosComponent},
   {path: "agregarTrabajadores", component:SignUpWorkersComponent},
   {path: "gestionVuelos", component: ManageFlightsComponent},
+  {path: "asignarMaleta", component: BagAssignComponent},
   {path: "**", redirectTo: "login", pathMatch:"full"},
 
 ];

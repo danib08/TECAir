@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TECAirDbAPI;
 using TECAirDbAPI.Models;
 
 namespace TECAirDbAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
+    //Workers Controller generated from DbContext
     public class WorkersController : ControllerBase
     {
         private readonly TECAirDbContext _context;
@@ -19,16 +20,25 @@ namespace TECAirDbAPI.Controllers
         public WorkersController(TECAirDbContext context)
         {
             _context = context;
-        }   
+        }
 
-        // GET: api/Workers
+        /// <summary>
+        /// Multi value get of workers
+        /// </summary>
+        /// <returns>All workers in database</returns>
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Worker>>> GetWorkers()
         {
             return await _context.Workers.ToListAsync();
         }
 
-        // GET: api/Workers/5
+        /// <summary>
+        /// Single value get
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Required worker</returns>
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Worker>> GetWorker(int id)
         {
@@ -42,8 +52,13 @@ namespace TECAirDbAPI.Controllers
             return worker;
         }
 
-        // PUT: api/Workers/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Put method to edit workers
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="worker"></param>
+        /// <returns>State of query</returns>
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutWorker(int id, Worker worker)
         {
@@ -73,32 +88,50 @@ namespace TECAirDbAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Workers
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Method to create worker
+        /// </summary>
+        /// <param name="worker"></param>
+        /// <returns></returns>
+
         [HttpPost]
-        public async Task<ActionResult<Worker>> PostWorker(Worker worker)
+        public async Task<ActionResult> PostWorker(List<Worker> workerList)
         {
-            _context.Workers.Add(worker);
-            try
+            while (workerList.Count() > 0)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (WorkerExists(worker.Workerid))
+                _context.Workers.Add(workerList.First());
+
+                try
                 {
-                    return Conflict();
+                    await _context.SaveChangesAsync();
                 }
-                else
+                catch (DbUpdateException)
                 {
-                    throw;
+                    if (WorkerExists(workerList.First().Workerid))
+                    {
+                        return Conflict();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
+                workerList.RemoveAt(0);
+
             }
 
-            return CreatedAtAction("GetWorker", new { id = worker.Workerid }, worker);
+            return Ok();
+
         }
+        
 
-        // DELETE: api/Workers/5
+        /// <summary>
+        /// Method for deleting workers by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>State of task</returns>
+
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWorker(int id)
         {

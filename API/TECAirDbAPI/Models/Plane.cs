@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace TECAirDbAPI.Models
 {
+    //Plane Model generated from DbContext
     public partial class Plane
     {
 
@@ -12,5 +13,6 @@ namespace TECAirDbAPI.Models
         public string Model { get; set; }
         public int Passengercap { get; set; }
         public int Bagcap { get; set; }
+
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace TECAirDbAPI.Models
 {
+    //Worker Model generated from DbContext
     public partial class Worker
     {
 
@@ -12,5 +13,6 @@ namespace TECAirDbAPI.Models
         public string Nameworker { get; set; }
         public string Lastnameworker { get; set; }
         public string Passworker { get; set; }
+
     }
 }

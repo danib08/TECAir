@@ -57,7 +57,7 @@ h6 span{
   display: block;
 }
 .full-height{
-  min-height: 130vh;
+  min-height: 120vh;
 }
 [type="checkbox"]:checked,
 [type="checkbox"]:not(:checked){

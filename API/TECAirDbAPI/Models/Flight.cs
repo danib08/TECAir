@@ -5,9 +5,10 @@ using System.Collections.Generic;
 
 namespace TECAirDbAPI.Models
 {
+    //Flight Model generated from DbContext
     public partial class Flight
     {
-
+        
         public string Flightid { get; set; }
         public int? Bagquantity { get; set; }
         public int? Userquantity { get; set; }

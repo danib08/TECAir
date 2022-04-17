@@ -5,7 +5,7 @@ CREATE TABLE CUSTOMER(
 	PassCustomer VARCHAR(15) NOT NULL,
 	Email VARCHAR(35) NOT NULL UNIQUE,
 	Phone INT NOT NULL,
-	StudentID INT DEFAULT 0 UNIQUE,
+	StudentID INT UNIQUE,
 	University VARCHAR(20),
 	Miles INT DEFAULT 0,
 	PRIMARY KEY (CustomerID)
@@ -36,8 +36,8 @@ CREATE TABLE FLIGHT(
 	Gate INT NOT NULL,
 	Departure TIMESTAMP NOT NULL, 
 	Arrival TIMESTAMP NOT NULL,
-	Origin CHAR(3) NOT NULL,
-	Destination CHAR(3) NOT NULL,
+	Origin CHAR(50) NOT NULL,
+	Destination CHAR(50) NOT NULL,
 	Stops TEXT,
 	Status TEXT,
 	Price INT,
@@ -65,7 +65,8 @@ CREATE TABLE Customer_in_Flight(
 	CustomerID INT,
 	FlightID CHAR(7),
 	FOREIGN KEY (CustomerID) REFERENCES CUSTOMER(CustomerID),
-	FOREIGN KEY (FlightID) REFERENCES FLIGHT(FlightID)
+	FOREIGN KEY (FlightID) REFERENCES FLIGHT(FlightID),
+	PRIMARY KEY (CustomerID, FlightID)
 );
 
 

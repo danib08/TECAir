@@ -1,7 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PutService } from 'src/app/Services/put-service';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { GetService } from 'src/app/Services/get-service';
+import { PatchService } from 'src/app/Services/patch-service';
+import { CustomerModel } from '../../models/customer';
+import { FlightPriceModel } from '../../models/flight-price';
+import { FlightModel } from '../../models/flight.model';
 
 @Component({
   selector: 'app-manage-promos',
@@ -10,9 +13,17 @@ import { PutService } from 'src/app/Services/put-service';
 })
 export class ManagePromosComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private apiService: PutService) { }
+  flightsArray: FlightModel[] = [];
+
+
+  flightPrice: FlightPriceModel = {
+    FlightID: '',
+    Price: 0
+  }
+  constructor(private formBuilder: FormBuilder, private apiService: PatchService, private apiServiceGET:GetService) { }
 
   ngOnInit(): void {
+    this.getFlights();
   }
 
 
@@ -58,15 +69,52 @@ export class ManagePromosComponent implements OnInit {
         }
       );
       if(this.discounts.length != 0){
-        this.apiService.addDiscount(this.discounts.value).subscribe(
-          res => {
-            console.log(res);
-          }
-        );
+        for (let i = 0; i< this.discounts.length; i++){
+          this.apiService.changeStatus(this.discounts.at(i).value).subscribe(
+            res => {
+              console.log(res);
+            }
+          );
+        }
+        
       }
 
       
       
     }
   }
+
+  getFlights(){
+    this.apiServiceGET.getFlights().subscribe(
+      res => {
+        this.flightsArray = res;
+      },
+      err => {
+        alert("Ha habido un error")
+      }
+      
+    );
+  }
+
+  getPrice(ID:string){
+    this.apiServiceGET.getPrice(ID).subscribe(
+      res =>{
+        this.flightPrice = res;
+        
+      }
+    );
+  }
+
+  getFlightPrice(ID:string): number{
+    let value = 0;
+    for(let i = 0; i < this.flightsArray.length; i++){
+      if (this.flightsArray[i].FlightID == ID){
+        value = this.flightsArray[i].Price;
+        break;
+      }
+    }
+    return value;
+  }
+
 }
+

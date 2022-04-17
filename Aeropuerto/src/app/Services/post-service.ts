@@ -25,4 +25,8 @@ export class PostService {
     addFlight(flight: FormControl):Observable<any>{
         return this.http.post<any>(this.addWorkerURL, flight);
     }
+
+    addBag(bag: FormControl):Observable<any>{
+        return this.http.post<any>(this.addWorkerURL, bag);
+    }
 }
