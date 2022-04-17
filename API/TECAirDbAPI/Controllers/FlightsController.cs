@@ -58,7 +58,7 @@ namespace TECAirDbAPI.Controllers
         /// <param name="id"></param>
         /// <returns>Required flight</returns>
         [HttpGet("Price/{id}")]
-        public async Task<ActionResult<string>> GetFlightPrice(string id)
+        public async Task<ActionResult<string>> FlightPrice(string id)
         {
             
             var flight = await _context.Flights.FindAsync(id);
@@ -72,6 +72,29 @@ namespace TECAirDbAPI.Controllers
 
             return data.ToString();
             
+        }
+
+        /// <summary>
+        /// Single value get price from flight
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Required flight</returns>
+        [HttpGet("Capacity/{id}")]
+        public async Task<ActionResult<string>> FlightCap(string id)
+        {
+
+            var flight = await _context.Flights.FindAsync(id);
+            var plane = await _context.Planes.FindAsync(flight.Planeid);
+
+            if (flight == null || plane == null)
+            {
+                return NotFound();
+            }
+
+            var data = new JObject(new JProperty("flightid", flight.Flightid), new JProperty("PassangerCap", plane.Passengercap));
+
+            return data.ToString();
+
         }
 
         /// <summary>

@@ -97,26 +97,33 @@ namespace TECAirDbAPI.Controllers
         /// <returns></returns>
         
         [HttpPost]
-        public async Task<ActionResult<Bag>> PostBag(Bag bag)
+        public async Task<ActionResult> PostBag(List<Bag> bagList)
         {
-            _context.Bags.Add(bag);
-            try
+
+            while(bagList.Count() > 0)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (BagExists(bag.Bagid))
+                _context.Bags.Add(bagList.First());
+
+                try
                 {
-                    return Conflict();
+                    await _context.SaveChangesAsync();
                 }
-                else
+                catch (DbUpdateException)
                 {
-                    throw;
+                    if (BagExists(bagList.First().Bagid))
+                    {
+                        return Conflict();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
+
+                bagList.RemoveAt(0);
             }
 
-            return CreatedAtAction("GetBag", new { id = bag.Bagid }, bag);
+            return Ok();
         }
 
         /// <summary>
