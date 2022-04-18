@@ -3,8 +3,8 @@
 body{
   background-color: #1f2029;
   width: 100%;
-  background:url(src/assets/bg.jpg);
-  height: 800px;
+  height: 100%;
+  background:url(src/assets/bg.jpg)
 }
 .container{
   width: 100%;
@@ -15,7 +15,7 @@ body{
   height: 100%;
 }
 .height {
-  height: 100px;
+  height: 100vh
 }
 
 .card {

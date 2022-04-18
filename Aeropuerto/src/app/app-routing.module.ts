@@ -11,6 +11,7 @@ import { SignUpWorkersComponent } from './Pages/registro-trabajadores/sign-up-wo
 import { ManageFlightsComponent } from './Pages/gestion-vuelos/manage-flights/manage-flights.component';
 import { BagAssignComponent } from './Pages/asignar-maletas/bag-assign/bag-assign.component';
 import { AsientosComponent } from './Pages/asientos/asientos.component';
+import { ValidacionUsuarioComponent } from './Pages/validacion-usuario/validacion-usuario/validacion-usuario.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: "gestionVuelos", component: ManageFlightsComponent},
   {path: "asignarMaleta", component: BagAssignComponent},
   {path: "asientos", component: AsientosComponent},
+  {path: "validacionUsuario", component: ValidacionUsuarioComponent},
   {path: "**", redirectTo: "login", pathMatch:"full"},
 
 ];

@@ -20,11 +20,11 @@
                       <form (submit)="loginUser($event)">
                         <h4  class="mb-4 pb-3">Iniciar sesión</h4>
                         <div class="form-group">
-                          <input type="number" name="logemail" class="form-style" placeholder="ID del usuario" id="logemail" autocomplete="off">
+                          <input type="number" name="id" class="form-style" placeholder="ID del usuario" id="id" autocomplete="off" required>
                           <i class="material-icons">person</i>
                         </div>
                         <div class="form-group mt-2">
-                          <input type="password" name="logpass" class="form-style" placeholder="Contraseña" id="logpass" autocomplete="off">
+                          <input type="password" name="password" class="form-style" placeholder="Contraseña" id="password" autocomplete="off" required>
                           <i class="material-icons">locks</i>
                         </div>
                         <button class="btn mt-4" type="submit">Iniciar sesión</button>

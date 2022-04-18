@@ -14,7 +14,7 @@ import { UserInFlightModel } from "../Pages/models/user-in-flight-model";
 })
 export class GetService {
 
-    private baseURL = "https://pruebaa.free.beeceptor.com";
+    private baseURL = "https://tecair.free.beeceptor.com";
     private getFlightsURL = `${this.baseURL}\\Flights`;
     private getCustomerURL = `${this.baseURL}\\Customers`;
     private getCustomerFlightURL = `${this.baseURL}\\CustomersFlight`;
