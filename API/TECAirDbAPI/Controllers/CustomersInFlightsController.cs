@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TECAirDbAPI;
+using  Newtonsoft.Json.Linq;
 using TECAirDbAPI.Models;
 
 namespace TECAirDbAPI.Controllers
@@ -41,12 +41,16 @@ namespace TECAirDbAPI.Controllers
         /// <param name="flightid"></param>
         /// <returns>Required customer in flight</returns>
         /// 
-        [HttpGet("{customerid}/{flightid}")]
-        public async Task<ActionResult<CustomerInFlight>> GetCustomerInFlight(int customerid, string flightid)
+        [HttpGet("{flightid}")]
+        public async Task<ActionResult<IEnumerable<CustomerInFlight>>> GetCustomerInFlight(string flightid)
         {
-            var customerInFlight = await _context.CustomerInFlights.FindAsync(customerid, flightid);
-
-            if (customerInFlight == null)
+            var customerInFlight = await _context.CustomerInFlights.Where(i => i.Flightid.Equals(flightid)).Select(i => new CustomerInFlight
+            {
+                Flightid = i.Flightid,
+                Seatnum = i.Seatnum
+            }).ToArrayAsync();
+            
+            if ( flightid == null)
             {
                 return NotFound();
             }
@@ -54,13 +58,15 @@ namespace TECAirDbAPI.Controllers
             return customerInFlight;
         }
 
+        
+
         /// <summary>
         /// Put method to edit customer in flight
         /// </summary>
         /// <param name="flightid"></param>
         /// <param name="customerInFlight"></param>
         /// <returns>State of query</returns>
-        
+
         [HttpPut("{customerid}/{flightid}")]
         public async Task<IActionResult> PutCustomerInFlight(int customerid, string flightid, CustomerInFlight customerInFlight)
         {
@@ -110,7 +116,7 @@ namespace TECAirDbAPI.Controllers
             {
                 if (CustomerInFlightExists(customerInFlight.Customerid, customerInFlight.Flightid))
                 {
-                    return Conflict();
+                    return Ok();
                 }
                 else
                 {
@@ -118,7 +124,7 @@ namespace TECAirDbAPI.Controllers
                 }
             }
 
-            return CreatedAtAction("GetCustomerInFlight", new { id = customerInFlight.Customerid }, customerInFlight);
+            return Ok();
         }
 
         /// <summary>
