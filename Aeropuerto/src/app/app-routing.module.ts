@@ -10,6 +10,8 @@ import { ManagePromosComponent } from './Pages/crear-promocion/manage-promos/man
 import { SignUpWorkersComponent } from './Pages/registro-trabajadores/sign-up-workers/sign-up-workers.component';
 import { ManageFlightsComponent } from './Pages/gestion-vuelos/manage-flights/manage-flights.component';
 import { BagAssignComponent } from './Pages/asignar-maletas/bag-assign/bag-assign.component';
+import { AsientosComponent } from './Pages/asientos/asientos.component';
+import { ValidacionUsuarioComponent } from './Pages/validacion-usuario/validacion-usuario/validacion-usuario.component';
 
 
 const routes: Routes = [
@@ -23,6 +25,8 @@ const routes: Routes = [
   {path: "agregarTrabajadores", component:SignUpWorkersComponent},
   {path: "gestionVuelos", component: ManageFlightsComponent},
   {path: "asignarMaleta", component: BagAssignComponent},
+  {path: "asientos", component: AsientosComponent},
+  {path: "validacionUsuario", component: ValidacionUsuarioComponent},
   {path: "**", redirectTo: "login", pathMatch:"full"},
 
 ];

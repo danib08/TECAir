@@ -4,8 +4,13 @@ export interface FlightModel {
   BagQuantity: number,
   UserQuantity: number,
   FlightID: string,
-  DepartureTime: string,
-  ArrivalTime:string
+  Departure: string,
+  Arrival:string
   Price:number,
-  Stops:string
+  Stops:[],
+  Gate: string,
+  Status: string,
+  Discount: number,
+  PlaneID: string,
+  WorkerID: number
 }

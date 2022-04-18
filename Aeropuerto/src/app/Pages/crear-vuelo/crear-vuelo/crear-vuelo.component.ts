@@ -2,6 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { PostService } from 'src/app/Services/post-service';
+import { CookieService } from 'ngx-cookie-service';
+import { PlaneModel } from '../../models/plane-model';
+import { GetService } from 'src/app/Services/get-service';
+
 
 @Component({
   selector: 'app-crear-vuelo',
@@ -10,11 +14,15 @@ import { PostService } from 'src/app/Services/post-service';
 })
 export class CrearVueloComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private apiService: PostService) { }
+  constructor(private formBuilder: FormBuilder, private apiService: PostService, private cookieSvc:CookieService, private apiServiceGET: GetService) { }
  
 
   list: Array<string> = [];
+  planesArray: PlaneModel[] = [];
 
+  ngOnInit(): void {
+    this.getPlanes();
+  }
 
   get origin(){
     return this.registerForm.get('Origin');
@@ -52,9 +60,11 @@ export class CrearVueloComponent implements OnInit {
     Origin: ['', Validators.required],
     Destination: ['', Validators.required],
     FlightID: ['', Validators.required],
-    DepartureTime: ['',Validators.required],
-    ArrivalTime:['', Validators.required],
-    Stops:[[]]
+    Departure: ['',Validators.required],
+    Arrival:['', Validators.required],
+    Stops:[[]],
+    WorkerID: parseInt(this.cookieSvc.get('WorkerID')),
+    PlaneID: ['', Validators.required]
     
   });
 
@@ -62,17 +72,15 @@ export class CrearVueloComponent implements OnInit {
     Stops:this.formBuilder.array([])
   });
 
-
-  ngOnInit(): void {
-  }
-
   addStops(){
     const stopsFormGroup = this.formBuilder.group({
       Origin: '',
       Destination: '',
       FlightID: '',
-      DepartureTime: '',
-      ArrivalTime: ''
+      Departure: '',
+      Arrival: '',
+      WorkerID: parseInt(this.cookieSvc.get('WorkerID')),
+      PlaneID: ''
     });
     this.stops.push(stopsFormGroup);
   }
@@ -94,18 +102,30 @@ export class CrearVueloComponent implements OnInit {
       this.apiService.addFlight(this.registerForm.value).subscribe(
         res => {
           console.log(res);
+          location.reload();
         }
       );
       if(this.stops.length != 0){
         this.apiService.addFlight(this.stops.value).subscribe(
           res => {
             console.log(res);
+            location.reload();
           }
         );
       }
     }
   }
-  
+  getPlanes(){
+    this.apiServiceGET.getPlanes().subscribe(
+      res => {
+        this.planesArray = res;
+      },
+      err => {
+        alert("Ha habido un error")
+      }
+      
+    );
+  }
   
 }
 
