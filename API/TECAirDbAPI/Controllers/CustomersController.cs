@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using TECAirDbAPI.Models;
 
 namespace TECAirDbAPI.Controllers
@@ -51,13 +52,40 @@ namespace TECAirDbAPI.Controllers
             return customer;
         }
 
+
+        /// <summary>
+        /// Single value get customer 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Required customer</returns>
+
+        [HttpGet("validate")]
+        public async Task<ActionResult<string>> CustomerValidation(int id, string pass)
+        {
+            var customer = await _context.Customers.FindAsync(id);
+
+            if (customer.Customerid == id && customer.Passcustomer.Equals(pass))
+            {
+                var data = new JObject(new JProperty("Existe", "Si"));
+                return data.ToString();
+            }
+            else
+            {
+                var data = new JObject(new JProperty("Existe", "No"));
+                return data.ToString();
+            }
+  
+        }
+
+        
+
         /// <summary>
         /// Put method to edit customer
         /// </summary>
         /// <param name="id"></param>
         /// <param name="customer"></param>
         /// <returns>State of query</returns>
-        
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCustomer(int id, Customer customer)
         {
@@ -116,12 +144,14 @@ namespace TECAirDbAPI.Controllers
             return CreatedAtAction("GetCustomer", new { id = customer.Customerid }, customer);
         }
 
+        
+
         /// <summary>
         /// Method for deleting customer by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns>State of task</returns>
-        
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCustomer(int id)
         {

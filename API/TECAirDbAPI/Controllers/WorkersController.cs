@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using TECAirDbAPI.Models;
 
 namespace TECAirDbAPI.Controllers
@@ -50,6 +51,30 @@ namespace TECAirDbAPI.Controllers
             }
 
             return worker;
+        }
+
+        /// <summary>
+        /// Single value get customer 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Required customer</returns>
+
+        [HttpGet("validate")]
+        public async Task<ActionResult<string>> WorkerValidation(int id, string pass)
+        {
+            var worker = await _context.Workers.FindAsync(id);
+
+            if (worker.Workerid == id && worker.Passworker.Equals(pass))
+            {
+                var data = new JObject(new JProperty("Existe", "Si"));
+                return data.ToString();
+            }
+            else
+            {
+                var data = new JObject(new JProperty("Existe", "No"));
+                return data.ToString();
+            }
+
         }
 
         /// <summary>
