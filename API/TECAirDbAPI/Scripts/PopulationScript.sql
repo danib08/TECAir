@@ -10,11 +10,11 @@ VALUES
 INSERT INTO plane
 (planeid, model, passengercap, bagcap)
 VALUES
-('TIMJH', 'Boeing 737', 188, 250),
+('TIMJH', 'Boeing 737', 210, 250),
 ('ECATM', 'AirBus 320', 180, 240),
-('N123A', 'Boeing 747', 500, 550),
-('XACHU', 'AirBus 340', 370, 420),
-('CVZYL', 'Boeing 777', 400, 450);
+('N123A', 'Boeing 747', 240, 550),
+('XACHU', 'AirBus 340', 150, 420),
+('CVZYL', 'Boeing 777', 120, 450);
 
 INSERT INTO customer
 (customerid, namecustomer, lastnamecustomer, passcustomer, email, phone, studentid, university, miles)
@@ -74,3 +74,63 @@ VALUES
 ('AC1808', DEFAULT, DEFAULT, 9, '2022-10-20 17:25:00', '2022-10-20 21:15:00', 'YUL/Canada', 'SJO/Costa Rica', '','Scheduled', 146, DEFAULT, 'TIMJH', 117370005);
 
 
+INSERT INTO bag
+(bagid, weight, color, price, customerid, flightid)
+VALUES
+('CO158', 35, "GREEN", 120,117630483,"IB6342"),
+('AC402', 20, "BLUE", 80,117790261,"DL466"),
+('GR631', 40, "RED", 140,117390704,"LA6015"),
+('RQ471', 20, "BLACK", 80,604540821,"AA1253"),
+('UA516', 60, "YELLOW", 200,115250307,"DL1974"),
+('IV701', 15, "WHITE", 60,117630483,"IB6342"),
+('GO891', 30, "GREY", 80,305270400,"DL121"),
+
+
+
+
+/*CustomerIds
+
+117630483
+117790261
+305270400
+117790840
+117390704
+305200614
+604540821
+303850224
+115250307
+305080248
+
+
+IB7852
+IB7811
+IB6342
+IB3152
+IB3217
+IB3281
+DL1721
+DL1756
+DL466
+DL121
+DL6874
+DL68
+DL2947
+DL1974
+LA2415
+LA2409
+LA1321
+LA6015
+LA4608
+LA462
+LA520
+LA2408
+AA1620
+AA1600
+AA1922
+AA120
+AA1253
+AA121
+AA2148
+AA1353
+
+*/
