@@ -23,19 +23,19 @@ export class BagAssignComponent implements OnInit {
   }
 
   get customerID(){
-    return this.registerForm.get('CustomerID');
+    return this.registerForm.get('customerid');
   }
 
   get flightID(){
-    return this.registerForm.get('FlightID');
+    return this.registerForm.get('flightid');
   }
 
   get weight(){
-    return this.registerForm.get('Weight');
+    return this.registerForm.get('weight');
   }
 
   get color(){
-    return this.registerForm.get('Color');
+    return this.registerForm.get('color');
   }
 
   get bags(){
@@ -43,11 +43,11 @@ export class BagAssignComponent implements OnInit {
   }
 
   registerForm = this.formBuilder.group({
-    CustomerID: ['', Validators.required],
-    Weight: [0, Validators.required],
-    FlightID: ['',Validators.required],
-    Color:['', Validators.required],
-    Price: 0
+    customerid: ['', Validators.required],
+    weight: [0, Validators.required],
+    flightid: ['',Validators.required],
+    color:['', Validators.required],
+    price: 0
   });
 
   registerForm2 = this.formBuilder.group({
@@ -56,11 +56,11 @@ export class BagAssignComponent implements OnInit {
 
   addBags(){
     const bagsFormGroup = this.formBuilder.group({
-      CustomerID: this.customerID?.value,
-      Weight: 0,
-      FlightID: this.flightID?.value,
-      Color:'',
-      Price: 0
+      customerid: this.customerID?.value,
+      weight: 0,
+      flightid: this.flightID?.value,
+      color:'',
+      price: 0
 
     });
     this.bags.push(bagsFormGroup);
@@ -107,10 +107,10 @@ export class BagAssignComponent implements OnInit {
       if(this.bags.length != 0){
         for(let i = 0; i < this.bags.length; i++){
           if(i == 0){
-            this.bags.at(i).get('Price')?.setValue(25);
+            this.bags.at(i).get('price')?.setValue(25);
           }
           else{
-            this.bags.at(i).get('Price')?.setValue(75);
+            this.bags.at(i).get('price')?.setValue(75);
           }
         }
         this.apiService.addBag(this.bags.value).subscribe(

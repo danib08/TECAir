@@ -17,8 +17,8 @@ export class ManagePromosComponent implements OnInit {
 
 
   flightPrice: FlightPriceModel = {
-    FlightID: '',
-    Price: 0
+    flightid: '',
+    price: 0
   }
   constructor(private formBuilder: FormBuilder, private apiService: PatchService, private apiServiceGET:GetService) { }
 
@@ -32,16 +32,16 @@ export class ManagePromosComponent implements OnInit {
   }
 
   get flightID(){
-    return this.registerForm.get('FlightID');
+    return this.registerForm.get('flightid');
   }
 
   get discount(){
-    return this.registerForm.get('Discount');
+    return this.registerForm.get('discount');
   }
 
   registerForm = this.formBuilder.group({
-    FlightID: ['',Validators.required],
-    Discount: [0, Validators.required]
+    flightid: ['',Validators.required],
+    discount: [0, Validators.required]
   });
 
   registerForm2 = this.formBuilder.group({
@@ -49,8 +49,8 @@ export class ManagePromosComponent implements OnInit {
   });
   addDiscounts(){
     const discountsFormGroup = this.formBuilder.group({
-      FlightID: '',
-      Discount: 0
+      flightid: '',
+      discount: 0
     });
     this.discounts.push(discountsFormGroup);
   }
@@ -108,8 +108,8 @@ export class ManagePromosComponent implements OnInit {
   getFlightPrice(ID:string): number{
     let value = 0;
     for(let i = 0; i < this.flightsArray.length; i++){
-      if (this.flightsArray[i].FlightID == ID){
-        value = this.flightsArray[i].Price;
+      if (this.flightsArray[i].flightid == ID){
+        value = this.flightsArray[i].price;
         break;
       }
     }

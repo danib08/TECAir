@@ -23,8 +23,8 @@ export class ManageFlightsComponent implements OnInit {
     return this.registerForm2.get('Flights') as FormArray;
   }
   registerForm = this.formBuilder.group({
-    FlightID: ['',Validators.required],
-    Status: ['', Validators.required]
+    flightid: ['',Validators.required],
+    status: ['', Validators.required]
   });
 
   registerForm2 = this.formBuilder.group({
@@ -32,8 +32,8 @@ export class ManageFlightsComponent implements OnInit {
   });
   addFlights(){
     const FlightsFormGroup = this.formBuilder.group({
-      FlightID: '',
-      Status: ''
+      flightid: '',
+      status: ''
     });
     this.flights.push(FlightsFormGroup);
   }
@@ -71,7 +71,7 @@ export class ManageFlightsComponent implements OnInit {
         this.flightsArray = res;
       },
       err => {
-        alert("Ha habido un error")
+        alert("Ha ocurrido un error")
       }
       
     );

@@ -6,7 +6,7 @@
       <br>
       <p class="h5">Asientos disponibles</p>
         
-      <div class="card px-4 py-3">
+      <div class="card px-4 py-3" *ngIf=Status>
         <div class="row" *ngFor="let row of arr_name">
           <div class="col" *ngFor="let col of row">
             <br>

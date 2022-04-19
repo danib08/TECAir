@@ -16,25 +16,25 @@ export class SignUpWorkersComponent implements OnInit {
   }
 
   get workerID(){
-    return this.registerForm.get('WorkerID');
+    return this.registerForm.get('workerid');
   }
   get nameWorker(){
-    return this.registerForm.get('NameWorker');
+    return this.registerForm.get('nameworker');
   }
   get lastNameWorker(){
-    return this.registerForm.get('LastNameWorker');
+    return this.registerForm.get('lastnameworker');
   }
   get passWorker(){
-    return this.registerForm.get('PassWorker');
+    return this.registerForm.get('passworker');
   }
   get workers(){
     return this.registerForm2.get('Workers') as FormArray;
   }
   registerForm = this.formBuilder.group({
-    WorkerID: [0, Validators.required],
-    NameWorker: ['', Validators.required],
-    LastNameWorker: ['', Validators.required],
-    PassWorker: ['',Validators.required],
+    workerid: [0, Validators.required],
+    nameworker: ['', Validators.required],
+    lastnameworker: ['', Validators.required],
+    passworker: ['',Validators.required],
   });
 
   registerForm2 = this.formBuilder.group({
@@ -43,10 +43,10 @@ export class SignUpWorkersComponent implements OnInit {
 
   addWorkers(){
     const workersFormGroup = this.formBuilder.group({
-      WorkerID: 0,
-      NameWorker: '',
-      LastNameWorker: '',
-      PassWorker: ''
+      workerid: 0,
+      nameworker: '',
+      lastnameworker: '',
+      passworker: ''
     });
     this.workers.push(workersFormGroup);
   }

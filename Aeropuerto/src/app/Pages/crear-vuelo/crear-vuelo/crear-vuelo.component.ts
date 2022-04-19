@@ -25,31 +25,31 @@ export class CrearVueloComponent implements OnInit {
   }
 
   get origin(){
-    return this.registerForm.get('Origin');
+    return this.registerForm.get('origin');
   }
   
   get destination(){
-    return this.registerForm.get('Destination');
+    return this.registerForm.get('destination');
   }
 
   get bagQuantity(){
-    return this.registerForm.get('BagQuantity');
+    return this.registerForm.get('bagquantity');
   }
 
   get userQuantity(){
-    return this.registerForm.get('UserQuantity');
+    return this.registerForm.get('userquantity');
   }
 
   get flightID(){
-    return this.registerForm.get('FlightID');
+    return this.registerForm.get('flightid');
   }
 
   get departureTime(){
-    return this.registerForm.get('DepartureTime');
+    return this.registerForm.get('departure');
   }
 
   get arrivalTime(){
-    return this.registerForm.get('ArrivalTime');
+    return this.registerForm.get('arrival');
   }
 
   get stops(){
@@ -57,14 +57,14 @@ export class CrearVueloComponent implements OnInit {
   }
 
   registerForm = this.formBuilder.group({
-    Origin: ['', Validators.required],
-    Destination: ['', Validators.required],
-    FlightID: ['', Validators.required],
-    Departure: ['',Validators.required],
-    Arrival:['', Validators.required],
-    Stops:[[]],
-    WorkerID: parseInt(this.cookieSvc.get('WorkerID')),
-    PlaneID: ['', Validators.required]
+    origin: ['', Validators.required],
+    destination: ['', Validators.required],
+    flightid: ['', Validators.required],
+    departure: ['',Validators.required],
+    arrival:['', Validators.required],
+    stops:[[]],
+    workerid: parseInt(this.cookieSvc.get('WorkerID')),
+    planeid: ['', Validators.required]
     
   });
 
@@ -74,13 +74,13 @@ export class CrearVueloComponent implements OnInit {
 
   addStops(){
     const stopsFormGroup = this.formBuilder.group({
-      Origin: '',
-      Destination: '',
-      FlightID: '',
-      Departure: '',
-      Arrival: '',
-      WorkerID: parseInt(this.cookieSvc.get('WorkerID')),
-      PlaneID: ''
+      origin: '',
+      destination: '',
+      flightid: '',
+      departure: '',
+      arrival: '',
+      workerid: parseInt(this.cookieSvc.get('WorkerID')),
+      planeid: ''
     });
     this.stops.push(stopsFormGroup);
   }
@@ -96,7 +96,7 @@ export class CrearVueloComponent implements OnInit {
     }
     else{
       for(let i = 0; i < this.stops.length; i++){
-        this.list.push(this.stops.at(i).get('FlightID')?.value);
+        this.list.push(this.stops.at(i).get('flightid')?.value);
       }
       this.registerForm.get('Stops')?.setValue(this.list);
       this.apiService.addFlight(this.registerForm.value).subscribe(

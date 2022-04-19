@@ -13,14 +13,14 @@
             <div class="form-input">
               <i class="material-icons">account_circle</i>
               <input type="number" class="form-control" placeholder="Cédula de identidad"
-              [(ngModel)]="newUser.CustomerID" name="CustomerID" #CustomerID = "ngModel"
+              [(ngModel)]="newUser.customerid" name="CustomerID" #CustomerID = "ngModel"
               [ngClass]="{'is-invalid':f.submitted && name.invalid}"
               required>
             </div>
             <div class="form-input">
               <i class="material-icons">account_circle</i>
               <input type="text" class="form-control" placeholder="Nombre"
-              [(ngModel)]="newUser.NameCustomer" name="Nombre" #name = "ngModel"
+              [(ngModel)]="newUser.namecustomer" name="Nombre" #name = "ngModel"
               [ngClass]="{'is-invalid':f.submitted && name.invalid}"
               required>
             </div>
@@ -28,7 +28,7 @@
             <div class="form-input">
               <i class="material-icons">person</i>
               <input type="text" class="form-control" placeholder="Apellido"
-              [(ngModel)]="newUser.LastNameCustomer" name="Apellido" #name = "ngModel"
+              [(ngModel)]="newUser.lastnamecustomer" name="Apellido" #name = "ngModel"
               [ngClass]="{'is-invalid':f.submitted && name.invalid}"
               required>
             </div>
@@ -36,7 +36,7 @@
             <div class="form-input">
               <i class="material-icons">email</i>
               <input type="text" class="form-control" placeholder="Email"
-              [(ngModel)]="newUser.Email" name="Email" #Email = "ngModel"
+              [(ngModel)]="newUser.email" name="Email" #Email = "ngModel"
               [ngClass]="{'is-invalid':f.submitted && name.invalid}"
               required>
             </div>
@@ -44,7 +44,7 @@
             <div class="form-input">
               <i class="material-icons">lock</i>
               <input type="password" class="form-control" placeholder="Contraseña"
-              [(ngModel)]="newUser.PassCustomer" name="Contraseña" #Contraseña = "ngModel"
+              [(ngModel)]="newUser.passcustomer" name="Contraseña" #Contraseña = "ngModel"
               [ngClass]="{'is-invalid':f.submitted && name.invalid}"
               required>
             </div>
@@ -52,7 +52,7 @@
             <div class="form-input">
               <i class="material-icons">call</i>
               <input type="number" class="form-control" placeholder="Telefono personal"
-              [(ngModel)]="newUser.Phone" name="Telefono" #Telefono = "ngModel"
+              [(ngModel)]="newUser.phone" name="Telefono" #Telefono = "ngModel"
               [ngClass]="{'is-invalid':f.submitted && name.invalid}"
               required>
             </div>
@@ -64,13 +64,13 @@
             <div class="form-input">
               <i class="material-icons">school</i>
               <input type="text" class="form-control" placeholder="Universidad"
-              [(ngModel)]="newUser.University" name="Universidad" #Universidad = "ngModel">
+              [(ngModel)]="newUser.university" name="Universidad" #Universidad = "ngModel">
             </div>
 
             <div class="form-input">
               <i class="material-icons">assignment_ind</i>
               <input type="text" class="form-control" placeholder="Carnet"
-              [(ngModel)]="newUser.StudentID" name="Carnet" #Telefono = "ngModel">
+              [(ngModel)]="newUser.studentid" name="Carnet" #Telefono = "ngModel">
             </div>
 
             <div class="form-input text-center">

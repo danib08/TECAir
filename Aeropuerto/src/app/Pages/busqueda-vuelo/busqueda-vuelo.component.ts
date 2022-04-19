@@ -18,8 +18,8 @@ export class BusquedaVueloComponent implements OnInit {
   constructor(private router:Router, private cookieSvc:CookieService,private apiService: PostService) { }
 
   search: FlightSearchModel = {
-    Origin: "",
-    Destination: ""
+    origin: "",
+    destination: ""
   }
 
   //List with all the flights
@@ -29,9 +29,9 @@ export class BusquedaVueloComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  connectReservacion(VueloID:string){
-    console.log(VueloID)
-    this.cookieSvc.set("IDVuelo", VueloID);
+  connectReservacion(FlightID:string){
+    console.log(FlightID);
+    this.cookieSvc.set("FlightID", FlightID);
     this.router.navigate(["asientos"]);
   }
 

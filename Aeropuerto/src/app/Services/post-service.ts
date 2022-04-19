@@ -11,8 +11,14 @@ import { WorkerModel } from "../Pages/models/worker-model";
     providedIn: 'root'
 })
 export class PostService {
-    private baseURL = "http://localhost..."
-    private addWorkerURL = "https://pruebaa.free.beeceptor.com"
+    private baseURL = "https://localhost:5001/api";
+    private addWorkerURL = `${this.baseURL}\\Workers`;
+    private addFlightURL = `${this.baseURL}\\Flights`;
+    private addCustomerURL = `${this.baseURL}\\Customers`;
+    private addBagURL = `${this.baseURL}\\Bags`;
+    private searchURL = `${this.baseURL}\\Flights`;
+    private logInWURL = `${this.baseURL}\\Workers/validate`;
+    private validateUserURL = `${this.baseURL}\\Customers/validate`;
 
     /**
      * Método constructor
@@ -27,23 +33,23 @@ export class PostService {
     }
     
     addFlight(flight: FormControl):Observable<any>{
-        return this.http.post<any>(this.addWorkerURL, flight);
+        return this.http.post<any>(this.addFlightURL, flight);
     }
 
     addBag(bag: FormControl):Observable<any>{
-        return this.http.post<any>(this.addWorkerURL, bag);
+        return this.http.post<any>(this.addBagURL, bag);
     }
 
     searchFlights(search: FlightSearchModel):Observable<any>{
-        return this.http.post<any>(this.addWorkerURL, search);
+        return this.http.post<any>(this.searchURL, search);
     }
 
     logInWorker(worker: WorkerModel):Observable<any>{
-        return this.http.post<any>(this.addWorkerURL, worker);
+        return this.http.post<any>(this.logInWURL, worker);
     }
 
     addCustomer(customer: CustomerModel):Observable<any>{
-        return this.http.post<any>(this.addWorkerURL, customer);
+        return this.http.post<any>(this.addCustomerURL, customer);
     }
 
     validateUser(customer: UserValModel):Observable<any>{

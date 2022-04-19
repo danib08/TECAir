@@ -12,8 +12,8 @@ import { WorkerModel } from '../models/worker-model';
 export class LoginComponent implements OnInit {
 
   worker: WorkerModel = {
-    WorkerID: 0,
-    PassWorker: ''
+    workerid: 0,
+    passworker: ''
 }
   constructor(private router:Router,private cookieSvc:CookieService,private apiService: PostService) { }
 
@@ -28,15 +28,15 @@ export class LoginComponent implements OnInit {
     const target= event.target
     const ID =  parseInt(target.querySelector("#id").value);
     const password =  target.querySelector("#password").value;
-    this.worker.WorkerID = ID;
-    this.worker.PassWorker = password;
+    this.worker.workerid = ID;
+    this.worker.passworker = password;
     this.validateData();
   }
   
   validateData(){
     this.apiService.logInWorker(this.worker).subscribe(
       res =>{
-        this.cookieSvc.set('WorkerID', this.worker.WorkerID.toString());
+        this.cookieSvc.set('Workerid', this.worker.workerid.toString());
         this.router.navigate(["home"]);
       }, 
       err =>{

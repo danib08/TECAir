@@ -1,5 +1,5 @@
 export interface UserValModel {
-    NameCustomer: string,
-    LastNameCustomer: string,
-    CustomerID: number
+    namecustomer: string,
+    lastnamecustomer: string,
+    customerid: number
 }

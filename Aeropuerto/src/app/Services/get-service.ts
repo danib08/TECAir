@@ -14,11 +14,11 @@ import { UserInFlightModel } from "../Pages/models/user-in-flight-model";
 })
 export class GetService {
 
-    private baseURL = "https://tecair.free.beeceptor.com";
+    private baseURL = "https://localhost:5001/api";
     private getFlightsURL = `${this.baseURL}\\Flights`;
     private getCustomerURL = `${this.baseURL}\\Customers`;
-    private getCustomerFlightURL = `${this.baseURL}\\CustomersFlight`;
-    private getCustomerCapURL = `${this.baseURL}\\CustomerCap`;
+    private getCustomerFlightURL = `${this.baseURL}\\CustomersInFlights/`;
+    private getFlightCapURL = `${this.baseURL}\\Flights/Capacity/`;
     private getPlaneURL = `${this.baseURL}\\Planes`;
 
     
@@ -31,21 +31,30 @@ export class GetService {
     }
 
     getPrice(ID:string):Observable<FlightPriceModel>{
-        let priceURL = `${this.baseURL}\\Flights\\`+ID;
+        let priceURL = `${this.baseURL}\\Flights/Price\\`+ID;
         return this.http.get<FlightPriceModel>(priceURL);
     }
+
     getCustomers():Observable<CustomerModel[]>{
         return this.http.get<CustomerModel[]>(this.getCustomerURL);
     }
+    
     getPlanes():Observable<PlaneModel[]>{
         return this.http.get<PlaneModel[]>(this.getPlaneURL);
     }
 
-    getCustomerInFlight():Observable<UserInFlightModel[]>{
-        return this.http.get<UserInFlightModel[]>(this.getCustomerFlightURL);
+    getCustomerInFlight(flight:string):Observable<UserInFlightModel[]>{
+        let URL = this.getCustomerFlightURL + flight;
+        return this.http.get<UserInFlightModel[]>(URL);
     }
 
-    getUserCapacity():Observable<FlightCapModel>{
-        return this.http.get<FlightCapModel>(this.getCustomerCapURL);
+    getFlightCapacity(flight:string):Observable<FlightCapModel>{
+        let URL = this.getFlightCapURL + flight;
+        return this.http.get<FlightCapModel>(URL);
+    }
+
+    getFlight(flight: string):Observable<FlightModel>{
+        let URL = `${this.baseURL}\\Flights\\`+flight;
+        return this.http.get<FlightModel>(URL);
     }
 }

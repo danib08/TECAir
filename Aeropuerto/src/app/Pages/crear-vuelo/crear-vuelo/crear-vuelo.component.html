@@ -7,9 +7,9 @@
         <div class="col-1 col-5">
             <div class="form-group">
                 <i class="bi bi-pin-map-fill">
-                    <label for="Origin">Origen</label>
+                    <label for="origin">Origen</label>
                 </i>
-                <input type="text" class="form-control" formControlName="Origin">
+                <input type="text" class="form-control" formControlName="origin">
                 <div
                 *ngIf="origin?.invalid && (origin?.dirty || origin?.touched)" class="alert alert-danger">
                     HOLA
@@ -17,9 +17,9 @@
             </div>
             <div class="form-group">
                 <i class="bi bi-pin-map-fill">
-                    <label for="Destination">Destino</label>
+                    <label for="destination">Destino</label>
                 </i>
-                <input type="text" class="form-control" formControlName="Destination">
+                <input type="text" class="form-control" formControlName="destination">
                 <div
                 *ngIf="destination?.invalid && (destination?.dirty || destination?.touched)" class="alert alert-danger">
                     HOLA2
@@ -27,9 +27,9 @@
             </div>
             <div class="form-group">
                 <i class="bi bi-journal-minus">
-                    <label for="FlightID">ID del vuelo</label>
+                    <label for="flightid">ID del vuelo</label>
                 </i>
-                <input type="text" class="form-control" formControlName="FlightID">
+                <input type="text" class="form-control" formControlName="flightid">
                 <div
                 *ngIf="flightID?.invalid && (flightID?.dirty || flightID?.touched)" class="alert alert-danger">
                     HOLA5
@@ -39,7 +39,7 @@
                 <i class="bi bi-arrow-up-square-fill">
                     <label for="DepartureTime">Fecha de salida</label>
                 </i>
-                <input type="datetime-local" class="form-control" formControlName="Departure">
+                <input type="datetime-local" class="form-control" formControlName="departure">
                 <div
                 *ngIf="departureTime?.invalid && (departureTime?.dirty || departureTime?.touched)" class="alert alert-danger">
                     HOLA6
@@ -49,7 +49,7 @@
                 <i class="bi bi-arrow-down-square-fill">
                     <label for="ArrivalTime">Fecha de llegada</label>
                 </i>
-                <input type="datetime-local" class="form-control" formControlName="Arrival">
+                <input type="datetime-local" class="form-control" formControlName="arrival">
                 <div
                 *ngIf="arrivalTime?.invalid && (arrivalTime?.dirty || arrivalTime?.touched)" class="alert alert-danger">
                     HOLA7
@@ -58,9 +58,9 @@
             <div class="form-group">
                 <i class="fa fa-plane"></i>
                 <label for="PlaneID">Seleccione el avión</label>
-                <select class="form-control" id="PlaneID" name="PlaneID" formControlName="PlaneID">
-                    <option *ngFor="let list of planesArray; index as i" value="{{list.PlaneID}}">
-                        {{list.PlaneID}} - {{list.Model}}
+                <select class="form-control" id="planeid" name="planeid" formControlName="planeid">
+                    <option *ngFor="let list of planesArray; index as i" value="{{list.planeid}}">
+                        {{list.planeid}} - {{list.model}}
                     </option>
                 </select>
             </div>
@@ -87,38 +87,38 @@
             <div [formGroupName]="i" >
                 <div class="form-group">
                     <div class="row">
-                        <label class="col-2" align="center" [attr.for] ="'Origin' + i">Origen</label>
+                        <label class="col-2" align="center" [attr.for] ="'origin' + i">Origen</label>
 
                         <div class="col-3">
-                            <input type="text" [attr.id]="'Origin' + i" class="form-control" formControlName="Origin">
+                            <input type="text" [attr.id]="'origin' + i" class="form-control" formControlName="origin">
                         </div>
         
-                        <label class="col-2" align="center" [attr.for] ="'Destination' + i" >Destino</label>
+                        <label class="col-2" align="center" [attr.for] ="'destination' + i" >Destino</label>
                         <div class="col-3">
-                            <input type="text" [attr.id]="'Destination' + i" class="form-control" formControlName="Destination">
+                            <input type="text" [attr.id]="'destination' + i" class="form-control" formControlName="destination">
                         </div>
                     </div>
                     <div class="row">
-                        <label class="col-2" align="center" [attr.for] ="'FlightID' + i" >ID del vuelo</label>
+                        <label class="col-2" align="center" [attr.for] ="'flightid' + i" >ID del vuelo</label>
                         <div class="col-3">
-                            <input type="text" [attr.id]="'FlightID' + i" class="form-control" formControlName="FlightID">
+                            <input type="text" [attr.id]="'flightid' + i" class="form-control" formControlName="flightid">
                         </div>
         
-                        <label class="col-2" align="center" [attr.for] ="'Departure' + i" >Fecha de salida</label>
+                        <label class="col-2" align="center" [attr.for] ="'departure' + i" >Fecha de salida</label>
                         <div class="col-3">
-                            <input type="datetime-local" [attr.id]="'Departure' + i" class="form-control" formControlName="Departure">
+                            <input type="datetime-local" [attr.id]="'departure' + i" class="form-control" formControlName="departure">
                         </div>
                     </div>
                     <div class="row">
-                        <label class="col-2" align="center" [attr.for] ="'Arrival' + i" >Fecha de llegada</label>
+                        <label class="col-2" align="center" [attr.for] ="'arrival' + i" >Fecha de llegada</label>
                         <div class="col-3">
-                            <input type="datetime-local" [attr.id]="'ArrivalTime' + i" class="form-control" formControlName="Arrival">
+                            <input type="datetime-local" [attr.id]="'arrival' + i" class="form-control" formControlName="arrival">
                         </div>
-                        <label class="col-2" align="center" [attr.for] ="'PlaneID' + i" >Avión</label>
+                        <label class="col-2" align="center" [attr.for] ="'planeid' + i" >Avión</label>
                         <div class="col-3">
-                            <select class="form-control" [attr.id]="'PlaneID' + i" formControlName="PlaneID"> 
-                                <option *ngFor="let list of planesArray; index as i" value="{{list.PlaneID}}">
-                                    {{list.PlaneID}} - {{list.Model}}
+                            <select class="form-control" [attr.id]="'planeid' + i" formControlName="planeid"> 
+                                <option *ngFor="let list of planesArray; index as i" value="{{list.planeid}}">
+                                    {{list.planeid}} - {{list.model}}
                                 </option>
                             </select>
                         </div>

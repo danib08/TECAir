@@ -12,7 +12,7 @@
             <div class="form-input">
               <i class="material-icons">account_circle</i>
               <input type="text" class="form-control" placeholder="Nombre"
-              [(ngModel)]="User.NameCustomer" name="Nombre" #name = "ngModel"
+              [(ngModel)]="User.namecustomer" name="Nombre" #name = "ngModel"
               [ngClass]="{'is-invalid':f.submitted && name.invalid}"
               required>
             </div>
@@ -20,7 +20,7 @@
             <div class="form-input">
               <i class="material-icons">person</i>
               <input type="text" class="form-control" placeholder="Apellido"
-              [(ngModel)]="User.LastNameCustomer" name="Apellido" #name = "ngModel"
+              [(ngModel)]="User.lastnamecustomer" name="Apellido" #name = "ngModel"
               [ngClass]="{'is-invalid':f.submitted && name.invalid}"
               required>
             </div>
@@ -28,7 +28,7 @@
             <div class="form-input">
               <i class="material-icons">person</i>
               <input type="number" class="form-control" placeholder="ID del Usuario"
-              [(ngModel)]="User.CustomerID" name="CustomerID" #CustomerID = "ngModel"
+              [(ngModel)]="User.customerid" name="CustomerID" #CustomerID = "ngModel"
               [ngClass]="{'is-invalid':f.submitted && name.invalid}"
               required>
             </div>

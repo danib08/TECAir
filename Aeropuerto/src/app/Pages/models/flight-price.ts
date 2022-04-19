@@ -1,4 +1,4 @@
 export interface FlightPriceModel {
-    FlightID:string,
-    Price:number
+    flightid:string,
+    price:number
 }

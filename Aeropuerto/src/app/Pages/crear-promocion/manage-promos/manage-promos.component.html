@@ -7,26 +7,26 @@
         <div class="col-1 col-5">    
             <div class="form-group">
                 <i class="fa fa-plane"></i>
-                <label for="FlightID">Escoja el vuelo al que desea aplicarle el descuento</label>
-                <select class="form-control" id="FlightID" name="FlightID" formControlName="FlightID" (click)="getPrice(flightID?.value)">
-                    <option *ngFor="let list of flightsArray; index as i" value="{{list.FlightID}}">
-                        {{list.FlightID}} - {{list.Origin}} - {{list.Destination}}
+                <label for="Flightid">Escoja el vuelo al que desea aplicarle el descuento</label>
+                <select class="form-control" id="flightid" name="flightid" formControlName="flightid" (click)="getPrice(flightID?.value)">
+                    <option *ngFor="let list of flightsArray; index as i" value="{{list.flightid}}">
+                        {{list.flightid}} - {{list.origin}} - {{list.destination}}
                     </option>
                 </select>
             </div>
             <div class="form-group"> 
-                <label>Precio sin descuento: {{flightPrice.Price}} dólares</label>
+                <label>Precio sin descuento: {{flightPrice.price}} dólares</label>
             </div>
             <div class="form-group">
                 <i class="fa fa-usd"></i>
-                <label for="Discount">Descuento</label>
-                <input type="number" class="form-control" formControlName="Discount">
+                <label for="discount">Descuento</label>
+                <input type="number" class="form-control" formControlName="discount">
                 <div *ngIf="(discount?.invalid && (discount?.dirty || discount?.touched)) || (discount?.value < 0 || discount?.value > 100) " class="alert alert-danger">
                     hola buenas
                 </div>
             </div>
             <div class="form-group"> 
-                <label> Precio con descuento: {{flightPrice.Price*((100-discount?.value)/100)}} dólares</label>
+                <label> Precio con descuento: {{flightPrice.price*((100-discount?.value)/100)}} dólares</label>
             </div>
             <div class="form-group">
                 <a class=" btn btn-primary" (click)="addDiscounts()">Agregar promoción</a>
@@ -51,22 +51,22 @@
                 <div [formGroupName]="i">
                     <div class="row">
                         <i class="fa fa-plane col-md-1">
-                            <label [attr.for]="'FlightID' + i">Vuelo</label>
+                            <label [attr.for]="'flightid' + i">Vuelo</label>
                         </i>
                         <div class="col-md-3">
-                            <select class="form-control" [attr.id]="'FlightID' + i" formControlName="FlightID" > 
-                                <option *ngFor="let list of flightsArray; index as i" value="{{list.FlightID}}">
-                                    {{list.FlightID}} - {{list.Origin}} - {{list.Destination}}
+                            <select class="form-control" [attr.id]="'flightid' + i" formControlName="flightid" > 
+                                <option *ngFor="let list of flightsArray; index as i" value="{{list.flightid}}">
+                                    {{list.flightid}} - {{list.origin}} - {{list.destination}}
                                 </option>
                             </select>
                         </div>
                         <i class="fa fa-usd col-md-1">
-                            <label class="col-md-3" [attr.for]="'Discount' + i">Descuento</label>
+                            <label class="col-md-3" [attr.for]="'discount' + i">Descuento</label>
                         </i>
                         <div class="col-md-3">
-                            <input type="number" [attr.id]="'Discount' + i" class="form-control" formControlName="Discount">
+                            <input type="number" [attr.id]="'discount' + i" class="form-control" formControlName="discount">
                         </div>
-                        <div *ngIf=" (discounts.at(i).get('Discount')?.value < 0 || discounts.at(i).get('Discount')?.value > 100) " class="alert alert-danger">
+                        <div *ngIf=" (discounts.at(i).get('discount')?.value < 0 || discounts.at(i).get('discount')?.value > 100) " class="alert alert-danger">
                             hola buenas
                         </div>
                         <div class="col-md-1">
@@ -75,11 +75,11 @@
                     </div>
                     <div class="row">
                         <div class="col-md-5"> 
-                            <label>Precio sin descuento: {{getFlightPrice(discounts.at(i).get('FlightID')?.value)}} dólares</label>
+                            <label>Precio sin descuento: {{getFlightPrice(discounts.at(i).get('flightid')?.value)}} dólares</label>
                         </div>
                         
                         <div class="col-md-9"> 
-                            <label> Precio con descuento: {{getFlightPrice(discounts.at(i).get('FlightID')?.value)*((100-discounts.at(i).get('Discount')?.value)/100)}} dólares</label>
+                            <label> Precio con descuento: {{getFlightPrice(discounts.at(i).get('flightid')?.value)*((100-discounts.at(i).get('discount')?.value)/100)}} dólares</label>
                         </div> 
                     </div>
                     <p>

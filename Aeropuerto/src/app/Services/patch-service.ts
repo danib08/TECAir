@@ -8,8 +8,9 @@ import { Observable } from "rxjs";
 })
 export class PatchService {
 
-    private baseURL = "http://localhost..."
-    private changeFlighttStatus = "https://tecair.free.beeceptor.com"
+    private baseURL = "https://localhost:5001/api";
+    private changeStatusURL = `${this.baseURL}\\Flights/FlightStatus`;
+    private setDiscountURL = `${this.baseURL}\\Flights/FlightDiscount`;
     /**
      * Método constructor
      * @param http 
@@ -19,9 +20,9 @@ export class PatchService {
     }
 
     changeStatus(status: FormControl):Observable<any>{
-        return this.http.patch<any>(this.changeFlighttStatus, status);
+        return this.http.patch<any>(this.changeStatusURL, status);
     }
     addDiscount(discount: FormControl):Observable<any>{
-        return this.http.patch<any>(this.changeFlighttStatus, discount);
+        return this.http.patch<any>(this.setDiscountURL, discount);
     }
 }
