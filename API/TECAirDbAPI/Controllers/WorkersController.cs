@@ -53,6 +53,8 @@ namespace TECAirDbAPI.Controllers
             return worker;
         }
 
+        /*
+
         /// <summary>
         /// Single value get customer 
         /// </summary>
@@ -76,6 +78,8 @@ namespace TECAirDbAPI.Controllers
             }
 
         }
+
+        */
 
         /// <summary>
         /// Put method to edit workers
