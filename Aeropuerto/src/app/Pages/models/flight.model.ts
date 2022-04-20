@@ -12,5 +12,5 @@ export interface FlightModel {
   status: string,
   discount: number,
   planeid: string,
-  workerID: number
+  workerid: number
 }

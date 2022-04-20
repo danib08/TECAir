@@ -64,8 +64,13 @@ export class CrearVueloComponent implements OnInit {
     arrival:['', Validators.required],
     stops:[[]],
     workerid: parseInt(this.cookieSvc.get('WorkerID')),
-    planeid: ['', Validators.required]
-    
+    planeid: ['', Validators.required],
+    bagquantity: 0,
+    userquantity: 0,
+    price: 0,
+    gate: '',
+    status: '',
+    discount: 0,
   });
 
   registerForm2 = this.formBuilder.group({
@@ -80,7 +85,14 @@ export class CrearVueloComponent implements OnInit {
       departure: '',
       arrival: '',
       workerid: parseInt(this.cookieSvc.get('WorkerID')),
-      planeid: ''
+      planeid: '',
+      bagquantity: 0,
+      userquantity: 0,
+      price: 0,
+      stops: [],
+      gate: '',
+      status: '',
+      discount: 0,
     });
     this.stops.push(stopsFormGroup);
   }

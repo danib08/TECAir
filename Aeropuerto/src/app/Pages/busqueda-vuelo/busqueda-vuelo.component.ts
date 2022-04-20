@@ -17,9 +17,21 @@ export class BusquedaVueloComponent implements OnInit {
 
   constructor(private router:Router, private cookieSvc:CookieService,private apiService: PostService) { }
 
-  search: FlightSearchModel = {
-    origin: "",
-    destination: ""
+  search: FlightModel = {
+    origin: '',
+    destination: '',
+    bagquantity: 0,
+    userquantity: 0,
+    flightid: '',
+    departure: '',
+    arrival: '',
+    price: 0,
+    stops: [],
+    gate: '',
+    status: '',
+    discount: 0,
+    planeid: '',
+    workerid: 0
   }
 
   //List with all the flights

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { PostService } from 'src/app/Services/post-service';
+import { LoginModelW } from '../models/login-model-w';
 import { WorkerModel } from '../models/worker-model';
 
 @Component({
@@ -13,8 +14,14 @@ export class LoginComponent implements OnInit {
 
   worker: WorkerModel = {
     workerid: 0,
-    passworker: ''
-}
+    passworker: '',
+    nameworker: '',
+    lastnameworker: ''
+  }
+
+  validation = {
+    Existe: ""
+  }
   constructor(private router:Router,private cookieSvc:CookieService,private apiService: PostService) { }
 
   ngOnInit(): void {}
@@ -34,13 +41,19 @@ export class LoginComponent implements OnInit {
   }
   
   validateData(){
+    console.log(this.worker)
     this.apiService.logInWorker(this.worker).subscribe(
       res =>{
-        this.cookieSvc.set('Workerid', this.worker.workerid.toString());
-        this.router.navigate(["home"]);
-      }, 
-      err =>{
-        alert("Contraseña o ID incorrectos")
+        this.validation = res;
+        console.log(res);
+        if (this.validation.Existe == "Si"){
+          this.cookieSvc.set('Workerid', this.worker.workerid.toString());
+          this.router.navigate(["home"]);
+        }else{
+          alert("Contraseña o ID incorrectos")
+        }
+      },err =>{
+        console.log(err)
       }
     );
   }

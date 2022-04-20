@@ -61,6 +61,7 @@ export class SignUpWorkersComponent implements OnInit {
       return;
     }
     else{
+      console.log(this.registerForm.value)
       this.apiService.addWorker(this.registerForm.value).subscribe(
         res => {
           console.log(res);

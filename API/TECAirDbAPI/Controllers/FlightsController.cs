@@ -143,14 +143,14 @@ namespace TECAirDbAPI.Controllers
         /// <returns>Request status </returns>
 
         [HttpPatch("FlightStatus")]
-        public async Task<IActionResult> PatchFlightStatus(string id, string status)
+        public async Task<IActionResult> PatchFlightStatus(string flightid, string status)
         {
             if (string.IsNullOrWhiteSpace(status))
             {
                 return BadRequest();
             }
 
-            var Flight = await _context.Flights.FindAsync(id);
+            var Flight = await _context.Flights.FindAsync(flightid);
             if (Flight == null)
             {
                 return NotFound();
@@ -158,7 +158,7 @@ namespace TECAirDbAPI.Controllers
 
             Flight.Status = status;
             await _context.SaveChangesAsync();
-            return NoContent();
+            return Ok();
 
         }
 

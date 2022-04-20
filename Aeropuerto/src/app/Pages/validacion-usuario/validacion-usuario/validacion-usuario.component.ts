@@ -3,6 +3,7 @@ import { PostService } from 'src/app/Services/post-service';
 import { UserValModel } from '../../models/user-val-model';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { CustomerModel } from '../../models/customer';
 
 @Component({
   selector: 'app-validacion-usuario',
@@ -12,14 +13,20 @@ import { Router } from '@angular/router';
 
 export class ValidacionUsuarioComponent implements OnInit {
 
-  User: UserValModel = {
+  User: CustomerModel = {
     namecustomer: '',
     lastnamecustomer: '',
-    customerid: 0
+    customerid: 0,
+    passcustomer: '',
+    email: '',
+    phone: 0,
+    studentid: 0,
+    university: '',
+    miles: 0
   }
 
   validation = {
-    Existe: ""
+    Existe: ''
   }
 
   constructor(private router:Router,private apiService: PostService,private cookieSvc:CookieService) { }

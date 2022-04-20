@@ -41,7 +41,19 @@ export class ManagePromosComponent implements OnInit {
 
   registerForm = this.formBuilder.group({
     flightid: ['',Validators.required],
-    discount: [0, Validators.required]
+    discount: [0, Validators.required],
+    origin: '',
+    destination: '',
+    bagquantity: 0,
+    userquantity: 0,
+    departure: '',
+    arrival: '',
+    price: 0,
+    stops: [],
+    gate: '',
+    status: '',
+    planeid: '',
+    workerID: 0
   });
 
   registerForm2 = this.formBuilder.group({
@@ -50,7 +62,19 @@ export class ManagePromosComponent implements OnInit {
   addDiscounts(){
     const discountsFormGroup = this.formBuilder.group({
       flightid: '',
-      discount: 0
+      discount: 0,
+      origin: '',
+      destination: '',
+      bagquantity: 0,
+      userquantity: 0,
+      departure: '',
+      arrival: '',
+      price: 0,
+      stops: [],
+      gate: '',
+      status: '',
+      planeid: '',
+      workerID: 0
     });
     this.discounts.push(discountsFormGroup);
   }
@@ -100,7 +124,6 @@ export class ManagePromosComponent implements OnInit {
     this.apiServiceGET.getPrice(ID).subscribe(
       res =>{
         this.flightPrice = res;
-        
       }
     );
   }

@@ -24,7 +24,19 @@ export class ManageFlightsComponent implements OnInit {
   }
   registerForm = this.formBuilder.group({
     flightid: ['',Validators.required],
-    status: ['', Validators.required]
+    status: ['', Validators.required],
+    origin: '',
+    destination: '',
+    bagquantity: 0,
+    userquantity: 0,
+    departure: '',
+    arrival: '',
+    price: 0,
+    stops: [],
+    gate: '',
+    discount: 0,
+    planeid: '',
+    workerid: 0
   });
 
   registerForm2 = this.formBuilder.group({
@@ -33,7 +45,19 @@ export class ManageFlightsComponent implements OnInit {
   addFlights(){
     const FlightsFormGroup = this.formBuilder.group({
       flightid: '',
-      status: ''
+      status: '',
+      origin: '',
+      destination: '',
+      bagquantity: 0,
+      userquantity: 0,
+      departure: '',
+      arrival: '',
+      price: 0,
+      stops: [],
+      gate: '',
+      discount: 0,
+      planeid: '',
+      workerid: 0
     });
     this.flights.push(FlightsFormGroup);
   }
@@ -46,6 +70,7 @@ export class ManageFlightsComponent implements OnInit {
       return;
     }
     else{
+      console.log(this.registerForm.value)
       this.apiService.changeStatus(this.registerForm.value).subscribe(
         res => {
           console.log(res);

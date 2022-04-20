@@ -4,6 +4,7 @@ import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
 import { CustomerModel } from "../Pages/models/customer";
 import { FlightSearchModel } from "../Pages/models/flight-search-model";
+import { LoginModelW } from "../Pages/models/login-model-w";
 import { UserValModel } from "../Pages/models/user-val-model";
 import { WorkerModel } from "../Pages/models/worker-model";
 
