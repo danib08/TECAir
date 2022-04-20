@@ -52,33 +52,6 @@ namespace TECAirDbAPI.Controllers
             return customer;
         }
 
-
-        /// <summary>
-        /// Single value get customer 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Required customer</returns>
-
-        [HttpGet("validate")]
-        public async Task<ActionResult<string>> CustomerValidation(int id, string pass)
-        {
-            var customer = await _context.Customers.FindAsync(id);
-
-            if (customer.Customerid == id && customer.Passcustomer.Equals(pass))
-            {
-                var data = new JObject(new JProperty("Existe", "Si"));
-                return data.ToString();
-            }
-            else
-            {
-                var data = new JObject(new JProperty("Existe", "No"));
-                return data.ToString();
-            }
-  
-        }
-
-        
-
         /// <summary>
         /// Put method to edit customer
         /// </summary>
@@ -146,6 +119,31 @@ namespace TECAirDbAPI.Controllers
 
         
 
+        
+        /// <summary>
+        /// Single value get customer 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Required customer</returns>
+
+        [HttpPost("Validate")]
+        public string CustomerValidation(Customer customer)
+        {
+            if (CustomerExists(customer.Customerid) && NameCustomer(customer.Namecustomer) && LastNameCustomer(customer.Lastnamecustomer))
+            {
+                var data = new JObject(new JProperty("Existe", "Si"));
+                return data.ToString();
+            }
+            else
+            {
+                var data = new JObject(new JProperty("Existe", "No"));
+                return data.ToString();
+            }
+
+        }
+
+        
+
         /// <summary>
         /// Method for deleting customer by id
         /// </summary>
@@ -170,6 +168,16 @@ namespace TECAirDbAPI.Controllers
         private bool CustomerExists(int id)
         {
             return _context.Customers.Any(e => e.Customerid == id);
+        }
+
+        private bool NameCustomer(string name)
+        {
+            return _context.Customers.Any(e => e.Namecustomer.Equals(name));
+        }
+
+        private bool LastNameCustomer(string lastName)
+        {
+            return _context.Customers.Any(e => e.Lastnamecustomer.Equals(lastName));
         }
     }
 }

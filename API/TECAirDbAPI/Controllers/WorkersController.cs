@@ -53,18 +53,10 @@ namespace TECAirDbAPI.Controllers
             return worker;
         }
 
-        /// <summary>
-        /// Single value get customer 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Required customer</returns>
-
-        [HttpGet("validate")]
-        public async Task<ActionResult<string>> WorkerValidation(int id, string pass)
+        [HttpPost("validate")]
+        public string WorkerValidation(Worker worker)
         {
-            var worker = await _context.Workers.FindAsync(id);
-
-            if (worker.Workerid == id && worker.Passworker.Equals(pass))
+            if (WorkerExists(worker.Workerid) && NameWorker(worker.Nameworker) && LastNameWorker(worker.Lastnameworker))
             {
                 var data = new JObject(new JProperty("Existe", "Si"));
                 return data.ToString();
@@ -175,6 +167,16 @@ namespace TECAirDbAPI.Controllers
         private bool WorkerExists(int id)
         {
             return _context.Workers.Any(e => e.Workerid == id);
+        }
+
+        private bool NameWorker(string name)
+        {
+            return _context.Workers.Any(e => e.Nameworker.Equals(name));
+        }
+
+        private bool LastNameWorker(string lastName)
+        {
+            return _context.Workers.Any(e => e.Lastnameworker.Equals(lastName));
         }
     }
 }
