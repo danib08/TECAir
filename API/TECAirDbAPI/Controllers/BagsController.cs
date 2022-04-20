@@ -39,7 +39,7 @@ namespace TECAirDbAPI.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Required bag</returns>
-        
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Bag>> GetBag(string id)
         {
@@ -59,7 +59,7 @@ namespace TECAirDbAPI.Controllers
         /// <param name="id"></param>
         /// <param name="bag"></param>
         /// <returns>State of query</returns>
-        
+
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBag(string id, Bag bag)
@@ -96,7 +96,7 @@ namespace TECAirDbAPI.Controllers
         /// <param name="bag"></param>
         /// <returns></returns> 
 
-        [HttpPost]
+        [HttpPost("Bag")]
         public async Task<ActionResult<Bag>> PostBag(Bag bag)
         {
             _context.Bags.Add(bag);
@@ -117,42 +117,6 @@ namespace TECAirDbAPI.Controllers
             }
 
             return CreatedAtAction("GetBag", new { id = bag.Bagid }, bag);
-        }
-
-        /// <summary>
-        /// Method to create bags
-        /// </summary>
-        /// <param name="bag"></param>
-        /// <returns></returns>
-
-        [HttpPost]
-        public async Task<ActionResult> PostBags(List<Bag> bagList)
-        {
-
-            while(bagList.Count() > 0)
-            {
-                _context.Bags.Add(bagList.First());
-
-                try
-                {
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateException)
-                {
-                    if (BagExists(bagList.First().Bagid))
-                    {
-                        return Conflict();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-
-                bagList.RemoveAt(0);
-            }
-
-            return Ok();
         }
 
 

@@ -30,7 +30,7 @@ namespace TECAirDbAPI
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql("Host=localhost;Database=TECAirDb;Username=admin;Password=admin1234");
+                optionsBuilder.UseNpgsql("Host=localhost;Database=tecairDb;Username=admin;Password=admin1234");
             }
         }
 

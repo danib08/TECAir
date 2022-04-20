@@ -52,6 +52,8 @@ namespace TECAirDbAPI.Controllers
             return flight;
         }
 
+
+
         /// <summary>
         /// Single value get price from flight
         /// </summary>
@@ -60,7 +62,7 @@ namespace TECAirDbAPI.Controllers
         [HttpGet("Price/{id}")]
         public async Task<ActionResult<string>> FlightPrice(string id)
         {
-            
+
             var flight = await _context.Flights.FindAsync(id);
 
             if (flight == null)
@@ -68,10 +70,10 @@ namespace TECAirDbAPI.Controllers
                 return NotFound();
             }
 
-            var data = new JObject(new JProperty("flightid",flight.Flightid), new JProperty("price", flight.Price));
+            var data = new JObject(new JProperty("flightid", flight.Flightid), new JProperty("price", flight.Price));
 
             return data.ToString();
-            
+
         }
 
         /// <summary>
@@ -104,7 +106,7 @@ namespace TECAirDbAPI.Controllers
         /// <param name="flight"></param>
         /// <returns>State of query</returns>
 
-        [HttpPut("{id}")]
+        [HttpPut("Status/{id}")]
         public async Task<IActionResult> FlightStatus(string id, Flight flight)
         {
             if (id != flight.Flightid)
@@ -133,87 +135,43 @@ namespace TECAirDbAPI.Controllers
             return NoContent();
         }
 
-
         /// <summary>
-        /// Method to change one filght status
+        /// Put method to edit flights
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="status"></param>
-        /// <returns>Request status </returns>
+        /// <param name="flight"></param>
+        /// <returns>State of query</returns>
 
-        [HttpPatch("FlightStatus")]
-        public async Task<IActionResult> PatchFlightStatus(string id, string status)
+        [HttpPut("Discount/{id}")]
+        public async Task<IActionResult> FlightDiscount(string id, Flight flight)
         {
-            if (string.IsNullOrWhiteSpace(status))
+            if (id != flight.Flightid)
             {
                 return BadRequest();
             }
 
-            var Flight = await _context.Flights.FindAsync(id);
-            if (Flight == null)
+            _context.Entry(flight).State = EntityState.Modified;
+
+            try
             {
-                return NotFound();
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!FlightExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
             }
 
-            Flight.Status = status;
-            await _context.SaveChangesAsync();
             return NoContent();
-
         }
 
-        /// <summary>
-        /// Method to change one filght discount
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="discount"></param>
-        /// <returns>Request status </returns>
 
-        [HttpPatch("FlightDiscount")]
-        public async Task<IActionResult> PatchFlightDiscount(string id1, int discount)
-        {
-            if (discount < 0)
-            {
-                return BadRequest();
-            }
-
-            var Flight = await _context.Flights.FindAsync(id1);
-            if (Flight == null)
-            {
-                return NotFound();
-            }
-
-            Flight.Discount = discount;
-            await _context.SaveChangesAsync();
-            return NoContent();
-
-        }
-
-        /// <summary>
-        /// Method to change stops in flights
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="discount"></param>
-        /// <returns>Request status </returns>
-
-        [HttpPatch("FlightStops")]
-        public async Task<IActionResult> PatchFlightStops(string id1, string stops)
-        {
-            if (stops == null)
-            {
-                return BadRequest();
-            }
-
-            var Flight = await _context.Flights.FindAsync(id1);
-            if (Flight == null)
-            {
-                return NotFound();
-            }
-
-            Flight.Stops = stops;
-            await _context.SaveChangesAsync();
-            return NoContent();
-
-        }
 
         /// <summary>
         /// Method to create Flights
@@ -221,7 +179,7 @@ namespace TECAirDbAPI.Controllers
         /// <param name="flight"></param>
         /// <returns></returns> 
 
-        [HttpPost]
+        [HttpPost("Flight")]
         public async Task<ActionResult<Flight>> PostFlight(Flight flight)
         {
             _context.Flights.Add(flight);
@@ -244,41 +202,7 @@ namespace TECAirDbAPI.Controllers
             return CreatedAtAction("GetFlight", new { id = flight.Flightid }, flight);
         }
 
-        /// <summary>
-        /// Method to create flights
-        /// </summary>
-        /// <param name="flightsList"></param>
-        /// <returns></returns>
 
-        [HttpPost]
-        public async Task<ActionResult> PostFlights(List<Flight> flightsList)
-        {
-            while (flightsList.Count() > 0)
-            {
-                _context.Flights.Add(flightsList.First());
-
-                try
-                {
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateException)
-                {
-                    if (FlightExists(flightsList.First().Flightid))
-                    {
-                        return Conflict();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                flightsList.RemoveAt(0);
-
-            }
-
-            return Ok();
-
-        }
 
         /// <summary>
         /// Method for deleting flight by id
@@ -305,5 +229,18 @@ namespace TECAirDbAPI.Controllers
         {
             return _context.Flights.Any(e => e.Flightid == id);
         }
+
+        private bool FligthtOrigin(string origin)
+        {
+            return _context.Flights.Any(e => e.Origin == origin);
+
+        }
+
+        private bool FligthtDestination(string destiation)
+        {
+            return _context.Flights.Any(e => e.Destination == destiation);
+
+        }
+
     }
 }
