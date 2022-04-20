@@ -39,6 +39,37 @@ namespace TECAirDbAPI.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Required flight</returns>
+        [HttpGet("SearchFlight")]
+        public async Task<ActionResult<IEnumerable<Flight>>> GetFlight(string origin, string destination)
+        {
+            List<Flight> data = new List<Flight>();
+
+            var flights = await _context.Flights.ToListAsync();
+
+            while (flights.Count() > 1)
+            {
+
+                if (flights.First().Origin.Equals(origin) && flights.First().Destination.Equals(destination))
+                {
+
+                    data.Add(flights.First());
+                    flights.RemoveAt(0);
+                    
+                }
+                else
+                {
+                    flights.RemoveAt(0);
+                }
+            }
+
+            return data;
+        }
+
+        /// <summary>
+        /// Single value get
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Required flight</returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Flight>> GetFlight(string id)
         {
@@ -52,6 +83,8 @@ namespace TECAirDbAPI.Controllers
             return flight;
         }
 
+
+
         /// <summary>
         /// Single value get price from flight
         /// </summary>
@@ -60,7 +93,7 @@ namespace TECAirDbAPI.Controllers
         [HttpGet("Price/{id}")]
         public async Task<ActionResult<string>> FlightPrice(string id)
         {
-            
+
             var flight = await _context.Flights.FindAsync(id);
 
             if (flight == null)
@@ -68,10 +101,10 @@ namespace TECAirDbAPI.Controllers
                 return NotFound();
             }
 
-            var data = new JObject(new JProperty("flightid",flight.Flightid), new JProperty("price", flight.Price));
+            var data = new JObject(new JProperty("flightid", flight.Flightid), new JProperty("price", flight.Price));
 
             return data.ToString();
-            
+
         }
 
         /// <summary>
@@ -97,6 +130,7 @@ namespace TECAirDbAPI.Controllers
 
         }
 
+
         /// <summary>
         /// Put method to edit flights
         /// </summary>
@@ -104,7 +138,7 @@ namespace TECAirDbAPI.Controllers
         /// <param name="flight"></param>
         /// <returns>State of query</returns>
 
-        [HttpPut("{id}")]
+        [HttpPut("Status/{id}")]
         public async Task<IActionResult> FlightStatus(string id, Flight flight)
         {
             if (id != flight.Flightid)
@@ -133,60 +167,42 @@ namespace TECAirDbAPI.Controllers
             return NoContent();
         }
 
-
         /// <summary>
-        /// Method to change one filght status
+        /// Put method to edit flights
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="status"></param>
-        /// <returns>Request status </returns>
+        /// <param name="flight"></param>
+        /// <returns>State of query</returns>
 
-        [HttpPatch("FlightStatus")]
-        public async Task<IActionResult> PatchFlightStatus(string flightid, string status)
+        [HttpPut("Discount/{id}")]
+        public async Task<IActionResult> FlightDiscount(string id, Flight flight)
         {
-            if (string.IsNullOrWhiteSpace(status))
+            if (id != flight.Flightid)
             {
                 return BadRequest();
             }
 
-            var Flight = await _context.Flights.FindAsync(flightid);
-            if (Flight == null)
+            _context.Entry(flight).State = EntityState.Modified;
+
+            try
             {
-                return NotFound();
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!FlightExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
             }
 
-            Flight.Status = status;
-            await _context.SaveChangesAsync();
-            return Ok();
-
-        }
-
-        /// <summary>
-        /// Method to change one filght discount
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="discount"></param>
-        /// <returns>Request status </returns>
-
-        [HttpPatch("FlightDiscount")]
-        public async Task<IActionResult> PatchFlightDiscount(string id1, int discount)
-        {
-            if (discount < 0)
-            {
-                return BadRequest();
-            }
-
-            var Flight = await _context.Flights.FindAsync(id1);
-            if (Flight == null)
-            {
-                return NotFound();
-            }
-
-            Flight.Discount = discount;
-            await _context.SaveChangesAsync();
             return NoContent();
-
         }
+
 
 
         /// <summary>
@@ -195,7 +211,7 @@ namespace TECAirDbAPI.Controllers
         /// <param name="flight"></param>
         /// <returns></returns> 
 
-        [HttpPost ("Flight")]
+        [HttpPost("Flight")]
         public async Task<ActionResult<Flight>> PostFlight(Flight flight)
         {
             _context.Flights.Add(flight);
@@ -218,7 +234,7 @@ namespace TECAirDbAPI.Controllers
             return CreatedAtAction("GetFlight", new { id = flight.Flightid }, flight);
         }
 
-        
+
 
         /// <summary>
         /// Method for deleting flight by id
@@ -245,5 +261,18 @@ namespace TECAirDbAPI.Controllers
         {
             return _context.Flights.Any(e => e.Flightid == id);
         }
+
+        private bool FligthtOrigin(string origin)
+        {
+            return _context.Flights.Any(e => e.Origin == origin);
+
+        }
+
+        private bool FligthtDestination(string destiation)
+        {
+            return _context.Flights.Any(e => e.Destination == destiation);
+
+        }
+
     }
 }

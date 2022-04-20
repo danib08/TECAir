@@ -57,6 +57,9 @@ namespace TECAirDbAPI
                     .IsFixedLength(true);
 
                 entity.Property(e => e.Weight).HasColumnName("weight");
+
+                entity.Property(e => e.Price).HasColumnName("price");
+
             });
 
             modelBuilder.Entity<Customer>(entity =>

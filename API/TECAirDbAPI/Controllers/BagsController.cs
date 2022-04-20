@@ -39,7 +39,7 @@ namespace TECAirDbAPI.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Required bag</returns>
-        
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Bag>> GetBag(string id)
         {
@@ -59,7 +59,7 @@ namespace TECAirDbAPI.Controllers
         /// <param name="id"></param>
         /// <param name="bag"></param>
         /// <returns>State of query</returns>
-        
+
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBag(string id, Bag bag)
@@ -96,7 +96,7 @@ namespace TECAirDbAPI.Controllers
         /// <param name="bag"></param>
         /// <returns></returns> 
 
-        [HttpPost ("Bag")]
+        [HttpPost("Bag")]
         public async Task<ActionResult<Bag>> PostBag(Bag bag)
         {
             _context.Bags.Add(bag);
