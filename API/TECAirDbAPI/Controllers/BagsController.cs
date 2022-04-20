@@ -91,13 +91,42 @@ namespace TECAirDbAPI.Controllers
         }
 
         /// <summary>
+        /// Method to create a single Bag
+        /// </summary>
+        /// <param name="bag"></param>
+        /// <returns></returns> 
+
+        [HttpPost]
+        public async Task<ActionResult<Bag>> PostBag(Bag bag)
+        {
+            _context.Bags.Add(bag);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (BagExists(bag.Bagid))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtAction("GetBag", new { id = bag.Bagid }, bag);
+        }
+
+        /// <summary>
         /// Method to create bags
         /// </summary>
         /// <param name="bag"></param>
         /// <returns></returns>
-        
+
         [HttpPost]
-        public async Task<ActionResult> PostBag(List<Bag> bagList)
+        public async Task<ActionResult> PostBags(List<Bag> bagList)
         {
 
             while(bagList.Count() > 0)
@@ -125,6 +154,8 @@ namespace TECAirDbAPI.Controllers
 
             return Ok();
         }
+
+
 
         /// <summary>
         /// Method for deleting bags by id
