@@ -3,6 +3,7 @@ using MobileApp.Models;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Android.Util;
+using System;
 
 namespace MobileApp
 {
@@ -17,6 +18,9 @@ namespace MobileApp
                 using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
                 connection.CreateTable<Worker>();
                 connection.CreateTable<Customer>();
+                connection.CreateTable<Plane>();
+                connection.CreateTable<Flight>();
+
                 return true;
             }
             catch(SQLiteException ex)

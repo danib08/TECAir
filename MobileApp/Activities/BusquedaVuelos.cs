@@ -36,6 +36,10 @@ namespace MobileApp.Activities
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.vuelos);
 
+            editTextOrigin = FindViewById<EditText>(Resource.Id.editTextOrigin);
+            editTextDestination = FindViewById<EditText>(Resource.Id.editTextDestination);
+            sendBusqueda = FindViewById<Button>(Resource.Id.sendSignIn);
+
             db = new Database();
             db.CreateDatabase();
 
@@ -66,14 +70,13 @@ namespace MobileApp.Activities
 
             };
 
-            db.InsertPlane(plane1);
-            db.DeleteFlight(flight1);
+            String insertedPlane = db.InsertPlane(plane1);
+            bool insertedFlight = db.InsertFlight(flight1);
 
-            editTextOrigin = FindViewById<EditText>(Resource.Id.editTextOrigin);
-            editTextDestination = FindViewById<EditText>(Resource.Id.editTextDestination);
+            Toast.MakeText(this, insertedPlane, ToastLength.Short).Show();
+            //Toast.MakeText(this, insertedFlight.ToString(), ToastLength.Short).Show();
 
-            sendBusqueda = FindViewById<Button>(Resource.Id.sendSignIn);
-
+            /*
             sendBusqueda.Click += (sender, e) =>
             {
                 if (editTextOrigin.Text.Equals("") || editTextDestination.Text.Equals(""))
@@ -89,7 +92,7 @@ namespace MobileApp.Activities
 
                 Toast.MakeText(this, toastText, ToastLength.Short).Show();
 
-            };
+            };*/
         }
 
     }
