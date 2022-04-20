@@ -119,18 +119,16 @@ namespace TECAirDbAPI.Controllers
 
         
 
-        /*
+        
         /// <summary>
         /// Single value get customer 
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Required customer</returns>
 
-        [HttpPost("validate")]
-        public async Task<ActionResult<string>> CustomerValidation(Customer customer)
+        [HttpPost("Validate")]
+        public string CustomerValidation(Customer customer)
         {
-            
-
             if (CustomerExists(customer.Customerid) && NameCustomer(customer.Namecustomer) && LastNameCustomer(customer.Lastnamecustomer))
             {
                 var data = new JObject(new JProperty("Existe", "Si"));
@@ -144,7 +142,7 @@ namespace TECAirDbAPI.Controllers
 
         }
 
-        */
+        
 
         /// <summary>
         /// Method for deleting customer by id
