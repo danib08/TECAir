@@ -38,7 +38,7 @@ CREATE TABLE FLIGHT(
 	Arrival TIMESTAMP NOT NULL,
 	Origin CHAR(50) NOT NULL,
 	Destination CHAR(50) NOT NULL,
-	Stops TEXT,
+	Stops TEXT[],
 	Status TEXT,
 	Price INT,
 	Discount INT DEFAULT 0,

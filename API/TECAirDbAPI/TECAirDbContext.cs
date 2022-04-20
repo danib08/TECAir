@@ -30,7 +30,7 @@ namespace TECAirDbAPI
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql("Host=localhost;Database=tecairDb;Username=admin;Password=admin1234");
+                optionsBuilder.UseNpgsql("Host=localhost;Database=TECAirDb;Username=admin;Password=admin1234");
             }
         }
 
@@ -57,6 +57,9 @@ namespace TECAirDbAPI
                     .IsFixedLength(true);
 
                 entity.Property(e => e.Weight).HasColumnName("weight");
+
+                entity.Property(e => e.Price).HasColumnName("price");
+
             });
 
             modelBuilder.Entity<Customer>(entity =>
