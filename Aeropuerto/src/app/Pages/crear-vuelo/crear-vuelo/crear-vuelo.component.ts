@@ -55,6 +55,12 @@ export class CrearVueloComponent implements OnInit {
   get stops(){
     return this.registerForm2.get('Stops') as FormArray;
   }
+  get price(){
+    return this.registerForm.get('price');
+  }
+  get gate(){
+    return this.registerForm.get('gate');
+  }
 
   registerForm = this.formBuilder.group({
     origin: ['', Validators.required],
@@ -67,9 +73,9 @@ export class CrearVueloComponent implements OnInit {
     planeid: ['', Validators.required],
     bagquantity: 0,
     userquantity: 0,
-    price: 0,
-    gate: 0,
-    status: '',
+    price: [0, Validators.required],
+    gate: [0, Validators.required],
+    status: 'Scheduled',
     discount: 0
   });
 
@@ -90,8 +96,8 @@ export class CrearVueloComponent implements OnInit {
       userquantity: 0,
       price: 0,
       stops: [],
-      gate: '',
-      status: '',
+      gate: 0,
+      status: 'Scheduled',
       discount: 0
     });
     this.stops.push(stopsFormGroup);
@@ -102,6 +108,10 @@ export class CrearVueloComponent implements OnInit {
   }
 
   submit(){
+    let flag = false;
+    if(this.stops.length != 0){
+      flag = true;
+    }
     if(!this.registerForm.valid){
       alert("ERROR");
       return;
@@ -114,20 +124,25 @@ export class CrearVueloComponent implements OnInit {
       console.log(this.registerForm.value)
       this.apiService.addFlight(this.registerForm.value).subscribe(
         res => {
-          console.log(res);
-          //location.reload();
+          if(flag == false){
+            location.reload()
+          }
         },err => {
-          alert("ha ocurrido un error")
+          alert("Ha ocurrido un error")
         }
       );
       if(this.stops.length != 0){
-        console.log(this.stops.value)
-        this.apiService.addFlight(this.stops.value).subscribe(
-          res => {
-            console.log(res);
-            location.reload();
-          }
-        );
+        for (let i = 0; i < this.stops.length; i++){
+          this.apiService.addFlight(this.stops.at(i).value).subscribe(
+            res => {
+              console.log(res);
+            },err=>{
+              alert("Ha ocurrido un error")
+            }
+          );
+          location.reload();
+        }
+        
       }
     }
   }

@@ -41,12 +41,19 @@ export class BusquedaVueloComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * Create the FlightID cookie
+   * @param FlightID 
+   */
   connectReservacion(FlightID:string){
     console.log(FlightID);
     this.cookieSvc.set("FlightID", FlightID);
     this.router.navigate(["asientos"]);
   }
 
+  /**
+   * Http Post call to search flights
+   */
   getFlightsSearch(){
     this.apiService.searchFlights(this.search).subscribe(
       res => {

@@ -56,6 +56,10 @@ export class SignUpWorkersComponent implements OnInit {
   }
 
   submit(){
+    let flag = false;
+    if(this.workers.length != 0){
+      flag = true;
+    }
     if(!this.registerForm.valid){
       alert("ERROR");
       return;
@@ -64,15 +68,25 @@ export class SignUpWorkersComponent implements OnInit {
       console.log(this.registerForm.value)
       this.apiService.addWorker(this.registerForm.value).subscribe(
         res => {
+          if(flag == false){
+            location.reload()
+          }
           console.log(res);
+        }, err=>{
+          alert("Ha ocurrido un error")
         }
       );
       if(this.workers.length != 0){
-        this.apiService.addWorker(this.workers.value).subscribe(
-          res => {
-            console.log(res);
-          }
-        );
+        for (let i = 0; i< this.workers.length; i++){
+          this.apiService.addWorker(this.workers.at(i).value).subscribe(
+            res => {
+              console.log(res);
+            },err=>{
+              alert("Ha ocurrido un error")
+            }
+          );
+        }
+        location.reload();
       }
 
       

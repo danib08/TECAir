@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { GetService } from 'src/app/Services/get-service';
 import { PatchService } from 'src/app/Services/patch-service';
+import { PutService } from 'src/app/Services/put-service';
 import { CustomerModel } from '../../models/customer';
 import { FlightPriceModel } from '../../models/flight-price';
 import { FlightModel } from '../../models/flight.model';
@@ -20,21 +21,36 @@ export class ManagePromosComponent implements OnInit {
     flightid: '',
     price: 0
   }
-  constructor(private formBuilder: FormBuilder, private apiService: PatchService, private apiServiceGET:GetService) { }
 
+  /**
+   * Constructor method
+   */
+  constructor(private formBuilder: FormBuilder, private apiService: PutService, private apiServiceGET:GetService) { }
+
+  /**
+   * Method to be executed at component startup
+   */
   ngOnInit(): void {
     this.getFlights();
   }
 
-
+  /**
+   * Get the discounts FormArray
+   */
   get discounts(){
     return this.registerForm2.get('Discounts') as FormArray;
   }
 
+  /**
+   * Get the flightid from the FormGroup
+   */
   get flightID(){
     return this.registerForm.get('flightid');
   }
 
+  /**
+   * Get the discount from the FormGroup
+   */
   get discount(){
     return this.registerForm.get('discount');
   }
@@ -53,12 +69,16 @@ export class ManagePromosComponent implements OnInit {
     gate: '',
     status: '',
     planeid: '',
-    workerID: 0
+    workerid: 0
   });
 
   registerForm2 = this.formBuilder.group({
     Discounts: this.formBuilder.array([], Validators.required)
   });
+
+  /**
+   * Add the extra discounts to an array
+   */
   addDiscounts(){
     const discountsFormGroup = this.formBuilder.group({
       flightid: '',
@@ -74,14 +94,28 @@ export class ManagePromosComponent implements OnInit {
       gate: '',
       status: '',
       planeid: '',
-      workerID: 0
+      workerid: 0
     });
     this.discounts.push(discountsFormGroup);
   }
+
+  /**
+   * Delete an item from the discounts array 
+   * @param index 
+   */
   removeDiscounts(index : number){
     this.discounts.removeAt(index);
   }
+
+  /**
+   * Send the data through http methods
+   * @returns 
+   */
   submit(){
+    let flag = false;
+    if(this.discounts.length != 0){
+      flag = true;
+    }
     if(!this.registerForm.valid){
       alert("ERROR");
       return;
@@ -89,7 +123,12 @@ export class ManagePromosComponent implements OnInit {
     else{
       this.apiService.changeStatus(this.registerForm.value).subscribe(
         res => {
+          if(flag == false){
+            location.reload()
+          }
           console.log(res);
+        },err=>{
+          alert("Ha ocurrido un error")
         }
       );
       if(this.discounts.length != 0){
@@ -97,10 +136,12 @@ export class ManagePromosComponent implements OnInit {
           this.apiService.changeStatus(this.discounts.at(i).value).subscribe(
             res => {
               console.log(res);
+            },err=>{
+              alert("Ha ocurrido un error")
             }
           );
         }
-        
+        location.reload();
       }
 
       
@@ -108,6 +149,9 @@ export class ManagePromosComponent implements OnInit {
     }
   }
 
+  /**
+   * Http Get call for all the flights
+   */
   getFlights(){
     this.apiServiceGET.getFlights().subscribe(
       res => {
@@ -120,6 +164,10 @@ export class ManagePromosComponent implements OnInit {
     );
   }
 
+  /**
+   * Http Get call for a specific price 
+   * @param ID 
+   */
   getPrice(ID:string){
     this.apiServiceGET.getPrice(ID).subscribe(
       res =>{
@@ -128,6 +176,11 @@ export class ManagePromosComponent implements OnInit {
     );
   }
 
+  /**
+   * Get a specific price from the flightsArray
+   * @param ID 
+   * @returns 
+   */
   getFlightPrice(ID:string): number{
     let value = 0;
     for(let i = 0; i < this.flightsArray.length; i++){

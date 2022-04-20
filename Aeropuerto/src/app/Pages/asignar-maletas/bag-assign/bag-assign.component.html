@@ -43,6 +43,16 @@
                     HOLA6
                 </div>
             </div>
+            <div class="form-group">
+                <i class="bi bi-bag">
+                    <label for="color">Digite el ID de la maleta</label>
+                </i>
+                <input type="text" class="form-control" formControlName="bagid">
+                <div
+                *ngIf="bagid?.invalid && (bagid?.dirty || bagid?.touched)" class="alert alert-danger">
+                    HOLA6
+                </div>
+            </div>
 
         </div>
     </div>
@@ -66,11 +76,17 @@
                             <input type="text" [attr.id]="'color' + i" class="form-control" formControlName="color">
                         </div>
                     </div>
-                    
-        
-                    <div class="col-5">
-                        <button class="btn btn-danger" align="right" (click)="removeBags(i)">Eliminar maleta</button>
+                    <div class="row">
+                        <label class="col-2" align="center" [attr.for] ="'bagid' + i" >ID de la maleta</label>
+                        <div class="col-3">
+                            <input type="text" [attr.id]="'bagid' + i" class="form-control" formControlName="bagid">
+                        </div>
+                        <div class="col-5">
+                            <button class="btn btn-danger" align="right" (click)="removeBags(i)">Eliminar maleta</button>
+                        </div>
                     </div>
+        
+                    
                 </div>
     
             </div>

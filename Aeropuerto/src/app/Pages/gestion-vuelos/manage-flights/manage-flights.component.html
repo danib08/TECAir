@@ -16,10 +16,13 @@
             </div>
             <div class="form-group">
                 <i class="bi bi-info-square-fill"></i>
-                <label for="status">Seleccione la acción a realizar</label>
+                <label for="status">Estado del vuelo</label>
                 <select class="form-control" id="status" name="status" formControlName="status">
-                <option value="opened">Abrir</option>
-                <option value="closed">Cerrar</option>
+                    <option value="Opened">Abierto</option>
+                    <option value="Closed">Cerrado</option>
+                    <option value="Scheduled">Programado</option>
+                    <option value="On-Time">En curso</option>
+                    <option value="Arrived">Finalizado</option>
                 </select>
             </div>
             <div class="form-group">
@@ -62,8 +65,11 @@
                         </i>
                         <div class="col-md-3">
                             <select class="form-control" [attr.id]="'status' + i" formControlName="status"> 
-                                <option value="opened"> Abrir</option>
-                                <option value="closed"> Cerrar</option>
+                                <option value="Opened">Abierto</option>
+                                <option value="Closed">Cerrado</option>
+                                <option value="Scheduled">Programado</option>
+                                <option value="On-Time">En curso</option>
+                                <option value="Arrived">Finalizado</option>
                             </select>
                         </div>
                         <div class="col-md-1">

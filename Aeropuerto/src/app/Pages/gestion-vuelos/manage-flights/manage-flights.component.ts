@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { GetService } from 'src/app/Services/get-service';
 import { PatchService } from 'src/app/Services/patch-service';
+import { PutService } from 'src/app/Services/put-service';
 import { FlightModel } from '../../models/flight.model';
 
 @Component({
@@ -11,7 +12,7 @@ import { FlightModel } from '../../models/flight.model';
 })
 export class ManageFlightsComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private apiService: PatchService, private apiServiceGET:GetService) { }
+  constructor(private formBuilder: FormBuilder, private apiService: PutService, private apiServiceGET:GetService) { }
 
   flightsArray: FlightModel[] = [];
   
@@ -65,6 +66,10 @@ export class ManageFlightsComponent implements OnInit {
     this.flights.removeAt(index);
   }
   submit(){
+    let flag = false;
+    if(this.flights.length != 0){
+      flag = true;
+    }
     if(!this.registerForm.valid){
       alert("ERROR");
       return;
@@ -73,7 +78,12 @@ export class ManageFlightsComponent implements OnInit {
       console.log(this.registerForm.value)
       this.apiService.changeStatus(this.registerForm.value).subscribe(
         res => {
+          if(flag == false){
+            location.reload()
+          }
           console.log(res);
+        }, err=>{
+          alert("Ha ocurrido un error")
         }
       );
       if(this.flights.length != 0){
@@ -81,9 +91,12 @@ export class ManageFlightsComponent implements OnInit {
           this.apiService.addDiscount(this.flights.at(i).value).subscribe(
             res => {
               console.log(res);
+            },err =>{
+              alert("Ha ocurrido un error")
             }
           );
         }
+        location.reload();
       }
 
       

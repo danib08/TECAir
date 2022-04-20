@@ -20,10 +20,16 @@ export class AsientosComponent implements OnInit {
   }
 
   Status = false;
+  /**
+   * Constructor Method
+   */
   constructor(private cookieSvc:CookieService,private router:Router, private ApiService: GetService) { 
 
   }
 
+  /**
+   * Method to be executed at component startup
+   */
   ngOnInit(){
     this.getUserCapacity();
     this.makeMatrix();
@@ -36,6 +42,9 @@ export class AsientosComponent implements OnInit {
   arr_name:number[][]=[[]];
   cont = 0;
 
+  /**
+   * Http Get call for all the customers in flight
+   */
   getUserInFlight(){
     let flight = this.cookieSvc.get("FlightID");
     this.ApiService.getCustomerInFlight(flight).subscribe(
@@ -49,6 +58,9 @@ export class AsientosComponent implements OnInit {
     );
   }
 
+  /**
+   * Http Get the customer capacity in a flight
+   */
   getUserCapacity(){
     let flight = this.cookieSvc.get("FlightID");
     this.ApiService.getFlightCapacity(flight).subscribe(
@@ -63,22 +75,33 @@ export class AsientosComponent implements OnInit {
     );
   }
 
-
+  /***
+ * Method that creates the arrangement for the seats
+ */
   setArray(){
     for(let i = 0; i < this.customerArray.length; i++){
       this.array.push(this.customerArray[i].seatnumber);
     }
     this.Status = true;
   }
-  
+  /**
+   * set the cookie for the seat number
+   * @param number 
+   */
   getNumber(number:Number){
     this.cookieSvc.set("seatNumber", number.toString());
   }
 
+  /**
+   * redirects to a new component
+   */
   checkPago(){
     this.router.navigate(["reservacionVuelo"]);
   }
 
+  /***
+   * creates the seat matrix
+   */
   makeMatrix(){
     this.arr_name = [];
     for(var i: number = 0; i < this.numSeats/10; i++) {
@@ -90,6 +113,11 @@ export class AsientosComponent implements OnInit {
     }
   }
 
+  /**
+   * verify that the seat is not occupied
+   * @param valor 
+   * @returns 
+   */
   truth(valor:number){
     if (this.array.includes(valor)){
       return true;
