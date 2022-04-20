@@ -118,8 +118,6 @@ namespace TECAirDbAPI.Controllers
         }
 
         
-
-        
         /// <summary>
         /// Single value get customer 
         /// </summary>
@@ -142,7 +140,23 @@ namespace TECAirDbAPI.Controllers
 
         }
 
-        
+
+        [HttpPost("LogIn")]
+        public string CustomerLogIn(Customer customer)
+        {
+            if (CustomerExists(customer.Customerid) && PassCustomer(customer.Passcustomer))
+            {
+                var data = new JObject(new JProperty("Existe", "Si"));
+                return data.ToString();
+            }
+            else
+            {
+                var data = new JObject(new JProperty("Existe", "No"));
+                return data.ToString();
+            }
+
+        }
+
 
         /// <summary>
         /// Method for deleting customer by id
@@ -178,6 +192,11 @@ namespace TECAirDbAPI.Controllers
         private bool LastNameCustomer(string lastName)
         {
             return _context.Customers.Any(e => e.Lastnamecustomer.Equals(lastName));
+        }
+
+        private bool PassCustomer(string pass)
+        {
+            return _context.Customers.Any(e => e.Passcustomer.Equals(pass));
         }
     }
 }
