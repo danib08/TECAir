@@ -53,10 +53,10 @@ namespace TECAirDbAPI.Controllers
             return worker;
         }
 
-        [HttpPost("validate")]
-        public string WorkerValidation(Worker worker)
+        [HttpPost("LogIn")]
+        public string WorkerLogIn(Worker worker)
         {
-            if (WorkerExists(worker.Workerid) && NameWorker(worker.Nameworker) && LastNameWorker(worker.Lastnameworker))
+            if (WorkerExists(worker.Workerid) && PassWorker(worker.Passworker))
             {
                 var data = new JObject(new JProperty("Existe", "Si"));
                 return data.ToString();
@@ -169,14 +169,10 @@ namespace TECAirDbAPI.Controllers
             return _context.Workers.Any(e => e.Workerid == id);
         }
 
-        private bool NameWorker(string name)
+        private bool PassWorker(string pass)
         {
-            return _context.Workers.Any(e => e.Nameworker.Equals(name));
+            return _context.Workers.Any(e => e.Passworker.Equals(pass));
         }
 
-        private bool LastNameWorker(string lastName)
-        {
-            return _context.Workers.Any(e => e.Lastnameworker.Equals(lastName));
-        }
     }
 }
