@@ -105,7 +105,7 @@ namespace TECAirDbAPI.Controllers
         /// <returns>State of query</returns>
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFlight(string id, Flight flight)
+        public async Task<IActionResult> FlightStatus(string id, Flight flight)
         {
             if (id != flight.Flightid)
             {
@@ -132,7 +132,6 @@ namespace TECAirDbAPI.Controllers
 
             return NoContent();
         }
-
 
 
         /// <summary>
@@ -246,11 +245,47 @@ namespace TECAirDbAPI.Controllers
         }
 
         /// <summary>
+        /// Method to create flights
+        /// </summary>
+        /// <param name="flightsList"></param>
+        /// <returns></returns>
+
+        [HttpPost]
+        public async Task<ActionResult> PostFlights(List<Flight> flightsList)
+        {
+            while (flightsList.Count() > 0)
+            {
+                _context.Flights.Add(flightsList.First());
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateException)
+                {
+                    if (FlightExists(flightsList.First().Flightid))
+                    {
+                        return Conflict();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                flightsList.RemoveAt(0);
+
+            }
+
+            return Ok();
+
+        }
+
+        /// <summary>
         /// Method for deleting flight by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns>State of task</returns>
-        
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFlight(string id)
         {
