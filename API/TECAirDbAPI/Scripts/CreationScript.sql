@@ -1,4 +1,4 @@
-CREATE TABLE CUSTOMER(
+postgres list CREATE TABLE CUSTOMER(
 	CustomerID INT,
 	NameCustomer VARCHAR(15) NOT NULL,
 	LastNameCustomer VARCHAR(15) NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE FLIGHT(
 	Arrival TIMESTAMP NOT NULL,
 	Origin CHAR(50) NOT NULL,
 	Destination CHAR(50) NOT NULL,
-	Stops TEXT,
+	Stops INTEGER[],
 	Status TEXT,
 	Price INT,
 	Discount INT DEFAULT 0,
@@ -52,6 +52,7 @@ CREATE TABLE FLIGHT(
 CREATE TABLE BAG(
 	BagID CHAR(10),
 	Weight INT,
+	Price INT,
 	Color TEXT,
 	CustomerID INT,
 	FlightID CHAR(7),

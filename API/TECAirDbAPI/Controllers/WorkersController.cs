@@ -133,44 +133,7 @@ namespace TECAirDbAPI.Controllers
 
             return CreatedAtAction("GetWorker", new { id = worker.Workerid }, worker);
         }
-
-        /// <summary>
-        /// Method to create worker
-        /// </summary>
-        /// <param name="worker"></param>
-        /// <returns></returns>
-
-        [HttpPost]
-        public async Task<ActionResult> PostWorkers(List<Worker> workerList)
-        {
-            while (workerList.Count() > 0)
-            {
-                _context.Workers.Add(workerList.First());
-
-                try
-                {
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateException)
-                {
-                    if (WorkerExists(workerList.First().Workerid))
-                    {
-                        return Conflict();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                workerList.RemoveAt(0);
-
-            }
-
-            return Ok();
-
-        }
-
-        
+ 
 
 
         /// <summary>

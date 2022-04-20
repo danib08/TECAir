@@ -119,42 +119,6 @@ namespace TECAirDbAPI.Controllers
             return CreatedAtAction("GetBag", new { id = bag.Bagid }, bag);
         }
 
-        /// <summary>
-        /// Method to create bags
-        /// </summary>
-        /// <param name="bag"></param>
-        /// <returns></returns>
-
-        [HttpPost]
-        public async Task<ActionResult> PostBags(List<Bag> bagList)
-        {
-
-            while(bagList.Count() > 0)
-            {
-                _context.Bags.Add(bagList.First());
-
-                try
-                {
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateException)
-                {
-                    if (BagExists(bagList.First().Bagid))
-                    {
-                        return Conflict();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-
-                bagList.RemoveAt(0);
-            }
-
-            return Ok();
-        }
-
 
 
         /// <summary>

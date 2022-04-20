@@ -188,32 +188,6 @@ namespace TECAirDbAPI.Controllers
 
         }
 
-        /// <summary>
-        /// Method to change stops in flights
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="discount"></param>
-        /// <returns>Request status </returns>
-
-        [HttpPatch("FlightStops")]
-        public async Task<IActionResult> PatchFlightStops(string id1, string stops)
-        {
-            if (stops == null)
-            {
-                return BadRequest();
-            }
-
-            var Flight = await _context.Flights.FindAsync(id1);
-            if (Flight == null)
-            {
-                return NotFound();
-            }
-
-            Flight.Stops = stops;
-            await _context.SaveChangesAsync();
-            return NoContent();
-
-        }
 
         /// <summary>
         /// Method to create Flights
@@ -244,41 +218,7 @@ namespace TECAirDbAPI.Controllers
             return CreatedAtAction("GetFlight", new { id = flight.Flightid }, flight);
         }
 
-        /// <summary>
-        /// Method to create flights
-        /// </summary>
-        /// <param name="flightsList"></param>
-        /// <returns></returns>
-
-        [HttpPost]
-        public async Task<ActionResult> PostFlights(List<Flight> flightsList)
-        {
-            while (flightsList.Count() > 0)
-            {
-                _context.Flights.Add(flightsList.First());
-
-                try
-                {
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateException)
-                {
-                    if (FlightExists(flightsList.First().Flightid))
-                    {
-                        return Conflict();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                flightsList.RemoveAt(0);
-
-            }
-
-            return Ok();
-
-        }
+        
 
         /// <summary>
         /// Method for deleting flight by id
