@@ -4,6 +4,7 @@ import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
 import { CustomerModel } from "../Pages/models/customer";
 import { FlightSearchModel } from "../Pages/models/flight-search-model";
+import { FlightModel } from "../Pages/models/flight.model";
 import { LoginModelW } from "../Pages/models/login-model-w";
 import { UserValModel } from "../Pages/models/user-val-model";
 import { WorkerModel } from "../Pages/models/worker-model";
@@ -18,8 +19,8 @@ export class PostService {
     private addCustomerURL = `${this.baseURL}\\Customers`;
     private addBagURL = `${this.baseURL}\\Bags`;
     private searchURL = `${this.baseURL}\\Flights`;
-    private logInWURL = `${this.baseURL}\\Workers/validate`;
-    private validateUserURL = `${this.baseURL}\\Customers/validate`;
+    private logInWURL = `${this.baseURL}\\Workers/Validate`;
+    private validateUserURL = `${this.baseURL}\\Customers/Validate`;
 
     /**
      * Método constructor
@@ -41,7 +42,7 @@ export class PostService {
         return this.http.post<any>(this.addBagURL, bag);
     }
 
-    searchFlights(search: FlightSearchModel):Observable<any>{
+    searchFlights(search: FlightModel):Observable<any>{
         return this.http.post<any>(this.searchURL, search);
     }
 
@@ -54,6 +55,6 @@ export class PostService {
     }
 
     validateUser(customer: UserValModel):Observable<any>{
-        return this.http.post<any>(this.addWorkerURL, customer);
+        return this.http.post<any>(this.validateUserURL, customer);
     }
 }

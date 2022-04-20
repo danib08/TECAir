@@ -23,7 +23,7 @@ export class ReservacionVuelosComponent implements OnInit {
     status: '',
     discount: 0,
     planeid: '',
-    workerID: 0
+    workerid: 0
   }
   nameCustomer = this.cookieSvc.get('CustomerName');
   lastNameCustomer = this.cookieSvc.get('CustomerLN');
