@@ -61,7 +61,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\BusquedaVuelos.cs" />
+    <Compile Include="Activities\FlightSearch.cs" />
     <Compile Include="Activities\SignInActivity.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Activities\MainActivity.cs" />
@@ -107,7 +107,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\flight_search.xml" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
@@ -138,15 +140,7 @@
     <AndroidResource Include="Resources\values\dimens.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\pruebita.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\layout\ListViewDataTemplate.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\vuelos.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

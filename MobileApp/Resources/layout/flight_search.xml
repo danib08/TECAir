@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/accentPalette"
+    android:orientation="vertical"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    tools:gridSpec="1|8|#0093eeff|K:#ee8700ff:16,l:72,l:16,r|S:#83ee00ff:16,0,l:16,56,l:16,0,r">
+
+    <TextView
+        style="@style/header"
+        android:layout_width="match_parent"
+        android:layout_height="52.5dp"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:text="@string/busqueda_vuelos"
+        android:textColor="@color/orangePalette"
+        android:id="@+id/textView1"
+        android:layout_marginTop="20dp" />
+
+    <EditText
+        style="@style/edit_text"
+        android:id="@+id/editTextOrigin"
+        android:translationY="0dp"
+        android:translationX="-30dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="85dp"
+        android:textSize="20sp"
+        android:hint="@string/origen"
+        android:textColor="@color/orangePalette"
+        android:autofillHints="@string/password"
+        android:inputType="text" />
+
+    <EditText
+        style="@style/edit_text"
+        android:id="@+id/editTextDestination"
+        android:translationY="-52dp"
+        android:translationX="150dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="85dp"
+        android:textSize="20sp"
+        android:hint="@string/destino"
+        android:autofillHints="@string/password"
+        android:inputType="text" />
+
+    <android.widget.Button
+        android:id="@+id/sendSearch"
+        style="@style/button_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationY="-30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="0dp"
+        android:text="@string/log"
+        android:textAllCaps="false" />
+
+    <ListView
+        android:id="@+id/listView1"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>
+

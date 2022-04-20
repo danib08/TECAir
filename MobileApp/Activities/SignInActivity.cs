@@ -64,7 +64,7 @@ namespace MobileApp.Activities
                         if (editTextPassIn.Text.Equals(customer.Passcustomer))
                         {
                             toastText = "Sesión iniciada";
-                            Intent intent = new Intent(this, typeof(BusquedaVuelos));
+                            Intent intent = new Intent(this, typeof(FlightSearch));
                             StartActivity(intent);
                             Finish();
                         }

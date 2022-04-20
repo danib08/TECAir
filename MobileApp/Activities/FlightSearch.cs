@@ -14,17 +14,16 @@ using System.Text;
 namespace MobileApp.Activities
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false)]
-    class BusquedaVuelos : AppCompatActivity
+    class FlightSearch : AppCompatActivity
     {
 
         private Database db;
 
         private EditText editTextOrigin;
         private EditText editTextDestination;
+        private Button searchBtn;
 
-        private Button sendBusqueda;
-
-        private String toastText;
+        private string toastText;
 
         private List<Flight> listFlights;
 
@@ -34,11 +33,11 @@ namespace MobileApp.Activities
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.vuelos);
+            SetContentView(Resource.Layout.flight_search);
 
             editTextOrigin = FindViewById<EditText>(Resource.Id.editTextOrigin);
             editTextDestination = FindViewById<EditText>(Resource.Id.editTextDestination);
-            sendBusqueda = FindViewById<Button>(Resource.Id.sendSignIn);
+            searchBtn = FindViewById<Button>(Resource.Id.sendSearch);
 
             db = new Database();
             db.CreateDatabase();
@@ -59,8 +58,8 @@ namespace MobileApp.Activities
                 Gate = 2,
                 Departure = "2022-08-22 16:40:00,",
                 Arrival = "2022-08-24 13:15:00",
-                Origin = "PTY",
-                Destination = "INC",
+                Origin = "PTY/Panama",
+                Destination = "INC/Corea del Sur",
                 Stops = "",
                 Status = "On Time",
                 Price = 1000,
@@ -70,14 +69,13 @@ namespace MobileApp.Activities
 
             };
 
-            String insertedPlane = db.InsertPlane(plane1);
-            bool insertedFlight = db.InsertFlight(flight1);
+            db.InsertPlane(plane1);
+            string insertedFlight = db.InsertFlight(flight1);
 
-            Toast.MakeText(this, insertedPlane, ToastLength.Short).Show();
-            //Toast.MakeText(this, insertedFlight.ToString(), ToastLength.Short).Show();
+            Toast.MakeText(this, insertedFlight, ToastLength.Short).Show();
 
-            /*
-            sendBusqueda.Click += (sender, e) =>
+            
+            searchBtn.Click += (sender, e) =>
             {
                 if (editTextOrigin.Text.Equals("") || editTextDestination.Text.Equals(""))
                 {
@@ -85,14 +83,14 @@ namespace MobileApp.Activities
                 }
                 else
                 {
-                   List<Flight> vuelito = db.SearchFlights(editTextOrigin.Text, editTextDestination.Text);
-                   // vuelito.Find(worker => worker.Workerid == workerId);
-                    toastText = "Numero de vuelo: " + vuelito.First().Flightid; 
+                    List<Flight> vuelitos = db.SearchFlights(editTextOrigin.Text, editTextDestination.Text);
+                    // vuelito.Find(worker => worker.Workerid == workerId);
+                    toastText = "Numero de vuelo: " + vuelitos.First().Flightid; 
                 }
 
                 Toast.MakeText(this, toastText, ToastLength.Short).Show();
 
-            };*/
+            };
         }
 
     }

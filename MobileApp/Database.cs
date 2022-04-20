@@ -34,7 +34,7 @@ namespace MobileApp
             try
             {
                 using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
-                List<Flight> flightsSearched = connection.Query<Flight>("SELECT * FROM Flight Where Origin=? AND Destination=?", Origin, Destination);
+                List<Flight> flightsSearched = connection.Query<Flight>("SELECT * FROM Flight Where Origin=?", Origin);
                 return flightsSearched;
 
             }
@@ -84,6 +84,7 @@ namespace MobileApp
             {
                 using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
                 connection.Insert(flight);
+
                 return true;
             }
             catch (SQLiteException ex)
