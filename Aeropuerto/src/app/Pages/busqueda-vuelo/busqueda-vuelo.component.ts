@@ -27,7 +27,7 @@ export class BusquedaVueloComponent implements OnInit {
     arrival: '',
     price: 0,
     stops: [],
-    gate: '',
+    gate: 0,
     status: '',
     discount: 0,
     planeid: '',

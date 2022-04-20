@@ -8,7 +8,7 @@ export interface FlightModel {
   arrival:string
   price:number,
   stops:[],
-  gate: string,
+  gate: number,
   status: string,
   discount: number,
   planeid: string,

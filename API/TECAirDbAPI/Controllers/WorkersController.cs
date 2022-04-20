@@ -111,7 +111,7 @@ namespace TECAirDbAPI.Controllers
         /// <param name="worker"></param>
         /// <returns></returns> 
 
-        [HttpPost]
+        [HttpPost("Worker")]
         public async Task<ActionResult<Worker>> PostWorker(Worker worker)
         {
             _context.Workers.Add(worker);

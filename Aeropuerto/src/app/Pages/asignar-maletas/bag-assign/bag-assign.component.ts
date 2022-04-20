@@ -43,11 +43,11 @@ export class BagAssignComponent implements OnInit {
   }
 
   registerForm = this.formBuilder.group({
-    customerid: ['', Validators.required],
+    customerid: [0, Validators.required],
     weight: [0, Validators.required],
     flightid: ['',Validators.required],
     color:['', Validators.required],
-    price: 0
+    //price: 0
   });
 
   registerForm2 = this.formBuilder.group({
@@ -99,6 +99,7 @@ export class BagAssignComponent implements OnInit {
       return;
     }
     else{
+      console.log(this.registerForm.value)
       this.apiService.addBag(this.registerForm.value).subscribe(
         res => {
           console.log(res);

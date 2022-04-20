@@ -221,7 +221,7 @@ namespace TECAirDbAPI.Controllers
         /// <param name="flight"></param>
         /// <returns></returns> 
 
-        [HttpPost]
+        [HttpPost ("Flight")]
         public async Task<ActionResult<Flight>> PostFlight(Flight flight)
         {
             _context.Flights.Add(flight);

@@ -14,12 +14,12 @@ import { WorkerModel } from "../Pages/models/worker-model";
 })
 export class PostService {
     private baseURL = "https://localhost:5001/api";
-    private addWorkerURL = `${this.baseURL}\\Workers`;
-    private addFlightURL = `${this.baseURL}\\Flights`;
+    private addWorkerURL = `${this.baseURL}\\Workers/Worker`;
+    private addFlightURL = `${this.baseURL}\\Flights/Flight`;
     private addCustomerURL = `${this.baseURL}\\Customers`;
-    private addBagURL = `${this.baseURL}\\Bags`;
+    private addBagURL = `${this.baseURL}\\Bags/Bag`;
     private searchURL = `${this.baseURL}\\Flights`;
-    private logInWURL = `${this.baseURL}\\Workers/Validate`;
+    private logInWURL = `${this.baseURL}\\Workers/LogIn`;
     private validateUserURL = `${this.baseURL}\\Customers/Validate`;
 
     /**

@@ -96,7 +96,7 @@ namespace TECAirDbAPI.Controllers
         /// <param name="bag"></param>
         /// <returns></returns> 
 
-        [HttpPost]
+        [HttpPost ("Bag")]
         public async Task<ActionResult<Bag>> PostBag(Bag bag)
         {
             _context.Bags.Add(bag);

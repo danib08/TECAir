@@ -63,14 +63,14 @@ export class CrearVueloComponent implements OnInit {
     departure: ['',Validators.required],
     arrival:['', Validators.required],
     stops:[[]],
-    workerid: parseInt(this.cookieSvc.get('WorkerID')),
+    workerid: parseInt(this.cookieSvc.get('Workerid')),
     planeid: ['', Validators.required],
     bagquantity: 0,
     userquantity: 0,
     price: 0,
-    gate: '',
+    gate: 0,
     status: '',
-    discount: 0,
+    discount: 0
   });
 
   registerForm2 = this.formBuilder.group({
@@ -84,7 +84,7 @@ export class CrearVueloComponent implements OnInit {
       flightid: '',
       departure: '',
       arrival: '',
-      workerid: parseInt(this.cookieSvc.get('WorkerID')),
+      workerid: parseInt(this.cookieSvc.get('Workerid')),
       planeid: '',
       bagquantity: 0,
       userquantity: 0,
@@ -92,7 +92,7 @@ export class CrearVueloComponent implements OnInit {
       stops: [],
       gate: '',
       status: '',
-      discount: 0,
+      discount: 0
     });
     this.stops.push(stopsFormGroup);
   }
@@ -110,14 +110,18 @@ export class CrearVueloComponent implements OnInit {
       for(let i = 0; i < this.stops.length; i++){
         this.list.push(this.stops.at(i).get('flightid')?.value);
       }
-      this.registerForm.get('Stops')?.setValue(this.list);
+      this.registerForm.get('stops')?.setValue(this.list);
+      console.log(this.registerForm.value)
       this.apiService.addFlight(this.registerForm.value).subscribe(
         res => {
           console.log(res);
-          location.reload();
+          //location.reload();
+        },err => {
+          alert("ha ocurrido un error")
         }
       );
       if(this.stops.length != 0){
+        console.log(this.stops.value)
         this.apiService.addFlight(this.stops.value).subscribe(
           res => {
             console.log(res);
