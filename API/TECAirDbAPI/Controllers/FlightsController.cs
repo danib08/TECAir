@@ -39,18 +39,18 @@ namespace TECAirDbAPI.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Required flight</returns>
-        [HttpGet("{origin}/{destination}")]
-        public async Task<ActionResult<IEnumerable<Flight>>> GetFlight(string origin, string destination)
+        [HttpPost("SearchFlight")]
+
+        public async Task<ActionResult<IEnumerable<Flight>>> GetFlight(Flight flight)
         {
             List<Flight> data = new List<Flight>();
 
             var flights = await _context.Flights.ToListAsync();
-            Console.WriteLine(origin);
-            Console.WriteLine(destination);
-            while (flights.Count() > 1)
+
+            while(flights.Count() > 0)
             {
 
-                if (flights.First().Origin.Equals(origin) && flights.First().Destination.Equals(destination))
+                if (flights.First().Origin.Equals(flight.Origin) && flights.First().Destination.Equals(flight.Destination))
                 {
 
                     data.Add(flights.First());
@@ -61,6 +61,7 @@ namespace TECAirDbAPI.Controllers
                 {
                     flights.RemoveAt(0);
                 }
+
             }
 
             return data;
