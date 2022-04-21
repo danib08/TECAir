@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
         this.estadoRes = res;
         console.log(res);
         if (this.estadoRes.estado == "Si"){
-          this.cookieSvc.set('UsuarioPass', this.usuarioRegistrado.Passcustomer.toString());
+          this.cookieSvc.set('usuarioCorreo', this.usuarioRegistrado.Email.toString());
           this.router.navigate(["home"]);
         }else{
           alert("Contraseña o Correo incorrectos")

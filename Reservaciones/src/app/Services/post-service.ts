@@ -14,7 +14,7 @@ export class PostService {
   private baseURL = "https://localhost:5001/api";
   private addWorkerURL = "https://tecair.free.beeceptor.com"
   private addCustomerURL = `${this.baseURL}\\Customers`;
-  private logInUser = `${this.baseURL}\\Customers/LogIn`;
+  private logInUser = `${this.baseURL}\\Customers/validate`;
   private searchURL = `${this.baseURL}\\Flights`;
 
   /**
@@ -45,13 +45,5 @@ export class PostService {
   */
   searchFlights(search: Flight):Observable<any>{
     return this.http.post<any>(this.searchURL, search);
-  }
-
-
-  addWorker(worker: FormControl):Observable<any>{
-    return this.http.post<any>(this.addWorkerURL, worker);
-  }
-  addFlight(flight: FormControl):Observable<any>{
-    return this.http.post<any>(this.addWorkerURL, flight);
   }
 }

@@ -27,8 +27,7 @@ export class ReservacionVuelosComponent implements OnInit {
     workerid: 0
   }
 
-  nameCustomer = this.cookieSvc.get('CustomerName');
-  lastNameCustomer = this.cookieSvc.get('CustomerLN');
+  correoCustomer = this.cookieSvc.get('usuarioCorreo');
   numAsiento = this.cookieSvc.get("seatNumber");
   Status = false;
 
