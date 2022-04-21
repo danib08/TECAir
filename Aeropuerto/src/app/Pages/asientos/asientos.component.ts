@@ -16,29 +16,27 @@ export class AsientosComponent implements OnInit {
 
   capacity: FlightCapModel = {
     flightid: '',
-    passangercap: 0
+    PassangerCap: 0
   }
 
-  Status = false;
+  State = false;
   /**
    * Constructor Method
    */
   constructor(private cookieSvc:CookieService,private router:Router, private ApiService: GetService) { 
-
+    this.getUserCapacity();
   }
 
   /**
    * Method to be executed at component startup
    */
   ngOnInit(){
-    this.getUserCapacity();
-    this.makeMatrix();
-    this.getUserInFlight();
-    this.setArray();
+    
+    
   }
 
   array: Array<number> = [];
-  numSeats: number = 0;
+  numSeats = 0;
   arr_name:number[][]=[[]];
   cont = 0;
 
@@ -50,7 +48,7 @@ export class AsientosComponent implements OnInit {
     this.ApiService.getCustomerInFlight(flight).subscribe(
       res =>{
         this.customerArray = res;
-        console.log(this.customerArray);
+        this.setArray(this.customerArray);
       },
       err => {
         alert("Ha ocurrido un error")
@@ -66,23 +64,26 @@ export class AsientosComponent implements OnInit {
     this.ApiService.getFlightCapacity(flight).subscribe(
       res =>{
         this.capacity = res;
-        this.numSeats = this.capacity.passangercap;
-        console.log(this.numSeats);
+        this.numSeats = this.capacity.PassangerCap;
+        this.makeMatrix(this.numSeats)
+        this.getUserInFlight();
+        
       },
       err => {
         alert("Ha ocurrido un error")
       }
     );
+    
   }
 
   /***
  * Method that creates the arrangement for the seats
  */
-  setArray(){
-    for(let i = 0; i < this.customerArray.length; i++){
-      this.array.push(this.customerArray[i].seatnumber);
+  setArray(customerArray:UserInFlightModel[]){
+    for(let i = 0; i < customerArray.length; i++){
+      this.array.push(customerArray[i].seatnumber);
     }
-    this.Status = true;
+    this.State = true;
   }
   /**
    * set the cookie for the seat number
@@ -102,9 +103,10 @@ export class AsientosComponent implements OnInit {
   /***
    * creates the seat matrix
    */
-  makeMatrix(){
+  makeMatrix(numSeats: number){
     this.arr_name = [];
-    for(var i: number = 0; i < this.numSeats/10; i++) {
+    console.log(numSeats)
+    for(var i: number = 0; i < numSeats/10; i++) {
         this.arr_name[i] = [];
         for(var j: number = 0; j < 10; j++) {
           this.arr_name[i][j]=this.cont;
@@ -126,6 +128,5 @@ export class AsientosComponent implements OnInit {
     }
   }
 
-  
 
 }

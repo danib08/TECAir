@@ -66,7 +66,7 @@ export class ManagePromosComponent implements OnInit {
     arrival: '',
     price: 0,
     stops: [],
-    gate: '',
+    gate: 0,
     status: '',
     planeid: '',
     workerid: 0
@@ -91,7 +91,7 @@ export class ManagePromosComponent implements OnInit {
       arrival: '',
       price: 0,
       stops: [],
-      gate: '',
+      gate: 0,
       status: '',
       planeid: '',
       workerid: 0
@@ -112,6 +112,7 @@ export class ManagePromosComponent implements OnInit {
    * @returns 
    */
   submit(){
+    this.setValuesInFlights();
     let flag = false;
     if(this.discounts.length != 0){
       flag = true;

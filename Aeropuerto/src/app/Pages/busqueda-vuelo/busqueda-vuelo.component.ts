@@ -22,16 +22,16 @@ export class BusquedaVueloComponent implements OnInit {
     destination: '',
     bagquantity: 0,
     userquantity: 0,
-    flightid: '',
-    departure: '',
-    arrival: '',
+    flightid: 'IB7811',
+    departure: '2022-09-07T20:20:00',
+    arrival: '2022-09-07T20:20:00',
     price: 0,
     stops: [],
     gate: 0,
     status: '',
     discount: 0,
-    planeid: '',
-    workerid: 0
+    planeid: 'TIMJH',
+    workerid: 117730482
   }
 
   //List with all the flights
