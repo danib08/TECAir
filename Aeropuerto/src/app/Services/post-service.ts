@@ -18,7 +18,7 @@ export class PostService {
     private addFlightURL = `${this.baseURL}\\Flights/Flight`;
     private addCustomerURL = `${this.baseURL}\\Customers`;
     private addBagURL = `${this.baseURL}\\Bags/Bag`;
-    private searchURL = `${this.baseURL}\\Flights`;
+    private searchURL = `${this.baseURL}\\Flights/SearchFlight`;
     private logInWURL = `${this.baseURL}\\Workers/LogIn`;
     private validateUserURL = `${this.baseURL}\\Customers/Validate`;
 

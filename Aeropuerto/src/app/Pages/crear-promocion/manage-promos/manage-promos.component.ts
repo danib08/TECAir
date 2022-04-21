@@ -121,7 +121,7 @@ export class ManagePromosComponent implements OnInit {
       return;
     }
     else{
-      this.apiService.changeStatus(this.registerForm.value).subscribe(
+      this.apiService.changeStatus(this.registerForm.value, this.registerForm.get('flightid')?.value).subscribe(
         res => {
           if(flag == false){
             location.reload()
@@ -133,7 +133,7 @@ export class ManagePromosComponent implements OnInit {
       );
       if(this.discounts.length != 0){
         for (let i = 0; i< this.discounts.length; i++){
-          this.apiService.changeStatus(this.discounts.at(i).value).subscribe(
+          this.apiService.changeStatus(this.discounts.at(i).value, this.discounts.at(i).get('flightid')?.value).subscribe(
             res => {
               console.log(res);
             },err=>{
@@ -192,5 +192,42 @@ export class ManagePromosComponent implements OnInit {
     return value;
   }
 
+  setValuesInFlights(){
+    for(let i = 0; i < this.flightsArray.length; i++){
+      if(this.flightsArray[i].flightid == this.registerForm.get('flightid')?.value){
+        this.registerForm.get('origin')?.setValue(this.flightsArray[i].origin);
+        this.registerForm.get('destination')?.setValue(this.flightsArray[i].destination);
+        this.registerForm.get('bagquantity')?.setValue(this.flightsArray[i].bagquantity);
+        this.registerForm.get('userquantity')?.setValue(this.flightsArray[i].userquantity);
+        this.registerForm.get('departure')?.setValue(this.flightsArray[i].departure);
+        this.registerForm.get('arrival')?.setValue(this.flightsArray[i].arrival);
+        this.registerForm.get('price')?.setValue(this.flightsArray[i].price);
+        this.registerForm.get('stops')?.setValue(this.flightsArray[i].stops);
+        this.registerForm.get('gate')?.setValue(this.flightsArray[i].gate);
+        this.registerForm.get('status')?.setValue(this.flightsArray[i].status);
+        this.registerForm.get('planeid')?.setValue(this.flightsArray[i].planeid);
+        this.registerForm.get('workerid')?.setValue(this.flightsArray[i].workerid);
+      }
+    }
+    if(this.discounts.length != 0){
+      for(let i = 0; i < this.discounts.length; i++){
+        for(let j = 0; j < this.flightsArray.length; j++){
+          if(this.flightsArray[j].flightid == this.discounts.at(i).get('flightid')?.value){
+            this.discounts.at(i).get('origin')?.setValue(this.flightsArray[j].flightid);
+            this.discounts.at(i).get('destination')?.setValue(this.flightsArray[j].destination);
+            this.discounts.at(i).get('bagquantity')?.setValue(this.flightsArray[j].bagquantity);
+            this.discounts.at(i).get('userquantity')?.setValue(this.flightsArray[j].userquantity);
+            this.discounts.at(i).get('arrival')?.setValue(this.flightsArray[j].arrival);
+            this.discounts.at(i).get('price')?.setValue(this.flightsArray[j].price);
+            this.discounts.at(i).get('stops')?.setValue(this.flightsArray[j].stops);
+            this.discounts.at(i).get('gate')?.setValue(this.flightsArray[j].gate);
+            this.discounts.at(i).get('status')?.setValue(this.flightsArray[j].status);
+            this.discounts.at(i).get('planeid')?.setValue(this.flightsArray[j].planeid);
+            this.discounts.at(i).get('workerid')?.setValue(this.flightsArray[j].workerid);
+          }
+        }
+      }
+    }
+  }
 }
 

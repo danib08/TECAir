@@ -8,8 +8,8 @@ import { Observable } from "rxjs";
 })
 export class PutService {
     private baseURL = "https://localhost:5001/api";
-    private changeStatusURL = `${this.baseURL}\\Flights/FlightStatus`;
-    private setDiscountURL = `${this.baseURL}\\Flights/FlightDiscount`;
+    private changeStatusURL = `${this.baseURL}\\Flights/Status/`;
+    private setDiscountURL = `${this.baseURL}\\Flights/Discount/`;
     /**
      * Método constructor
      * @param http 
@@ -18,10 +18,12 @@ export class PutService {
 
     }
 
-    changeStatus(status: FormControl):Observable<any>{
-        return this.http.put<any>(this.changeStatusURL, status);
+    changeStatus(status: FormControl, flightID:string):Observable<any>{
+        let URL = this.changeStatusURL+flightID;
+        return this.http.put<any>(URL, status);
     }
-    addDiscount(discount: FormControl):Observable<any>{
-        return this.http.put<any>(this.setDiscountURL, discount);
+    addDiscount(discount: FormControl, flightID:string):Observable<any>{
+        let URL = this.setDiscountURL+flightID;
+        return this.http.put<any>(URL, discount);
     }
 }

@@ -39,13 +39,14 @@ namespace TECAirDbAPI.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Required flight</returns>
-        [HttpGet("SearchFlight")]
+        [HttpGet("{origin}/{destination}")]
         public async Task<ActionResult<IEnumerable<Flight>>> GetFlight(string origin, string destination)
         {
             List<Flight> data = new List<Flight>();
 
             var flights = await _context.Flights.ToListAsync();
-
+            Console.WriteLine(origin);
+            Console.WriteLine(destination);
             while (flights.Count() > 1)
             {
 

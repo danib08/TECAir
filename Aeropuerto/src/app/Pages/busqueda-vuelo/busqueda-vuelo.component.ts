@@ -55,6 +55,7 @@ export class BusquedaVueloComponent implements OnInit {
    * Http Post call to search flights
    */
   getFlightsSearch(){
+    console.log(this.search)
     this.apiService.searchFlights(this.search).subscribe(
       res => {
         this.fligthsArray = res;
