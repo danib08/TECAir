@@ -11,17 +11,49 @@ export class HomeComponent implements OnInit {
   constructor(private apiService:GetService) { }
 
   //List with all the flights
-  listaVuelos:Flight[]=[];
+  flightsArray: Flight[] = [];
+  flights: Array<Flight> = [];
+  state = false;
 
   ngOnInit(): void {
-    //this.apiService.getPromociones().subscribe(
-    //  res => {
-    //    this.listaVuelos = res;
-    //  },
-    //  err => {
-    //    alert("Ha habido un error")
-    //  }
-    //);
+    this.getFlights();
+    console.log(this.flightsArray);
+  }
+  /**
+   * @description: Method for getting all the flight for the db
+   */
+  getFlights(){
+    this.apiService.getFlights().subscribe(
+      res => {
+        this.flightsArray = res;
+        this.getRandomFlights();
+        console.log(this.flights);
+      },
+      err => {
+        alert("Ha habido un error")
+      }
+    );
+  }
+    /**
+   * @description: Method for getting randoms flights
+   */
+  getRandomFlights(){
+    var num;
+    var pasNum;
+    for(let i = 0; i < 3; i++){
+      num = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
+      while(true){
+        if(num!=pasNum){
+          pasNum =  num;
+          this.flights.push(this.flightsArray[num]);
+          break;
+        }
+        else{
+          num = Math.floor(Math.random() * (2 - 0 + 1)) + 0;
+        }
+      }
+    }
+    this.state = true;
   }
 
 }

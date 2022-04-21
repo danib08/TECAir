@@ -11,14 +11,15 @@ export class GestionUsuarioComponent implements OnInit {
 
   constructor(private apiService: PostService){}
   nuevoUsuario: Customer={
-    Customerid: 0,
-    Namecustomer: "",
-    Lastnamecustomer: "",
-    Passcustomer: "",
-    Email: "",
-    Phone: 0,
-    Studentid: 0,
-    University: "",
+    customerid: 0,
+    namecustomer: "",
+    lastnamecustomer: "",
+    passcustomer: "",
+    email: "",
+    phone: 0,
+    studentid: 0,
+    university: "",
+    miles: 0
   }
   ngOnInit(): void {
   }
@@ -29,6 +30,8 @@ export class GestionUsuarioComponent implements OnInit {
     this.apiService.addCustomer(this.nuevoUsuario).subscribe(
       res =>{
         location.reload();
+      }, err => {
+        alert("Ha ocurrido un error")
       }
     );
   }

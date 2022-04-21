@@ -1,28 +1,28 @@
 <app-header></app-header>
-<body>
+<body *ngIf=Status>
   <div class="row px-5 py-3 justify-content-center">
     <!-- Section about payments details -->
     <div class="col-sm-8 p-3  bg-dark text-white">
       <p class="h1">Resumen de la reservación</p>
       <div class="col mb-lg-0 mb-3">
-        <p class="mb-0">Estimado: {{nombreUsuario}}</p>
+        <p class="mb-0">Estimado: {{nameCustomer}} {{lastNameCustomer}}</p>
         <p></p>
-        <p>Esta es la información del vuelo {{Flightid}} que partirá de {{Origin}} al destino {{Destination}}, la fecha de salida es {{DateTimeDeparture}} y de llegada {{DateTimeArrival}}</p>
-        <p class="mb">Este vuelo esta en la compuerta numero {{gate}} y posee las siguientes paradas: {{Stops}}</p>
+        <p>Esta es la información del vuelo {{Flight.flightid}} que partirá de {{Flight.origin}} al destino {{Flight.destination}}, la fecha de salida es {{Flight.departure}} y de llegada {{Flight.arrival}}</p>
+        <p class="mb">Debe abordar el vuelo por la compuerta número {{Flight.gate}} y posee un total de {{Flight.stops.length}} escalas</p>
       </div>
       <div class="bg-dark rounded d-flex flex-column">
         <div class="p-2 d-flex">
             <div class="col-8">Precio original:</div>
-            <div class="ml-auto">{{Price}}</div>
+            <div class="ml-auto">{{Flight.price}}</div>
         </div>
         <div class="p-2 d-flex">
             <div class="col-8">Descuento:</div>
-            <div class="ml-auto">{{Discount}}%</div>
+            <div class="ml-auto">{{Flight.discount}}%</div>
         </div>
         <div class="border-top px-3 mx-2"></div>
         <div class="p-2 d-flex pt-3">
-            <div class="col-8"><b>Total</b></div>
-            <div class="ml-auto"><b>$85.00</b></div>
+            <div class="col-8"><b>Total: </b></div>
+            <div class="ml-auto"><b>{{Flight.price*((100-Flight.discount)/100)}}</b></div>
         </div>
       </div>
     </div>

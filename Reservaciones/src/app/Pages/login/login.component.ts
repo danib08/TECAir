@@ -12,17 +12,18 @@ import { IniciarSesion } from '../models/iniciar-sesion';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   constructor(private router:Router,private cookieSvc:CookieService,private apiService: PostService) { }
+
   nuevoUsuario: Customer={
-    Customerid: 0,
-    Namecustomer: "",
-    Lastnamecustomer: "",
-    Passcustomer: "",
-    Email: "",
-    Phone: 0,
-    Studentid: 0,
-    University: "",
+    customerid: 0,
+    namecustomer: "",
+    lastnamecustomer: "",
+    passcustomer: "",
+    email: "",
+    phone: 0,
+    studentid: 0,
+    university: "",
+    miles: 0
   }
 
   usuarioRegistrado: IniciarSesion={
@@ -39,15 +40,19 @@ export class LoginComponent implements OnInit {
    * @description: Method for login users to the web app
    */
   loginUser(){
-    this.apiService.login(this.usuarioRegistrado).subscribe(
+    console.log(this.usuarioRegistrado)
+    this.apiService.logInUsuario(this.usuarioRegistrado).subscribe(
       res =>{
         this.estadoRes = res;
-        if(this.estadoRes.estado == "OK"){
-          window.alert("BIENVENIDO");
+        console.log(res);
+        if (this.estadoRes.estado == "Si"){
+          this.cookieSvc.set('UsuarioPass', this.usuarioRegistrado.Passcustomer.toString());
           this.router.navigate(["home"]);
         }else{
-          window.alert("CONTRASEÑA O EMAILL INCORRECTOS")
+          alert("Contraseña o Correo incorrectos")
         }
+      },err =>{
+        console.log(err)
       }
     );
   }
@@ -58,6 +63,8 @@ export class LoginComponent implements OnInit {
     this.apiService.addCustomer(this.nuevoUsuario).subscribe(
       res =>{
         location.reload();
+      }, err => {
+        alert("Ha ocurrido un error")
       }
     );
   }

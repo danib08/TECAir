@@ -2,18 +2,18 @@
  * @description: Interface of flights
  */
 export interface Flight {
-  Flightid: string,
-  BagQuantity: number,
-  UserQuantity: number,
-  Gate: number,
-  DepartureTime: string,
-  ArrivalTime:string,
-  Origin: string,
-  Destination: string,
-  Stops:string,
-  Status:string,
-  Price:number,
-  Discount:number,
-  Planeid: string,
-  Workerid: number,
+  origin: string,
+  destination: string,
+  bagquantity: number,
+  userquantity: number,
+  flightid: string,
+  departure: string,
+  arrival:string
+  price:number,
+  stops:[],
+  gate: number,
+  status: string,
+  discount: number,
+  planeid: string,
+  workerid: number
 }

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { Flight } from '../models/flight';
+import { GetService } from 'src/app/Services/get-service';
+
 @Component({
   selector: 'app-reservacion-vuelos',
   templateUrl: './reservacion-vuelos.component.html',
@@ -7,24 +10,42 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ReservacionVuelosComponent implements OnInit {
 
-  nombreUsuario:string="Aldo Cambronero";
-  gate:number=45;
-  DateTimeDeparture:string="";
-  DateTimeArrival:string="";
-  Origin:string="CR";
-  Destination:string="MDR";
-  Stops:string="---";
-  Price:number=0;
-  Discount:number=0;
-  Flightid:string="";
-  numAsientos:string="";
-
-  constructor(private cookieSvc:CookieService) {
-    this.Flightid=this.cookieSvc.get("IDVuelo");
-    this.numAsientos=this.cookieSvc.get("numAsiento");
-    //Method for asking the API for the information of the flight
+  Flight: Flight = {
+    origin: '',
+    destination: '',
+    bagquantity: 0,
+    userquantity: 0,
+    flightid: '',
+    departure: '',
+    arrival: '',
+    price: 0,
+    stops: [],
+    gate: 0,
+    status: '',
+    discount: 0,
+    planeid: '',
+    workerid: 0
   }
+
+  nameCustomer = this.cookieSvc.get('CustomerName');
+  lastNameCustomer = this.cookieSvc.get('CustomerLN');
+  numAsiento = this.cookieSvc.get("seatNumber");
+  Status = false;
+
+  constructor(private cookieSvc:CookieService,private apiService:GetService) {}
   ngOnInit(): void {
+    this.getFlight();
   }
 
+  getFlight(){
+    this.apiService.getFlight(this.cookieSvc.get('FlightID')).subscribe(
+      res => {
+        this.Flight = res;
+        this.Status = true;
+      },
+      err =>{
+        alert("Ha ocurrido un error")
+      }
+    );
+  }
 }

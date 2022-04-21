@@ -36,34 +36,34 @@
       <p class="lead text-muted">Visítanos cada semana para observar los increíbles descuentos disponibles</p>
     </div>
   </div>
-  <div class="w3-row-padding w3-padding-16">
+  <div class="w3-row-padding w3-padding-16" *ngIf=state>
     <div class="w3-third w3-margin-bottom">
       <img src="https://www.visittheusa.mx/sites/default/files/styles/hero_l/public/images/hero_media_image/2020-01/3bb2f916-427c-4445-a599-880a1d26af92.jpeg?h=eb07a09a&itok=cx_be55D" alt="Norway" style="width:100%">
       <div class="w3-container w3-white">
-        <h3>Miami, Florida</h3>
-        <h6 class="w3-opacity">Precio original $99</h6>
-        <p>Descuento 20%</p>
-        <p>Vuelo directo</p>
+        <h3>{{flights[0].origin}} - {{flights[0].destination}}</h3>
+        <h6 class="w3-opacity">Precio original ${{flights[0].price}} </h6>
+        <p>Descuento {{flights[0].discount}} %</p>
+        <p>Vuelo con: {{flights[0].stops.length}} escalas</p>
         <button class="w3-button w3-block w3-black w3-margin-bottom">Reservación</button>
       </div>
     </div>
     <div class="w3-third w3-margin-bottom">
       <img src="https://wallpaperaccess.com/full/1192027.jpg" alt="Norway" style="width:100%">
       <div class="w3-container w3-white">
-        <h3>Oslo, Noruega</h3>
-        <h6 class="w3-opacity">Precio original $250</h6>
-        <p>Descuento 30%</p>
-        <p>Vuelo con escala</p>
+        <h3>{{flights[1].origin}} - {{flights[1].destination}}</h3>
+        <h6 class="w3-opacity">Precio original ${{flights[1].price}} </h6>
+        <p>Descuento {{flights[1].discount}} %</p>
+        <p>Vuelo con: {{flights[1].stops.length}} escalas</p>
         <button class="w3-button w3-block w3-black w3-margin-bottom">Reservación</button>
       </div>
     </div>
     <div class="w3-third w3-margin-bottom">
       <img src="https://www.teahub.io/photos/full/161-1616360_santa-catalina-arch-antigua-agua-volcano-guatemala-santa.jpg" alt="Norway" style="width:100%">
       <div class="w3-container w3-white">
-        <h3>Santa Catalina, Guatemala</h3>
-        <h6 class="w3-opacity">Precio original $50</h6>
-        <p>Descuento 15%</p>
-        <p>Vuelo directo</p>
+        <h3>{{flights[2].origin}} - {{flights[2].destination}}</h3>
+        <h6 class="w3-opacity">Precio original ${{flights[2].price}} </h6>
+        <p>Descuento {{flights[2].discount}} %</p>
+        <p>Vuelo con: {{flights[2].stops.length}} escalas</p>
         <button class="w3-button w3-block w3-black w3-margin-bottom">Reservación</button>
       </div>
     </div>
@@ -102,7 +102,7 @@
             <p class="card-text">La información proporcionada puede variar de acuerdo a las leyes gubernamentales de cada país. Recuerda que debes consultar los sitios web oficiales de cada gobierno para revisar y confirmar los requisitos de ingreso.</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href="https://www.w3schools.com/" role:link>Link</a>
+                <a href="https://data.humdata.org/visualization/covid19-humanitarian-operations/?ga1&gclid=Cj0KCQjw3v6SBhCsARIsACyrRAltJp7CnHDOYTROFvZALWI-vcMaFirjnorPkdklnh2fKi9ndvHSQD0aAjw5EALw_wcB" role:link>Link</a>
               </div>
             </div>
           </div>
@@ -116,7 +116,7 @@
             <p class="card-text">Sigue nuestras recomendaciones de bioseguridad antes, durante y después de tu vuelo para que estés tranquilo en todo tu viaje.</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href="https://www.w3schools.com/" role:link>Link</a>
+                <a href="https://www.ministeriodesalud.go.cr/" role:link>Link</a>
               </div>
             </div>
           </div>

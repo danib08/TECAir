@@ -9,7 +9,7 @@
         <div class="row" *ngFor="let row of arr_name">
           <div class="col" *ngFor="let col of row">
             <br>
-            <button [disabled]="verdad(col)" #bt type="button" class="bt" (click)="getNumber(col);bt.disabled = true;">
+            <button [disabled]="truth(col)" #bt type="button" class="bt" (click)="getNumber(col);bt.disabled = true;">
             <i class="material-icons">event_seat </i>
             <br>
             </button>
