@@ -70,10 +70,9 @@ namespace MobileApp.Activities
             };
 
             db.InsertPlane(plane1);
-            string insertedFlight = db.InsertFlight(flight1);
+            bool insertedFlight = db.InsertFlight(flight1);
 
-            Toast.MakeText(this, insertedFlight, ToastLength.Short).Show();
-
+            Toast.MakeText(this, insertedFlight.ToString(), ToastLength.Short).Show();
             
             searchBtn.Click += (sender, e) =>
             {
@@ -84,13 +83,16 @@ namespace MobileApp.Activities
                 else
                 {
                     List<Flight> vuelitos = db.SearchFlights(editTextOrigin.Text, editTextDestination.Text);
-                    // vuelito.Find(worker => worker.Workerid == workerId);
                     toastText = "Numero de vuelo: " + vuelitos.First().Flightid; 
                 }
 
                 Toast.MakeText(this, toastText, ToastLength.Short).Show();
 
             };
+        }
+
+        void searchFlights(string destination)
+        {
         }
 
     }

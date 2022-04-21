@@ -36,7 +36,6 @@ namespace MobileApp
                 using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
                 List<Flight> flightsSearched = connection.Query<Flight>("SELECT * FROM Flight Where Origin=?", Origin);
                 return flightsSearched;
-
             }
             catch (SQLiteException ex)
             {
