@@ -4,10 +4,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using MobileApp.Activities;
-using System.Collections.Generic;
 
-namespace MobileApp
+namespace MobileApp.Activities
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
 
@@ -16,7 +14,6 @@ namespace MobileApp
         private Button buttonSignUp;
         private Button buttonSignIn;
         
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -26,7 +23,6 @@ namespace MobileApp
 
             buttonSignIn = FindViewById<Button>(Resource.Id.btnSignIn);
             buttonSignUp = FindViewById<Button>(Resource.Id.btnSignUp);
-
 
             buttonSignUp.Click += (sender, e) =>
             {
@@ -41,18 +37,13 @@ namespace MobileApp
                 Intent intent = new Intent(this, typeof(SignInActivity));
                 StartActivity(intent);
             };
-            
-
         }
         
-
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-
-        
+        }       
     }
 }

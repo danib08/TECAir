@@ -1,18 +1,13 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using MobileApp.Models;
 using AndroidX.AppCompat.App;
 
 namespace MobileApp
 {
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false)]
     class SignUpActivity : AppCompatActivity
     {
 
@@ -29,7 +24,7 @@ namespace MobileApp
 
         private Button sendSignUp;
 
-        private String toastText;
+        private string toastText;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -96,9 +91,7 @@ namespace MobileApp
                         toastText = "Esta cédula ya se encuentra registrada";
                     }
                 }
-
                 Toast.MakeText(this, toastText, ToastLength.Short).Show();
-
             };
         }
     }

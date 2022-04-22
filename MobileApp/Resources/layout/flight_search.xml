@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="85dp"
         android:textSize="20sp"
-        android:hint="@string/origen"
+        android:hint="@string/origin"
         android:textColor="@color/orangePalette"
         android:autofillHints="@string/password"
         android:inputType="text" />
@@ -45,12 +45,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="85dp"
         android:textSize="20sp"
-        android:hint="@string/destino"
+        android:hint="@string/destination"
         android:autofillHints="@string/password"
         android:inputType="text" />
 
     <android.widget.Button
-        android:id="@+id/sendBusqueda"
+        android:id="@+id/sendSearch"
         style="@style/button_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
