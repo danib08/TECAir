@@ -9,7 +9,7 @@ namespace MobileApp
 {
     internal class Database
     {
-        readonly string folder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+        readonly string folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 
         public bool CreateDatabase()
         {
@@ -29,12 +29,27 @@ namespace MobileApp
                 return false;
             }
         }
+
         public List<Flight> SearchFlights(string Origin, string Destination)
         {
             try
             {
                 using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
-                List<Flight> flightsSearched = connection.Query<Flight>("SELECT * FROM Flight Where Origin=?", Origin);
+                var tmpList = connection.Table<Flight>().ToList();
+
+                List<Flight> flightsSearched = new List<Flight>();
+
+                foreach (Flight f in tmpList)
+                {
+                    string[] subsOrigin = f.Origin.Split("/");
+                    string[] subsDest = f.Destination.Split("/");
+
+                    if ((subsOrigin[0].Equals(Origin) || subsOrigin[1].Equals(Origin)) && 
+                        (subsDest[0].Equals(Destination) || subsDest[1].Equals(Destination)))
+                    {
+                        flightsSearched.Add(f);
+                    }
+                }
                 return flightsSearched;
             }
             catch (SQLiteException ex)
@@ -42,7 +57,6 @@ namespace MobileApp
                 Log.Info("SQLiteEx", ex.Message);
                 return null;
             }
-
         }
 
         //Posts

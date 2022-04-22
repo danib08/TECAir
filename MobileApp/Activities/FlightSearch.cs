@@ -1,15 +1,11 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using MobileApp.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using MobileApp.Adapters;
 
 namespace MobileApp.Activities
 {
@@ -22,22 +18,24 @@ namespace MobileApp.Activities
         private EditText editTextOrigin;
         private EditText editTextDestination;
         private Button searchBtn;
+        private ListView listView;
 
         private string toastText;
-
         private List<Flight> listFlights;
-
+        private FlightAdapter adapter;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.flight_search);
 
             editTextOrigin = FindViewById<EditText>(Resource.Id.editTextOrigin);
             editTextDestination = FindViewById<EditText>(Resource.Id.editTextDestination);
             searchBtn = FindViewById<Button>(Resource.Id.sendSearch);
+            listView = FindViewById<ListView>(Resource.Id.listView1);
 
             db = new Database();
             db.CreateDatabase();
@@ -66,34 +64,36 @@ namespace MobileApp.Activities
                 Discount = 0,
                 Planeid = "AXJ720",
                 Workerid = 12345869
-
             };
 
             db.InsertPlane(plane1);
-            bool insertedFlight = db.InsertFlight(flight1);
-
-            Toast.MakeText(this, insertedFlight.ToString(), ToastLength.Short).Show();
+            db.InsertFlight(flight1);
             
             searchBtn.Click += (sender, e) =>
             {
                 if (editTextOrigin.Text.Equals("") || editTextDestination.Text.Equals(""))
                 {
                     toastText = "Por favor llene todos los espacios solicitados";
+                    Toast.MakeText(this, toastText, ToastLength.Short).Show();
                 }
                 else
-                {
-                    List<Flight> vuelitos = db.SearchFlights(editTextOrigin.Text, editTextDestination.Text);
-                    toastText = "Numero de vuelo: " + vuelitos.First().Flightid; 
+                {                   
+                    listFlights = db.SearchFlights(editTextOrigin.Text, editTextDestination.Text);
+
+                    adapter = new FlightAdapter(this, listFlights);
+                    listView.Adapter = adapter;
+
+                    if (listFlights.Count == 0)
+                    {
+                        toastText = "No se encontraron vuelos coincidentes.";
+                        Toast.MakeText(this, toastText, ToastLength.Short).Show();
+                    } 
+                    else {
+                        editTextOrigin.Text = "";
+                        editTextDestination.Text = "";
+                    }
                 }
-
-                Toast.MakeText(this, toastText, ToastLength.Short).Show();
-
             };
         }
-
-        void searchFlights(string destination)
-        {
-        }
-
     }
 }

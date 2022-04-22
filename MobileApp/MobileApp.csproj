@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Activities\FlightSearch.cs" />
     <Compile Include="Activities\SignInActivity.cs" />
+    <Compile Include="Adapters\FlightAdapter.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Models\Bag.cs" />
@@ -70,7 +71,6 @@
     <Compile Include="Models\Flight.cs" />
     <Compile Include="Models\Plane.cs" />
     <Compile Include="Models\Worker.cs" />
-    <Compile Include="ListViewAdapter.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Activities\SignUpActivity.cs" />
@@ -140,7 +140,7 @@
     <AndroidResource Include="Resources\values\dimens.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\ListViewDataTemplate.xml">
+    <AndroidResource Include="Resources\layout\listview_row.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

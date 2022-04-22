@@ -3,7 +3,7 @@ using System;
 
 namespace MobileApp.Models
 {
-    class Flight
+    public class Flight
     {
         [PrimaryKey]
         public string Flightid { get; set; }
