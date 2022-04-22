@@ -26,6 +26,14 @@
             </div>
 
             <div class="form-input">
+              <input type="number" class="form-control" placeholder="Cédula de identidad"
+              [(ngModel)]="nuevoUsuario.customerid" name="CustomerID" #CustomerID = "ngModel"
+              [ngClass]="{'is-invalid':f.submitted && name.invalid}"
+              required>
+              <i class="material-icons">perm_contact_calendar</i>
+            </div>
+
+            <div class="form-input">
               <i class="material-icons">email</i>
               <input type="text" class="form-control" placeholder="Email"
               [(ngModel)]="nuevoUsuario.email" name="Email" #Email = "ngModel"

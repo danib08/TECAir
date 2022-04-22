@@ -21,7 +21,12 @@ export class AsientosComponent implements OnInit {
 
   Status = false;
 
-  constructor(private cookieSvc:CookieService,private router:Router,private ApiService: GetService){}
+  /**
+   * Method to be executed at component startup
+   */
+  constructor(private cookieSvc:CookieService,private router:Router,private ApiService: GetService){
+    this.getUserCapacity();
+  }
 
   array: Array<number> = [];
   numSeats: number = 0;
@@ -52,7 +57,8 @@ export class AsientosComponent implements OnInit {
       res =>{
         this.capacity = res;
         this.numSeats = this.capacity.passangercap;
-        console.log(this.numSeats);
+        this.makeMatrix(this.numSeats)
+        this.getUserInFlight();
       },
       err => {
         alert("Ha ocurrido un error")
@@ -62,9 +68,9 @@ export class AsientosComponent implements OnInit {
   /***
    * Method that creates the arrangement for the seats
   */
- setArray(){
-   for(let i = 0; i < this.customerArray.length; i++){
-     this.array.push(this.customerArray[i].seatnumber);
+  setArray(customerArray:UserInFlightModel[]){
+    for(let i = 0; i < customerArray.length; i++){
+      this.array.push(customerArray[i].seatnumber);
     }
     this.Status = true;
   }
@@ -84,9 +90,10 @@ export class AsientosComponent implements OnInit {
   /**
   * creates the seat matrix
   */
-  makeMatrix(){
+  makeMatrix(numSeats: number){
     this.arr_name = [];
-    for(var i: number = 0; i < this.numSeats/10; i++) {
+    console.log(numSeats)
+    for(var i: number = 0; i < numSeats/10; i++) {
       this.arr_name[i] = [];
       for(var j: number = 0; j < 10; j++) {
         this.arr_name[i][j]=this.cont;
@@ -107,14 +114,6 @@ export class AsientosComponent implements OnInit {
     }
   }
 
-  /**
-   * Method to be executed at component startup
-   */
-   ngOnInit(){
-    this.getUserCapacity();
-    this.makeMatrix();
-    this.getUserInFlight();
-    this.setArray();
-  }
+  ngOnInit(){}
 
 }

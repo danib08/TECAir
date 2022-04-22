@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   usuarioRegistrado: IniciarSesion={
     Passcustomer: "",
-    Email: ""
+    customerid: 0
   }
 
   estadoRes: EstadoModel = {
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
         this.estadoRes = res;
         console.log(res);
         if (this.estadoRes.estado == "Si"){
-          this.cookieSvc.set('usuarioCorreo', this.usuarioRegistrado.Email.toString());
+          this.cookieSvc.set('usuarioCorreo', this.usuarioRegistrado.customerid.toString());
           this.router.navigate(["home"]);
         }else{
           alert("Contraseña o Correo incorrectos")
@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
    * @description: Method for adding new users to the DB
    */
   SignUpUser(){
+    this.nuevoUsuario.university=this.nuevoUsuario.university.toUpperCase();
     this.apiService.addCustomer(this.nuevoUsuario).subscribe(
       res =>{
         location.reload();

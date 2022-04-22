@@ -27,6 +27,7 @@ export class GestionUsuarioComponent implements OnInit {
    * @description: Method for adding new users to the DB
    */
    SignUpUser(){
+    this.nuevoUsuario.university=this.nuevoUsuario.university.toUpperCase();
     this.apiService.addCustomer(this.nuevoUsuario).subscribe(
       res =>{
         location.reload();

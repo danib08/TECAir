@@ -9,7 +9,7 @@ import { FlightCapModel } from "../Pages/models/flight-cap-model";
   providedIn: 'root'
 })
 export class GetService {
-  private baseURL = "http://localhost..."
+  private baseURL = "https://localhost:5001/api";
   private addWorkerURL = "https://tecair.free.beeceptor.com"
   private getFlightsURL = `${this.baseURL}\\Flights`;
   private getCustomerFlightURL = `${this.baseURL}\\CustomersInFlights/`;
