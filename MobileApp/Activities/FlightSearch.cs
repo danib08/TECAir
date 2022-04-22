@@ -54,7 +54,7 @@ namespace MobileApp.Activities
                 Bagquantity = 0,
                 Userquantity = 0,
                 Gate = 2,
-                Departure = "2022-08-22 16:40:00,",
+                Departure = "2022-08-22 16:40:00",
                 Arrival = "2022-08-24 13:15:00",
                 Origin = "PTY/Panama",
                 Destination = "INC/Corea del Sur",
@@ -81,7 +81,7 @@ namespace MobileApp.Activities
                     listFlights = db.SearchFlights(editTextOrigin.Text, editTextDestination.Text);
 
                     adapter = new FlightAdapter(this, listFlights);
-                    listView.Adapter = adapter;
+                    listView.Adapter = adapter; 
 
                     if (listFlights.Count == 0)
                     {

@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" 
+    android:background="@color/accentPalette">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Vuelo #AAAAAA"
+        android:textSize="30sp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        style="@style/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="30dp" 
+        android:text="@string/ori"
+        android:textColor="@color/orangePalette"/>
+
+    <TextView
+        android:id="@+id/textOrigin"
+        style="@style/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_toRightOf="@id/textView1"
+        android:layout_marginTop="30dp" 
+        android:layout_marginLeft="10dp"
+        android:text="PTY/Panama"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView1"
+        android:text="@string/destin"
+        android:textColor="@color/orangePalette"/>
+
+    <TextView
+        android:id="@+id/textDestin"
+        style="@style/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView1"
+        android:layout_toRightOf="@id/textView2"
+        android:layout_marginLeft="10dp"
+        android:text="INC/Corea del Sur"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView2"
+        android:layout_marginTop="10dp" 
+        android:text="@string/departure"
+        android:textColor="@color/orangePalette"/>
+
+    <TextView
+        android:id="@+id/textDeparture"
+        style="@style/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView2"
+        android:layout_toRightOf="@id/textView3"
+        android:layout_marginTop="10dp" 
+        android:layout_marginLeft="10dp"
+        android:text="2022-08-22 16:40:00"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView3"
+        android:text="@string/arrival"
+        android:textColor="@color/orangePalette"/>
+
+    <TextView
+        android:id="@+id/textArrival"
+        style="@style/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView3"
+        android:layout_toRightOf="@id/textView4"
+        android:layout_marginLeft="10dp"
+        android:text="2022-08-24 13:15:00"/>
+
+    <TextView
+        android:id="@+id/textView5"
+        style="@style/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView4"
+        android:layout_marginTop="10dp" 
+        android:text="@string/gate"
+        android:textColor="@color/orangePalette"/>
+
+    <TextView
+        android:id="@+id/textGate"
+        style="@style/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView4"
+        android:layout_toRightOf="@id/textView5"
+        android:layout_marginTop="10dp" 
+        android:layout_marginLeft="10dp"
+        android:text="23"/>
+
+    <TextView
+        android:id="@+id/textView6"
+        style="@style/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView5"
+        android:text="@string/price"
+        android:textColor="@color/orangePalette"/>
+
+    <TextView
+        android:id="@+id/textPrice"
+        style="@style/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView5"
+        android:layout_toRightOf="@id/textView6"
+        android:layout_marginLeft="10dp"
+        android:text="1000"/>
+
+    <TextView
+        android:id="@+id/textView7"
+        style="@style/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView6"
+        android:layout_marginTop="10dp" 
+        android:text="@string/stops"
+        android:textColor="@color/orangePalette"/>
+    
+    <TextView
+        android:id="@+id/textStops"
+        style="@style/body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView6"
+        android:layout_toRightOf="@id/textView7"
+        android:layout_marginTop="10dp" 
+        android:layout_marginLeft="10dp"
+        android:text="No hay"/>
+
+    <android.widget.Button
+        android:id="@+id/buyBtn"
+        style="@style/button_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView7"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="@string/buy"
+        android:textAllCaps="false" />
+
+</RelativeLayout>

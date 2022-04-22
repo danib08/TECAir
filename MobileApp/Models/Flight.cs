@@ -18,6 +18,7 @@ namespace MobileApp.Models
         public string Status { get; set; }
         public int Price { get; set; }
         public int Discount { get; set; }
+
         //foreign keys
         public string Planeid { get; set; }
         public int Workerid { get; set; }

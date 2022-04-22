@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="85dp"
         android:textSize="20sp"
-        android:hint="@string/origen"
+        android:hint="@string/origin"
         android:textColor="@color/orangePalette"
         android:autofillHints="@string/password"
         android:inputType="text" />
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="85dp"
         android:textSize="20sp"
-        android:hint="@string/destino"
+        android:hint="@string/destination"
         android:autofillHints="@string/password"
         android:inputType="text" />
 
