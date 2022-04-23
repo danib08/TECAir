@@ -1,15 +1,18 @@
 ﻿using SQLite;
 using MobileApp.Models;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using Android.Util;
 using System;
+using System.Net;
+using Newtonsoft.Json;
 
 namespace MobileApp
 {
     internal class Database
     {
         readonly string folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+        private const string Ipv4 = "192.168.0.10";
+        private readonly string baseAddress = "https://" + Ipv4 + ":44361/api/";
 
         public bool CreateDatabase()
         {
@@ -20,6 +23,8 @@ namespace MobileApp
                 connection.CreateTable<Customer>();
                 connection.CreateTable<Plane>();
                 connection.CreateTable<Flight>();
+                connection.CreateTable<Bag>();
+                connection.CreateTable<CustomerInFlight>();
 
                 return true;
             }
@@ -29,6 +34,54 @@ namespace MobileApp
                 return false;
             }
         }
+
+        // PostgreSQL Synchronization 
+        public void Sync()
+        {
+            SyncCustomers();
+        }
+
+        private void SyncCustomers()
+        {
+            string url = "Customers";
+            using WebClient webClient = new WebClient { BaseAddress = baseAddress };
+            string send = webClient.DownloadString(url);
+
+            List<Customer> serverList = JsonConvert.DeserializeObject<List<Customer>>(send);
+            List<Customer> localList = GetCustomers();
+            List<Customer> newList = serverList;  // Copy server data to local app data
+
+            // Check for new data on app in order to keep it
+            foreach (Customer local in localList)
+            {
+                bool isLocalChange = true;
+
+                foreach (Customer server in serverList)
+                {
+                    // Checks if data was already on the server
+                    if (local.Customerid == server.Customerid)
+                    {
+                        isLocalChange = false;
+                        break;
+                    }
+                }
+                if (isLocalChange)
+                {
+                    // Adds new data if it wasn't yet on the server
+                    newList.Add(local);
+                }
+            }
+
+            // Clear all data in Customer Table
+            using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
+            connection.Query<Customer>("DELETE FROM Customer");
+
+            // Adds updated data to local database
+            foreach (Customer c in newList)
+            {
+                connection.Insert(c);
+            }
+        }   
 
         public List<Flight> SearchFlights(string Origin, string Destination)
         {
@@ -59,8 +112,7 @@ namespace MobileApp
             }
         }
 
-        //Posts
-
+        // Post Methods
         public bool InsertWorker(Worker worker)
         {
             try
@@ -137,8 +189,22 @@ namespace MobileApp
             }
         }
 
-        //Multivalue Gets
+        public bool InsertCustomerInFlight(CustomerInFlight cif)
+        {
+            try
+            {
+                using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
+                connection.Insert(cif);
+                return true;
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("SQLiteEx", ex.Message);
+                return false;
+            }
+        }
 
+        // Multi-Value Get Methods
         public List<Worker> GetWorkers()
         {
             try
@@ -181,7 +247,6 @@ namespace MobileApp
             }
         }
  
-
         public List<Plane> GetPlanes()
         {
             try
@@ -195,7 +260,6 @@ namespace MobileApp
                 return null;
             }
         }
-
         public List<Bag> GetBags()
         {
             try
@@ -210,7 +274,21 @@ namespace MobileApp
             }
         }
 
-        //Single value gets
+        public List<CustomerInFlight> GetCustomersInFlights()
+        {
+            try
+            {
+                using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
+                return connection.Table<CustomerInFlight>().ToList();
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("SQLiteEx", ex.Message);
+                return null;
+            }
+        }
+
+        // Single-Value Get Methods
         public Worker GetWorker(int workerId)
         {
             try
@@ -225,9 +303,7 @@ namespace MobileApp
                 Log.Info("SQLiteEx", ex.Message);
                 return null;
             }
-
         }
-
         public Customer GetCustomer(int customerId)
         {
             try
@@ -243,7 +319,6 @@ namespace MobileApp
             }
 
         }
-
         public Flight GetFlight(int flightId)
         {
             try
@@ -257,7 +332,6 @@ namespace MobileApp
                 Log.Info("SQLiteEx", ex.Message);
                 return null;
             }
-
         }
 
         public Plane GetPlane(int planeId)
@@ -273,7 +347,6 @@ namespace MobileApp
                 Log.Info("SQLiteEx", ex.Message);
                 return null;
             }
-
         }
 
         public Bag GetBag(int bagId)
@@ -289,10 +362,25 @@ namespace MobileApp
                 Log.Info("SQLiteEx", ex.Message);
                 return null;
             }
-
         }
 
-        //Updates
+        public CustomerInFlight GetCustomerInFlight(int customerId, string flightId) 
+        {
+            try
+            {
+                using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
+                List<CustomerInFlight> cifs = connection.Query<CustomerInFlight>("SELECT * FROM CustomerInFlight Where" +
+                    " Customerid=? And Flightid=?", customerId, flightId);
+                return cifs.Find(cif => cif.Customerid == customerId && cif.Flightid.Equals(flightId));
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("SQLiteEx", ex.Message);
+                return null;
+            }
+        }
+
+        // Put/Update Methods
         public bool UpdateWorker(Worker worker)
         {
             try
@@ -307,7 +395,6 @@ namespace MobileApp
                 Log.Info("SQLiteEx", ex.Message);
                 return false;
             }
-
         }
 
         public bool UpdateCustomer(Customer customer)
@@ -324,7 +411,6 @@ namespace MobileApp
                 Log.Info("SQLiteEx", ex.Message);
                 return false;
             }
-
         }
 
         public bool UpdateFlight(Flight flight)
@@ -343,7 +429,6 @@ namespace MobileApp
                 Log.Info("SQLiteEx", ex.Message);
                 return false;
             }
-
         }
 
         public bool UpdatePlane(Plane plane)
@@ -360,7 +445,6 @@ namespace MobileApp
                 Log.Info("SQLiteEx", ex.Message);
                 return false;
             }
-
         }
 
         public bool UpdateBag(Bag bag)
@@ -377,10 +461,24 @@ namespace MobileApp
                 Log.Info("SQLiteEx", ex.Message);
                 return false;
             }
-
+        }
+        public bool UpdateCustomerInFlight(CustomerInFlight cif)
+        {
+            try
+            {
+                using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
+                connection.Query<Bag>("UPDATE CustomerInFlight set CustomerId=?,Flightid=? Where Seatnum=?", 
+                    cif.Customerid, cif.Flightid, cif.Seatnum);
+                return true;
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("SQLiteEx", ex.Message);
+                return false;
+            }
         }
 
-        //Deletes
+        // Delete Methods
         public bool DeleteWorker(Worker worker)
         {
             try
@@ -394,7 +492,6 @@ namespace MobileApp
                 Log.Info("SQLiteEx", ex.Message);
                 return false;
             }
-
         }
 
         public bool DeleteCustomer(Customer customer)
@@ -410,7 +507,6 @@ namespace MobileApp
                 Log.Info("SQLiteEx", ex.Message);
                 return false;
             }
-
         }
 
         public bool DeleteFlight(Flight flight)
@@ -426,7 +522,6 @@ namespace MobileApp
                 Log.Info("SQLiteEx", ex.Message);
                 return false;
             }
-
         }
 
         public bool DeletePlane(Plane plane)
@@ -442,10 +537,9 @@ namespace MobileApp
                 Log.Info("SQLiteEx", ex.Message);
                 return false;
             }
-
         }
 
-        public bool DeletePlane(Bag bag)
+        public bool DeleteBag(Bag bag)
         {
             try
             {
@@ -458,8 +552,21 @@ namespace MobileApp
                 Log.Info("SQLiteEx", ex.Message);
                 return false;
             }
-
         }
 
+        public bool DeleteCustomerInFlight(CustomerInFlight cif)
+        {
+            try
+            {
+                using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
+                connection.Delete(cif);
+                return true;
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("SQLiteEx", ex.Message);
+                return false;
+            }
+        }
     }
 }

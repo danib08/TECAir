@@ -68,6 +68,7 @@
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Models\Bag.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerInFlight.cs" />
     <Compile Include="Models\Flight.cs" />
     <Compile Include="Models\Plane.cs" />
     <Compile Include="Models\Worker.cs" />

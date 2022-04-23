@@ -13,6 +13,7 @@ namespace MobileApp.Activities
     {
         private Button buttonSignUp;
         private Button buttonSignIn;
+        private Database db;
         
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -20,6 +21,10 @@ namespace MobileApp.Activities
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
+
+            db = new Database();
+            db.CreateDatabase();
+            db.Sync();
 
             buttonSignIn = FindViewById<Button>(Resource.Id.btnSignIn);
             buttonSignUp = FindViewById<Button>(Resource.Id.btnSignUp);
@@ -44,6 +49,6 @@ namespace MobileApp.Activities
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }       
+        }   
     }
 }
