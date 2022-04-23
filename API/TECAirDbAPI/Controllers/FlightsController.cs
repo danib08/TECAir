@@ -35,10 +35,40 @@ namespace TECAirDbAPI.Controllers
         }
 
         /// <summary>
+        /// Multi value get of flights
+        /// </summary>
+        /// <returns>All flights in database</returns>
+
+        [HttpGet("Discount")]
+        public async Task<ActionResult<IEnumerable<Flight>>> GetFlightsDiscount()
+        {
+            var flights = await _context.Flights.ToListAsync();
+            List<Flight> data = new List<Flight>();
+
+            while (flights.Count() > 0)
+            {
+                if (flights.First().Discount != 0)
+                {
+                    data.Add(flights.First());
+                    flights.RemoveAt(0);
+                }
+                else
+                {
+                    flights.RemoveAt(0);
+                }
+            }
+
+            return data;
+            
+        }
+
+
+        /// <summary>
         /// Single value get
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Required flight</returns>
+
         [HttpPost("SearchFlight")]
 
         public async Task<ActionResult<IEnumerable<Flight>>> GetFlight(Flight flight)
