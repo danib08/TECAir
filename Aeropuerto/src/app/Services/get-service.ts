@@ -20,7 +20,7 @@ export class GetService {
     private getCustomerFlightURL = `${this.baseURL}\\CustomersInFlights/`;
     private getFlightCapURL = `${this.baseURL}\\Flights/Capacity/`;
     private getPlaneURL = `${this.baseURL}\\Planes`;
-
+    private getDiscountsURL = `${this.baseURL}\\Flights/Discount`;
     
     constructor(private http: HttpClient) {
 
@@ -56,5 +56,9 @@ export class GetService {
     getFlight(flight: string):Observable<FlightModel>{
         let URL = `${this.baseURL}\\Flights\\`+flight;
         return this.http.get<FlightModel>(URL);
+    }
+
+    getDiscounts():Observable<FlightModel[]>{
+        return this.http.get<FlightModel[]>(this.getDiscountsURL);
     }
 }

@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   }
 
   getFlights(){
-    this.apiService.getFlights().subscribe(
+    this.apiService.getDiscounts().subscribe(
       res => {
         this.flightsArray = res;
         this.getRandomFlights();
