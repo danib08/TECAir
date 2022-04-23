@@ -1,28 +1,24 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using MobileApp.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MobileApp.Activities
 {
+
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false)]
     class SignInActivity : AppCompatActivity
     {
         private Database db;
 
         private EditText editTextIdIn;
         private EditText editTextPassIn;
-
         private Button sendSignIn;
 
-        private String toastText;
+        private string toastText;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -62,20 +58,17 @@ namespace MobileApp.Activities
                         if (editTextPassIn.Text.Equals(customer.Passcustomer))
                         {
                             toastText = "Sesión iniciada";
-                            Intent intent = new Intent(this, typeof(SignInActivity));
+                            Intent intent = new Intent(this, typeof(FlightSearch));
                             StartActivity(intent);
                             Finish();
                         }
                         else {
                             toastText = "Contraseña incorrecta";
-                        }
-                        
+                        }                   
                     }
                 }
-
                 Toast.MakeText(this, toastText, ToastLength.Short).Show();
             };
-
         }
     }
 }
