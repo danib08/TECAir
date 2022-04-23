@@ -11,6 +11,9 @@ namespace TECAirDbAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
+    //Bag Controller generated from DbContext
+
     public class BagsController : ControllerBase
     {
         private readonly TECAirDbContext _context;
@@ -20,14 +23,23 @@ namespace TECAirDbAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Bags
+        /// <summary>
+        /// Multi value get of bags
+        /// </summary>
+        /// <returns>All bags in database</returns>
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Bag>>> GetBags()
         {
             return await _context.Bags.ToListAsync();
         }
 
-        // GET: api/Bags/5
+        /// <summary>
+        /// Single value get
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Required bag</returns>
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Bag>> GetBag(string id)
         {
@@ -41,7 +53,13 @@ namespace TECAirDbAPI.Controllers
             return bag;
         }
 
-        // PUT: api/Bags/5
+        /// <summary>
+        /// Put method to edit bags
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="bag"></param>
+        /// <returns>State of query</returns>
+
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBag(string id, Bag bag)
@@ -72,9 +90,13 @@ namespace TECAirDbAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Bags
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        /// <summary>
+        /// Method to create a single Bag
+        /// </summary>
+        /// <param name="bag"></param>
+        /// <returns></returns> 
+
+        [HttpPost("Bag")]
         public async Task<ActionResult<Bag>> PostBag(Bag bag)
         {
             _context.Bags.Add(bag);
@@ -97,7 +119,14 @@ namespace TECAirDbAPI.Controllers
             return CreatedAtAction("GetBag", new { id = bag.Bagid }, bag);
         }
 
-        // DELETE: api/Bags/5
+
+
+        /// <summary>
+        /// Method for deleting bags by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>State of task</returns>
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBag(string id)
         {

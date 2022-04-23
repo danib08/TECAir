@@ -1,0 +1,55 @@
+<app-header></app-header>
+<body>
+  <div class="card px-5 py-3">
+    <!-- Forms of destination and origin-->
+    <div id="Flight" class="w3-container ">
+      <form (submit)="mostrarInfo($event)">
+        <h3>Viaja con nosotros</h3>
+        <div class="w3-row-padding" style="margin:0 -16px;">
+          <div class="w3-half">
+            <label>Salida</label>
+            <input class="w3-input w3-border" type="text" placeholder="Aeropuerto de origen">
+          </div>
+          <div class="w3-half">
+            <label>Llegada</label>
+            <input class="w3-input w3-border" type="text" placeholder="Aeropuerto de llegada">
+          </div>
+        </div>
+        <h3></h3>
+        <button class="btn" type="submit">Buscar</button>
+      </form>
+    </div>
+  </div>
+  <!-- Display of all the flights -->
+  <div class="container px-5 py-3" *ngIf=Estado>
+    <div class="card px-5 py-3">
+      <li *ngFor="let hero of listVuelos">
+        <div class="row">
+          <div class="col-sm-8 p-3 bg-dark text-white">
+            <div class="row">
+              <div class="col-sm">
+                <h6 ><i class="material-icons"> flight_takeoff</i> &nbsp; Origen &nbsp; <i class="material-icons">trending_flat</i> &nbsp; Destino &nbsp; <i class="material-icons"> flight_land</i>
+                  &nbsp;&nbsp;&nbsp; Paradas: {{hero.Stops}} &nbsp; <i class="material-icons"> airplanemode_active</i></h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <span class="left"> {{hero.Origin}}</span><span class="right">{{hero.Destination}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <span class="left">{{hero.DepartureTime}}</span><span class="right">{{hero.ArrivalTime}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4 p-3 bg-dark text-white">
+            <button class="btn" (click)="connectReservacion(hero.FlightID)" style="float: right;">Precio: ${{hero.Price}}</button>
+          </div>
+        </div>
+      </li>
+    </div>
+  </div>
+</body>
+
+<app-footer></app-footer>

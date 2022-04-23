@@ -1,0 +1,108 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <h2>Registro de trabajadores TECAir </h2>
+    <body>
+    <form (submit)="submit()" [formGroup]="registerForm">
+    <div class="row">
+        <div class="col-1 col-5">
+            <div class="form-group">
+                <i class="bi bi-journal-minus">
+                    <label for="WorkerID">ID del Trabajador</label>
+                </i>
+                <input type="number" class="form-control" formControlName="WorkerID">
+                <div
+                *ngIf="workerID?.invalid && (workerID?.dirty || workerID?.touched)" class="alert alert-danger">
+                    HOLA
+                </div>
+            </div>
+            <div class="form-group">
+                <i class="bi bi-file-person-fill">
+                    <label for="NameWorker">Nombre del trabajador</label>
+                </i>
+                <input type="text" class="form-control" formControlName="NameWorker">
+                <div
+                *ngIf="nameWorker?.invalid && (nameWorker?.dirty || nameWorker?.touched)" class="alert alert-danger">
+                    HOLA2
+                </div>
+            </div>
+            <div class="form-group">
+                <i class="bi bi-file-person-fill">
+                    <label for="LastNameWorker">Apellido del trabajador</label>
+                </i>
+                <input type="text" class="form-control" formControlName="LastNameWorker">
+                <div
+                *ngIf="lastNameWorker?.invalid && (lastNameWorker?.dirty || lastNameWorker?.touched)" class="alert alert-danger">
+                    HOLA5
+                </div>
+            </div>
+            <div class="form-group">
+                <i class="bi bi-file-lock2-fill">
+                    <label for="PassWorker">Contraseña</label>
+                </i>
+                <input type="password" class="form-control" formControlName="PassWorker">
+                <div
+                *ngIf="passWorker?.invalid && (passWorker?.dirty || passWorker?.touched)" class="alert alert-danger">
+                    HOLA5
+                </div>
+            </div>
+        </div>
+        <div class="col-1 col-3">
+            <p class="hidden">
+              a
+              a
+              a  
+            </p>
+            <div class="imageRef">
+                <p>    
+                </p>
+                <img src="https://images.emojiterra.com/twitter/512px/1f465.png" width="300px">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <a class=" btn btn-primary" (click)="addWorkers()">Agregar otro trabajador</a>
+    </div>
+
+    <form (submit)="submit()" [formGroup]="registerForm2">
+        <div formArrayName="Workers" *ngFor="let stop of workers.controls; let i = index">
+            <div [formGroupName]="i" >
+                <div class="form-group">
+                    <div class="row">
+                        <label class="col-2" align="center" [attr.for] ="'WorkerID' + i">ID del trabajador</label>
+
+                        <div class="col-3">
+                            <input type="number" [attr.id]="'WorkerID' + i" class="form-control" formControlName="WorkerID">
+                        </div>
+        
+                        <label class="col-2" align="center" [attr.for] ="'NameWorker' + i" >Nombre</label>
+                        <div class="col-3">
+                            <input type="text" [attr.id]="'NameWorker' + i" class="form-control" formControlName="NameWorker">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-2" align="center" [attr.for] ="'LastNameWorker' + i" >Apellido</label>
+                        <div class="col-3">
+                            <input type="text" [attr.id]="'LastNameWorker' + i" class="form-control" formControlName="LastNameWorker">
+                        </div>
+        
+                        <label class="col-2" align="center" [attr.for] ="'PassWorker' + i" >Contraseña</label>
+                        <div class="col-3">
+                            <input type="password" [attr.id]="'PassWorker' + i" class="form-control" formControlName="PassWorker">
+                        </div>
+                    </div>
+                    <div class="row">        
+                        <div class="col-5">
+                            <button class="btn btn-danger" align="right" (click)="removeWorkers(i)">Eliminar trabajador</button>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </form>
+
+    <button type="submit" class="btn btn-success" [disabled]="registerForm.invalid"> Enviar </button>
+    </form>
+    </body>
+</div>
+<app-footer></app-footer>

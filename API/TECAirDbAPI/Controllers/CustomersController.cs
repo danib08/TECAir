@@ -5,12 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using TECAirDbAPI.Models;
 
 namespace TECAirDbAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
+    //Customer Controller generated from DbContext
     public class CustomersController : ControllerBase
     {
         private readonly TECAirDbContext _context;
@@ -20,14 +23,22 @@ namespace TECAirDbAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Customers
+        /// <summary>
+        /// Multi value get of customers
+        /// </summary>
+        /// <returns>All customers in database</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
         {
             return await _context.Customers.ToListAsync();
         }
 
-        // GET: api/Customers/5
+        /// <summary>
+        /// Single value get customer 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Required customer</returns>
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<Customer>> GetCustomer(int id)
         {
@@ -41,8 +52,13 @@ namespace TECAirDbAPI.Controllers
             return customer;
         }
 
-        // PUT: api/Customers/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Put method to edit customer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="customer"></param>
+        /// <returns>State of query</returns>
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCustomer(int id, Customer customer)
         {
@@ -72,7 +88,11 @@ namespace TECAirDbAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Customers
+        /// <summary>
+        /// Method to create customers
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
@@ -97,7 +117,53 @@ namespace TECAirDbAPI.Controllers
             return CreatedAtAction("GetCustomer", new { id = customer.Customerid }, customer);
         }
 
-        // DELETE: api/Customers/5
+        
+        /// <summary>
+        /// Single value get customer 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Required customer</returns>
+
+        [HttpPost("Validate")]
+        public string CustomerValidation(Customer customer)
+        {
+            if (CustomerExists(customer.Customerid) && NameCustomer(customer.Namecustomer) && LastNameCustomer(customer.Lastnamecustomer))
+            {
+                var data = new JObject(new JProperty("Existe", "Si"));
+                return data.ToString();
+            }
+            else
+            {
+                var data = new JObject(new JProperty("Existe", "No"));
+                return data.ToString();
+            }
+
+        }
+
+
+        [HttpPost("LogIn")]
+        public string CustomerLogIn(Customer customer)
+        {
+            if (CustomerExists(customer.Customerid) && PassCustomer(customer.Passcustomer))
+            {
+                var data = new JObject(new JProperty("Existe", "Si"));
+                return data.ToString();
+            }
+            else
+            {
+                var data = new JObject(new JProperty("Existe", "No"));
+                return data.ToString();
+            }
+
+        }
+
+
+        /// <summary>
+        /// Method for deleting customer by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>State of task</returns>
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCustomer(int id)
         {
@@ -116,6 +182,21 @@ namespace TECAirDbAPI.Controllers
         private bool CustomerExists(int id)
         {
             return _context.Customers.Any(e => e.Customerid == id);
+        }
+
+        private bool NameCustomer(string name)
+        {
+            return _context.Customers.Any(e => e.Namecustomer.Equals(name));
+        }
+
+        private bool LastNameCustomer(string lastName)
+        {
+            return _context.Customers.Any(e => e.Lastnamecustomer.Equals(lastName));
+        }
+
+        private bool PassCustomer(string pass)
+        {
+            return _context.Customers.Any(e => e.Passcustomer.Equals(pass));
         }
     }
 }

@@ -1,0 +1,79 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <h2> Gestión de vuelos de TECAir </h2>
+    <body>
+    <form (submit)="submit()" [formGroup]="registerForm">
+    <div class="row">
+        <div class="col-1 col-5">    
+            <div class="form-group">
+                <i class="fa fa-plane"></i>
+                <label for="FlightID">Seleccione el vuelo</label>
+                <select class="form-control" id="FlightID" name="FlightID" formControlName="FlightID">
+                <option value="wenas">HOLA</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <i class="bi bi-info-square-fill"></i>
+                <label for="Status">Seleccione la acción a realizar</label>
+                <select class="form-control" id="Status" name="Status" formControlName="Status">
+                <option value="opened">Abrir</option>
+                <option value="closed">Cerrar</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <a class=" btn btn-primary" (click)="addFlights()">Gestionar otro vuelo</a>
+            </div>
+        </div>
+        <div class="col-1 col-3">
+            <p class="hidden">
+              a
+              a
+              a  
+            </p>
+            <div class="imageRef">
+                <p>    
+                </p>
+                <img class="image" src="https://cdn0.iconfinder.com/data/icons/time-and-date-18/32/Time_and_Date__Flight_Time-512.png" width="312px" height="200px" align="center">
+            </div>
+        </div>
+    </div>
+        
+        <form (submit)="submit()" [formGroup]="registerForm2">
+            <p>
+
+            </p>
+            <div formArrayName="Flights" *ngFor="let discount of flights.controls; let i = index">
+                <div [formGroupName]="i">
+                    <div class="row">
+                        <i class="fa fa-plane col-md-1">
+                            <label [attr.for]="'FlightID' + i">Vuelo</label>
+                        </i>
+                        <div class="col-md-3">
+                            <select class="form-control" [attr.id]="'FlightID' + i" formControlName="FlightID"> 
+                                <option value="tardes"> Hola3</option>
+                            </select>
+                        </div>
+                        <i class="bi bi-info-square-fill col-md-1">
+                            <label [attr.for]="'Status' + i">Estado</label>
+                        </i>
+                        <div class="col-md-3">
+                            <select class="form-control" [attr.id]="'Status' + i" formControlName="Status"> 
+                                <option value="opened"> Abrir</option>
+                                <option value="closed"> Cerrar</option>
+                            </select>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-danger" (click)="removeFlights(i)">Eliminar opción</button>
+                        </div>
+                    </div>
+                    <p>
+
+                    </p>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="registerForm.invalid"> Enviar </button>
+        </form>
+    </form>
+    </body>
+</div>
+<app-footer></app-footer>

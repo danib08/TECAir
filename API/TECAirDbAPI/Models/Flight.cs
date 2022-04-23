@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace TECAirDbAPI.Models
 {
+    //Flight Model generated from DbContext
     public partial class Flight
     {
         
@@ -16,7 +17,7 @@ namespace TECAirDbAPI.Models
         public DateTime Arrival { get; set; }
         public string Origin { get; set; }
         public string Destination { get; set; }
-        public string Stops { get; set; }
+        public string[] Stops { get; set; }
         public string Status { get; set; }
         public int? Price { get; set; }
         public int? Discount { get; set; }
