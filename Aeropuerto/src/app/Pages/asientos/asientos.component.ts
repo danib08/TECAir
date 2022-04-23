@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { GetService } from 'src/app/Services/get-service';
 import { UserInFlightModel } from '../models/user-in-flight-model';
 import { FlightCapModel } from '../models/flight-cap-model';
+import { PutService } from 'src/app/Services/put-service';
 @Component({
   selector: 'app-asientos',
   templateUrl: './asientos.component.html',
@@ -19,11 +20,17 @@ export class AsientosComponent implements OnInit {
     PassangerCap: 0
   }
 
+  customerInFlight: UserInFlightModel ={
+    customerid: 0,
+    flightid: '',
+    seatnum: 0
+  }
+
   State = false;
   /**
    * Constructor Method
    */
-  constructor(private cookieSvc:CookieService,private router:Router, private ApiService: GetService) { 
+  constructor(private cookieSvc:CookieService,private router:Router, private ApiService: GetService, private putSvc: PutService) { 
     this.getUserCapacity();
   }
 
@@ -81,7 +88,7 @@ export class AsientosComponent implements OnInit {
  */
   setArray(customerArray:UserInFlightModel[]){
     for(let i = 0; i < customerArray.length; i++){
-      this.array.push(customerArray[i].seatnumber);
+      this.array.push(customerArray[i].seatnum);
     }
     this.State = true;
   }
@@ -96,8 +103,23 @@ export class AsientosComponent implements OnInit {
   /**
    * redirects to a new component
    */
-  checkPago(){
-    this.router.navigate(["reservacionVuelo"]);
+  ready(){
+    if(this.cookieSvc.get('seatNumber') == ''){
+      alert("Debe seleccionar un asiento")
+    }
+    else{
+      this.customerInFlight.customerid = parseInt(this.cookieSvc.get('CustomerID'));
+      this.customerInFlight.flightid = this.cookieSvc.get('FlightID');
+      this.customerInFlight.seatnum = parseInt(this.cookieSvc.get('seatNumber'));
+      this.putSvc.setSeat(this.customerInFlight, this.cookieSvc.get('FlightID'), this.cookieSvc.get('CustomerID')).subscribe(
+        res =>{
+          this.router.navigate(["reservacionVuelo"]);
+        }, err => {
+          alert("Ha ocurrido un error")
+        }
+      );
+      
+    }
   }
 
   /***

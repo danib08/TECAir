@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/Services/post-service';
-import { UserValModel } from '../../models/user-val-model';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { CustomerModel } from '../../models/customer';
@@ -42,7 +41,12 @@ export class ValidacionUsuarioComponent implements OnInit {
           this.cookieSvc.set('CustomerID', this.User.customerid.toString());
           this.cookieSvc.set('CustomerName', this.User.namecustomer);
           this.cookieSvc.set('CustomerLN', this.User.lastnamecustomer);
-          this.router.navigate(["busquedaVuelo"]);
+          if(this.cookieSvc.get('FlightID')==''){
+            this.router.navigate(["busquedaVuelo"]);
+          }
+          else{
+            this.router.navigate(["pago"]);
+          }
         }else{
           alert("El usuario ingresado no existe")
         }

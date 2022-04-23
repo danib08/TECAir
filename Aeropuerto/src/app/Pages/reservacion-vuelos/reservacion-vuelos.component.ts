@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef,  ViewChild } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { GetService } from 'src/app/Services/get-service';
 import { FlightModel } from '../models/flight.model';
+import {jsPDF} from "jspdf";
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-reservacion-vuelos',
   templateUrl: './reservacion-vuelos.component.html',
@@ -29,7 +31,7 @@ export class ReservacionVuelosComponent implements OnInit {
   lastNameCustomer = this.cookieSvc.get('CustomerLN');
   numAsiento = this.cookieSvc.get("seatNumber");
   Status = false;
-  constructor(private cookieSvc:CookieService, private apiService:GetService) {
+  constructor(private cookieSvc:CookieService, private apiService:GetService, private router:Router) {
     //Method for asking the API for the information of the flight
   }
   ngOnInit(): void {
@@ -46,5 +48,22 @@ export class ReservacionVuelosComponent implements OnInit {
         alert("Ha ocurrido un error")
       }
     );
+  }
+  @ViewChild('content', {static: false})el!:ElementRef;
+  makePDF(){
+    let pdf = new jsPDF('p','pt','a4');
+    pdf.html(this.el.nativeElement,{
+      callback: (pdf) => {
+        pdf.save("Boleto.pdf"); 
+      }
+    });
+  }
+  home(){
+    this.cookieSvc.delete('CustomerID');
+    this.cookieSvc.delete('CustomerLN');
+    this.cookieSvc.delete('CustomerName');
+    this.cookieSvc.delete("FlightID");
+    this.cookieSvc.delete("seatNumber");
+    this.router.navigate(["home"]);
   }
 }

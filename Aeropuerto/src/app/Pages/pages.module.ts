@@ -17,6 +17,7 @@ import { ReservacionVuelosComponent } from './reservacion-vuelos/reservacion-vue
 import { BagAssignComponent } from './asignar-maletas/bag-assign/bag-assign.component';
 import { AsientosComponent } from './asientos/asientos.component';
 import { ValidacionUsuarioComponent } from './validacion-usuario/validacion-usuario/validacion-usuario.component';
+import { PaymentConfirmationComponent } from './confirmacion/payment-confirmation/payment-confirmation.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ValidacionUsuarioComponent } from './validacion-usuario/validacion-usua
     ManageFlightsComponent,
     BagAssignComponent,
     AsientosComponent,
-    ValidacionUsuarioComponent
+    ValidacionUsuarioComponent,
+    PaymentConfirmationComponent
   ],
   imports: [
     CommonModule,

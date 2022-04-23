@@ -6,6 +6,7 @@ import { CustomerModel } from "../Pages/models/customer";
 import { FlightSearchModel } from "../Pages/models/flight-search-model";
 import { FlightModel } from "../Pages/models/flight.model";
 import { LoginModelW } from "../Pages/models/login-model-w";
+import { UserInFlightModel } from "../Pages/models/user-in-flight-model";
 import { UserValModel } from "../Pages/models/user-val-model";
 import { WorkerModel } from "../Pages/models/worker-model";
 
@@ -21,6 +22,7 @@ export class PostService {
     private searchURL = `${this.baseURL}\\Flights/SearchFlight`;
     private logInWURL = `${this.baseURL}\\Workers/LogIn`;
     private validateUserURL = `${this.baseURL}\\Customers/Validate`;
+    private addCustomerInFlightURL = `${this.baseURL}\\CustomersInFlight`;
 
     /**
      * Método constructor
@@ -56,5 +58,9 @@ export class PostService {
 
     validateUser(customer: UserValModel):Observable<any>{
         return this.http.post<any>(this.validateUserURL, customer);
+    }
+
+    addCustomerInFlight(customer:UserInFlightModel):Observable<any>{
+        return this.http.post<any>(this.addCustomerInFlightURL, customer);
     }
 }

@@ -44,7 +44,7 @@
         <h6 class="w3-opacity">Precio original ${{flights[0].price}} </h6>
         <p>Descuento {{flights[0].discount}} %</p>
         <p>Vuelo con: {{flights[0].stops.length}} escalas</p>
-        <button class="w3-button w3-block w3-black w3-margin-bottom">Reservación</button>
+        <button class="w3-button w3-block w3-black w3-margin-bottom" (click)="reserv(0)">Reservación</button>
       </div>
     </div>
     <div class="w3-third w3-margin-bottom">
@@ -54,7 +54,7 @@
         <h6 class="w3-opacity">Precio original ${{flights[1].price}} </h6>
         <p>Descuento {{flights[1].discount}} %</p>
         <p>Vuelo con: {{flights[1].stops.length}} escalas</p>
-        <button class="w3-button w3-block w3-black w3-margin-bottom">Reservación</button>
+        <button class="w3-button w3-block w3-black w3-margin-bottom" (click)="reserv(1)">Reservación</button>
       </div>
     </div>
     <div class="w3-third w3-margin-bottom">
@@ -64,7 +64,7 @@
         <h6 class="w3-opacity">Precio original ${{flights[2].price}} </h6>
         <p>Descuento {{flights[2].discount}} %</p>
         <p>Vuelo con: {{flights[2].stops.length}} escalas</p>
-        <button class="w3-button w3-block w3-black w3-margin-bottom">Reservación</button>
+        <button class="w3-button w3-block w3-black w3-margin-bottom" (click)="reserv(2)">Reservación</button>
       </div>
     </div>
   </div>
