@@ -62,7 +62,7 @@ CREATE TABLE BAG(
 );
 
 CREATE TABLE Customer_in_Flight(
-	SeatNum VARCHAR(3),
+	SeatNum INT,
 	CustomerID INT,
 	FlightID VARCHAR(7),
 	FOREIGN KEY (CustomerID) REFERENCES CUSTOMER(CustomerID),

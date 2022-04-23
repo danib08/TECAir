@@ -53,7 +53,9 @@ namespace TECAirDbAPI.Controllers
                 if (flights.First().Origin.Equals(flight.Origin) && flights.First().Destination.Equals(flight.Destination))
                 {
 
-                    data.Add(flights.First());
+                    if(flights.First().Status.Equals("On Time") || flights.First().Status.Equals("Scheduled"))
+
+                        data.Add(flights.First());
                     flights.RemoveAt(0);
                     
                 }
