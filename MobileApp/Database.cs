@@ -12,7 +12,7 @@ namespace MobileApp
     {
         readonly string folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
         private const string Ipv4 = "192.168.0.10";
-        private readonly string baseAddress = "https://" + Ipv4 + ":44361/api/";
+        private readonly string baseAddress = "http://" + Ipv4 + "/api/";
 
         public bool CreateDatabase()
         {
@@ -45,6 +45,7 @@ namespace MobileApp
         {
             string url = "Customers";
             using WebClient webClient = new WebClient { BaseAddress = baseAddress };
+            webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
             string send = webClient.DownloadString(url);
 
             List<Customer> serverList = JsonConvert.DeserializeObject<List<Customer>>(send);
@@ -59,7 +60,7 @@ namespace MobileApp
                 foreach (Customer server in serverList)
                 {
                     // Checks if data was already on the server
-                    if (local.Customerid == server.Customerid)
+                    if (local.customerid == server.customerid)
                     {
                         isLocalChange = false;
                         break;
@@ -69,6 +70,11 @@ namespace MobileApp
                 {
                     // Adds new data if it wasn't yet on the server
                     newList.Add(local);
+                    string json = JsonConvert.SerializeObject(local);
+
+                    using WebClient webClient2 = new WebClient { BaseAddress = baseAddress };
+                    webClient2.Headers[HttpRequestHeader.ContentType] = "application/json";
+                    webClient2.UploadString(url, json);
                 }
             }
 
@@ -309,8 +315,8 @@ namespace MobileApp
             try
             {
                 using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
-                List<Customer> customers = connection.Query<Customer>("SELECT * FROM Customer Where Customerid=?", customerId);
-                return customers.Find(customer => customer.Customerid == customerId); ;
+                List<Customer> customers = connection.Query<Customer>("SELECT * FROM Customer Where customerid=?", customerId);
+                return customers.Find(customer => customer.customerid == customerId); ;
             }
             catch (SQLiteException ex)
             {
@@ -402,8 +408,8 @@ namespace MobileApp
             try
             {
                 using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
-                connection.Query<Customer>("UPDATE Customer set Namecustomer=?,Lastnamecustomer?=,Passcustomer=?,Email=?,Phone=?,Studentid=?,University=?" +
-                    " Where Customerid=?", customer.Namecustomer, customer.Lastnamecustomer, customer.Passcustomer, customer.Customerid, customer.Email, customer.Phone, customer.Studentid, customer.University);
+                connection.Query<Customer>("UPDATE Customer set namecustomer=?,lastnamecustomer?=,passcustomer=?,email=?,phone=?,studentid=?,university=?" +
+                    " Where customerid=?", customer.namecustomer, customer.lastnamecustomer, customer.passcustomer, customer.customerid, customer.email, customer.phone, customer.studentid, customer.university);
                 return true;
             }
             catch (SQLiteException ex)

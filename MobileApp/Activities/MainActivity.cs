@@ -40,6 +40,7 @@ namespace MobileApp.Activities
             buttonSignIn.Click += (sender, e) =>
             {
                 Intent intent = new Intent(this, typeof(SignInActivity));
+                OverridePendingTransition(Android.Resource.Animation.SlideInLeft, Android.Resource.Animation.SlideOutRight);
                 StartActivity(intent);
             };
         }

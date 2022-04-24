@@ -7,14 +7,14 @@ namespace MobileApp.Models
     {
 
         [PrimaryKey]
-        public int Customerid { get; set; }
-        public string Namecustomer { get; set; }
-        public string Lastnamecustomer { get; set; }
-        public string Passcustomer { get; set; }
-        public string Email { get; set; }
-        public int Phone { get; set; }
-        public int Studentid { get; set; }
-        public string University { get; set; }
-        public int Miles { get; set; }
+        public int customerid { get; set; }
+        public string namecustomer { get; set; }
+        public string lastnamecustomer { get; set; }
+        public string passcustomer { get; set; }
+        public string email { get; set; }
+        public int phone { get; set; }
+        public int studentid { get; set; }
+        public string university { get; set; }
+        public int miles { get; set; }
     }
 }
