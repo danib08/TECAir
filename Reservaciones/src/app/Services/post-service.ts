@@ -1,55 +1,62 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
-import { BuscarVuelo } from "../Pages/models/buscar-vuelo";
-import { Customer } from "../Pages/models/customer";
-import { IniciarSesion } from "../Pages/models/iniciar-sesion";
+import { CustomerModel } from "../Pages/models/customer";;
+import { FlightModel } from "../Pages/models/flight.model";
+import { UserInFlightModel } from "../Pages/models/user-in-flight-model";
 
 @Injectable({
     providedIn: 'root'
 })
 export class PostService {
-    private baseURL = "http://localhost..."
-    private addWorkerURL = "https://tecair.free.beeceptor.com"
+    private baseURL = "http://localhost/api";
+    private addCustomerURL = this.baseURL+'/Customers';
+    private searchURL = this.baseURL+'/Flights/SearchFlight';
+    private logInWURL = this.baseURL+'/Customers/LogIn';
+    private addCustomerInFlightURL = this.baseURL+'/CustomersInFlights';
 
     /**
      * Método constructor
-     * @param http
+     * @param http 
      */
      constructor(private http: HttpClient) {
 
     }
+  
+
     /**
-     * @description Method for register a user
-     * @param Customer
-     * @returns EstadoModel Object
+     * search a flight from the db
+     * @param search 
+     * @returns 
      */
-    addCustomer(Usuarios: Customer):Observable<any>{
-      return this.http.post<any>(this.addWorkerURL, Usuarios);
-    }
-    /**
-     * @description Method for login a user
-     * @param Customer
-     * @returns EstadoModel Object
-     */
-    login(Usuarios: IniciarSesion):Observable<any>{
-      return this.http.post<any>(this.addWorkerURL, Usuarios);
-    }
-    /**
-     * @description Method for search flights
-     * @param Customer
-     * @returns EstadoModel Object
-     */
-    addBusquedaVuelo(vuelo:BuscarVuelo):Observable<any>{
-      return this.http.post<any>(this.addWorkerURL, vuelo);
+    searchFlights(search: FlightModel):Observable<any>{
+        return this.http.post<any>(this.searchURL, search);
     }
 
-    addWorker(worker: FormControl):Observable<any>{
-        return this.http.post<any>(this.addWorkerURL, worker);
+    /**
+     * Validate the login worker with a http request
+     * @param customer 
+     * @returns 
+     */
+    logInCustomer(customer: CustomerModel):Observable<any>{
+        return this.http.post<any>(this.logInWURL, customer);
     }
 
-    addFlight(flight: FormControl):Observable<any>{
-        return this.http.post<any>(this.addWorkerURL, flight);
+    /**
+     * add a customer into the db
+     * @param customer 
+     * @returns 
+     */
+    addCustomer(customer: CustomerModel):Observable<any>{
+        return this.http.post<any>(this.addCustomerURL, customer);
+    }
+
+    /**
+     * add a customer in flight to the db
+     * @param customer 
+     * @returns 
+     */
+    addCustomerInFlight(customer:UserInFlightModel):Observable<any>{
+        return this.http.post<any>(this.addCustomerInFlightURL, customer);
     }
 }

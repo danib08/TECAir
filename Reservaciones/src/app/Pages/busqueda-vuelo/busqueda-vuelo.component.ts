@@ -1,91 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Vuelos } from '../models/vuelos.model';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { BuscarVuelo } from '../models/buscar-vuelo';
 import { GetService } from 'src/app/Services/get-service';
-import { Flight } from '../models/flight';
+
 import { PostService } from 'src/app/Services/post-service';
+import { FlightModel } from '../models/flight.model';
 // Test for displaying all the flights
-const COUNTRIES: Vuelos[] = [
-  {
-    Origin: "Mexico",
-    Destination: "United States",
-    BagQuantity: 4546,
-    UserQuantity: 8994,
-    FlightID: "XML1",
-    DepartureTime: "21:00",
-    ArrivalTime:"12:47",
-    Price:450,
-    Stops:"4"
-  },
-  {
-    Origin: "Canada",
-    Destination: "United States",
-    BagQuantity: 4546,
-    UserQuantity: 8994,
-    FlightID: "XML2",
-    DepartureTime: "21:00",
-    ArrivalTime:"12:47",
-    Price:150,
-    Stops:"3"
-  },
-  {
-    Origin: "Costa Rica",
-    Destination: "Canada",
-    BagQuantity: 4546,
-    UserQuantity: 8994,
-    FlightID: "XML3",
-    DepartureTime: "21:00",
-    ArrivalTime:"12:47",
-    Price:400,
-    Stops:"0"
-  },
-  {
-    Origin: "Panama",
-    Destination: "España",
-    BagQuantity: 4546,
-    UserQuantity: 8994,
-    FlightID: "XML4",
-    DepartureTime: "21:00",
-    ArrivalTime:"12:47",
-    Price:350,
-    Stops:"9"
-  },
-  {
-    Origin: "Japon",
-    Destination: "España",
-    BagQuantity: 4546,
-    UserQuantity: 8994,
-    FlightID: "XML5",
-    DepartureTime: "21:00",
-    ArrivalTime:"12:47",
-    Price:550,
-    Stops:"1"
-  },
-  {
-    Origin: "Peru",
-    Destination: "Costa Rica",
-    BagQuantity: 4546,
-    UserQuantity: 8994,
-    FlightID: "XML6",
-    DepartureTime: "21:00",
-    ArrivalTime:"12:47",
-    Price:430,
-    Stops:"4"
-  },
-  {
-    Origin: "Uruguay",
-    Destination: "Russia",
-    BagQuantity: 4546,
-    UserQuantity: 8994,
-    FlightID: "XML7",
-    DepartureTime:"21:00",
-    ArrivalTime: "12:47",
-    Price:40,
-    Stops:"6"
-  }
-];
 
 @Component({
   selector: 'app-busqueda-vuelo',
@@ -94,43 +14,57 @@ const COUNTRIES: Vuelos[] = [
 })
 export class BusquedaVueloComponent implements OnInit {
 
-  constructor(private router:Router, private cookieSvc:CookieService,private apiService:GetService,private apiServ: PostService) { }
+  constructor(private router:Router, private cookieSvc:CookieService,private apiService: PostService) { }
 
-  busqueda:BuscarVuelo={
-    Origin: "",
-    Destination: "",
+  search: FlightModel = {
+    origin: '',
+    destination: '',
+    bagquantity: 0,
+    userquantity: 0,
+    flightid: 'IB7811',
+    departure: '2022-09-07T20:20:00',
+    arrival: '2022-09-07T20:20:00',
+    price: 0,
+    stops: [],
+    gate: 0,
+    status: '',
+    discount: 0,
+    planeid: 'TIMJH',
+    workerid: 117730482
   }
 
   //List with all the flights
-  listaVuelos:Flight[]=[];
-
+  fligthsArray:FlightModel[]=[];
   //Show the list of flights
-  Estado=false;
-
-  listVuelos= COUNTRIES;
+  State=false;
 
   ngOnInit(): void {}
 
-  //Testing the button
-  mostrarInfo(){
-    this.Estado=true;
-    this.apiService.getVuelos(this.busqueda).subscribe(
+  /**
+   * Create the FlightID cookie
+   * @param FlightID 
+   */
+  connectReservacion(FlightID:string){
+    console.log(FlightID);
+    this.cookieSvc.set("FlightID", FlightID);
+    this.router.navigate(["pago"]);
+  }
+
+  /**
+   * Http Post call to search flights
+   */
+  getFlightsSearch(){
+    console.log(this.search)
+    this.apiService.searchFlights(this.search).subscribe(
       res => {
-        this.listaVuelos = res;
+        this.fligthsArray = res;
+        
       },
-      err => {
+      err =>{
         alert("Ha habido un error")
       }
     );
-  }
+    this.State = true;
 
-  getListaVuelos(event: { preventDefault: () => void; target: any; }){
-    //Ask API for all the flight that comes form Origin to Destination
-  }
-
-  connectReservacion(VueloID:string){
-    console.log(VueloID)
-    this.cookieSvc.set("IDVuelo", VueloID);
-    this.router.navigate(["asientos"]);
   }
 }

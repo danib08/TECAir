@@ -48,7 +48,7 @@ export class BusquedaVueloComponent implements OnInit {
   connectReservacion(FlightID:string){
     console.log(FlightID);
     this.cookieSvc.set("FlightID", FlightID);
-    this.router.navigate(["asientos"]);
+    this.router.navigate(["pago"]);
   }
 
   /**
