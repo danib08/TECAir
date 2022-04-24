@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { BusquedaVueloComponent } from './busqueda-vuelo/busqueda-vuelo.component';
 import { GestionUsuarioComponent } from './gestion-usuario/gestion-usuario.component';
 import { ReservacionVuelosComponent } from './reservacion-vuelos/reservacion-vuelos.component';
+import { AsientosComponent } from './asientos/asientos.component';
+import { PaymentConfirmationComponent } from './confirmacion/payment-confirmation/payment-confirmation.component';
 
 
 @NgModule({
@@ -17,8 +19,9 @@ import { ReservacionVuelosComponent } from './reservacion-vuelos/reservacion-vue
     LoginComponent,
     BusquedaVueloComponent,
     GestionUsuarioComponent,
-    ReservacionVuelosComponent
-
+    ReservacionVuelosComponent,
+    AsientosComponent,
+    PaymentConfirmationComponent
   ],
   imports: [
     CommonModule,

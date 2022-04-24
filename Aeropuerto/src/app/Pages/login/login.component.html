@@ -6,9 +6,9 @@
     <div class="container">
       <div class="row full-height justify-content-center">
         <div class="col-12 text-center align-self-center py-5">
-          <h1>Air Tec - Su aerolínea de confianza </h1>
+          <h1>TECAir - Su aerolínea de confianza </h1>
           <div class="section pb-5 pt-5 pt-sm-2 text-center">
-            <h6 class="mb-0 pb-3"><span>Iniciar sesión </span><span>Registrar Usuario</span></h6>
+            <h6 class="mb-0 pb-3"><span>Plataforma para trabajadores </span></h6>
             <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
             <label for="reg-log"></label>
             <div class="card-3d-wrap mx-auto">
@@ -20,56 +20,14 @@
                       <form (submit)="loginUser($event)">
                         <h4  class="mb-4 pb-3">Iniciar sesión</h4>
                         <div class="form-group">
-                          <input type="email" name="logemail" class="form-style" placeholder="Email" id="logemail" autocomplete="off">
-                          <i class="material-icons">email</i>
+                          <input type="number" name="id" class="form-style" placeholder="ID del usuario" id="id" autocomplete="off" required>
+                          <i class="material-icons">person</i>
                         </div>
                         <div class="form-group mt-2">
-                          <input type="password" name="logpass" class="form-style" placeholder="Contraseña" id="logpass" autocomplete="off">
+                          <input type="password" name="password" class="form-style" placeholder="Contraseña" id="password" autocomplete="off" required>
                           <i class="material-icons">locks</i>
                         </div>
                         <button class="btn mt-4" type="submit">Iniciar sesión</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-back">
-                  <div class="center-wrap" >
-                    <div class="section text-center">
-                      <!-- Section about SignUp -->
-                      <form (submit)="SignUpUser($event)">
-                        <h4 class="mb-4 pb-3">Registrar Usuario</h4>
-                        <div class="form-group">
-                          <input type="text" name="logname" class="form-style" placeholder="Nombre completo" id="logname" autocomplete="off">
-                          <i class="material-icons">account_circle</i>
-                        </div>
-                        <div class="form-group mt-2">
-                          <input type="email" name="logemail" class="form-style" placeholder="Email" id="logemail" autocomplete="off">
-                          <i class="material-icons">email</i>
-                        </div>
-                        <div class="form-group mt-2">
-                          <input type="password" name="logpass" class="form-style" placeholder="Contraseña" id="logpass" autocomplete="off">
-                          <i class="material-icons">lock</i>
-                        </div>
-
-                        <div class="form-group mt-2">
-                          <input type="text" name="logtelef" class="form-style" placeholder="Telefono personal" id="logtelef" autocomplete="off">
-                          <i class="material-icons">call</i>
-                        </div>
-
-                        <div class="form-group mt-2">
-                          <label class="form-check-label">Si es estudiantes de universidad</label>
-                        </div>
-
-                        <div class="form-group mt-2">
-                          <input type="text" name="logUniver" class="form-style" placeholder="Universidad" id="logUniver" autocomplete="off">
-                          <i class="material-icons">school</i>
-                        </div>
-
-                        <div class="form-group mt-2">
-                          <input type="text" name="logCarnet" class="form-style" placeholder="Carnet" id="logCarnet" autocomplete="off">
-                          <i class="material-icons">assignment_ind</i>
-                        </div>
-                        <button class="btn mt-4" type="submit">Registrar Usuario</button>
                       </form>
                     </div>
                   </div>

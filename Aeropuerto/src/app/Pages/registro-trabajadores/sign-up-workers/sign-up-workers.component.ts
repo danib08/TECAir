@@ -10,72 +10,118 @@ import { PostService } from 'src/app/Services/post-service';
 })
 export class SignUpWorkersComponent implements OnInit {
 
+  /**
+   * Constructor method
+   * @param formBuilder 
+   * @param apiService 
+   */
   constructor(private formBuilder: FormBuilder, private apiService: PostService) { }
 
+   /**
+   * Method to be executed at component startup
+   */
   ngOnInit(): void {
   }
 
+  /**
+   * get the workerid from the registerForm
+   */
   get workerID(){
-    return this.registerForm.get('WorkerID');
+    return this.registerForm.get('workerid');
   }
+  /**
+   * get the nameWorker from the registerForm
+   */
   get nameWorker(){
-    return this.registerForm.get('NameWorker');
+    return this.registerForm.get('nameworker');
   }
+  /**
+   * get the lastNameWorker from the registerForm
+   */
   get lastNameWorker(){
-    return this.registerForm.get('LastNameWorker');
+    return this.registerForm.get('lastnameworker');
   }
+  /**
+   * get the password from the registerForm
+   */
   get passWorker(){
-    return this.registerForm.get('PassWorker');
+    return this.registerForm.get('passworker');
   }
+  /**
+   * get the workers formArray
+   */
   get workers(){
     return this.registerForm2.get('Workers') as FormArray;
   }
   registerForm = this.formBuilder.group({
-    WorkerID: [0, Validators.required],
-    NameWorker: ['', Validators.required],
-    LastNameWorker: ['', Validators.required],
-    PassWorker: ['',Validators.required],
+    workerid: [0, Validators.required],
+    nameworker: ['', Validators.required],
+    lastnameworker: ['', Validators.required],
+    passworker: ['',Validators.required],
   });
 
   registerForm2 = this.formBuilder.group({
     Workers:this.formBuilder.array([])
   });
 
+  /**
+   * Add a worker to the formArray
+   */
   addWorkers(){
     const workersFormGroup = this.formBuilder.group({
-      WorkerID: 0,
-      NameWorker: '',
-      LastNameWorker: '',
-      PassWorker: ''
+      workerid: 0,
+      nameworker: '',
+      lastnameworker: '',
+      passworker: ''
     });
     this.workers.push(workersFormGroup);
   }
 
+  /**
+   * Delete a worker from the formArray
+   * @param index 
+   */
   removeWorkers(index : number){
     this.workers.removeAt(index);
   }
 
+  /**
+   * Send the workers to the db
+   * @returns 
+   */
   submit(){
+    let flag = false;
+    if(this.workers.length != 0){
+      flag = true;
+    }
     if(!this.registerForm.valid){
       alert("ERROR");
       return;
     }
     else{
+      console.log(this.registerForm.value)
       this.apiService.addWorker(this.registerForm.value).subscribe(
         res => {
+          if(flag == false){
+            location.reload()
+          }
           console.log(res);
+        }, err=>{
+          alert("Ha ocurrido un error")
         }
       );
       if(this.workers.length != 0){
-        this.apiService.addWorker(this.workers.value).subscribe(
-          res => {
-            console.log(res);
-          }
-        );
+        for (let i = 0; i< this.workers.length; i++){
+          this.apiService.addWorker(this.workers.at(i).value).subscribe(
+            res => {
+              console.log(res);
+            },err=>{
+              alert("Ha ocurrido un error")
+            }
+          );
+        }
+        location.reload();
       }
-
-      
-      
     }
   }
 }

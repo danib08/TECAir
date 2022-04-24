@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+
+body{
+  background-color: #1f2029;
+  width: 100%;
+  height: auto;
+  background:url(src/assets/bg.jpg)
+}
+
+.card {
+  border: none;
+  padding: 10px;
+  min-width: 550pt;
+  background-color: #1c1e21;
+  color: #fff;
+}
+.btn.btn-primary {
+  margin-left: 15px;
+  width: 15%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  background-image: linear-gradient(to right, #000000 0%, #79CBCA 51%, #7a7e83 100%);
+  border-color: black;
+  transition: 0.5s;
+  background-size: 200% auto
+}
+.h5{
+  color: tomato;
+  text-align-last: center;
+}
+.btn.btn.btn-primary:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none
+}
+
+.btn.btn-primary:hover .fas.fa-arrow-right {
+  transform: translate(15px);
+  transition: transform 0.2s ease-in
+}

@@ -141,7 +141,9 @@ namespace TECAirDbAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<CustomerInFlight>> PostCustomerInFlight(CustomerInFlight customerInFlight)
         {
+            var flight = await _context.Flights.FindAsync(customerInFlight.Flightid);
             _context.CustomerInFlights.Add(customerInFlight);
+            flight.Userquantity += 1;
             try
             {
                 await _context.SaveChangesAsync();

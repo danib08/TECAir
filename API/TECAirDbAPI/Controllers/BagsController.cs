@@ -99,7 +99,9 @@ namespace TECAirDbAPI.Controllers
         [HttpPost("Bag")]
         public async Task<ActionResult<Bag>> PostBag(Bag bag)
         {
+            var flight = await _context.Flights.FindAsync(bag.Flightid);
             _context.Bags.Add(bag);
+            flight.Bagquantity += 1;
             try
             {
                 await _context.SaveChangesAsync();

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using TECAirDbAPI.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace TECAirDbAPI.Controllers
 {
@@ -174,7 +175,6 @@ namespace TECAirDbAPI.Controllers
         /// <param name="id"></param>
         /// <param name="flight"></param>
         /// <returns>State of query</returns>
-
         [HttpPut("Status/{id}")]
         public async Task<IActionResult> FlightStatus(string id, Flight flight)
         {

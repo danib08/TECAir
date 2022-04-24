@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CustomerModel } from '../models/customer';
+import { PostService } from 'src/app/Services/post-service';
 
 @Component({
   selector: 'app-gestion-usuario',
@@ -7,16 +9,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GestionUsuarioComponent implements OnInit {
 
-  constructor() { }
-
+  /**
+   * Constructor Method
+   * @param apiService 
+   */
+  constructor(private apiService: PostService){}
+    newUser: CustomerModel={
+    customerid: 0,
+    namecustomer: "",
+    lastnamecustomer: "",
+    passcustomer: "",
+    email: "",
+    phone: 0,
+    studentid: 0,
+    university: "",
+    miles: 0
+  }
+  /**
+   * Method to be executed at component startup
+   */
   ngOnInit(): void {
   }
   /**
    * @description: Method for adding new users to the DB
    */
-  SignUpUser(event: { preventDefault: () => void; target: any; }){
-    event.preventDefault()
-    const target= event.target
-    console.log("Hola mundo 2")
+   SignUpUser(){
+    this.apiService.addCustomer(this.newUser).subscribe(
+      res =>{
+        location.reload();
+      }, err => {
+        alert("Ha ocurrido un error")
+      }
+    );
   }
 }

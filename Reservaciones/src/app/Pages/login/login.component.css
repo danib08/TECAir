@@ -104,7 +104,7 @@ h6 span{
   position: relative;
   width: 440px;
   max-width: 100%;
-  height: 440px;
+  height: 480px;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   perspective: 800px;
@@ -122,7 +122,7 @@ h6 span{
 }
 .card-front, .card-back {
   width: 100%;
-  height: 125%;
+  height:150%;
   background-color: #2a2b38;
   background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
   background-position: bottom center;
