@@ -9,18 +9,25 @@ import { PostService } from 'src/app/Services/post-service';
 })
 export class GestionUsuarioComponent implements OnInit {
 
+  /**
+   * Constructor Method
+   * @param apiService 
+   */
   constructor(private apiService: PostService){}
     newUser: CustomerModel={
-    CustomerID: 0,
-    NameCustomer: "",
-    LastNameCustomer: "",
-    PassCustomer: "",
-    Email: "",
-    Phone: 0,
-    StudentID: 0,
-    University: "",
-    Miles: 0
+    customerid: 0,
+    namecustomer: "",
+    lastnamecustomer: "",
+    passcustomer: "",
+    email: "",
+    phone: 0,
+    studentid: 0,
+    university: "",
+    miles: 0
   }
+  /**
+   * Method to be executed at component startup
+   */
   ngOnInit(): void {
   }
   /**
@@ -30,6 +37,8 @@ export class GestionUsuarioComponent implements OnInit {
     this.apiService.addCustomer(this.newUser).subscribe(
       res =>{
         location.reload();
+      }, err => {
+        alert("Ha ocurrido un error")
       }
     );
   }

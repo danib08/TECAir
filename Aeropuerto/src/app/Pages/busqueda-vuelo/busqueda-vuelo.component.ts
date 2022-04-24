@@ -17,9 +17,21 @@ export class BusquedaVueloComponent implements OnInit {
 
   constructor(private router:Router, private cookieSvc:CookieService,private apiService: PostService) { }
 
-  search: FlightSearchModel = {
-    Origin: "",
-    Destination: ""
+  search: FlightModel = {
+    origin: '',
+    destination: '',
+    bagquantity: 0,
+    userquantity: 0,
+    flightid: 'IB7811',
+    departure: '2022-09-07T20:20:00',
+    arrival: '2022-09-07T20:20:00',
+    price: 0,
+    stops: [],
+    gate: 0,
+    status: '',
+    discount: 0,
+    planeid: 'TIMJH',
+    workerid: 117730482
   }
 
   //List with all the flights
@@ -29,13 +41,21 @@ export class BusquedaVueloComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  connectReservacion(VueloID:string){
-    console.log(VueloID)
-    this.cookieSvc.set("IDVuelo", VueloID);
-    this.router.navigate(["asientos"]);
+  /**
+   * Create the FlightID cookie
+   * @param FlightID 
+   */
+  connectReservacion(FlightID:string){
+    console.log(FlightID);
+    this.cookieSvc.set("FlightID", FlightID);
+    this.router.navigate(["pago"]);
   }
 
+  /**
+   * Http Post call to search flights
+   */
   getFlightsSearch(){
+    console.log(this.search)
     this.apiService.searchFlights(this.search).subscribe(
       res => {
         this.fligthsArray = res;

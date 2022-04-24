@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { PostService } from 'src/app/Services/post-service';
+import { LoginModelW } from '../models/login-model-w';
 import { WorkerModel } from '../models/worker-model';
 
 @Component({
@@ -12,9 +13,21 @@ import { WorkerModel } from '../models/worker-model';
 export class LoginComponent implements OnInit {
 
   worker: WorkerModel = {
-    WorkerID: 0,
-    PassWorker: ''
-}
+    workerid: 0,
+    passworker: '',
+    nameworker: '',
+    lastnameworker: ''
+  }
+
+  validation = {
+    Existe: ""
+  }
+  /**
+   * Constructor method
+   * @param router 
+   * @param cookieSvc 
+   * @param apiService 
+   */
   constructor(private router:Router,private cookieSvc:CookieService,private apiService: PostService) { }
 
   ngOnInit(): void {}
@@ -28,19 +41,28 @@ export class LoginComponent implements OnInit {
     const target= event.target
     const ID =  parseInt(target.querySelector("#id").value);
     const password =  target.querySelector("#password").value;
-    this.worker.WorkerID = ID;
-    this.worker.PassWorker = password;
+    this.worker.workerid = ID;
+    this.worker.passworker = password;
     this.validateData();
   }
   
+  /**
+   * Validate if the id and the password are correct
+   */
   validateData(){
+    console.log(this.worker)
     this.apiService.logInWorker(this.worker).subscribe(
       res =>{
-        this.cookieSvc.set('WorkerID', this.worker.WorkerID.toString());
-        this.router.navigate(["home"]);
-      }, 
-      err =>{
-        alert("Contraseña o ID incorrectos")
+        this.validation = res;
+        console.log(res);
+        if (this.validation.Existe == "Si"){
+          this.cookieSvc.set('Workerid', this.worker.workerid.toString());
+          this.router.navigate(["home"]);
+        }else{
+          alert("Contraseña o ID incorrectos")
+        }
+      },err =>{
+        console.log(err)
       }
     );
   }

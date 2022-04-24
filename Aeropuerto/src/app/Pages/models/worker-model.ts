@@ -1,4 +1,6 @@
 export interface WorkerModel {
-    WorkerID: number,
-    PassWorker: string
+    workerid: number,
+    nameworker: string,
+    lastnameworker:string,
+    passworker: string
 }

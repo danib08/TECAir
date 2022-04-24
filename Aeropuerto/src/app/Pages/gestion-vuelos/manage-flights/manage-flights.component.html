@@ -7,19 +7,22 @@
         <div class="col-1 col-5">    
             <div class="form-group">
                 <i class="fa fa-plane"></i>
-                <label for="FlightID">Seleccione el vuelo</label>
-                <select class="form-control" id="FlightID" name="FlightID" formControlName="FlightID">
-                    <option *ngFor="let list of flightsArray; index as i" value="{{list.FlightID}}">
-                        {{list.FlightID}} - {{list.Origin}} - {{list.Destination}}
+                <label for="flightid">Seleccione el vuelo</label>
+                <select class="form-control" id="flightid" name="flightid" formControlName="flightid">
+                    <option *ngFor="let list of flightsArray; index as i" value="{{list.flightid}}">
+                        {{list.flightid}} - {{list.origin}} - {{list.destination}}
                     </option>
                 </select>
             </div>
             <div class="form-group">
                 <i class="bi bi-info-square-fill"></i>
-                <label for="Status">Seleccione la acción a realizar</label>
-                <select class="form-control" id="Status" name="Status" formControlName="Status">
-                <option value="opened">Abrir</option>
-                <option value="closed">Cerrar</option>
+                <label for="status">Estado del vuelo</label>
+                <select class="form-control" id="status" name="status" formControlName="status">
+                    <option value="Opened">Abierto</option>
+                    <option value="Closed">Cerrado</option>
+                    <option value="Scheduled">Programado</option>
+                    <option value="OnTime">En curso</option>
+                    <option value="Arrived">Finalizado</option>
                 </select>
             </div>
             <div class="form-group">
@@ -48,22 +51,25 @@
                 <div [formGroupName]="i">
                     <div class="row">
                         <i class="fa fa-plane col-md-1">
-                            <label [attr.for]="'FlightID' + i">Vuelo</label>
+                            <label [attr.for]="'flightid' + i">Vuelo</label>
                         </i>
                         <div class="col-md-3">
-                            <select class="form-control" [attr.id]="'FlightID' + i" formControlName="FlightID"> 
-                                <option *ngFor="let list of flightsArray; index as i" value="{{list.FlightID}}">
-                                    {{list.FlightID}} - {{list.Origin}} - {{list.Destination}}
+                            <select class="form-control" [attr.id]="'flightid' + i" formControlName="flightid"> 
+                                <option *ngFor="let list of flightsArray; index as i" value="{{list.flightid}}">
+                                    {{list.flightid}} - {{list.origin}} - {{list.destination}}
                                 </option>
                             </select>
                         </div>
                         <i class="bi bi-info-square-fill col-md-1">
-                            <label [attr.for]="'Status' + i">Estado</label>
+                            <label [attr.for]="'status' + i">Estado</label>
                         </i>
                         <div class="col-md-3">
-                            <select class="form-control" [attr.id]="'Status' + i" formControlName="Status"> 
-                                <option value="opened"> Abrir</option>
-                                <option value="closed"> Cerrar</option>
+                            <select class="form-control" [attr.id]="'status' + i" formControlName="status"> 
+                                <option value="Opened">Abierto</option>
+                                <option value="Closed">Cerrado</option>
+                                <option value="Scheduled">Programado</option>
+                                <option value="OnTime">En curso</option>
+                                <option value="Arrived">Finalizado</option>
                             </select>
                         </div>
                         <div class="col-md-1">

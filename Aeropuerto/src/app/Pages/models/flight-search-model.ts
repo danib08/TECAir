@@ -1,4 +1,4 @@
 export interface FlightSearchModel {
-    Origin:string,
-    Destination:string
+    origin:string,
+    destination:string
 }

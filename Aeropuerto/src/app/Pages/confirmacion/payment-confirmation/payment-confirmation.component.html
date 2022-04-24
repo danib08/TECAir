@@ -1,0 +1,54 @@
+<app-header></app-header>
+<body>
+    <div class="row px-5 py-3">
+        <div class="col-1 col-6">
+            <div class="payment">
+                <p>
+                    Detalles del vuelo:
+                    <br>
+                    Vuelo...........................................{{Flight.flightid}}
+                    <br>
+                    Salida..........................................{{Flight.origin}}
+                    <br>
+                    Llegada........................................{{Flight.destination}} 
+                    <br>
+                    Día y hora de salida.......................{{Flight.departure}}
+                    <br>
+                    Día y hora de llegada.....................{{Flight.arrival}}
+                    <br>
+                    Total del boleto: ...........................{{Flight.price*((100-Flight.discount)/100)}}
+                </p>
+            </div>
+        </div>
+    <div class="col-sm-6 bg-dark text-white justify-content-right">
+        <br>
+        <p class="h8">Detalles del pago -|- <i class="fa fa-credit-card w3-large"></i><i class="fa fa-cc-mastercard w3-large"></i> <i class="fa fa-cc-amex w3-large"></i> <i class="fa fa-cc-cc-visa w3-large"></i></p>
+        <div class="row gx-3">
+        <div class="col-12">
+            <div class="d-flex flex-column">
+                <p class="text mb-1">Nombre de la tarjeta</p> <input class="form-control mb-3" type="text" placeholder="Nombre">
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="d-flex flex-column">
+                <p class="text mb-1">Número de tarjeta</p> <input class="form-control mb-3" type="text" placeholder="#### - #### - #### - ####">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="d-flex flex-column">
+                <p class="text mb-1">Expiración</p> <input class="form-control mb-3" type="text" placeholder="MM/YYYY">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="d-flex flex-column">
+                <p class="text mb-1">CVV/CVC</p> <input class="form-control mb-3 pt-2 " type="number" placeholder="***" >
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="btn btn-primary mb-3" (click)="checkPago()"> <span class="ps-3">Realizar pago</span> <i class="material-icons">trending_flat</i> </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</body>
+<app-footer></app-footer>

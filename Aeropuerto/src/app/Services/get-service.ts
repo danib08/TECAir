@@ -14,38 +14,90 @@ import { UserInFlightModel } from "../Pages/models/user-in-flight-model";
 })
 export class GetService {
 
-    private baseURL = "https://tecair.free.beeceptor.com";
-    private getFlightsURL = `${this.baseURL}\\Flights`;
-    private getCustomerURL = `${this.baseURL}\\Customers`;
-    private getCustomerFlightURL = `${this.baseURL}\\CustomersFlight`;
-    private getCustomerCapURL = `${this.baseURL}\\CustomerCap`;
-    private getPlaneURL = `${this.baseURL}\\Planes`;
-
+    private baseURL = "http://localhost/api";
+    private getFlightsURL = this.baseURL+'/Flights';
+    private getCustomerURL = this.baseURL+'/Customers';
+    private getCustomerFlightURL = this.baseURL+'/CustomersInFlights/';
+    private getFlightCapURL = this.baseURL+'/Flights/Capacity/';
+    private getPlaneURL = this.baseURL+'/Planes';
+    private getDiscountsURL = this.baseURL+'/Flights/Discount';
     
+    /**
+     * Constructor method
+     * @param http 
+     */
     constructor(private http: HttpClient) {
 
     }
 
+    /**
+     * get all the flights from the db
+     * @returns 
+     */
     getFlights():Observable<FlightModel[]>{
         return this.http.get<FlightModel[]>(this.getFlightsURL);
     }
 
+    /**
+     * get a flight price from the db
+     * @param ID 
+     * @returns 
+     */
     getPrice(ID:string):Observable<FlightPriceModel>{
-        let priceURL = `${this.baseURL}\\Flights\\`+ID;
+        let priceURL = `${this.baseURL}\\Flights/Price\\`+ID;
         return this.http.get<FlightPriceModel>(priceURL);
     }
+
+    /**
+     * get all the customers from the db
+     * @returns 
+     */
     getCustomers():Observable<CustomerModel[]>{
         return this.http.get<CustomerModel[]>(this.getCustomerURL);
     }
+    /**
+     * get all the planes from the db
+     * @returns 
+     */
     getPlanes():Observable<PlaneModel[]>{
         return this.http.get<PlaneModel[]>(this.getPlaneURL);
     }
 
-    getCustomerInFlight():Observable<UserInFlightModel[]>{
-        return this.http.get<UserInFlightModel[]>(this.getCustomerFlightURL);
+    /**
+     * get all the customers in flight
+     * @param flight 
+     * @returns 
+     */
+    getCustomerInFlight(flight:string):Observable<UserInFlightModel[]>{
+        let URL = this.getCustomerFlightURL + flight;
+        return this.http.get<UserInFlightModel[]>(URL);
     }
 
-    getUserCapacity():Observable<FlightCapModel>{
-        return this.http.get<FlightCapModel>(this.getCustomerCapURL);
+    /**
+     * get the customer capacity for a flight
+     * @param flight 
+     * @returns 
+     */
+    getFlightCapacity(flight:string):Observable<FlightCapModel>{
+        let URL = this.getFlightCapURL + flight;
+        return this.http.get<FlightCapModel>(URL);
+    }
+
+    /**
+     * get a flight
+     * @param flight 
+     * @returns 
+     */
+    getFlight(flight: string):Observable<FlightModel>{
+        let URL = `${this.baseURL}\\Flights\\`+flight;
+        return this.http.get<FlightModel>(URL);
+    }
+
+    /**
+     * get the flights with discounts from the db
+     * @returns 
+     */
+    getDiscounts():Observable<FlightModel[]>{
+        return this.http.get<FlightModel[]>(this.getDiscountsURL);
     }
 }

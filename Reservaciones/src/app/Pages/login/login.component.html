@@ -20,16 +20,16 @@
                       <form name="form" (ngSubmit)="f.form.valid && loginUser()" #f="ngForm">
                         <h4  class="mb-4 pb-3">Iniciar sesión</h4>
                         <div class="form-group">
-                          <input type="email" name="logemail" class="form-style" placeholder="Email"
-                          [(ngModel)]="usuarioRegistrado.Email" name="Email" #Email = "ngModel"
-                          [ngClass]="{'is-invalid':f.submitted && name.invalid}"
+                          <input type="number" name="customerid" class="form-style" placeholder="Cédula de identidad"
+                          [(ngModel)]="customer.customerid" name="customerid" #customerid = "ngModel"
+                          [ngClass]="{'is-invalid':f.submitted}"
                           required>
                           <i class="material-icons">email</i>
                         </div>
                         <div class="form-group mt-2">
-                          <input type="password" name="logpass" class="form-style" placeholder="Contraseña"
-                          [(ngModel)]="usuarioRegistrado.Passcustomer" name="Contraseña" #Contraseña = "ngModel"
-                          [ngClass]="{'is-invalid':f.submitted && name.invalid}"
+                          <input type="password" name="passcustomer" class="form-style" placeholder="Contraseña"
+                          [(ngModel)]="customer.passcustomer" name="passcustomer" #passcustomer = "ngModel"
+                          [ngClass]="{'is-invalid':f.submitted}"
                           required>
                           <i class="material-icons">locks</i>
                         </div>
@@ -45,40 +45,44 @@
                       <form name="form" (ngSubmit)="f.form.valid && SignUpUser()" #f="ngForm">
                         <h4 class="mb-4 pb-3">Registrar Usuario</h4>
                         <div class="form-group">
-                          <input type="text" name="logname" class="form-style" placeholder="Nombre"
-                          [(ngModel)]="nuevoUsuario.Namecustomer" name="Nombre" #name = "ngModel"
-                          [ngClass]="{'is-invalid':f.submitted && name.invalid}"
+                          <input type="text" name="namecustomer" class="form-style" placeholder="Nombre"
+                          [(ngModel)]="customer.namecustomer" name="namecustomer" #namecustomer = "ngModel"
+                          [ngClass]="{'is-invalid':f.submitted}"
                           required>
                           <i class="material-icons">account_circle</i>
                         </div>
 
                         <div class="form-group mt-2">
-                          <input type="text" name="logname" class="form-style" placeholder="Apellido"
-                          [(ngModel)]="nuevoUsuario.Lastnamecustomer" name="Apellido" #name = "ngModel"
-                          [ngClass]="{'is-invalid':f.submitted && name.invalid}"
+                          <input type="text" name="lastnamecustomer" class="form-style" placeholder="Apellido"
+                          [(ngModel)]="customer.lastnamecustomer" name="lastnamecustomer" #lastnamecustomer = "ngModel"
+                          [ngClass]="{'is-invalid':f.submitted}"
                           required>
                           <i class="material-icons">person</i>
                         </div>
-
                         <div class="form-group mt-2">
-                          <input type="email" name="logemail" class="form-style" placeholder="Email"
-                          [(ngModel)]="nuevoUsuario.Email" name="Email" #Email = "ngModel"
-                          [ngClass]="{'is-invalid':f.submitted && name.invalid}"
+                          <input type="number" name="customerid" class="form-style" placeholder="Cédula de identidad"
+                          [(ngModel)]="customer.customerid" name="customerid" #customerid = "ngModel">
+                          <i class="material-icons">assignment_ind</i>
+                        </div>
+                        <div class="form-group mt-2">
+                          <input type="email" name="email" class="form-style" placeholder="email"
+                          [(ngModel)]="customer.email" name="email" #email = "ngModel"
+                          [ngClass]="{'is-invalid':f.submitted}"
                           required>
                           <i class="material-icons">email</i>
                         </div>
                         <div class="form-group mt-2">
-                          <input type="password" name="logpass" class="form-style" placeholder="Contraseña"
-                          [(ngModel)]="nuevoUsuario.Passcustomer" name="Contraseña" #Contraseña = "ngModel"
-                          [ngClass]="{'is-invalid':f.submitted && name.invalid}"
+                          <input type="password" name="passcustomer" class="form-style" placeholder="Contraseña"
+                          [(ngModel)]="customer.passcustomer" name="passcustomer" #passcustomer = "ngModel"
+                          [ngClass]="{'is-invalid':f.submitted}"
                           required>
                           <i class="material-icons">lock</i>
                         </div>
 
                         <div class="form-group mt-2">
-                          <input type="text" name="logtelef" class="form-style" placeholder="Telefono personal"
-                          [(ngModel)]="nuevoUsuario.Phone" name="Telefono" #Telefono = "ngModel"
-                          [ngClass]="{'is-invalid':f.submitted && name.invalid}"
+                          <input type="text" name="logtelef" class="form-style" placeholder="Número telefónico"
+                          [(ngModel)]="customer.phone" name="phone" #phone = "ngModel"
+                          [ngClass]="{'is-invalid':f.submitted}"
                           required>
                           <i class="material-icons">call</i>
                         </div>
@@ -88,14 +92,14 @@
                         </div>
 
                         <div class="form-group mt-2">
-                          <input type="text" name="logUniver" class="form-style" placeholder="Universidad"
-                          [(ngModel)]="nuevoUsuario.University" name="Universidad" #Universidad = "ngModel">
+                          <input type="text" name="university" class="form-style" placeholder="Universidad"
+                          [(ngModel)]="customer.university" name="university" #university = "ngModel">
                           <i class="material-icons">school</i>
                         </div>
 
                         <div class="form-group mt-2">
-                          <input type="text" name="logCarnet" class="form-style" placeholder="Carnet"
-                          [(ngModel)]="nuevoUsuario.Studentid" name="Carnet" #Telefono = "ngModel">
+                          <input type="text" name="studentid" class="form-style" placeholder="Carnet"
+                          [(ngModel)]="customer.studentid" name="studentid" #studentid = "ngModel">
                           <i class="material-icons">assignment_ind</i>
                         </div>
                         <button class="btn mt-4" type="submit">Registrar Usuario</button>

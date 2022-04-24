@@ -7,40 +7,50 @@
         <div class="col-1 col-5">
             <div class="form-group">
                 <i class="fa fa-plane"></i>
-                <label for="FlightID">Escoja el vuelo al que desea asignar la maleta</label>
-                <select class="form-control" id="FlightID" name="FlightID" formControlName="FlightID">
-                    <option *ngFor="let list of flightsArray; index as i" value="{{list.FlightID}}">
-                        {{list.FlightID}} - {{list.Origin}} - {{list.Destination}}
+                <label for="flightid">Escoja el vuelo al que desea asignar la maleta</label>
+                <select class="form-control" id="flightid" name="flightid" formControlName="flightid">
+                    <option *ngFor="let list of flightsArray; index as i" value="{{list.flightid}}">
+                        {{list.flightid}} - {{list.origin}} - {{list.destination}}
                     </option>
                 </select>
             </div>
             <div class="form-group">
                 <i class="bi bi-person-fill"></i>
-                <label for="FlightID">Escoja el usuario al que desea asignar la maleta</label>
-                <select class="form-control" id="CustomerID" name="CustomerID" formControlName="CustomerID">
-                    <option *ngFor="let list of customerArray; index as i" value="{{list.CustomerID}}">
-                        {{list.CustomerID}} - {{list.NameCustomer}} - {{list.LastNameCustomer}}
+                <label for="customerid">Escoja el usuario al que desea asignar la maleta</label>
+                <select class="form-control" id="customerid" name="customerid" formControlName="customerid">
+                    <option *ngFor="let list of customerArray; index as i" value="{{list.customerid}}">
+                        {{list.customerid}} - {{list.namecustomer}} - {{list.lastnamecustomer}}
                     </option>
                 </select>
             </div>
             <div class="form-group">
                 <i class="bi bi-bag">
-                    <label for="FlightID">Escoja el peso de la maleta</label>
+                    <label for="weight">Escoja el peso de la maleta</label>
                 </i>
-                <input type="number" class="form-control" formControlName="Weight">
+                <input type="number" class="form-control" formControlName="weight">
                 <div
                 *ngIf="weight?.invalid && (weight?.dirty || weight?.touched)" class="alert alert-danger">
-                    HOLA5
+                    El espacio no puede estar vacío
                 </div>
             </div>
             <div class="form-group">
                 <i class="bi bi-bag">
-                    <label for="Color">Escoja el color de la maleta</label>
+                    <label for="color">Escoja el color de la maleta</label>
                 </i>
-                <input type="text" class="form-control" formControlName="Color">
+                <input type="text" class="form-control" formControlName="color">
                 <div
                 *ngIf="color?.invalid && (color?.dirty || color?.touched)" class="alert alert-danger">
-                    HOLA6
+                El espacio no puede estar vacío
+                </div>
+            </div>
+            <div class="form-group">
+                <i class="bi bi-bag">
+                    <label for="color">Digite el ID de la maleta</label>
+                </i>
+                <input type="text" class="form-control" formControlName="bagid">
+                <div
+                *ngIf="bagid?.invalid && (bagid?.dirty || bagid?.touched)" class="alert alert-danger">
+                El espacio no puede estar vacío
                 </div>
             </div>
 
@@ -55,22 +65,28 @@
             <div [formGroupName]="i" >
                 <div class="form-group">
                     <div class="row">
-                        <label class="col-2" align="center" [attr.for] ="'Weight' + i">Peso</label>
+                        <label class="col-2" align="center" [attr.for] ="'weight' + i">Peso</label>
 
                         <div class="col-3">
-                            <input type="text" [attr.id]="'Weight' + i" class="form-control" formControlName="Weight">
+                            <input type="text" [attr.id]="'weight' + i" class="form-control" formControlName="weight">
                         </div>
         
-                        <label class="col-2" align="center" [attr.for] ="'Color' + i" >Color</label>
+                        <label class="col-2" align="center" [attr.for] ="'color' + i" >Color</label>
                         <div class="col-3">
-                            <input type="text" [attr.id]="'Color' + i" class="form-control" formControlName="Color">
+                            <input type="text" [attr.id]="'color' + i" class="form-control" formControlName="color">
                         </div>
                     </div>
-                    
-        
-                    <div class="col-5">
-                        <button class="btn btn-danger" align="right" (click)="removeBags(i)">Eliminar maleta</button>
+                    <div class="row">
+                        <label class="col-2" align="center" [attr.for] ="'bagid' + i" >ID de la maleta</label>
+                        <div class="col-3">
+                            <input type="text" [attr.id]="'bagid' + i" class="form-control" formControlName="bagid">
+                        </div>
+                        <div class="col-5">
+                            <button class="btn btn-danger" align="right" (click)="removeBags(i)">Eliminar maleta</button>
+                        </div>
                     </div>
+        
+                    
                 </div>
     
             </div>

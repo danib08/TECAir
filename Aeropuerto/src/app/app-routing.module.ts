@@ -12,6 +12,7 @@ import { ManageFlightsComponent } from './Pages/gestion-vuelos/manage-flights/ma
 import { BagAssignComponent } from './Pages/asignar-maletas/bag-assign/bag-assign.component';
 import { AsientosComponent } from './Pages/asientos/asientos.component';
 import { ValidacionUsuarioComponent } from './Pages/validacion-usuario/validacion-usuario/validacion-usuario.component';
+import { PaymentConfirmationComponent } from './Pages/confirmacion/payment-confirmation/payment-confirmation.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: "asignarMaleta", component: BagAssignComponent},
   {path: "asientos", component: AsientosComponent},
   {path: "validacionUsuario", component: ValidacionUsuarioComponent},
+  {path: "pago", component: PaymentConfirmationComponent},
   {path: "**", redirectTo: "login", pathMatch:"full"},
 
 ];

@@ -53,18 +53,10 @@ namespace TECAirDbAPI.Controllers
             return worker;
         }
 
-        /// <summary>
-        /// Single value get customer 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Required customer</returns>
-
-        [HttpGet("validate")]
-        public async Task<ActionResult<string>> WorkerValidation(int id, string pass)
+        [HttpPost("LogIn")]
+        public string WorkerLogIn(Worker worker)
         {
-            var worker = await _context.Workers.FindAsync(id);
-
-            if (worker.Workerid == id && worker.Passworker.Equals(pass))
+            if (WorkerExists(worker.Workerid) && PassWorker(worker.Passworker))
             {
                 var data = new JObject(new JProperty("Existe", "Si"));
                 return data.ToString();
@@ -114,41 +106,35 @@ namespace TECAirDbAPI.Controllers
         }
 
         /// <summary>
-        /// Method to create worker
+        /// Method to create a single Worker
         /// </summary>
         /// <param name="worker"></param>
-        /// <returns></returns>
+        /// <returns></returns> 
 
-        [HttpPost]
-        public async Task<ActionResult> PostWorker(List<Worker> workerList)
+        [HttpPost("Worker")]
+        public async Task<ActionResult<Worker>> PostWorker(Worker worker)
         {
-            while (workerList.Count() > 0)
+            _context.Workers.Add(worker);
+            try
             {
-                _context.Workers.Add(workerList.First());
-
-                try
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (WorkerExists(worker.Workerid))
                 {
-                    await _context.SaveChangesAsync();
+                    return Conflict();
                 }
-                catch (DbUpdateException)
+                else
                 {
-                    if (WorkerExists(workerList.First().Workerid))
-                    {
-                        return Conflict();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
-                workerList.RemoveAt(0);
-
             }
 
-            return Ok();
-
+            return CreatedAtAction("GetWorker", new { id = worker.Workerid }, worker);
         }
-        
+
+
 
         /// <summary>
         /// Method for deleting workers by id
@@ -176,5 +162,11 @@ namespace TECAirDbAPI.Controllers
         {
             return _context.Workers.Any(e => e.Workerid == id);
         }
+
+        private bool PassWorker(string pass)
+        {
+            return _context.Workers.Any(e => e.Passworker.Equals(pass));
+        }
+
     }
 }
