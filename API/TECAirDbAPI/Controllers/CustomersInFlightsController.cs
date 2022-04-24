@@ -34,6 +34,42 @@ namespace TECAirDbAPI.Controllers
             return await _context.CustomerInFlights.ToListAsync();
         }
 
+
+        /// <summary>
+        /// Single value get
+        /// </summary>
+        /// <param name="customerInFlight"></param>
+        /// <returns>Required flight</returns>
+
+        [HttpPost("NoSeats")]
+
+        public async Task<ActionResult<IEnumerable<CustomerInFlight>>> GetNoSeatCustomer(CustomerInFlight customerInFlight)
+        {
+            List<CustomerInFlight> data = new List<CustomerInFlight>();
+            var cif = await _context.CustomerInFlights.ToListAsync();
+
+
+
+            while (cif.Count() > 0)
+            {
+
+                if (cif.First().Customerid == customerInFlight.Customerid && cif.First().Seatnum == 0)
+                {
+
+                    data.Add(cif.First());
+                    cif.RemoveAt(0);
+
+                }
+                else
+                {
+                    cif.RemoveAt(0);
+                }
+
+            }
+
+            return data;
+        }
+
         /// <summary>
         /// Single value get customer in flight
         /// </summary>
@@ -49,16 +85,14 @@ namespace TECAirDbAPI.Controllers
                 Flightid = i.Flightid,
                 Seatnum = i.Seatnum
             }).ToArrayAsync();
-            
-            if ( flightid == null)
+
+            if (flightid == null)
             {
                 return NotFound();
             }
 
             return customerInFlight;
         }
-
-        
 
         /// <summary>
         /// Put method to edit customer in flight
