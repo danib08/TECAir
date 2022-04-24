@@ -31,13 +31,27 @@ export class ReservacionVuelosComponent implements OnInit {
   lastNameCustomer = this.cookieSvc.get('CustomerLN');
   numAsiento = this.cookieSvc.get("seatNumber");
   Status = false;
+
+  /**
+   * Constructor method
+   * @param cookieSvc 
+   * @param apiService 
+   * @param router 
+   */
   constructor(private cookieSvc:CookieService, private apiService:GetService, private router:Router) {
     //Method for asking the API for the information of the flight
   }
+
+   /**
+   * Method to be executed at component startup
+   */
   ngOnInit(): void {
     this.getFlight();
   }
 
+  /**
+   * get a flight from the api
+   */
   getFlight(){
     this.apiService.getFlight(this.cookieSvc.get('FlightID')).subscribe(
       res => {
@@ -49,6 +63,9 @@ export class ReservacionVuelosComponent implements OnInit {
       }
     );
   }
+  /**
+   * make a pdf with the airline ticket
+   */
   @ViewChild('content', {static: false})el!:ElementRef;
   makePDF(){
     let pdf = new jsPDF('p','pt','a4');
@@ -58,6 +75,9 @@ export class ReservacionVuelosComponent implements OnInit {
       }
     });
   }
+  /**
+   * Delete the customer cookies and redirect to home
+   */
   home(){
     this.cookieSvc.delete('CustomerID');
     this.cookieSvc.delete('CustomerLN');

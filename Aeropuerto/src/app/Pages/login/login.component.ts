@@ -22,6 +22,12 @@ export class LoginComponent implements OnInit {
   validation = {
     Existe: ""
   }
+  /**
+   * Constructor method
+   * @param router 
+   * @param cookieSvc 
+   * @param apiService 
+   */
   constructor(private router:Router,private cookieSvc:CookieService,private apiService: PostService) { }
 
   ngOnInit(): void {}
@@ -40,6 +46,9 @@ export class LoginComponent implements OnInit {
     this.validateData();
   }
   
+  /**
+   * Validate if the id and the password are correct
+   */
   validateData(){
     console.log(this.worker)
     this.apiService.logInWorker(this.worker).subscribe(

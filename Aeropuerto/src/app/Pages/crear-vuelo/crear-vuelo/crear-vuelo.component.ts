@@ -14,50 +14,82 @@ import { GetService } from 'src/app/Services/get-service';
 })
 export class CrearVueloComponent implements OnInit {
 
+  /**
+   * Constructor method
+   * @param formBuilder 
+   * @param apiService 
+   * @param cookieSvc 
+   * @param apiServiceGET 
+   */
   constructor(private formBuilder: FormBuilder, private apiService: PostService, private cookieSvc:CookieService, private apiServiceGET: GetService) { }
  
 
   list: Array<string> = [];
   planesArray: PlaneModel[] = [];
-
+  /**
+   * Method to be executed at component startup
+   */
   ngOnInit(): void {
     this.getPlanes();
   }
 
+  /**
+   * get the origin data from the registerForm
+   */
   get origin(){
     return this.registerForm.get('origin');
   }
-  
+  /**
+   * get the destination data from the registerForm
+   */
   get destination(){
     return this.registerForm.get('destination');
   }
-
+  /**
+   * get the bagquantity data from the registerForm
+   */
   get bagQuantity(){
     return this.registerForm.get('bagquantity');
   }
-
+  /**
+   * get the userquantity data from the registerForm
+   */
   get userQuantity(){
     return this.registerForm.get('userquantity');
   }
-
+  /**
+   * get the flightid data from the registerForm
+   */
   get flightID(){
     return this.registerForm.get('flightid');
   }
-
+  /**
+   * get the departuretime data from the registerForm
+   */
   get departureTime(){
     return this.registerForm.get('departure');
   }
-
+  /**
+   * get the arrivaltime data from the registerForm
+   */
   get arrivalTime(){
     return this.registerForm.get('arrival');
   }
-
+  /**
+   * get the stops data from the registerForm
+   */
   get stops(){
     return this.registerForm2.get('Stops') as FormArray;
   }
+  /**
+   * get the price data from the registerForm
+   */
   get price(){
     return this.registerForm.get('price');
   }
+  /**
+   * get the gate data from the registerForm
+   */
   get gate(){
     return this.registerForm.get('gate');
   }
@@ -83,6 +115,9 @@ export class CrearVueloComponent implements OnInit {
     Stops:this.formBuilder.array([])
   });
 
+  /**
+   * Add a stop into the formArray
+   */
   addStops(){
     const stopsFormGroup = this.formBuilder.group({
       origin: '',
@@ -102,11 +137,18 @@ export class CrearVueloComponent implements OnInit {
     });
     this.stops.push(stopsFormGroup);
   }
-
+  /**
+ * Delete the index stop from the formArray
+ * @param index 
+ */
   removeStops(index : number){
     this.stops.removeAt(index);
   }
 
+  /**
+   * Send the flights data to the api
+   * @returns 
+   */
   submit(){
     let flag = false;
     if(this.stops.length != 0){
@@ -146,6 +188,10 @@ export class CrearVueloComponent implements OnInit {
       }
     }
   }
+
+  /**
+   * get the planes data from the api
+   */
   getPlanes(){
     this.apiServiceGET.getPlanes().subscribe(
       res => {

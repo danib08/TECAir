@@ -37,13 +37,28 @@ export class PaymentConfirmationComponent implements OnInit {
   lastNameCustomer = this.cookieSvc.get('CustomerLN');
   numAsiento = this.cookieSvc.get("seatNumber");
   Status = false;
+
+  /**
+   * Constructor method
+   * @param cookieSvc 
+   * @param apiService 
+   * @param router 
+   * @param postSvc 
+   */
   constructor(private cookieSvc:CookieService, private apiService:GetService, private router:Router, private postSvc:PostService) {
     //Method for asking the API for the information of the flight
   }
+
+  /**
+   * Method to be executed at component startup
+   */
   ngOnInit(): void {
     this.getFlight();
   }
 
+/***
+ * get the required flight from the api
+ */
   getFlight(){
     this.apiService.getFlight(this.cookieSvc.get('FlightID')).subscribe(
       res => {
@@ -56,6 +71,9 @@ export class PaymentConfirmationComponent implements OnInit {
     );
   }
 
+  /**
+   * Create the user in flight
+   */
   checkPago(){
     this.customerInFlight.customerid = parseInt(this.cookieSvc.get('CustomerID'));
     this.customerInFlight.flightid = this.cookieSvc.get('FlightID');

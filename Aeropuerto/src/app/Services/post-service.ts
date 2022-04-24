@@ -14,7 +14,7 @@ import { WorkerModel } from "../Pages/models/worker-model";
     providedIn: 'root'
 })
 export class PostService {
-    private baseURL = "https://localhost:5001/api";
+    private baseURL = "http://localhost/api";
     private addWorkerURL = this.baseURL+'/Workers/Worker';
     private addFlightURL = this.baseURL+'/Flights/Flight';
     private addCustomerURL = this.baseURL+'/Customers';
@@ -32,34 +32,74 @@ export class PostService {
 
     }
 
+    /**
+     * Add a new worker to the db
+     * @param worker 
+     * @returns 
+     */
     addWorker(worker: FormControl):Observable<any>{
         return this.http.post<any>(this.addWorkerURL, worker);
     }
-    
+   
+    /**
+     * add a flight to the db
+     * @param flight 
+     * @returns 
+     */
     addFlight(flight: FormControl):Observable<any>{
         return this.http.post<any>(this.addFlightURL, flight);
     }
 
+    /**
+     * add a bag to the db
+     * @param bag 
+     * @returns 
+     */
     addBag(bag: FormControl):Observable<any>{
         return this.http.post<any>(this.addBagURL, bag);
     }
 
+    /**
+     * search a flight from the db
+     * @param search 
+     * @returns 
+     */
     searchFlights(search: FlightModel):Observable<any>{
         return this.http.post<any>(this.searchURL, search);
     }
 
+    /**
+     * Validate the login worker with a http request
+     * @param worker 
+     * @returns 
+     */
     logInWorker(worker: WorkerModel):Observable<any>{
         return this.http.post<any>(this.logInWURL, worker);
     }
 
+    /**
+     * add a customer into the db
+     * @param customer 
+     * @returns 
+     */
     addCustomer(customer: CustomerModel):Observable<any>{
         return this.http.post<any>(this.addCustomerURL, customer);
     }
 
+    /**
+     * Validate if a customer exists in the db
+     * @param customer 
+     * @returns 
+     */
     validateUser(customer: UserValModel):Observable<any>{
         return this.http.post<any>(this.validateUserURL, customer);
     }
 
+    /**
+     * add a customer in flight to the db
+     * @param customer 
+     * @returns 
+     */
     addCustomerInFlight(customer:UserInFlightModel):Observable<any>{
         return this.http.post<any>(this.addCustomerInFlightURL, customer);
     }

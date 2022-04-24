@@ -10,23 +10,46 @@ import { PostService } from 'src/app/Services/post-service';
 })
 export class SignUpWorkersComponent implements OnInit {
 
+  /**
+   * Constructor method
+   * @param formBuilder 
+   * @param apiService 
+   */
   constructor(private formBuilder: FormBuilder, private apiService: PostService) { }
 
+   /**
+   * Method to be executed at component startup
+   */
   ngOnInit(): void {
   }
 
+  /**
+   * get the workerid from the registerForm
+   */
   get workerID(){
     return this.registerForm.get('workerid');
   }
+  /**
+   * get the nameWorker from the registerForm
+   */
   get nameWorker(){
     return this.registerForm.get('nameworker');
   }
+  /**
+   * get the lastNameWorker from the registerForm
+   */
   get lastNameWorker(){
     return this.registerForm.get('lastnameworker');
   }
+  /**
+   * get the password from the registerForm
+   */
   get passWorker(){
     return this.registerForm.get('passworker');
   }
+  /**
+   * get the workers formArray
+   */
   get workers(){
     return this.registerForm2.get('Workers') as FormArray;
   }
@@ -41,6 +64,9 @@ export class SignUpWorkersComponent implements OnInit {
     Workers:this.formBuilder.array([])
   });
 
+  /**
+   * Add a worker to the formArray
+   */
   addWorkers(){
     const workersFormGroup = this.formBuilder.group({
       workerid: 0,
@@ -51,10 +77,18 @@ export class SignUpWorkersComponent implements OnInit {
     this.workers.push(workersFormGroup);
   }
 
+  /**
+   * Delete a worker from the formArray
+   * @param index 
+   */
   removeWorkers(index : number){
     this.workers.removeAt(index);
   }
 
+  /**
+   * Send the workers to the db
+   * @returns 
+   */
   submit(){
     let flag = false;
     if(this.workers.length != 0){
@@ -88,9 +122,6 @@ export class SignUpWorkersComponent implements OnInit {
         }
         location.reload();
       }
-
-      
-      
     }
   }
 }

@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using TECAirDbAPI.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace TECAirDbAPI.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
 

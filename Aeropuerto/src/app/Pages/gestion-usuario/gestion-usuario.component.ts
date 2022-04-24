@@ -9,6 +9,10 @@ import { PostService } from 'src/app/Services/post-service';
 })
 export class GestionUsuarioComponent implements OnInit {
 
+  /**
+   * Constructor Method
+   * @param apiService 
+   */
   constructor(private apiService: PostService){}
     newUser: CustomerModel={
     customerid: 0,
@@ -21,6 +25,9 @@ export class GestionUsuarioComponent implements OnInit {
     university: "",
     miles: 0
   }
+  /**
+   * Method to be executed at component startup
+   */
   ngOnInit(): void {
   }
   /**

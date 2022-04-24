@@ -28,11 +28,23 @@ export class ValidacionUsuarioComponent implements OnInit {
     Existe: ''
   }
 
+  /**
+   * Constructor method
+   * @param router 
+   * @param apiService 
+   * @param cookieSvc 
+   */
   constructor(private router:Router,private apiService: PostService,private cookieSvc:CookieService) { }
 
+   /**
+   * Method to be executed at component startup
+   */
   ngOnInit(): void {
   }
 
+  /**
+   * Validate if the customer exists 
+   */
   validateUser(){
     this.apiService.validateUser(this.User).subscribe(
       res => {

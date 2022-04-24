@@ -101,7 +101,7 @@ export class AsientosComponent implements OnInit {
   }
 
   /**
-   * redirects to a new component
+   * redirects to a new component add set the seatnumber to the customer
    */
   ready(){
     if(this.cookieSvc.get('seatNumber') == ''){

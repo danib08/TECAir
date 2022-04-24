@@ -14,8 +14,18 @@ export class HomeComponent implements OnInit {
   flightsArray: FlightModel[] = [];
   flights: Array<FlightModel> = [];
   state = false;
+
+  /**
+   * Constructor method
+   * @param apiService 
+   * @param cookieSvc 
+   * @param router 
+   */
   constructor(private apiService: GetService, private cookieSvc:CookieService,private router:Router) { }
 
+  /**
+   * Method to be executed at component startup
+   */
   ngOnInit(): void {
     this.flights = [];
     this.getFlights();
@@ -28,6 +38,9 @@ export class HomeComponent implements OnInit {
     
   }
 
+  /**
+   * get the flights with discount from de db
+   */
   getFlights(){
     this.apiService.getDiscounts().subscribe(
       res => {
@@ -42,6 +55,9 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  /**
+   * Set a random array of flights to be shown on screen
+   */
   getRandomFlights(){
     var num;
     var pasNum;
@@ -60,6 +76,10 @@ export class HomeComponent implements OnInit {
     }
     this.state = true;
   }
+  /**
+   * Reserve a flight with discount
+   * @param num 
+   */
   reserv(num: number){
     if(num == 0){
       this.cookieSvc.set('FlightID', this.flights[0].flightid.toString());

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { GetService } from 'src/app/Services/get-service';
-import { PatchService } from 'src/app/Services/patch-service';
 import { PutService } from 'src/app/Services/put-service';
 import { FlightModel } from '../../models/flight.model';
 
@@ -12,14 +11,25 @@ import { FlightModel } from '../../models/flight.model';
 })
 export class ManageFlightsComponent implements OnInit {
 
+  /**
+   * Constructor method
+   * @param formBuilder 
+   * @param apiService 
+   * @param apiServiceGET 
+   */
   constructor(private formBuilder: FormBuilder, private apiService: PutService, private apiServiceGET:GetService) { }
 
   flightsArray: FlightModel[] = [];
-  
+  /**
+   * Method to be executed at component startup
+   */
   ngOnInit(): void {
     this.getFlights();
   }
 
+  /**
+   * Get the flights formArray
+   */
   get flights(){
     return this.registerForm2.get('Flights') as FormArray;
   }
@@ -43,6 +53,9 @@ export class ManageFlightsComponent implements OnInit {
   registerForm2 = this.formBuilder.group({
     Flights: this.formBuilder.array([], Validators.required)
   });
+  /**
+   * add new flight to the FormArray
+   */
   addFlights(){
     const FlightsFormGroup = this.formBuilder.group({
       flightid: '',
@@ -62,9 +75,17 @@ export class ManageFlightsComponent implements OnInit {
     });
     this.flights.push(FlightsFormGroup);
   }
+  /**
+   * Delete the index flight from the FormArray
+   * @param index 
+   */
   removeFlights(index : number){
     this.flights.removeAt(index);
   }
+  /**
+   * Send the new data to the api
+   * @returns 
+   */
   submit(){
     this.setValuesInFlights();
     let flag = false;
@@ -137,7 +158,7 @@ export class ManageFlightsComponent implements OnInit {
       for(let i = 0; i < this.flights.length; i++){
         for(let j = 0; j < this.flightsArray.length; j++){
           if(this.flightsArray[j].flightid == this.flights.at(i).get('flightid')?.value){
-            this.flights.at(i).get('origin')?.setValue(this.flightsArray[j].flightid);
+            this.flights.at(i).get('origin')?.setValue(this.flightsArray[j].origin);
             this.flights.at(i).get('destination')?.setValue(this.flightsArray[j].destination);
             this.flights.at(i).get('bagquantity')?.setValue(this.flightsArray[j].bagquantity);
             this.flights.at(i).get('userquantity')?.setValue(this.flightsArray[j].userquantity);

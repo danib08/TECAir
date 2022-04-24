@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { GetService } from 'src/app/Services/get-service';
-import { PatchService } from 'src/app/Services/patch-service';
 import { PutService } from 'src/app/Services/put-service';
 import { CustomerModel } from '../../models/customer';
 import { FlightPriceModel } from '../../models/flight-price';
@@ -122,6 +121,7 @@ export class ManagePromosComponent implements OnInit {
       return;
     }
     else{
+      console.log(this.registerForm.value)
       this.apiService.changeStatus(this.registerForm.value, this.registerForm.get('flightid')?.value).subscribe(
         res => {
           if(flag == false){
@@ -215,7 +215,7 @@ export class ManagePromosComponent implements OnInit {
       for(let i = 0; i < this.discounts.length; i++){
         for(let j = 0; j < this.flightsArray.length; j++){
           if(this.flightsArray[j].flightid == this.discounts.at(i).get('flightid')?.value){
-            this.discounts.at(i).get('origin')?.setValue(this.flightsArray[j].flightid);
+            this.discounts.at(i).get('origin')?.setValue(this.flightsArray[j].origin);
             this.discounts.at(i).get('destination')?.setValue(this.flightsArray[j].destination);
             this.discounts.at(i).get('bagquantity')?.setValue(this.flightsArray[j].bagquantity);
             this.discounts.at(i).get('userquantity')?.setValue(this.flightsArray[j].userquantity);
