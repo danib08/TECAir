@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SeatNumAssignComponent } from './Pages/asiento-faltante/seat-num-assign/seat-num-assign.component';
 import { AsientosComponent } from './Pages/asientos/asientos.component';
 import { BusquedaVueloComponent } from './Pages/busqueda-vuelo/busqueda-vuelo.component';
 import { PaymentConfirmationComponent } from './Pages/confirmacion/payment-confirmation/payment-confirmation.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: "reservacionVuelo",component: ReservacionVuelosComponent},
   {path: "asientos",component: AsientosComponent},
   {path: "pago", component: PaymentConfirmationComponent},
+  {path: "seatAssign", component: SeatNumAssignComponent},
   {path: "**", redirectTo: "login", pathMatch:"full"},
 
 ];
