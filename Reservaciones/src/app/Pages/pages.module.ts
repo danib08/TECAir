@@ -11,6 +11,7 @@ import { GestionUsuarioComponent } from './gestion-usuario/gestion-usuario.compo
 import { ReservacionVuelosComponent } from './reservacion-vuelos/reservacion-vuelos.component';
 import { AsientosComponent } from './asientos/asientos.component';
 import { PaymentConfirmationComponent } from './confirmacion/payment-confirmation/payment-confirmation.component';
+import { SeatNumAssignComponent } from './asiento-faltante/seat-num-assign/seat-num-assign.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { PaymentConfirmationComponent } from './confirmacion/payment-confirmatio
     GestionUsuarioComponent,
     ReservacionVuelosComponent,
     AsientosComponent,
-    PaymentConfirmationComponent
+    PaymentConfirmationComponent,
+    SeatNumAssignComponent
   ],
   imports: [
     CommonModule,

@@ -86,4 +86,16 @@ export class PaymentConfirmationComponent implements OnInit {
       }
     );
     }
+    home(){
+      this.customerInFlight.customerid = parseInt(this.cookieSvc.get('CustomerID'));
+      this.customerInFlight.flightid = this.cookieSvc.get('FlightID');
+      console.log(this.customerInFlight)
+      this.postSvc.addCustomerInFlight(this.customerInFlight).subscribe(
+        res =>{
+          this.router.navigate(["home"]);
+        }, err => {
+          alert("Ha ocurrido un error")
+        }
+      );
+      }
   }

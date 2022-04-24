@@ -4,8 +4,9 @@ using Android.Widget;
 using System;
 using MobileApp.Models;
 using AndroidX.AppCompat.App;
+using Android.Content;
 
-namespace MobileApp
+namespace MobileApp.Activities
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false)]
     class SignUpActivity : AppCompatActivity
@@ -21,7 +22,6 @@ namespace MobileApp
         private EditText editTextPhone;
         private EditText editTextStudentId;
         private EditText editTextUni;
-
         private Button sendSignUp;
 
         private string toastText;
@@ -58,27 +58,37 @@ namespace MobileApp
                 {
                     toastText = "Su cédula debe ser un número";
                 }
-                else if (!int.TryParse(editTextStudentId.Text, out int userPhone))
+                else if (!int.TryParse(editTextPhone.Text, out int userPhone))
                 {
                     toastText = "Su número telefónico debe ser un número";
                 }
-                else if(!editTextStudentId.Equals("") && !int.TryParse(editTextStudentId.Text, out int studentIdNum))
+                else if(!editTextStudentId.Text.Equals("") && !int.TryParse(editTextStudentId.Text, out int studentIdNum))
                 {
                     toastText = "Su carné de estudiante debe ser un número";
                 }
                 else
                 {
+                    int stuId;
+                    if (editTextStudentId.Text.Equals(""))
+                    {
+                        stuId = 0;
+                    }
+                    else
+                    {
+                        stuId = Int32.Parse(editTextStudentId.Text);
+                    }
+
+                    string id = editTextUni.Text;
                     Customer customer = new Customer
                     {
                         Customerid = userIdNum,
-                        Namecustomer = editTextName.Text,
-                        Lastnamecustomer = editTextLastName.Text,
-                        Passcustomer = editTextPass.Text,
-                        Email = editTextEmail.Text,
-                        Phone = userPhone,
-                        Studentid = Int32.Parse(editTextStudentId.Text),
-                        University = editTextUni.Text
-                    
+                        namecustomer = editTextName.Text,
+                        lastnamecustomer = editTextLastName.Text,
+                        passcustomer = editTextPass.Text,
+                        email = editTextEmail.Text,
+                        phone = userPhone,
+                        studentid = stuId,
+                        university = editTextUni.Text
                     };
 
                     if (db.InsertCustomer(customer))

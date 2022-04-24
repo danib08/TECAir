@@ -55,10 +55,11 @@ namespace MobileApp.Activities
                     }
                     else
                     {
-                        if (editTextPassIn.Text.Equals(customer.Passcustomer))
+                        if (editTextPassIn.Text.Equals(customer.passcustomer))
                         {
                             toastText = "Sesión iniciada";
                             Intent intent = new Intent(this, typeof(FlightSearch));
+                            OverridePendingTransition(Android.Resource.Animation.SlideInLeft, Android.Resource.Animation.SlideOutRight);
                             StartActivity(intent);
                             Finish();
                         }
