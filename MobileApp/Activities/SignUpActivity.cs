@@ -78,7 +78,6 @@ namespace MobileApp.Activities
                         stuId = Int32.Parse(editTextStudentId.Text);
                     }
 
-                    string id = editTextUni.Text;
                     Customer customer = new Customer
                     {
                         Customerid = userIdNum,
@@ -93,6 +92,20 @@ namespace MobileApp.Activities
 
                     if (db.InsertCustomer(customer))
                     {
+                                              // Local Table
+                        CustomerLocal customerLocal = new CustomerLocal
+                        {
+                            Customerid = userIdNum,
+                            namecustomer = editTextName.Text,
+                            lastnamecustomer = editTextLastName.Text,
+                            passcustomer = editTextPass.Text,
+                            email = editTextEmail.Text,
+                            phone = userPhone,
+                            studentid = stuId,
+                            university = editTextUni.Text
+                        };
+                        db.InsertCustomerLocal(customerLocal);
+
                         toastText = "Registro exitoso";
                         Finish();
                     }

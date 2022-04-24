@@ -35,7 +35,6 @@ namespace MobileApp.Activities
                 OverridePendingTransition(Android.Resource.Animation.SlideInLeft, Android.Resource.Animation.SlideOutRight);
                 StartActivity(intent);
             };
-
             
             buttonSignIn.Click += (sender, e) =>
             {

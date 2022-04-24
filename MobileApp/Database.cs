@@ -29,6 +29,7 @@ namespace MobileApp
                 connection.CreateTable<Flight>();
                 connection.CreateTable<Bag>();
                 connection.CreateTable<CustomerInFlight>();
+                connection.CreateTable<CustomerLocal>(); // SQLite-only table
 
                 return true;
             }
@@ -59,11 +60,12 @@ namespace MobileApp
             string response = await client.GetStringAsync(url);
 
             List<Customer> serverList = JsonConvert.DeserializeObject<List<Customer>>(response);
-            List<Customer> localList = GetCustomers();
             List<Customer> newList = serverList;  // Copy server data to local app data
+            //List<Customer> appList = GetCustomers();
 
-            // Check for new data on app in order to keep it
-            foreach (Customer local in localList)
+
+            /*// Check for new data on app in order to keep it
+            foreach (Customer local in appList)
             {
                 bool isLocalChange = true;
 
@@ -87,13 +89,26 @@ namespace MobileApp
                     content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                     await client.PostAsync(url, content);
                 }
+            }*/
+
+            List<CustomerLocal> localList = GetLocalCustomers();
+            foreach (CustomerLocal item in localList)
+            {
+                newList.Add(item);
+
+                // Post to server
+                string json = JsonConvert.SerializeObject(item);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                await client.PostAsync(url, content);
             }
- 
+
             // Clear all data in Customer Table
             using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
             connection.Query<Customer>("DELETE FROM Customer");
-
-            // Adds updated data to local database
+            connection.Query<CustomerLocal>("DELETE FROM CustomerLocal");
+            
+            // Add updated data to app database
             foreach (Customer c in newList)
             {
                 connection.Insert(c);
@@ -221,6 +236,21 @@ namespace MobileApp
             }
         }
 
+        public bool InsertCustomerLocal(CustomerLocal customer)
+        {
+            try
+            {
+                using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
+                connection.Insert(customer);
+                return true;
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("SQLiteEx", ex.Message);
+                return false;
+            }
+        }
+
         // Multi-Value Get Methods
         public List<Worker> GetWorkers()
         {
@@ -297,6 +327,20 @@ namespace MobileApp
             {
                 using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
                 return connection.Table<CustomerInFlight>().ToList();
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("SQLiteEx", ex.Message);
+                return null;
+            }
+        }
+
+        public List<CustomerLocal> GetLocalCustomers()
+        {
+            try
+            {
+                using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
+                return connection.Table<CustomerLocal>().ToList();
             }
             catch (SQLiteException ex)
             {
