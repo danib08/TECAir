@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using TECAirDbAPI.Models;
 
 namespace TECAirDbAPI.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
 
@@ -80,10 +82,8 @@ namespace TECAirDbAPI.Controllers
 
             while(flights.Count() > 0)
             {
-                string[] subsOrigin = flights.First().Origin.Split("/");
-                string[] subsDest = flights.First().Destination.Split("/");
 
-                if ((flight.Origin.Equals(subsOrigin[0]) || flight.Origin.Equals(subsOrigin[1])) && (flight.Destination.Equals(subsDest[0]) || flight.Destination.Equals(subsDest[1])))
+                if (flights.First().Origin.Equals(flight.Origin) && flights.First().Destination.Equals(flight.Destination))
                 {
 
                     if(flights.First().Status.Equals("On Time") || flights.First().Status.Equals("Scheduled"))
@@ -211,7 +211,7 @@ namespace TECAirDbAPI.Controllers
         /// <param name="flight"></param>
         /// <returns>State of query</returns>
 
-        [HttpPut("Discount/{id}")]
+        [HttpPut("Discount-{id}")]
         public async Task<IActionResult> FlightDiscount(string id, Flight flight)
         {
             if (id != flight.Flightid)
