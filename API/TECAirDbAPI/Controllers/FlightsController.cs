@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using TECAirDbAPI.Models;
 
 namespace TECAirDbAPI.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
 
@@ -35,17 +37,48 @@ namespace TECAirDbAPI.Controllers
         }
 
         /// <summary>
+        /// Multi value get of flights
+        /// </summary>
+        /// <returns>All flights in database</returns>
+
+        [HttpGet("Discount")]
+        public async Task<ActionResult<IEnumerable<Flight>>> GetFlightsDiscount()
+        {
+            var flights = await _context.Flights.ToListAsync();
+            List<Flight> data = new List<Flight>();
+
+            while (flights.Count() > 0)
+            {
+                if (flights.First().Discount != 0)
+                {
+                    data.Add(flights.First());
+                    flights.RemoveAt(0);
+                }
+                else
+                {
+                    flights.RemoveAt(0);
+                }
+            }
+
+            return data;
+            
+        }
+
+
+        /// <summary>
         /// Single value get
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Required flight</returns>
+
         [HttpPost("SearchFlight")]
 
         public async Task<ActionResult<IEnumerable<Flight>>> GetFlight(Flight flight)
         {
             List<Flight> data = new List<Flight>();
-
             var flights = await _context.Flights.ToListAsync();
+            
+
 
             while(flights.Count() > 0)
             {
@@ -178,7 +211,7 @@ namespace TECAirDbAPI.Controllers
         /// <param name="flight"></param>
         /// <returns>State of query</returns>
 
-        [HttpPut("Discount/{id}")]
+        [HttpPut("Discount-{id}")]
         public async Task<IActionResult> FlightDiscount(string id, Flight flight)
         {
             if (id != flight.Flightid)
