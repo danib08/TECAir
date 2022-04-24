@@ -23,6 +23,7 @@ export class PostService {
     private logInWURL = this.baseURL+'/Workers/LogIn';
     private validateUserURL = this.baseURL+'/Customers/Validate';
     private addCustomerInFlightURL = this.baseURL+'/CustomersInFlights';
+    private searchCustomersSeatsURL = this.baseURL+'/CustomersInFlights/NoSeats';
 
     /**
      * Método constructor
@@ -103,4 +104,14 @@ export class PostService {
     addCustomerInFlight(customer:UserInFlightModel):Observable<any>{
         return this.http.post<any>(this.addCustomerInFlightURL, customer);
     }
+
+    /**
+     * search the customer seats
+     * @param search 
+     * @returns 
+     */
+     searchSeats(customer: UserInFlightModel):Observable<any>{
+        console.log(customer)
+       return this.http.post<any>(this.searchCustomersSeatsURL, customer);
+   }
 }

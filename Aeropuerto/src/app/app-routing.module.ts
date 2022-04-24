@@ -13,6 +13,8 @@ import { BagAssignComponent } from './Pages/asignar-maletas/bag-assign/bag-assig
 import { AsientosComponent } from './Pages/asientos/asientos.component';
 import { ValidacionUsuarioComponent } from './Pages/validacion-usuario/validacion-usuario/validacion-usuario.component';
 import { PaymentConfirmationComponent } from './Pages/confirmacion/payment-confirmation/payment-confirmation.component';
+import { SeatNumAssignComponent } from './Pages/asiento-faltante/seat-num-assign/seat-num-assign.component';
+import { ValidacionUsuarioFlightComponent } from './Pages/validacion-user-flight/validacion-usuario-flight/validacion-usuario-flight.component';
 
 
 const routes: Routes = [
@@ -29,6 +31,8 @@ const routes: Routes = [
   {path: "asientos", component: AsientosComponent},
   {path: "validacionUsuario", component: ValidacionUsuarioComponent},
   {path: "pago", component: PaymentConfirmationComponent},
+  {path: "seatAssign", component: SeatNumAssignComponent},
+  {path: "validacionUsuarioFlight", component: ValidacionUsuarioFlightComponent},
   {path: "**", redirectTo: "login", pathMatch:"full"},
 
 ];
