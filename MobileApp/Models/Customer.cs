@@ -7,7 +7,7 @@ namespace MobileApp.Models
     {
 
         [PrimaryKey]
-        public int customerid { get; set; }
+        public int Customerid { get; set; }
         public string namecustomer { get; set; }
         public string lastnamecustomer { get; set; }
         public string passcustomer { get; set; }

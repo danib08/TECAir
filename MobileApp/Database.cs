@@ -3,16 +3,20 @@ using MobileApp.Models;
 using System.Collections.Generic;
 using Android.Util;
 using System;
-using System.Net;
 using Newtonsoft.Json;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using System.Text;
 
 namespace MobileApp
 {
     internal class Database
     {
-        readonly string folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+        private readonly string folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+        private static readonly HttpClient client = new HttpClient();
         private const string Ipv4 = "192.168.0.10";
-        private readonly string baseAddress = "http://" + Ipv4 + "/api/";
+        private readonly string baseAddress = "http://" + Ipv4 + ":80/api/";
 
         public bool CreateDatabase()
         {
@@ -28,7 +32,7 @@ namespace MobileApp
 
                 return true;
             }
-            catch(SQLiteException ex)
+            catch (SQLiteException ex)
             {
                 Log.Info("SQLiteEx", ex.Message);
                 return false;
@@ -36,19 +40,25 @@ namespace MobileApp
         }
 
         // PostgreSQL Synchronization 
-        public void Sync()
+        public async Task SyncAsync()
         {
-            SyncCustomers();
+            client.BaseAddress = new Uri(baseAddress);
+            await SyncCustomersAsync();
         }
 
-        private void SyncCustomers()
+        private async Task SyncCustomersAsync()
         {
-            string url = "Customers";
+            /*string url = "Customers";
             using WebClient webClient = new WebClient { BaseAddress = baseAddress };
             webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
-            string send = webClient.DownloadString(url);
+            string send = webClient.DownloadString(url);*/
 
-            List<Customer> serverList = JsonConvert.DeserializeObject<List<Customer>>(send);
+            string url = "Customers";
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string response = await client.GetStringAsync(url);
+
+            List<Customer> serverList = JsonConvert.DeserializeObject<List<Customer>>(response);
             List<Customer> localList = GetCustomers();
             List<Customer> newList = serverList;  // Copy server data to local app data
 
@@ -60,7 +70,7 @@ namespace MobileApp
                 foreach (Customer server in serverList)
                 {
                     // Checks if data was already on the server
-                    if (local.customerid == server.customerid)
+                    if (local.Customerid == server.Customerid)
                     {
                         isLocalChange = false;
                         break;
@@ -70,14 +80,15 @@ namespace MobileApp
                 {
                     // Adds new data if it wasn't yet on the server
                     newList.Add(local);
-                    string json = JsonConvert.SerializeObject(local);
 
-                    using WebClient webClient2 = new WebClient { BaseAddress = baseAddress };
-                    webClient2.Headers[HttpRequestHeader.ContentType] = "application/json";
-                    webClient2.UploadString(url, json);
+                    // Post to server
+                    string json = JsonConvert.SerializeObject(local);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    await client.PostAsync(url, content);
                 }
             }
-
+ 
             // Clear all data in Customer Table
             using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
             connection.Query<Customer>("DELETE FROM Customer");
@@ -87,7 +98,7 @@ namespace MobileApp
             {
                 connection.Insert(c);
             }
-        }   
+        }
 
         public List<Flight> SearchFlights(string Origin, string Destination)
         {
@@ -315,8 +326,8 @@ namespace MobileApp
             try
             {
                 using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
-                List<Customer> customers = connection.Query<Customer>("SELECT * FROM Customer Where customerid=?", customerId);
-                return customers.Find(customer => customer.customerid == customerId); ;
+                List<Customer> customers = connection.Query<Customer>("SELECT * FROM Customer Where Customerid=?", customerId);
+                return customers.Find(customer => customer.Customerid == customerId); ;
             }
             catch (SQLiteException ex)
             {
@@ -409,7 +420,7 @@ namespace MobileApp
             {
                 using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
                 connection.Query<Customer>("UPDATE Customer set namecustomer=?,lastnamecustomer?=,passcustomer=?,email=?,phone=?,studentid=?,university=?" +
-                    " Where customerid=?", customer.namecustomer, customer.lastnamecustomer, customer.passcustomer, customer.customerid, customer.email, customer.phone, customer.studentid, customer.university);
+                    " Where Customerid=?", customer.namecustomer, customer.lastnamecustomer, customer.passcustomer, customer.Customerid, customer.email, customer.phone, customer.studentid, customer.university);
                 return true;
             }
             catch (SQLiteException ex)

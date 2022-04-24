@@ -22,7 +22,6 @@ namespace MobileApp.Activities
         private EditText editTextPhone;
         private EditText editTextStudentId;
         private EditText editTextUni;
-
         private Button sendSignUp;
 
         private string toastText;
@@ -63,23 +62,33 @@ namespace MobileApp.Activities
                 {
                     toastText = "Su número telefónico debe ser un número";
                 }
-                else if(!editTextStudentId.Equals("") && !int.TryParse(editTextStudentId.Text, out int studentIdNum))
+                else if(!editTextStudentId.Text.Equals("") && !int.TryParse(editTextStudentId.Text, out int studentIdNum))
                 {
                     toastText = "Su carné de estudiante debe ser un número";
                 }
                 else
                 {
+                    int stuId;
+                    if (editTextStudentId.Text.Equals(""))
+                    {
+                        stuId = 0;
+                    }
+                    else
+                    {
+                        stuId = Int32.Parse(editTextStudentId.Text);
+                    }
+
+                    string id = editTextUni.Text;
                     Customer customer = new Customer
                     {
-                        customerid = userIdNum,
+                        Customerid = userIdNum,
                         namecustomer = editTextName.Text,
                         lastnamecustomer = editTextLastName.Text,
                         passcustomer = editTextPass.Text,
                         email = editTextEmail.Text,
                         phone = userPhone,
-                        studentid = Int32.Parse(editTextStudentId.Text),
+                        studentid = stuId,
                         university = editTextUni.Text
-                    
                     };
 
                     if (db.InsertCustomer(customer))

@@ -15,7 +15,7 @@ namespace MobileApp.Activities
         private Button buttonSignIn;
         private Database db;
         
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
@@ -24,7 +24,7 @@ namespace MobileApp.Activities
 
             db = new Database();
             db.CreateDatabase();
-            db.Sync();
+            await db.SyncAsync();
 
             buttonSignIn = FindViewById<Button>(Resource.Id.btnSignIn);
             buttonSignUp = FindViewById<Button>(Resource.Id.btnSignUp);
