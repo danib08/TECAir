@@ -74,13 +74,16 @@ namespace TECAirDbAPI.Controllers
         public async Task<ActionResult<IEnumerable<Flight>>> GetFlight(Flight flight)
         {
             List<Flight> data = new List<Flight>();
-
             var flights = await _context.Flights.ToListAsync();
+            
+
 
             while(flights.Count() > 0)
             {
+                string[] subsOrigin = flights.First().Origin.Split("/");
+                string[] subsDest = flights.First().Destination.Split("/");
 
-                if (flights.First().Origin.Equals(flight.Origin) && flights.First().Destination.Equals(flight.Destination))
+                if ((flight.Origin.Equals(subsOrigin[0]) || flight.Origin.Equals(subsOrigin[1])) && (flight.Destination.Equals(subsDest[0]) || flight.Destination.Equals(subsDest[1])))
                 {
 
                     if(flights.First().Status.Equals("On Time") || flights.First().Status.Equals("Scheduled"))
