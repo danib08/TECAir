@@ -15,12 +15,12 @@ import { UserInFlightModel } from "../Pages/models/user-in-flight-model";
 export class GetService {
 
     private baseURL = "https://localhost:5001/api";
-    private getFlightsURL = `${this.baseURL}\\Flights`;
-    private getCustomerURL = `${this.baseURL}\\Customers`;
-    private getCustomerFlightURL = `${this.baseURL}\\CustomersInFlights/`;
-    private getFlightCapURL = `${this.baseURL}\\Flights/Capacity/`;
-    private getPlaneURL = `${this.baseURL}\\Planes`;
-    private getDiscountsURL = `${this.baseURL}\\Flights/Discount`;
+    private getFlightsURL = this.baseURL+'/Flights';
+    private getCustomerURL = this.baseURL+'/Customers';
+    private getCustomerFlightURL = this.baseURL+'/CustomersInFlights/';
+    private getFlightCapURL = this.baseURL+'/Flights/Capacity/';
+    private getPlaneURL = this.baseURL+'/Planes';
+    private getDiscountsURL = this.baseURL+'/Flights/Discount';
     
     constructor(private http: HttpClient) {
 

@@ -133,6 +133,7 @@ export class ManagePromosComponent implements OnInit {
         }
       );
       if(this.discounts.length != 0){
+        console.log(this.discounts.value)
         for (let i = 0; i< this.discounts.length; i++){
           this.apiService.changeStatus(this.discounts.at(i).value, this.discounts.at(i).get('flightid')?.value).subscribe(
             res => {
@@ -225,6 +226,7 @@ export class ManagePromosComponent implements OnInit {
             this.discounts.at(i).get('status')?.setValue(this.flightsArray[j].status);
             this.discounts.at(i).get('planeid')?.setValue(this.flightsArray[j].planeid);
             this.discounts.at(i).get('workerid')?.setValue(this.flightsArray[j].workerid);
+            this.discounts.at(i).get('departure')?.setValue(this.flightsArray[j].departure);
           }
         }
       }

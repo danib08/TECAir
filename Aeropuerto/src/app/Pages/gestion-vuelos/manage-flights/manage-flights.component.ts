@@ -83,6 +83,8 @@ export class ManageFlightsComponent implements OnInit {
             location.reload()
           }
           console.log(res);
+        },err=>{
+          alert("Ha ocurrido un error")
         }
       );
       if(this.flights.length != 0){
@@ -90,6 +92,8 @@ export class ManageFlightsComponent implements OnInit {
           this.apiService.changeStatus(this.flights.at(i).value, this.flights.at(i).get('flightid')?.value).subscribe(
             res => {
               console.log(res);
+            },err=>{
+              alert("Ha ocurrido un error")
             }
           );
         }
@@ -144,6 +148,7 @@ export class ManageFlightsComponent implements OnInit {
             this.flights.at(i).get('discount')?.setValue(this.flightsArray[j].discount);
             this.flights.at(i).get('planeid')?.setValue(this.flightsArray[j].planeid);
             this.flights.at(i).get('workerid')?.setValue(this.flightsArray[j].workerid);
+            this.flights.at(i).get('departure')?.setValue(this.flightsArray[j].departure);
           }
         }
       }

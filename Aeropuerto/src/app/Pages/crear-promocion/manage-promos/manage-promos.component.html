@@ -22,7 +22,7 @@
                 <label for="discount">Descuento</label>
                 <input type="number" class="form-control" formControlName="discount">
                 <div *ngIf="(discount?.invalid && (discount?.dirty || discount?.touched)) || (discount?.value < 0 || discount?.value > 100) " class="alert alert-danger">
-                    hola buenas
+                    El espacio no puede estar vacío
                 </div>
             </div>
             <div class="form-group"> 
@@ -67,7 +67,7 @@
                             <input type="number" [attr.id]="'discount' + i" class="form-control" formControlName="discount">
                         </div>
                         <div *ngIf=" (discounts.at(i).get('discount')?.value < 0 || discounts.at(i).get('discount')?.value > 100) " class="alert alert-danger">
-                            hola buenas
+                            El espacio no puede estar vacío
                         </div>
                         <div class="col-md-1">
                             <button class="btn btn-danger" (click)="removeDiscounts(i)">Eliminar promoción</button>

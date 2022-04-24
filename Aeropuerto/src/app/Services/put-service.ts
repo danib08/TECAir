@@ -9,9 +9,9 @@ import { UserInFlightModel } from "../Pages/models/user-in-flight-model";
 })
 export class PutService {
     private baseURL = "https://localhost:5001/api";
-    private changeStatusURL = `${this.baseURL}\\Flights/Status/`;
-    private setDiscountURL = `${this.baseURL}\\Flights/Discount/`;
-    private setCustomerInFlightURL = `${this.baseURL}\\CustomersInFlight/`;
+    private changeStatusURL = this.baseURL+'/Flights/Status/';
+    private setDiscountURL = this.baseURL+'/Flights/Discount/';
+    private setCustomerInFlightURL = this.baseURL+'/CustomersInFlights/';
     /**
      * Método constructor
      * @param http 
