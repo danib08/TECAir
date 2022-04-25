@@ -14,6 +14,8 @@ export class PostService {
     private searchURL = this.baseURL+'/Flights/SearchFlight';
     private logInWURL = this.baseURL+'/Customers/LogIn';
     private addCustomerInFlightURL = this.baseURL+'/CustomersInFlights';
+    private searchCustomersSeatsURL = this.baseURL+'/CustomersInFlights/NoSeats';
+
 
     /**
      * Método constructor
@@ -58,5 +60,15 @@ export class PostService {
      */
     addCustomerInFlight(customer:UserInFlightModel):Observable<any>{
         return this.http.post<any>(this.addCustomerInFlightURL, customer);
+    }
+
+    /**
+     * search the customer seats
+     * @param search 
+     * @returns 
+     */
+     searchSeats(customer: UserInFlightModel):Observable<any>{
+         console.log(customer)
+        return this.http.post<any>(this.searchCustomersSeatsURL, customer);
     }
 }

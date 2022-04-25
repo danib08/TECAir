@@ -28,6 +28,10 @@ namespace MobileApp.Activities
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
 
+            db = new Database();
+            db.CreateDatabase();
+            await db.SyncAsync();
+
             buttonSignIn = FindViewById<Button>(Resource.Id.btnSignIn);
             buttonSignUp = FindViewById<Button>(Resource.Id.btnSignUp);
 

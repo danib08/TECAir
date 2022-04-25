@@ -18,6 +18,8 @@ import { BagAssignComponent } from './asignar-maletas/bag-assign/bag-assign.comp
 import { AsientosComponent } from './asientos/asientos.component';
 import { ValidacionUsuarioComponent } from './validacion-usuario/validacion-usuario/validacion-usuario.component';
 import { PaymentConfirmationComponent } from './confirmacion/payment-confirmation/payment-confirmation.component';
+import { SeatNumAssignComponent } from './asiento-faltante/seat-num-assign/seat-num-assign.component';
+import { ValidacionUsuarioFlightComponent } from './validacion-user-flight/validacion-usuario-flight/validacion-usuario-flight.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { PaymentConfirmationComponent } from './confirmacion/payment-confirmatio
     BagAssignComponent,
     AsientosComponent,
     ValidacionUsuarioComponent,
-    PaymentConfirmationComponent
+    PaymentConfirmationComponent,
+    SeatNumAssignComponent,
+    ValidacionUsuarioFlightComponent
   ],
   imports: [
     CommonModule,

@@ -3,6 +3,7 @@ using Android.OS;
 using Android.Widget;
 using MobileApp.Models;
 using AndroidX.AppCompat.App;
+using Android.Content;
 
 namespace MobileApp.Activities
 {
