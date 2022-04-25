@@ -19,6 +19,12 @@ namespace MobileApp.Activities
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+
+            // Database synchronization
+            db = new Database();
+            db.CreateDatabase();
+            await db.SyncAsync();
+
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
 
@@ -35,7 +41,6 @@ namespace MobileApp.Activities
                 OverridePendingTransition(Android.Resource.Animation.SlideInLeft, Android.Resource.Animation.SlideOutRight);
                 StartActivity(intent);
             };
-
             
             buttonSignIn.Click += (sender, e) =>
             {

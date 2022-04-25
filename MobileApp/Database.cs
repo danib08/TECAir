@@ -29,7 +29,8 @@ namespace MobileApp
                 connection.CreateTable<Flight>();
                 connection.CreateTable<Bag>();
                 connection.CreateTable<CustomerInFlight>();
-
+                connection.CreateTable<CustomerLocal>(); // SQLite-only table
+                connection.CreateTable<CustomerInFlightLocal>(); // SQLite-only table
                 return true;
             }
             catch (SQLiteException ex)
@@ -44,57 +45,156 @@ namespace MobileApp
         {
             client.BaseAddress = new Uri(baseAddress);
             await SyncCustomersAsync();
+            await SyncBagsAsync();
+            await SyncPlanesAsync();
+            await SyncFlightsAsync();
+            await SyncWorkersAsync();
+            await SyncCustomersInFlightsAsync();
         }
 
         private async Task SyncCustomersAsync()
         {
-            /*string url = "Customers";
-            using WebClient webClient = new WebClient { BaseAddress = baseAddress };
-            webClient.Headers[HttpRequestHeader.ContentType] = "application/json";
-            string send = webClient.DownloadString(url);*/
-
             string url = "Customers";
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             string response = await client.GetStringAsync(url);
 
             List<Customer> serverList = JsonConvert.DeserializeObject<List<Customer>>(response);
-            List<Customer> localList = GetCustomers();
             List<Customer> newList = serverList;  // Copy server data to local app data
 
-            // Check for new data on app in order to keep it
-            foreach (Customer local in localList)
+            List<CustomerLocal> localList = GetLocalCustomers();
+            foreach (CustomerLocal item in localList)
             {
-                bool isLocalChange = true;
+                newList.Add(item);
 
-                foreach (Customer server in serverList)
-                {
-                    // Checks if data was already on the server
-                    if (local.Customerid == server.Customerid)
-                    {
-                        isLocalChange = false;
-                        break;
-                    }
-                }
-                if (isLocalChange)
-                {
-                    // Adds new data if it wasn't yet on the server
-                    newList.Add(local);
-
-                    // Post to server
-                    string json = JsonConvert.SerializeObject(local);
-                    var content = new StringContent(json, Encoding.UTF8, "application/json");
-                    content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                    await client.PostAsync(url, content);
-                }
+                // Post to server
+                string json = JsonConvert.SerializeObject(item);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                await client.PostAsync(url, content);
             }
- 
+
             // Clear all data in Customer Table
             using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
             connection.Query<Customer>("DELETE FROM Customer");
-
-            // Adds updated data to local database
+            connection.Query<CustomerLocal>("DELETE FROM CustomerLocal");
+            
+            // Add updated data to app database
             foreach (Customer c in newList)
+            {
+                connection.Insert(c);
+            }
+        }
+
+        private async Task SyncBagsAsync()
+        {
+            string url = "Bags";
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string response = await client.GetStringAsync(url);
+
+            List<Bag> serverList = JsonConvert.DeserializeObject<List<Bag>>(response);
+          
+            // Clear all data in Bag Table
+            using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
+            connection.Query<Bag>("DELETE FROM Bag");
+
+            // Add updated data to app database
+            foreach (Bag bag in serverList)
+            {
+                connection.Insert(bag);
+            }
+        }
+
+        private async Task SyncPlanesAsync()
+        {
+            string url = "Planes";
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string response = await client.GetStringAsync(url);
+
+            List<Plane> serverList = JsonConvert.DeserializeObject<List<Plane>>(response);
+
+            // Clear all data in Plane Table
+            using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
+            connection.Query<Plane>("DELETE FROM Plane");
+
+            // Add updated data to app database
+            foreach (Plane plane in serverList)
+            {
+                connection.Insert(plane);
+            }
+        }
+
+        private async Task SyncWorkersAsync()
+        {
+            string url = "Workers";
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string response = await client.GetStringAsync(url);
+
+            List<Worker> serverList = JsonConvert.DeserializeObject<List<Worker>>(response);
+
+            // Clear all data in Worker Table
+            using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
+            connection.Query<Worker>("DELETE FROM Worker");
+
+            // Add updated data to app database
+            foreach (Worker worker in serverList)
+            {
+                connection.Insert(worker);
+            }
+        }
+
+        private async Task SyncFlightsAsync()
+        {
+            string url = "Flights";
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string response = await client.GetStringAsync(url);
+
+            List<Flight> serverList = JsonConvert.DeserializeObject<List<Flight>>(response);
+
+            // Clear all data in Flight Table
+            using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
+            connection.Query<Plane>("DELETE FROM Flight");
+
+            // Add updated data to app database
+            foreach (Flight flight in serverList)
+            {
+                connection.Insert(flight);
+            }
+        }
+
+        private async Task SyncCustomersInFlightsAsync()
+        {
+            string url = "CustomersInFlights";
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string response = await client.GetStringAsync(url);
+
+            List<CustomerInFlight> serverList = JsonConvert.DeserializeObject<List<CustomerInFlight>>(response);
+            List<CustomerInFlight> newList = serverList;  // Copy server data to local app data
+
+            List<CustomerInFlightLocal> localList = GetLocalCustomersInFlights();
+            foreach (CustomerInFlightLocal item in localList)
+            {
+                newList.Add(item);
+
+                // Post to server
+                string json = JsonConvert.SerializeObject(item);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                await client.PostAsync(url, content);
+            }
+
+            // Clear all data in CustomerInFlight Table
+            using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
+            connection.Query<Customer>("DELETE FROM CustomerInFlight");
+            connection.Query<CustomerLocal>("DELETE FROM CustomerInFlight");
+
+            // Add updated data to app database
+            foreach (CustomerInFlight c in newList)
             {
                 connection.Insert(c);
             }
@@ -205,8 +305,37 @@ namespace MobileApp
                 return false;
             }
         }
-
         public bool InsertCustomerInFlight(CustomerInFlight cif)
+        {
+            try
+            {
+                using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
+                connection.Insert(cif);
+                return true;
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("SQLiteEx", ex.Message);
+                return false;
+            }
+        }
+
+        public bool InsertCustomerLocal(CustomerLocal customer)
+        {
+            try
+            {
+                using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
+                connection.Insert(customer);
+                return true;
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("SQLiteEx", ex.Message);
+                return false;
+            }
+        }
+
+        public bool InsertCustomerInFlightLocal(CustomerInFlightLocal cif)
         {
             try
             {
@@ -305,6 +434,33 @@ namespace MobileApp
             }
         }
 
+        public List<CustomerLocal> GetLocalCustomers()
+        {
+            try
+            {
+                using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
+                return connection.Table<CustomerLocal>().ToList();
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("SQLiteEx", ex.Message);
+                return null;
+            }
+        }
+        public List<CustomerInFlightLocal> GetLocalCustomersInFlights()
+        {
+            try
+            {
+                using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
+                return connection.Table<CustomerInFlightLocal>().ToList();
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("SQLiteEx", ex.Message);
+                return null;
+            }
+        }
+
         // Single-Value Get Methods
         public Worker GetWorker(int workerId)
         {
@@ -336,7 +492,7 @@ namespace MobileApp
             }
 
         }
-        public Flight GetFlight(int flightId)
+        public Flight GetFlight(string flightId)
         {
             try
             {
@@ -351,7 +507,7 @@ namespace MobileApp
             }
         }
 
-        public Plane GetPlane(int planeId)
+        public Plane GetPlane(string planeId)
         {
             try
             {
@@ -366,7 +522,7 @@ namespace MobileApp
             }
         }
 
-        public Bag GetBag(int bagId)
+        public Bag GetBag(string bagId)
         {
             try
             {
@@ -413,7 +569,6 @@ namespace MobileApp
                 return false;
             }
         }
-
         public bool UpdateCustomer(Customer customer)
         {
             try
@@ -436,9 +591,9 @@ namespace MobileApp
             {
                 using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
                 connection.Query<Flight>("UPDATE Flight set Bagquantity=?,Userquantity?=,Gate=?,Departure=?,Arrival=?,Origin=?,Destination=?," +
-                    "Stops=?,Status=?,Price=?,Discount=?,Planeid=?,Workerid=?" +
+                    "Status=?,Price=?,Discount=?,Planeid=?,Workerid=?" +
                     " Where Flightid=?", flight.Bagquantity, flight.Userquantity, flight.Gate, flight.Departure, flight.Arrival, flight.Origin, 
-                    flight.Destination, flight.Stops,flight.Status, flight.Price, flight.Discount, flight.Planeid, flight.Workerid);
+                    flight.Destination, flight.Status, flight.Price, flight.Discount, flight.Planeid, flight.Workerid);
                 return true;
             }
             catch (SQLiteException ex)

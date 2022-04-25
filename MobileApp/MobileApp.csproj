@@ -61,12 +61,16 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\FlightSearch.cs" />
+    <Compile Include="Activities\BuyActivity.cs" />
+    <Compile Include="Activities\FlightInfoActivity.cs" />
+    <Compile Include="Activities\FlightSearchActivity.cs" />
     <Compile Include="Activities\SignInActivity.cs" />
     <Compile Include="Adapters\FlightAdapter.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Models\Bag.cs" />
+    <Compile Include="Models\CustomerInFlightLocal.cs" />
+    <Compile Include="Models\CustomerLocal.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerInFlight.cs" />
     <Compile Include="Models\Flight.cs" />
@@ -149,7 +153,7 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\pago.xml">
+    <AndroidResource Include="Resources\layout\payment.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

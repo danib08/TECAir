@@ -136,33 +136,12 @@
         android:layout_marginLeft="10dp"
         android:text="1000"/>
 
-    <TextView
-        android:id="@+id/textView7"
-        style="@style/body"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textView6"
-        android:layout_marginTop="10dp" 
-        android:text="@string/stops"
-        android:textColor="@color/orangePalette"/>
-    
-    <TextView
-        android:id="@+id/textStops"
-        style="@style/body"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textView6"
-        android:layout_toRightOf="@id/textView7"
-        android:layout_marginTop="10dp" 
-        android:layout_marginLeft="10dp"
-        android:text="No hay"/>
-
     <android.widget.Button
         android:id="@+id/buyBtn"
         style="@style/button_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textView7"
+        android:layout_below="@id/textView6"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:text="@string/buy"

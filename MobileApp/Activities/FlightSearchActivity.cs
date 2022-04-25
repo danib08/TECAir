@@ -4,13 +4,13 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using MobileApp.Models;
 using System.Collections.Generic;
-using System.Linq;
 using MobileApp.Adapters;
+using Android.Content;
 
 namespace MobileApp.Activities
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false)]
-    class FlightSearch : AppCompatActivity
+    class FlightSearchActivity : AppCompatActivity
     {
 
         private Database db;
@@ -23,6 +23,7 @@ namespace MobileApp.Activities
         private string toastText;
         private List<Flight> listFlights;
         private FlightAdapter adapter;
+        private int loggedId;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -32,43 +33,17 @@ namespace MobileApp.Activities
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.flight_search);
 
+            int customerId = Intent.GetIntExtra("customerId", 0);
+            loggedId = customerId;
+
+            db = new Database();
+            db.CreateDatabase();
+
             editTextOrigin = FindViewById<EditText>(Resource.Id.editTextOrigin);
             editTextDestination = FindViewById<EditText>(Resource.Id.editTextDestination);
             searchBtn = FindViewById<Button>(Resource.Id.sendSearch);
             listView = FindViewById<ListView>(Resource.Id.listView1);
 
-            db = new Database();
-            db.CreateDatabase();
-
-            Plane plane1 = new Plane
-            {
-                Planeid = "AXJ720",
-                Model = "Boeing777",
-                Passangercap = 200,
-                Bagcap = 250
-            };
-
-            Flight flight1 = new Flight
-            {
-                Flightid = "CM2012",
-                Bagquantity = 0,
-                Userquantity = 0,
-                Gate = 2,
-                Departure = "2022-08-22 16:40:00",
-                Arrival = "2022-08-24 13:15:00",
-                Origin = "PTY/Panama",
-                Destination = "INC/Corea del Sur",
-                Stops = "",
-                Status = "On Time",
-                Price = 1000,
-                Discount = 0,
-                Planeid = "AXJ720",
-                Workerid = 12345869
-            };
-
-            db.InsertPlane(plane1);
-            db.InsertFlight(flight1);
-            
             searchBtn.Click += (sender, e) =>
             {
                 if (editTextOrigin.Text.Equals("") || editTextDestination.Text.Equals(""))
@@ -92,8 +67,21 @@ namespace MobileApp.Activities
                         editTextOrigin.Text = "";
                         editTextDestination.Text = "";
                     }
+
+                    listView.ItemClick += ListClick;
                 }
             };
+        }
+
+        private void ListClick(object sender, AdapterView.ItemClickEventArgs eventArgs)
+        {
+            string clickedId = listFlights[eventArgs.Position].Flightid;
+
+            Intent infoIntent = new Intent(this, typeof(FlightInfoActivity));
+            infoIntent.PutExtra("flightId", clickedId);
+            infoIntent.PutExtra("customerId", loggedId);
+            StartActivity(infoIntent);
+            OverridePendingTransition(Android.Resource.Animation.SlideInLeft, Android.Resource.Animation.SlideOutRight);
         }
     }
 }

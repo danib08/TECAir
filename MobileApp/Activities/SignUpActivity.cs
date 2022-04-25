@@ -1,7 +1,6 @@
 ﻿using Android.App;
 using Android.OS;
 using Android.Widget;
-using System;
 using MobileApp.Models;
 using AndroidX.AppCompat.App;
 using Android.Content;
@@ -75,10 +74,9 @@ namespace MobileApp.Activities
                     }
                     else
                     {
-                        stuId = Int32.Parse(editTextStudentId.Text);
+                        stuId = int.Parse(editTextStudentId.Text);
                     }
 
-                    string id = editTextUni.Text;
                     Customer customer = new Customer
                     {
                         Customerid = userIdNum,
@@ -93,6 +91,19 @@ namespace MobileApp.Activities
 
                     if (db.InsertCustomer(customer))
                     {
+                        // Local Table
+                        CustomerLocal customerLocal = new CustomerLocal
+                        {
+                            Customerid = userIdNum,
+                            namecustomer = editTextName.Text,
+                            lastnamecustomer = editTextLastName.Text,
+                            passcustomer = editTextPass.Text,
+                            email = editTextEmail.Text,
+                            phone = userPhone,
+                            studentid = stuId,
+                            university = editTextUni.Text
+                        };
+                        db.InsertCustomerLocal(customerLocal);
                         toastText = "Registro exitoso";
                         Finish();
                     }
