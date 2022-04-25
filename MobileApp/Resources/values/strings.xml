@@ -27,7 +27,6 @@
 	<string name="arrival">Llegada: </string>
 	<string name="gate">Puerta: </string>
 	<string name="price">Precio ($): </string>
-	<string name="stops">Vuelos intermedios: </string>
 	<string name="buy">Reservar</string>
 
 </resources>

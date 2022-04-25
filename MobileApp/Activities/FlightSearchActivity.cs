@@ -4,13 +4,13 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using MobileApp.Models;
 using System.Collections.Generic;
-using System.Linq;
 using MobileApp.Adapters;
+using Android.Content;
 
 namespace MobileApp.Activities
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = false)]
-    class FlightSearch : AppCompatActivity
+    class FlightSearchActivity : AppCompatActivity
     {
 
         private Database db;
@@ -63,8 +63,20 @@ namespace MobileApp.Activities
                         editTextOrigin.Text = "";
                         editTextDestination.Text = "";
                     }
+
+                    listView.ItemClick += ListClick;
                 }
             };
+        }
+
+        private void ListClick(object sender, AdapterView.ItemClickEventArgs eventArgs)
+        {
+            string clickedId = listFlights[eventArgs.Position].Flightid;
+
+            Intent infoIntent = new Intent(this, typeof(FlightInfoActivity));
+            infoIntent.PutExtra("flightId", clickedId);
+            StartActivity(infoIntent);
+            OverridePendingTransition(Android.Resource.Animation.SlideInLeft, Android.Resource.Animation.SlideOutRight);
         }
     }
 }

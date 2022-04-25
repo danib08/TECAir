@@ -61,7 +61,8 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\FlightSearch.cs" />
+    <Compile Include="Activities\FlightInfoActivity.cs" />
+    <Compile Include="Activities\FlightSearchActivity.cs" />
     <Compile Include="Activities\SignInActivity.cs" />
     <Compile Include="Adapters\FlightAdapter.cs" />
     <Compile Include="Database.cs" />

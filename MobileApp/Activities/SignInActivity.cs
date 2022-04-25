@@ -58,7 +58,7 @@ namespace MobileApp.Activities
                         if (editTextPassIn.Text.Equals(customer.passcustomer))
                         {
                             toastText = "Sesión iniciada";
-                            Intent intent = new Intent(this, typeof(FlightSearch));
+                            Intent intent = new Intent(this, typeof(FlightSearchActivity));
                             OverridePendingTransition(Android.Resource.Animation.SlideInLeft, Android.Resource.Animation.SlideOutRight);
                             StartActivity(intent);
                             Finish();

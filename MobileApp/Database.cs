@@ -478,7 +478,7 @@ namespace MobileApp
             }
 
         }
-        public Flight GetFlight(int flightId)
+        public Flight GetFlight(string flightId)
         {
             try
             {
@@ -493,7 +493,7 @@ namespace MobileApp
             }
         }
 
-        public Plane GetPlane(int planeId)
+        public Plane GetPlane(string planeId)
         {
             try
             {
@@ -508,7 +508,7 @@ namespace MobileApp
             }
         }
 
-        public Bag GetBag(int bagId)
+        public Bag GetBag(string bagId)
         {
             try
             {
