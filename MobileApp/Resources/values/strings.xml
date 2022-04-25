@@ -28,5 +28,8 @@
 	<string name="gate">Puerta: </string>
 	<string name="price">Precio ($): </string>
 	<string name="buy">Reservar</string>
-
+	<string name="card_num">No. Tarjeta</string>
+	<string name="ccv">CCV</string>
+	<string name="expires">Vencimiento</string>
+	<string name="pay">Completar pago</string>
 </resources>

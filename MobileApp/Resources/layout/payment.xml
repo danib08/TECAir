@@ -11,9 +11,6 @@
     android:minHeight="25px"
     tools:gridSpec="1|8|#0093eeff|K:#ee8700ff:16,l:72,l:16,r|S:#83ee00ff:16,0,l:16,56,l:16,0,r">
 
-
-
-
     <TextView
         style="@style/header"
         android:layout_width="match_parent"
@@ -32,18 +29,17 @@
         android:translationY="70dp"
         android:translationX="20dp"
         android:textSize="20sp"
-        android:text="Nombre"
-        android:textColor="@color/creamPalette"
-        android:id="@+id/Origin" />
+        android:text="@string/name"
+        android:textColor="@color/creamPalette"/>
 
     <EditText
         style="@style/edit_text"
-        android:id="@+id/textNameTarjeta"
+        android:id="@+id/textCardName"
         android:translationY="40dp"
         android:translationX="20dp"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
+        android:layout_marginStart="100dp"
         android:textSize="20sp"
         android:textColor="@color/orangePalette"
         android:inputType="text" />
@@ -55,22 +51,20 @@
         android:translationY="70dp"
         android:translationX="20dp"
         android:textSize="20sp"
-        android:text="No Tarjeta"
+        android:text="@string/card_num"
         android:textColor="@color/creamPalette"
-        android:id="@+id/Destiny"    
         android:inputType="number"/>
 
     <EditText
         style="@style/edit_text"
-        android:id="@+id/textNoTarjeta"
+        android:id="@+id/textNumCard"
         android:translationY="40dp"
         android:translationX="20dp"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
+        android:layout_marginStart="100dp"
         android:textSize="20sp"
-
-        android:inputType="text" />
+        android:inputType="number" />
 
     <TextView
         style="@style/header"
@@ -79,9 +73,8 @@
         android:translationY="70dp"
         android:translationX="20dp"
         android:textSize="20sp"
-        android:text="CCV"
-        android:textColor="@color/creamPalette"
-        android:id="@+id/Date" />
+        android:text="@string/ccv"
+        android:textColor="@color/creamPalette"/>
 
     <EditText
         style="@style/edit_text"
@@ -90,33 +83,41 @@
         android:translationX="20dp"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
+        android:layout_marginStart="100dp"
+        android:textSize="20sp"
+        android:inputType="numberPassword" />
+
+    <TextView
+        style="@style/header"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:translationY="70dp"
+        android:translationX="20dp"
+        android:textSize="20sp"
+        android:text="@string/expires"
+        android:textColor="@color/creamPalette"/>
+
+    <EditText
+        style="@style/edit_text"
+        android:id="@+id/textDate"
+        android:translationY="60dp"
+        android:translationX="20dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
         android:textSize="20sp"
         android:autofillHints="@string/password"
-        android:inputType="number" />
-
-
+        android:inputType="date" />
 
     <android.widget.Button
-        android:id="@+id/buttonAgendar"
+        android:id="@+id/btnPayment"
         style="@style/button_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:translationY="50dp"
+        android:translationY="60dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:text="Completar Pago"
-        android:textAllCaps="false" />
-
-    <android.widget.Button
-        android:id="@+id/back2"
-        style="@style/button_light"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:translationY="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:text="Volver"
+        android:text="@string/pay"
         android:textAllCaps="false" />
 
 </LinearLayout>

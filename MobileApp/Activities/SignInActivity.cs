@@ -4,7 +4,6 @@ using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using MobileApp.Models;
-using System;
 
 namespace MobileApp.Activities
 {
@@ -59,6 +58,7 @@ namespace MobileApp.Activities
                         {
                             toastText = "Sesión iniciada";
                             Intent intent = new Intent(this, typeof(FlightSearchActivity));
+                            intent.PutExtra("customerId", userIdNum);
                             OverridePendingTransition(Android.Resource.Animation.SlideInLeft, Android.Resource.Animation.SlideOutRight);
                             StartActivity(intent);
                             Finish();

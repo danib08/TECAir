@@ -305,7 +305,6 @@ namespace MobileApp
                 return false;
             }
         }
-
         public bool InsertCustomerInFlight(CustomerInFlight cif)
         {
             try
@@ -327,6 +326,21 @@ namespace MobileApp
             {
                 using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
                 connection.Insert(customer);
+                return true;
+            }
+            catch (SQLiteException ex)
+            {
+                Log.Info("SQLiteEx", ex.Message);
+                return false;
+            }
+        }
+
+        public bool InsertCustomerInFlightLocal(CustomerInFlightLocal cif)
+        {
+            try
+            {
+                using var connection = new SQLiteConnection(System.IO.Path.Combine(folder, "TecAir.db"));
+                connection.Insert(cif);
                 return true;
             }
             catch (SQLiteException ex)

@@ -1,10 +1,8 @@
 ﻿using Android.App;
 using Android.OS;
 using Android.Widget;
-using System;
 using MobileApp.Models;
 using AndroidX.AppCompat.App;
-using Android.Content;
 
 namespace MobileApp.Activities
 {
@@ -75,7 +73,7 @@ namespace MobileApp.Activities
                     }
                     else
                     {
-                        stuId = Int32.Parse(editTextStudentId.Text);
+                        stuId = int.Parse(editTextStudentId.Text);
                     }
 
                     Customer customer = new Customer

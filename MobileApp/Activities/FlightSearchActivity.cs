@@ -23,6 +23,7 @@ namespace MobileApp.Activities
         private string toastText;
         private List<Flight> listFlights;
         private FlightAdapter adapter;
+        private int loggedId;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -32,14 +33,17 @@ namespace MobileApp.Activities
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.flight_search);
 
+            int customerId = Intent.GetIntExtra("customerId", 0);
+            loggedId = customerId;
+
+            db = new Database();
+            db.CreateDatabase();
+
             editTextOrigin = FindViewById<EditText>(Resource.Id.editTextOrigin);
             editTextDestination = FindViewById<EditText>(Resource.Id.editTextDestination);
             searchBtn = FindViewById<Button>(Resource.Id.sendSearch);
             listView = FindViewById<ListView>(Resource.Id.listView1);
 
-            db = new Database();
-            db.CreateDatabase();
-            
             searchBtn.Click += (sender, e) =>
             {
                 if (editTextOrigin.Text.Equals("") || editTextDestination.Text.Equals(""))
@@ -75,6 +79,7 @@ namespace MobileApp.Activities
 
             Intent infoIntent = new Intent(this, typeof(FlightInfoActivity));
             infoIntent.PutExtra("flightId", clickedId);
+            infoIntent.PutExtra("customerId", loggedId);
             StartActivity(infoIntent);
             OverridePendingTransition(Android.Resource.Animation.SlideInLeft, Android.Resource.Animation.SlideOutRight);
         }

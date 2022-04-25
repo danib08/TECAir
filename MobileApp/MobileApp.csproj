@@ -61,6 +61,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\BuyActivity.cs" />
     <Compile Include="Activities\FlightInfoActivity.cs" />
     <Compile Include="Activities\FlightSearchActivity.cs" />
     <Compile Include="Activities\SignInActivity.cs" />
@@ -152,7 +153,7 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\pago.xml">
+    <AndroidResource Include="Resources\layout\payment.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
