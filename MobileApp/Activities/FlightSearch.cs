@@ -39,35 +39,6 @@ namespace MobileApp.Activities
 
             db = new Database();
             db.CreateDatabase();
-
-            Plane plane1 = new Plane
-            {
-                Planeid = "AXJ720",
-                Model = "Boeing777",
-                Passangercap = 200,
-                Bagcap = 250
-            };
-
-            Flight flight1 = new Flight
-            {
-                Flightid = "CM2012",
-                Bagquantity = 0,
-                Userquantity = 0,
-                Gate = 2,
-                Departure = "2022-08-22 16:40:00",
-                Arrival = "2022-08-24 13:15:00",
-                Origin = "PTY/Panama",
-                Destination = "INC/Corea del Sur",
-                Stops = "",
-                Status = "On Time",
-                Price = 1000,
-                Discount = 0,
-                Planeid = "AXJ720",
-                Workerid = 12345869
-            };
-
-            db.InsertPlane(plane1);
-            db.InsertFlight(flight1);
             
             searchBtn.Click += (sender, e) =>
             {

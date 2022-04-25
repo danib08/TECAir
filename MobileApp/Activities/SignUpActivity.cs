@@ -92,7 +92,7 @@ namespace MobileApp.Activities
 
                     if (db.InsertCustomer(customer))
                     {
-                                              // Local Table
+                        // Local Table
                         CustomerLocal customerLocal = new CustomerLocal
                         {
                             Customerid = userIdNum,
@@ -105,7 +105,6 @@ namespace MobileApp.Activities
                             university = editTextUni.Text
                         };
                         db.InsertCustomerLocal(customerLocal);
-
                         toastText = "Registro exitoso";
                         Finish();
                     }

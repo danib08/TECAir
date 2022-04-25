@@ -19,12 +19,14 @@ namespace MobileApp.Activities
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.activity_main);
 
+            // Database synchronization
             db = new Database();
             db.CreateDatabase();
             await db.SyncAsync();
+
+            // Set our view from the "main" layout resource
+            SetContentView(Resource.Layout.activity_main);
 
             buttonSignIn = FindViewById<Button>(Resource.Id.btnSignIn);
             buttonSignUp = FindViewById<Button>(Resource.Id.btnSignUp);
